@@ -13,11 +13,13 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      elasticsearch.enable = true;
-      graylog = {
+      service.elasticsearch.enable = true;
+      service.mongodb.enable = true;
+      service.graylog = {
         enable = true;
+        extraConfig = "http_bind_address = 127.0.0.1:9011";
+        elasticsearchHosts = ["http://localhost:9200"];
       };
-      mongodb.enable = true;
     };
   };
 }

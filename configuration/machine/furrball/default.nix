@@ -41,14 +41,6 @@
 
       script.wake.enable = true;
 
-      service.elasticsearch.enable = true;
-      service.mongodb.enable = true;
-      service.graylog = {
-        enable = true;
-        extraConfig = "http_bind_address = 127.0.0.1:9011";
-        elasticsearchHosts = ["http://localhost:9200"];
-      };
-
       role = {
         container_host.enable = true;
         games_machine.enable = true;
