@@ -16,7 +16,7 @@
       type = types.str;
     };
     options.ipv4method = mkOption {
-      type = types.enum ["static" "dhcpstatic" "dhcp"];
+      type = types.enum ["static" "dhcpstatic" "dhcp" "pppoe"];
     };
   };
 
