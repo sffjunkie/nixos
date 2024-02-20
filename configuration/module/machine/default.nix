@@ -4,6 +4,7 @@
     ./games
     ./gateway
     ./media
+    ./scripts
     ./service
     ./shells
     ./storage
