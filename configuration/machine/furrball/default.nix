@@ -39,6 +39,8 @@
         music.enable = true;
       };
 
+      script.wake.enable = true;
+
       service.elasticsearch.enable = true;
       service.mongodb.enable = true;
       service.graylog = {
