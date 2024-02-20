@@ -36,7 +36,7 @@
         netdevice = {
           lan = {
             device = "eno1";
-            mac = "TBC";
+            mac = "18:c0:4d:04:92:ee";
             ipv4 = "10.44.0.3";
             ipv4method = "dhcpstatic";
           };
