@@ -1,0 +1,22 @@
+{
+  imports = [
+    ./brave
+    ./darktable
+    ./firefox
+    ./gimp
+    ./gittyup
+    ./gnome-apps
+    ./gns3
+    ./inkscape
+    ./keepassxc
+    ./libreoffice
+    ./mpv
+    ./obsidian
+    ./picard
+    ./qutebrowser
+    ./rofi
+    ./thunderbird
+    ./wofi
+    ./zathura
+  ];
+}

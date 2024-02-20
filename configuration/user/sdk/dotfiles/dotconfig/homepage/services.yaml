@@ -1,0 +1,7 @@
+---
+# For configuration options and examples, please see:
+# https://gethomepage.dev/en/configs/services
+
+- Home Automation:
+      - Home Assistant:
+            href: https://hass.looniversity.net

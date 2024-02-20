@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./minio
+    ./nfs
+    ./samba
+  ];
+}

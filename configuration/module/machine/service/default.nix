@@ -1,0 +1,19 @@
+{
+  imports = [
+    ./acme
+    ./autoupgrade
+    ./coredns
+    ./dhcp4
+    ./elasticsearch
+    ./fail2ban
+    ./graylog
+    ./lldap
+    ./mongodb
+    ./nextcloud
+    ./postgresql
+    ./sshd
+    ./step-ca
+    ./traefik
+    ./unbound
+  ];
+}
