@@ -11,21 +11,21 @@ in {
       hostName = "babs";
       domain = "looniversity.net";
 
-      systemd.network = {
-        enable = true;
+      interfaces.${wolInterface}.wakeOnLan.enable = true;
+    };
 
-        networks = {
-          matchConfig.Name = "eno1";
-          networkConfig.DHCP = "ipv4";
-          linkConfig = {
-            GenericSegmentationOffload = false;
-            GenericReceiveOffload = false;
-            TCPSegmentationOffload = false;
-          };
+    systemd.network = {
+      enable = true;
+
+      networks = {
+        matchConfig.Name = "eno1";
+        networkConfig.DHCP = "ipv4";
+        linkConfig = {
+          GenericSegmentationOffload = false;
+          GenericReceiveOffload = false;
+          TCPSegmentationOffload = false;
         };
       };
-
-      interfaces.${wolInterface}.wakeOnLan.enable = true;
     };
   };
 }
