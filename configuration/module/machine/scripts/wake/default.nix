@@ -32,7 +32,7 @@
     case $1 in
       ${hostsCase}
         echo "Sending WOL packet to $1 with MAC ''${hostToMac[$1]}"
-        ${pkgs.wakelan}/bin/wakelan -m "''${hostToMac[$1]}"
+        ${pkgs.wakeonlan}/bin/wakeonlan "''${hostToMac[$1]}"
         ;;
       *)
         echo "Unknown host $1"
