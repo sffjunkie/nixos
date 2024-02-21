@@ -193,6 +193,7 @@
       go = import ./devshell/go {inherit pkgs;};
       python = import ./devshell/python {inherit pkgs;};
       rust = import ./devshell/rust {inherit pkgs;};
+      net = import ./devshell/net {inherit pkgs;};
     };
   };
 }
