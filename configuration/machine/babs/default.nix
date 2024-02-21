@@ -24,7 +24,6 @@
   config = {
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
-    services.nfs.server.enable = true;
     services.logrotate.checkConfig = false;
 
     looniversity = {
