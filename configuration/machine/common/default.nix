@@ -4,7 +4,7 @@
     ./modules.nix
     ./nix.nix
     ./packages.nix
-    ./workaround
+    ./workaround.nix
     ../../site
   ];
 
