@@ -18,12 +18,20 @@ in {
       enable = true;
 
       networks = {
-        matchConfig.Name = "eno1";
-        networkConfig.DHCP = "ipv4";
-        linkConfig = {
-          GenericSegmentationOffload = false;
-          GenericReceiveOffload = false;
-          TCPSegmentationOffload = false;
+        eno1 = {
+          matchConfig.Name = "eno1";
+          networkConfig.DHCP = "ipv4";
+        };
+      };
+
+      links = {
+        eno1 = {
+          matchConfig.Name = "eno1";
+          linkConfig = {
+            GenericSegmentationOffload = false;
+            GenericReceiveOffload = false;
+            TCPSegmentationOffload = false;
+          };
         };
       };
     };
