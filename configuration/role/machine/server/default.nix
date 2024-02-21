@@ -14,7 +14,7 @@ in {
     looniversity = {
       pinentry.enable = true;
 
-      # profile.hardened.enable = true;
+      profile.hardened.enable = true;
 
       service.autoUpgrade.enable = true;
       service.fail2ban.enable = true;
