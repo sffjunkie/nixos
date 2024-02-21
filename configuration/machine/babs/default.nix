@@ -24,6 +24,9 @@
   config = {
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
+    # https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501/2
+    services.logrotate.checkConfig = false;
+
     looniversity = {
       service = {
         sshd.enable = true;
