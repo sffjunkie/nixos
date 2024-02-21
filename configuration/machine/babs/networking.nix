@@ -11,7 +11,20 @@ in {
       hostName = "babs";
       domain = "looniversity.net";
 
-      useDHCP = lib.mkDefault true;
+      systemd.network = {
+        enable = true;
+
+        networks = {
+          matchConfig.Name = "eno1";
+          networkConfig.DHCP = "ipv4";
+          linkConfig = {
+            GenericSegmentationOffload = false;
+            GenericReceiveOffload = false;
+            TCPSegmentationOffload = false;
+          };
+        };
+      };
+
       interfaces.${wolInterface}.wakeOnLan.enable = true;
     };
   };
