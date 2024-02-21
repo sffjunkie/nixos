@@ -1,6 +1,7 @@
 {pkgs, ...}:
 pkgs.mkShell {
   nativeBuildInputs = with pkgs.buildPackages; [
+    pdm
     poetry
     python311
     python311.pkgs.myst-parser
