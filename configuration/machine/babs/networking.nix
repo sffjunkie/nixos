@@ -12,7 +12,7 @@ in {
       domain = "looniversity.net";
 
       useDHCP = lib.mkDefault true;
-      interfaces.${wolInterface}.wakeOnLan = true;
+      interfaces.${wolInterface}.wakeOnLan.enable = true;
     };
   };
 }
