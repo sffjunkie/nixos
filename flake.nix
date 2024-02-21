@@ -20,6 +20,10 @@
     sops-nix.url = "github:Mic92/sops-nix";
   };
 
+  nixConfig = {
+    bash-prompt = ''\n\[\033[1;34m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\\$\[\033[0m\] '';
+  };
+
   outputs = {
     self,
     nixpkgs,
