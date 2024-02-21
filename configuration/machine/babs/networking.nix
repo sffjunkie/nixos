@@ -1,4 +1,10 @@
-{lib, ...}: {
+{
+  config,
+  lib,
+  ...
+}: let
+  wolInterface = lib.getNetdevice config "babs" "lan";
+in {
   config = {
     networking = {
       hostId = "fafececd";
@@ -6,8 +12,7 @@
       domain = "looniversity.net";
 
       useDHCP = lib.mkDefault true;
-      # interfaces.enp4s0.useDHCP = lib.mkDefault true;
-      # interfaces.wlp3s0.useDHCP = lib.mkDefault true;
+      interfaces.${wolInterface}.wakeOnLan = true;
     };
   };
 }
