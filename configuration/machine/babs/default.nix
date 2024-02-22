@@ -26,7 +26,6 @@
 
     looniversity = {
       service = {
-        sshd.enable = true;
         minio.enable = true;
         nfs.enable = true;
         samba = {
@@ -41,6 +40,8 @@
             };
           };
         };
+        sshd.enable = true;
+        syncthing.enable = true;
       };
 
       role = {
