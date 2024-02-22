@@ -21,6 +21,8 @@
       };
     };
 
+    xdg.configFile."syncthing/config.xml".source = ../dotfiles/dotconfig/syncthing/config.xml;
+
     looniversity = {
       atuin.enable = true;
       bat.enable = true;
@@ -103,7 +105,7 @@
       settings.qt.enable = true;
       settings.qtile.enable = true;
 
-      xdg-user.enable = true;
+      user-dirs.enable = true;
     };
 
     xdg.mime.enable = true;
