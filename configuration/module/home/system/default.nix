@@ -5,7 +5,6 @@
     ./imagemagick
     ./pavucontrol
     ./pywal
-    ./syncthing
     ./user-dirs
     ./veracrypt
   ];

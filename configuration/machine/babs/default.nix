@@ -12,6 +12,8 @@
     ./hardware.nix
     ./networking.nix
 
+    ./services
+
     ../common
     ../../module/machine
     ../../module/mount
@@ -41,7 +43,6 @@
           };
         };
         sshd.enable = true;
-        syncthing.enable = true;
       };
 
       role = {
