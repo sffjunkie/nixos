@@ -6,6 +6,7 @@
     ./gui
     ./music
     ./scripts
+    ./service
     ./shells
     ./system
     ./terminals
