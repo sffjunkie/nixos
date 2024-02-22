@@ -18,14 +18,14 @@
     };
 
     environment.interactiveShellInit = ''
-      ff() { loc=$1; shift; find $loc -type f "$@" }
-      fft() { loc=$1; shift; find $loc -type f -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" }
-      ffts() { loc=$1; shift; find $loc -type f -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" | sort }
-      fd() { loc=$1; shift; find $loc -type d "$@" }
-      fdt() { loc=$1; shift; find $loc -type d -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" }
-      fdts() { loc=$1; shift; find $loc -type d -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" | sort }
+      ff() { loc=$1; shift; find $loc -type f "$@"; }
+      fft() { loc=$1; shift; find $loc -type f -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@"; }
+      ffts() { loc=$1; shift; find $loc -type f -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" | sort; }
+      fd() { loc=$1; shift; find $loc -type d "$@"; }
+      fdt() { loc=$1; shift; find $loc -type d -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@"; }
+      fdts() { loc=$1; shift; find $loc -type d -printf "%CY-%Cm-%Cd %CH:%CM %p\n" "$@" | sort; }
 
-      cdl() { cd $1; ls -l $1}
+      cdl() { cd $1; ls -l; }
     '';
   };
 }
