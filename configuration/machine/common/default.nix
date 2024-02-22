@@ -11,6 +11,4 @@
   environment.shellAliases = {
     dmesg = "dmesg -T";
   };
-
-  services.fstrim.enable = true;
 }
