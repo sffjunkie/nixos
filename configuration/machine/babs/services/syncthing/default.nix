@@ -1,8 +1,8 @@
 {config, ...}: let
-  cfg = config.service.syncthing;
+  cfg = config.services.syncthing;
 in {
   config = {
-    service.syncthing = {
+    services.syncthing = {
       enable = true;
       openDefaultPorts = true;
       guiAddress = "0.0.0.0:8384";
@@ -29,8 +29,8 @@ in {
             path = "/tank0/sync/sdk/development";
             type = "receiveonly";
             devices = [
-              cfg.settings.devices.babs.id
-              cfg.settings.devices.furrball.id
+              "babs"
+              "furrball"
             ];
           };
 
@@ -39,8 +39,8 @@ in {
             path = "/tank0/sync/sdk/documents";
             type = "receiveonly";
             devices = [
-              cfg.settings.devices.babs.id
-              cfg.settings.devices.furrball.id
+              "babs"
+              "furrball"
             ];
           };
 
@@ -49,8 +49,8 @@ in {
             path = "/tank0/sync/sdk/persona";
             type = "receiveonly";
             devices = [
-              cfg.settings.devices.babs.id
-              cfg.settings.devices.furrball.id
+              "babs"
+              "furrball"
             ];
           };
 
@@ -59,8 +59,8 @@ in {
             path = "/tank0/sync/sdk/pictures";
             type = "receiveonly";
             devices = [
-              cfg.settings.devices.babs.id
-              cfg.settings.devices.furrball.id
+              "babs"
+              "furrball"
             ];
           };
 
@@ -68,8 +68,8 @@ in {
             id = "site-ebooks";
             path = "/tank0/sync/site/ebooks";
             devices = [
-              cfg.settings.devices.babs.id
-              cfg.settings.devices.furrball.id
+              "babs"
+              "furrball"
             ];
           };
         };
