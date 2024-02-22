@@ -102,6 +102,8 @@
       settings.gnome.enable = true;
       settings.qt.enable = true;
       settings.qtile.enable = true;
+
+      xdg-user.enable = true;
     };
 
     xdg.mime.enable = true;
