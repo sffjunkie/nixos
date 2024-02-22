@@ -19,6 +19,10 @@ in {
       enable = true;
       openDefaultPorts = true;
       guiAddress = "0.0.0.0:8384";
+
+      settings.options = {
+        relaysEnabled = false;
+      };
     };
 
     networking.firewall = {
