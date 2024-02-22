@@ -14,20 +14,16 @@ in {
   };
 
   config = mkIf cfg.enable {
-    xgd.userDirs = {
+    xdg.userDirs = {
       enable = true;
-      desktop.default = "${config.home.homeDirectory}/desktop";
-      documents.default = "${config.home.homeDirectory}/documents";
-      download.default = "${config.home.homeDirectory}/downloads";
-      music.default = "${config.home.homeDirectory}/music";
-      pictures.default = "${config.home.homeDirectory}/pictures";
-      publicShare.default = "${config.home.homeDirectory}/public";
-      templates.default = "${config.home.homeDirectory}/templates";
-      videos.default = "${config.home.homeDirectory}/videos";
-    };
-
-    networking.firewall = {
-      allowedTCPPorts = [8384];
+      desktop = "${config.home.homeDirectory}/desktop";
+      documents = "${config.home.homeDirectory}/documents";
+      download = "${config.home.homeDirectory}/downloads";
+      music = "${config.home.homeDirectory}/music";
+      pictures = "${config.home.homeDirectory}/pictures";
+      publicShare = "${config.home.homeDirectory}/public";
+      templates = "${config.home.homeDirectory}/templates";
+      videos = "${config.home.homeDirectory}/videos";
     };
   };
 }
