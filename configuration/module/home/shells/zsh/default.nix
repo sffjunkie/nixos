@@ -17,11 +17,6 @@ in {
       dotDir = ".config/zsh";
       enableCompletion = true;
       enableAutosuggestions = true;
-      shellAliases = {
-        nano = "nano -l --guidestripe=72";
-        free = "free -h";
-        df = "df -h";
-      };
       syntaxHighlighting.enable = true;
       initExtra = ''
         bindkey '^f' autosuggest-accept
