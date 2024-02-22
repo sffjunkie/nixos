@@ -13,6 +13,7 @@
     ./postgresql
     ./sshd
     ./step-ca
+    ./syncthing
     ./traefik
     ./unbound
   ];
