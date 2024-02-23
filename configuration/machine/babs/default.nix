@@ -11,13 +11,11 @@
     ./fs.nix
     ./hardware.nix
     ./networking.nix
-
     ./services
-
     ../common
+
     ../../module/machine
     ../../module/mount
-
     ../../role/machine
 
     sops-nix.nixosModules.sops
