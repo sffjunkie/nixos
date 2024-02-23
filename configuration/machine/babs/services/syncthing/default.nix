@@ -66,6 +66,16 @@ in {
             ];
           };
 
+          sdk-secrets = {
+            id = "sdk-secrets";
+            path = "/tank0/sync/sdk/secrets";
+            type = "receiveonly";
+            devices = [
+              "babs"
+              "furrball"
+            ];
+          };
+
           site-ebooks = {
             id = "site-ebooks";
             path = "/tank0/sync/site/ebooks";
