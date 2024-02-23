@@ -128,6 +128,11 @@ in {
       default = "";
     };
 
+    nameServer = mkOption {
+      type = types.str;
+      default = "";
+    };
+
     hosts = mkOption {
       type = types.attrsOf host;
       default = {};

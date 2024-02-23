@@ -4,6 +4,7 @@
     prefixLength = 21;
     domainName = "looniversity.net";
     ldapRoot = "dc=looniversity,dc=net";
+    nameServer = "10.44.0.1";
 
     hosts = {
       pinky = {
