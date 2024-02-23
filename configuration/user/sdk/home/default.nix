@@ -21,8 +21,6 @@
       };
     };
 
-    xdg.configFile."syncthing/config.xml".source = ../dotfiles/dotconfig/syncthing/config.xml;
-
     looniversity = {
       atuin.enable = true;
       bat.enable = true;
