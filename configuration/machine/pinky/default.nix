@@ -11,7 +11,6 @@
     ./fs.nix
     ./hardware.nix
     ./networking.nix
-
     ./service
 
     ../common
