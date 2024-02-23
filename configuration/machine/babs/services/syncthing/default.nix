@@ -2,6 +2,8 @@
   cfg = config.services.syncthing;
 in {
   config = {
+    networking.firewall.allowedTCPPorts = [8384];
+
     services.syncthing = {
       enable = true;
       openDefaultPorts = true;
