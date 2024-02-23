@@ -11,7 +11,7 @@
   config = {
     environment.shellAliases = {
       df = "df -h";
-      dfs = "df -ha | (read -r; printf \"%s\n\" \"\$REPLY\"; sort)";
+      dfs = "df -ha | (read -r; printf \"%s\\n\" \"\$REPLY\"; sort)";
       dmesg = "dmesg -T";
       free = "free -h";
       nano = "nano -l --guidestripe=72";
