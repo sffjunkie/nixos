@@ -161,6 +161,7 @@
       proxy.handler = "traefik";
       s3.handler = "minio";
       sync.handler = "syncthing";
+      zigbee.handler = "zigbee2mqtt";
     };
 
     serviceHandlers = {
@@ -236,6 +237,11 @@
         ports = {
           dashboard = "8080";
         };
+      };
+
+      zigbee2mqtt = {
+        host = "thebrain";
+        port = 8080;
       };
     };
   };
