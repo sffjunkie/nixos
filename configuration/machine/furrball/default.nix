@@ -37,6 +37,7 @@
       spotify.enable = true;
 
       mount = {
+        backup.enable = true;
         music.enable = true;
       };
 
