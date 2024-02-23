@@ -5,6 +5,9 @@
   ...
 }: let
   cfg = config.looniversity.mount.backup;
+
+  lanIpv4 = lib.getLanIpv4 config "babs";
+
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.mount.backup = {
@@ -13,7 +16,7 @@ in {
 
   config = mkIf cfg.enable {
     fileSystems."/mnt/backup" = {
-      device = "10.44.0.3:/tank0/backup";
+      device = "${lanIpv4}:/tank0/backup";
       fsType = "nfs";
       options = ["x-systemd.automount" "x-systemd.requires=network-online.target" "noauto"];
     };
