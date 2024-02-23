@@ -4,16 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gateway.pppd;
   wanDev = lib.getNetdevice config "pinky" "wan";
-
-  inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gateway.pppd = {
-    enable = mkEnableOption "pppd";
-  };
-
-  config = mkIf cfg.enable {
+  config = {
     services.pppd = {
       enable = true;
       peers = {

@@ -2,5 +2,6 @@
   imports = [
     ./nat
     ./pppd
+    ./wireguard
   ];
 }

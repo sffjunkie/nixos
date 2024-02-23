@@ -12,6 +12,8 @@
     ./hardware.nix
     ./networking.nix
 
+    ./service
+
     ../common
     ../../module/machine
     ../../module/mount
