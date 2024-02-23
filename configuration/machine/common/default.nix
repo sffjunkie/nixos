@@ -15,6 +15,7 @@
       dmesg = "dmesg -T";
       free = "free -h";
       nano = "nano -l --guidestripe=72";
+      hgrep = "history | grep";
     };
 
     environment.interactiveShellInit = ''
