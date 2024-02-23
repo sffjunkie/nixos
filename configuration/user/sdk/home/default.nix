@@ -22,7 +22,6 @@
     };
 
     looniversity = {
-      atuin.enable = true;
       bat.enable = true;
       bottom.enable = true;
       direnv.enable = true;
