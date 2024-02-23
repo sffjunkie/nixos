@@ -32,6 +32,7 @@
     };
 
     looniversity = {
+      net-tools.enable = true;
       rclone.enable = true;
       spotify.enable = true;
 

@@ -27,6 +27,7 @@
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     looniversity = {
+      net-tools.enable = true;
       service = {
         minio.enable = true;
         nfs.enable = true;
