@@ -36,7 +36,7 @@ in {
 
         peers = [
           {
-            publicKey = "{client public key}";
+            publicKey = "KiKUDMFNPA5wFSQ79FFoVnFiiBN1PYq6K1OCO6zSEjY=";
             allowedIPs = ["10.50.0.2/32"];
           }
         ];
