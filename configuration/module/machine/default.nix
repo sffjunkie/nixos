@@ -5,6 +5,7 @@
     ./gateway
     ./home-automation
     ./media
+    ./network
     ./scripts
     ./service
     ./shells
