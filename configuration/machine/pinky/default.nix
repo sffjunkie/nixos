@@ -25,7 +25,6 @@
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     looniversity = {
-      role.gateway.enable = true;
       service.lldap.enable = true;
     };
 
