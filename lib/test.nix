@@ -8,15 +8,6 @@
   # the tests failed, it prints the summary by throwing an exception and
   # exiting with a non-zero exit code.
   #
-  # This is the main entry point for the test runner. It's usually called by
-  # creating a top level `tests.nix` with the following content:
-  # ```
-  # let
-  #   testing = import ./testing;
-  # in
-  #   testing.run ./.
-  # ```
-  #
   # Note that every _test.nix file should evaluate to a list of tests. Each test
   # in the list should have the schema defined in `runTest`.
   run = dir: attrs @ {lib, ...}: let
