@@ -9,7 +9,7 @@
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.admin.mongodb = {
-    enable = mkEnableOption "mongodb";
+    enable = mkEnableOption "mongodb admin";
   };
 
   config = mkIf cfg.enable {

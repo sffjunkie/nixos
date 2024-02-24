@@ -10,7 +10,7 @@
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.admin.postgresql = {
-    enable = mkEnableOption "postgresql";
+    enable = mkEnableOption "postgresql admin";
   };
 
   config = mkIf cfg.enable {
