@@ -4,11 +4,13 @@
   - machine - per machine configurations
   - module - various nixos modules
     - home - home-manager modules
-    - machine - machine specific modules
+    - machine - machine wide modules
     - mount - mount points
   - role - a role enables a group of modules
   - secret - sops-nix secrets
   - site - site wide configuration
+    - network - hosts, services, serviceHandlers
+    - tool - tools
   - user - user definitions
     - *user name*
       - home - home-manager configuration
@@ -21,7 +23,9 @@
 
 - installer - ISO installation image creation
 
-- lib - Custom library functions
+- lib - custom library functions
+  - network - Retrieve values from the site.network configuration
+  - tool - Retrieve tool information from the site.tool configuration
 
 ## devshell
 

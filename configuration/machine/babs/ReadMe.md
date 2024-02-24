@@ -44,7 +44,6 @@ Partitions
 - tank1/kids
 - tank1/movies
 - tank1/music_videos
-- tank1/private
 - tank1/radio
 - tank1/roms
 - tank1/torrent
