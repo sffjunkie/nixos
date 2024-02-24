@@ -1,5 +1,6 @@
 {
   imports = [
+    ./admin
     ./desktop
     ./games
     ./home-automation
