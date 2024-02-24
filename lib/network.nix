@@ -15,7 +15,7 @@
 
   # serviceHandlerMainPort :: attrSet -> str -> str -> int
   # Get a named port number for the `serviceHandlerName`
-  serviceHandlerMainPort = config: serviceHandlerName: portName: config.looniversity.network.serviceHandlers.${serviceHandlerName}.port;
+  serviceHandlerMainPort = config: serviceHandlerName: config.looniversity.network.serviceHandlers.${serviceHandlerName}.port;
 
   # serviceHandlerNamedPort :: attrSet -> str -> str -> int
   # Get a named port number for the `serviceHandlerName`
