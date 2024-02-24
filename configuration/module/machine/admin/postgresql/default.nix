@@ -14,9 +14,14 @@ in {
   };
 
   config = mkIf cfg.enable {
+    sops.secrets."tool/pgadmin/initial_password" = {owner = config.users.users.pgadmin.name;};
+
     services.pgadmin = {
       enable = true;
       port = port;
+
+      initialEmail = "siteadmin@looniversity.lan";
+      initialPasswordFile = config.sops.secrets."tool/pgadmin/initial_password".path;
     };
   };
 }
