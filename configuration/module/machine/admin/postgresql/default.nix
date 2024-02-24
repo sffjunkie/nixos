@@ -5,7 +5,7 @@
 }: let
   cfg = config.looniversity.admin.postgresql;
 
-  port = lib.network.get
+  port = lib.tool.getToolPort config "postgresql-admin";
 
   inherit (lib) mkEnableOption mkIf;
 in {
@@ -16,6 +16,7 @@ in {
   config = mkIf cfg.enable {
     services.pgadmin = {
       enable = true;
+      port = port;
     };
   };
 }
