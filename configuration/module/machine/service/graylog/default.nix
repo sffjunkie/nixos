@@ -8,7 +8,7 @@
 }: let
   cfg = config.looniversity.service.graylog;
 
-  mongodb_host = lib.getHandlerHostFQDN config "mongodb";
+  mongodb_host = lib.network.getHandlerHostName config "mongodb";
   mongodb_uri = "mongodb://${mongodb_host}/graylog";
 
   confFile = pkgs.writeText "graylog.conf" ''
