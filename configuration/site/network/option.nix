@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  options,
   ...
 }: let
   inherit (lib) mkOption types;
@@ -65,7 +66,7 @@
     };
     options.domainName = mkOption {
       type = types.str;
-      default = "";
+      default = options.looniversity.network.domainName.default;
     };
     options.addToDns = mkOption {
       type = types.bool;
@@ -112,7 +113,7 @@ in {
 
     domainName = mkOption {
       type = types.str;
-      default = "";
+      default = "looniversity.net";
     };
 
     ldapRoot = mkOption {
