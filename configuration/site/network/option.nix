@@ -29,14 +29,6 @@
       type = types.str;
       default = name;
     };
-    options.network = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.prefixLength = mkOption {
-      type = types.int;
-      default = -1;
-    };
     options.description = mkOption {
       type = types.str;
       default = "";
