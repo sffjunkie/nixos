@@ -1,3 +1,5 @@
+# Adapted from https://github.com/jetpack-io/nixtest/ to take a reference
+# to `lib`
 {lib, ...}: rec {
   # Function `run` takes a directory as an argument, finds all test files
   # matching the pattern `**/*.test.nix`, and runs all of those tests.
@@ -17,21 +19,19 @@
   #
   # Note that every _test.nix file should evaluate to a list of tests. Each test
   # in the list should have the schema defined in `runTest`.
-  run = dir: attrSet ? {}: let
-    results = runDir dir attrSet;
+  run = dir: attrs @ {lib, ...}: let
+    results = runDir dir attrs;
   in (
     assertTests results
   );
 
-  # Function `runDir` takes a directory as an argument, finds all test files
-  # matching the pattern `**/*.test.nix`, and runs all of those tests.
-  #
-  # It returns a list of results, one for each test.
-  runDir = dir: attrSet: (
+  # testFiles = path -> list[str]
+  # Returns a
+  testFiles = dir: (
     let
       fileTypes = builtins.readDir dir;
       filenames = builtins.attrNames fileTypes;
-      results =
+      allTestFiles =
         builtins.foldl' (
           acc: filename: let
             path = dir + "/${filename}";
@@ -39,13 +39,30 @@
             isTestFile = (fileType == "regular") && (builtins.match ".*_test\.nix" filename) != null;
           in (
             if fileType == "directory"
-            then acc ++ (runDir path)
+            then acc ++ (testFiles path)
             else if isTestFile
-            then acc ++ (runTests (import path attrSet))
+            then acc ++ [path]
             else acc ++ []
           )
         ) []
         filenames;
+    in
+      allTestFiles
+  );
+
+  # Function `runDir` takes a directory as an argument, finds all test files
+  # matching the pattern `**/*.test.nix`, and runs all of those tests.
+  #
+  # It returns a list of results, one for each test.
+  runDir = dir: attrs @ {lib, ...}: (
+    let
+      results =
+        builtins.foldl' (
+          acc: filepath: (
+            acc ++ (runTests ((import filepath) {inherit lib;}))
+          )
+        ) []
+        (testFiles dir);
     in
       results
   );
@@ -92,6 +109,7 @@
     failures = builtins.filter (test: test.passed == false) results;
     numFailures = builtins.length failures;
   in (
+    # results
     if (builtins.length failures) == 0
     then "[PASS] ${toString numTests}/${toString numTests} tests passed\n"
     else
@@ -105,8 +123,8 @@
         acc
         + ''
           [FAIL] ${result.name}
-            Got: ${builtins.toJSON result.actual}
             Expected: ${builtins.toJSON result.expected}
+            Actual:   ${builtins.toJSON result.actual}
 
         ''
     ) ""
