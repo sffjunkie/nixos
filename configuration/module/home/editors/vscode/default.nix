@@ -37,7 +37,8 @@
     github.remotehub
     keesschollaart.vscode-home-assistant
     ms-vscode.cpptools-extension-pack
-    ms-vscode.makefile-tools
+    # TODO: 2024-02-24 Currently fails to build. Need to check later
+    # ms-vscode.makefile-tools
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
     shipitsmarter.sops-edit
