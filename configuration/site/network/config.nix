@@ -125,6 +125,122 @@
           };
         };
       };
+
+      # IoT
+      philips-hue = {
+        description = "Philips Hue";
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.21";
+            ipv4method = "dhcpstatic";
+            mac = "00:17:88:24:a4:6d";
+          };
+        };
+      };
+
+      # Media devices
+      gh-bedroom = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.50";
+            ipv4method = "dhcpstatic";
+            mac = "a4:77:33:2f:59:aa";
+          };
+        };
+      };
+      gh-mediaroom = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.51";
+            ipv4method = "dhcpstatic";
+            mac = "d8:6c:63:4b:d4:5e";
+          };
+        };
+      };
+      gh-dressingroom = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.52";
+            ipv4method = "dhcpstatic";
+            mac = "20:df:b9:2d:f2:92";
+          };
+        };
+      };
+      gh-kitchen = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.53";
+            ipv4method = "dhcpstatic";
+            mac = "48:d6:d5:f4:1b:bd";
+          };
+        };
+      };
+      gh-lounge = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.54";
+            ipv4method = "dhcpstatic";
+            mac = "d4:f5:47:bd:39:6d";
+          };
+        };
+      };
+      gh-garage = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.55";
+            ipv4method = "dhcpstatic";
+            mac = "48:d6:d5:db:83:2d";
+          };
+        };
+      };
+      ca-kitchen = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.60";
+            ipv4method = "dhcpstatic";
+            mac = "54:60:09:f9:ef:da";
+          };
+        };
+      };
+      ca-garage = {
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.61";
+            ipv4method = "dhcpstatic";
+            mac = "54:60:09:f9:f0:ae";
+          };
+        };
+      };
+      cxn-lounge = {
+        description = "CXNv2";
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.62";
+            ipv4method = "dhcpstatic";
+            mac = "b4:bc:7c:bf:01:ca";
+          };
+        };
+      };
+      gtv-bedroom = {
+        description = "Google TV";
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.63";
+            ipv4method = "dhcpstatic";
+            mac = "e2:3e:79:61:b6:bd";
+          };
+        };
+      };
+      sb-mediaroom = {
+        description = "Sonos Beam";
+        netdevice = {
+          default = {
+            ipv4 = "10.44.0.64";
+            ipv4method = "dhcpstatic";
+            mac = "94:9f:3e:c5:56:fe";
+          };
+        };
+      };
     };
 
     vlans = {
