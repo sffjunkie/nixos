@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  sops,
+  pkgs,
   ...
 }: let
   wanDev = lib.network.netdevice config "pinky" "wan";
@@ -13,7 +13,7 @@ in {
       pkgs.wireguard-tools
     ];
 
-    networking.firewall.interfaces.allowedUDPPorts = [51820];
+    networking.firewall.interfaces.${wanDev}.allowedUDPPorts = [51820];
 
     networking.wireguard.interfaces = {
       wg0 = {
@@ -29,7 +29,7 @@ in {
           ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.50.0.0/24 -o ${wanDev} -j MASQUERADE
         '';
 
-        privateKeyFile = sops.secrets."service/wireguard/server/private_key".path;
+        privateKeyFile = config.sops.secrets."service/wireguard/server/private_key".path;
 
         peers = [
           {
