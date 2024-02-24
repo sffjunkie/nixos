@@ -195,5 +195,7 @@
       rust = import ./devshell/rust {inherit pkgs;};
       net = import ./devshell/net {inherit pkgs;};
     };
+
+    tests = lib.test.run ./test {inherit lib;};
   };
 }
