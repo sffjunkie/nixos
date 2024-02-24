@@ -17,7 +17,7 @@ in {
       service.mongodb.enable = true;
       service.graylog = {
         enable = true;
-        extraConfig = "http_bind_address = 127.0.0.1:9011";
+        extraConfig = "http_bind_address = 0.0.0.0:9011";
         elasticsearchHosts = ["http://localhost:9200"];
       };
     };
