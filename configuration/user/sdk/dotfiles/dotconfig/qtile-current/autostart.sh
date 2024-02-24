@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[[ -f ${XDG_CONFIG_HOME:-$HOME/.config}/sh/env.sh ]] && source ${XDG_CONFIG_HOME:-$HOME/.config}/sh/env.sh
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/sh/env.sh" ] && . "${XDG_CONFIG_HOME:-$HOME/.config}/sh/env.sh"
 
 xrdb -merge "${XDG_CONFIG_HOME:-$HOME/.config}/x11/Xresources" &
 
