@@ -35,6 +35,11 @@
       rclone.enable = true;
       spotify.enable = true;
 
+      admin = {
+        mongodb.enable = true;
+        postgresql.enable = true;
+      };
+
       mount = {
         backup.enable = true;
         music.enable = true;
