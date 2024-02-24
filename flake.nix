@@ -196,6 +196,8 @@
       net = import ./devshell/net {inherit pkgs;};
     };
 
+    # The nix devShell above adds a nix-test function which runs the tests
+    # under the `tests` attribute
     tests = lib.test.run ./test {inherit lib;};
   };
 }
