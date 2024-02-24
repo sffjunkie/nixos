@@ -143,6 +143,12 @@ in {
           ln -s ${cfg.package}/plugin/$includedplugin /var/lib/graylog/plugins/$includedplugin || true
         done
       '';
+      unitConfig = {
+        Wants = [
+          "elasticsearch.service"
+          "mongodb.service"
+        ];
+      };
       serviceConfig = {
         User = "${cfg.user}";
         StateDirectory = "graylog";
