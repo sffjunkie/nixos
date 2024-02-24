@@ -4,8 +4,8 @@
   lib,
   ...
 }: let
-  wanDev = lib.getNetdevice config "pinky" "wan";
-  lanDev = lib.getNetdevice config "pinky" "lan";
+  wanDev = lib.network.getNetdevice config "pinky" "wan";
+  lanDev = lib.network.getNetdevice config "pinky" "lan";
 in {
   config = {
     networking.nat = {

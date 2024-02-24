@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-  wolInterface = lib.getNetdevice config "babs" "lan";
+  wolInterface = lib.network.getNetdevice config "babs" "lan";
 in {
   config = {
     networking = {

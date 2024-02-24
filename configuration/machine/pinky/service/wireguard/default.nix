@@ -4,7 +4,7 @@
   sops,
   ...
 }: let
-  wanDev = lib.getNetdevice config "pinky" "wan";
+  wanDev = lib.network.getNetdevice config "pinky" "wan";
 in {
   config = {
     sops.secrets."service/wireguard/server/private_key" = {};

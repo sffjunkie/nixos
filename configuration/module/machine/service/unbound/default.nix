@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.looniversity.service.unbound;
-  lanIpv4 = lib.getLanIpv4 config "pinky";
+  lanIpv4 = lib.network.getLanIpv4 config "pinky";
 
   dnsPort = 1053;
 

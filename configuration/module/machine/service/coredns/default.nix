@@ -5,8 +5,8 @@
   ...
 }: let
   cfg = config.looniversity.service.coredns;
-  lanDev = lib.traceVal lib.getNetdevice config "pinky" "lan";
-  lanIpv4 = lib.getLanIpv4 config "pinky";
+  lanDev = lib.traceVal lib.network.getNetdevice config "pinky" "lan";
+  lanIpv4 = lib.network.getLanIpv4 config "pinky";
   dynamicZoneDataDir = "/var/lib/coredns/dynamic";
 
   dnsPort = 1053;

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  wanDev = lib.getNetdevice config "pinky" "wan";
+  wanDev = lib.network.getNetdevice config "pinky" "wan";
 in {
   config = {
     services.pppd = {

@@ -1,5 +1,4 @@
-{lib, ...}: final: prev:
-{
+{lib, ...}: final: prev: {
   enabled = {enable = true;};
+  network = import ./network.nix {inherit lib;};
 }
-// (import ./network.nix {inherit lib;})
