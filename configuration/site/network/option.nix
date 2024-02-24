@@ -76,7 +76,7 @@
       type = types.bool;
       default = false;
     };
-    options.handler = mkOption {
+    options.handlerName = mkOption {
       type = types.str;
     };
   });

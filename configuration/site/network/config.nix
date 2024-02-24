@@ -146,22 +146,22 @@
     };
 
     services = {
-      defaults = {
-        domainName = "service.${config.looniversity.network.domainName}";
+      ca = {
+        handlerName = "step-ca";
+        addToDns = true;
       };
-
-      ca.handler = "step-ca";
-      cloud.handler = "nextcloud";
-      dhcp4.handler = "kea";
-      dns.handler = "coredns";
-      home-automation.handler = "home-assistant";
-      log.handler = "graylog";
-      metrics.handler = "prometheus";
-      music.handler = "jellyfin";
-      proxy.handler = "traefik";
-      s3.handler = "minio";
-      sync.handler = "syncthing";
-      zigbee.handler = "zigbee2mqtt";
+      cloud.handlerName = "nextcloud";
+      dhcp4.handlerName = "kea";
+      dns.handlerName = "coredns";
+      git.handlerName = "gitea";
+      home-automation.handlerName = "home-assistant";
+      log.handlerName = "graylog";
+      metrics.handlerName = "prometheus";
+      music.handlerName = "jellyfin";
+      proxy.handlerName = "traefik";
+      s3.handlerName = "minio";
+      sync.handlerName = "syncthing";
+      zigbee.handlerName = "zigbee2mqtt";
     };
 
     serviceHandlers = {
