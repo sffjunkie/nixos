@@ -1,27 +1,30 @@
-let
+{lib, ...}: let
   testConfig = {
-    network = "10.44.0.0";
-    prefixLength = 21;
-    domainName = "looniversity.net";
+    looniversity.network = {
+      network = "10.44.0.0";
+      prefixLength = 21;
+      domainName = "looniversity.net";
 
-    services = {
-      ca.handler = "step-ca";
-      cloud.handler = "nextcloud";
-    };
-
-    serviceHandlers = {
-      nextcloud = {
-        host = "thebrain";
+      services = {
+        ca.handler = "step-ca";
+        cloud.handler = "nextcloud";
       };
 
-      step-ca = {
-        host = "pinky";
+      serviceHandlers = {
+        nextcloud = {
+          host = "thebrain";
+        };
+
+        step-ca = {
+          host = "pinky";
+        };
       };
     };
   };
-in {
-  testGetHandlerNameForService = {
-    actual = lib.network.serviceServiceHandlerName "ca";
+in [
+  {
+    name = "network.serviceServiceHandlerName";
+    actual = lib.network.serviceServiceHandlerName testConfig "ca";
     expected = "step-ca";
-  };
-}
+  }
+]
