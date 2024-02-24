@@ -22,7 +22,7 @@
 
   inherit (lib) mkOption types;
 in {
-  options.looniversity.tools = {
+  options.looniversity.tools = mkOption {
     type = types.attrsOf tool;
     default = {};
   };
