@@ -12,6 +12,8 @@ in {
       domain = "looniversity.net";
 
       interfaces.${wolInterface}.wakeOnLan.enable = true;
+
+      useDHCP = false;
     };
 
     systemd.network = {
