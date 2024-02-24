@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.looniversity.admin.mongodb;
@@ -13,7 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      mongodb-compass
+      pkgs.mongodb-compass
     ];
   };
 }
