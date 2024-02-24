@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.looniversity.service.lldap;
-  lanDev = lib.network.getNetdevice config "pinky" "lan";
+  lanDev = lib.network.netdevice config "pinky" "lan";
 
   inherit (lib) mkEnableOption mkIf;
 in {

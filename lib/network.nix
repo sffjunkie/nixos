@@ -1,10 +1,10 @@
 {lib, ...}: let
-  # getNetdevice :: attrSet -> str -> str -> str
+  # netdevice :: attrSet -> str -> str -> str
   # Gets a hosts network device given an alias
-  getNetdevice = config: host: ifname: config.looniversity.network.hosts.${host}.netdevice.${ifname}.device;
+  netdevice = config: host: ifname: config.looniversity.network.hosts.${host}.netdevice.${ifname}.device;
 
-  # getLanIpv4 :: attrSet -> str -> str
-  getLanIpv4 = config: host: config.looniversity.network.hosts.${host}.netdevice.lan.ipv4;
+  # lanIpv4 :: attrSet -> str -> str
+  lanIpv4 = config: host: config.looniversity.network.hosts.${host}.netdevice.lan.ipv4;
 
   # handlerName -> ...
 
@@ -24,23 +24,30 @@
 
   # serviceName -> ...
 
-  # serviceHandlerNameForService :: attrSet -> str -> str
-  serviceHandlerNameForService = config: serviceName: config.looniversity.network.services.${serviceName}.handler;
+  # serviceDomainName :: attrSet -> str -> str
+  serviceDomainName = config: serviceName: config.looniversity.network.services.${serviceName}.domainName;
 
-  # serviceHandlerForService :: attrSet -> str -> attrSet
-  serviceHandlerForService = config: serviceName: serviceHandler config (serviceHandlerNameForService config serviceName);
+  # serviceServiceHandlerName :: attrSet -> str -> str
+  serviceServiceHandlerName = config: serviceName: config.looniversity.network.services.${serviceName}.handler;
 
-  # serviceHandlerHostNameForService :: attrSet -> str -> str
-  serviceHandlerHostNameForService = config: serviceName: (serviceHandlerForService config serviceName).host;
+  # serviceServiceHandler :: attrSet -> str -> attrSet
+  serviceServiceHandler = config: serviceName: serviceHandler config (serviceServiceHandlerName config serviceName);
 
-  # serviceHandlerHostFQDNForService :: attrSet -> str -> str
-  serviceHandlerHostFQDNForService = config: serviceName:
-    lib.concatStringsSep "/"
-    [(serviceHandlerHostNameForService config serviceName) config.looniversity.network.domainName];
+  # serviceServiceHandlerHostName :: attrSet -> str -> str
+  serviceServiceHandlerHostName = config: serviceName: (serviceServiceHandler config serviceName).host;
+
+  # serviceServiceHandlerHostFQDN :: attrSet -> str -> str
+  serviceServiceHandlerHostFQDN = config: serviceName:
+    lib.concatStringsSep "."
+    [(serviceServiceHandlerHostName config serviceName) (serviceDomainName config serviceName)];
 in {
-  inherit getNetdevice getLanIpv4;
-  inherit serviceHandler serviceHandlerHostName serviceHandlerHostFQDN;
+  inherit netdevice lanIpv4;
+
+  inherit serviceHandler;
+  inherit serviceHandlerHostName serviceHandlerHostFQDN;
   inherit serviceHandlerNamedPort;
-  inherit serviceHandlerNameForService serviceHandlerForService;
-  inherit serviceHandlerHostNameForService serviceHandlerHostFQDNForService;
+
+  inherit serviceDomainName;
+  inherit serviceServiceHandlerName serviceServiceHandler;
+  inherit serviceServiceHandlerHostName serviceServiceHandlerHostFQDN;
 }

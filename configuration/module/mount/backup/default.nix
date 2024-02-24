@@ -6,7 +6,7 @@
 }: let
   cfg = config.looniversity.mount.backup;
 
-  lanIpv4 = lib.network.getLanIpv4 config "babs";
+  lanIpv4 = lib.network.lanIpv4 config "babs";
 
   inherit (lib) mkEnableOption mkIf;
 in {

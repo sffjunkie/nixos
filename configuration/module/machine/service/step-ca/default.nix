@@ -6,7 +6,7 @@
   ...
 }: let
   cfg = config.looniversity.service.step-ca;
-  lanDev = lib.network.getNetdevice config "pinky" "lan";
+  lanDev = lib.network.netdevice config "pinky" "lan";
 
   inherit (lib) mkEnableOption mkIf types;
   inherit (builtins) isNull;
