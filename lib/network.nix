@@ -4,50 +4,53 @@
   netdevice = config: host: ifname: config.looniversity.network.hosts.${host}.netdevice.${ifname}.device;
 
   # lanIpv4 :: attrSet -> str -> str
+  # Get the ipv4 address of the host's lan network device
   lanIpv4 = config: host: config.looniversity.network.hosts.${host}.netdevice.lan.ipv4;
 
-  # handlerName -> ...
+  # serviceHandlerName -> ...
 
   # serviceHandler :: attrSet -> str -> attrSet
-  serviceHandler = config: handlerName: config.looniversity.network.serviceHandlers.${handlerName};
-
-  # serviceHandlerHostName :: attrSet -> str -> str
-  serviceHandlerHostName = config: handlerName: config.looniversity.network.serviceHandlers.${handlerName}.host;
-
-  # serviceHandlerHostFQDN :: attrSet -> str -> str
-  serviceHandlerHostFQDN = config: handlerName:
-    lib.concatStringsSep "."
-    [(serviceHandlerHostName config handlerName) config.looniversity.network.domainName];
+  # Get the service handler definition for the `serviceHandlerName`
+  serviceHandler = config: serviceHandlerName: config.looniversity.network.serviceHandlers.${serviceHandlerName};
 
   # serviceHandlerNamedPort :: attrSet -> str -> str -> int
-  serviceHandlerNamedPort = config: handlerName: portName: config.looniversity.network.serviceHandlers.${handlerName}.ports.${portName};
+  # Get a named port number for the `serviceHandlerName`
+  serviceHandlerNamedPort = config: serviceHandlerName: portName: config.looniversity.network.serviceHandlers.${serviceHandlerName}.ports.${portName};
+
+  # serviceHandlerHostName :: attrSet -> str -> str
+  # Get the host name for the `serviceName`
+  serviceHandlerHostName = config: serviceHandlerName: (serviceHandler config serviceHandlerName).host;
+
+  # serviceHandlerFQDN :: attrSet -> str -> str
+  serviceHandlerFQDN = config: serviceHandlerName:
+    lib.concatStringsSep "."
+    [(serviceHandlerHostName config serviceHandlerName) config.looniversity.network.domainName];
 
   # serviceName -> ...
 
+  # serviceHostName :: attrSet -> str -> str
+  serviceHostName = config: serviceName: config.looniversity.network.services.${serviceName}.hostName;
+
   # serviceDomainName :: attrSet -> str -> str
   serviceDomainName = config: serviceName: config.looniversity.network.services.${serviceName}.domainName;
+
+  # serviceFQDN :: attrSet -> str -> str
+  serviceFQDN = config: serviceName:
+    lib.concatStringsSep "."
+    [(serviceHostName config serviceName) (serviceDomainName config serviceName)];
 
   # serviceServiceHandlerName :: attrSet -> str -> str
   serviceServiceHandlerName = config: serviceName: config.looniversity.network.services.${serviceName}.handler;
 
   # serviceServiceHandler :: attrSet -> str -> attrSet
   serviceServiceHandler = config: serviceName: serviceHandler config (serviceServiceHandlerName config serviceName);
-
-  # serviceServiceHandlerHostName :: attrSet -> str -> str
-  serviceServiceHandlerHostName = config: serviceName: (serviceServiceHandler config serviceName).host;
-
-  # serviceServiceHandlerHostFQDN :: attrSet -> str -> str
-  serviceServiceHandlerHostFQDN = config: serviceName:
-    lib.concatStringsSep "."
-    [(serviceServiceHandlerHostName config serviceName) (serviceDomainName config serviceName)];
 in {
   inherit netdevice lanIpv4;
 
   inherit serviceHandler;
-  inherit serviceHandlerHostName serviceHandlerHostFQDN;
   inherit serviceHandlerNamedPort;
+  inherit serviceHandlerHostName serviceHandlerFQDN;
 
-  inherit serviceDomainName;
+  inherit serviceHostName serviceDomainName serviceFQDN;
   inherit serviceServiceHandlerName serviceServiceHandler;
-  inherit serviceServiceHandlerHostName serviceServiceHandlerHostFQDN;
 }
