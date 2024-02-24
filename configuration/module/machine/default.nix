@@ -2,7 +2,6 @@
   imports = [
     ./desktop
     ./games
-    ./gateway
     ./home-automation
     ./media
     ./network
