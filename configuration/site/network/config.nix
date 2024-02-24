@@ -18,6 +18,7 @@
             device = "enp5s0";
             ipv4 = "10.44.0.1";
             ipv4method = "static";
+            mac = "TBC"; # TODO: Add correct MAC
           };
         };
       };
@@ -43,28 +44,6 @@
           };
         };
       };
-      mary = {
-        description = "Music Server";
-        netdevice = {
-          lan = {
-            device = "enp5s0";
-            mac = "TBC";
-            ipv4 = "10.44.0.4";
-            ipv4method = "dhcpstatic";
-          };
-        };
-      };
-      calamity = {
-        description = "Backup Server";
-        netdevice = {
-          lan = {
-            device = "enp5s0";
-            mac = "TBC";
-            ipv4 = "10.44.0.5";
-            ipv4method = "dhcpstatic";
-          };
-        };
-      };
       furrball = {
         description = "Workstation";
         netdevice = {
@@ -79,12 +58,35 @@
         description = "Laptop";
         netdevice = {
           wifi = {
-            device = "TBC";
+            device = "TBC"; # TODO: Add correct wifi device
             ipv4method = "dhcp";
-            mac = "TBC";
+            mac = "TBC"; # TODO: Add correct MAC
           };
         };
       };
+      # mary = {
+      #   description = "Music Server";
+      #   netdevice = {
+      #     lan = {
+      #       device = "enp5s0";
+      #       mac = "TBC";
+      #       ipv4 = "10.44.0.4";
+      #       ipv4method = "dhcpstatic";
+      #     };
+      #   };
+      # };
+      # calamity = {
+      #   description = "Backup Server";
+      #   netdevice = {
+      #     lan = {
+      #       device = "enp5s0";
+      #       mac = "TBC";
+      #       ipv4 = "10.44.0.5";
+      #       ipv4method = "dhcpstatic";
+      #     };
+      #   };
+      # };
+
       sw1 = {
         description = "Node0 Switch";
         netdevice = {
@@ -95,6 +97,8 @@
           };
         };
       };
+
+      # Wifi access points
       wa1 = {
         description = "Downstairs WAP";
         netdevice = {
@@ -119,7 +123,7 @@
         description = "HiFi Repeater";
         netdevice = {
           lan = {
-            ipv4 = "10.44.0.6";
+            ipv4 = "10.44.0.13";
             ipv4method = "dhcpstatic";
             mac = "74:DA:88:5D:37:00";
           };
@@ -130,7 +134,7 @@
       philips-hue = {
         description = "Philips Hue";
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.21";
             ipv4method = "dhcpstatic";
             mac = "00:17:88:24:a4:6d";
@@ -141,7 +145,7 @@
       # Media devices
       gh-bedroom = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.50";
             ipv4method = "dhcpstatic";
             mac = "a4:77:33:2f:59:aa";
@@ -150,7 +154,7 @@
       };
       gh-mediaroom = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.51";
             ipv4method = "dhcpstatic";
             mac = "d8:6c:63:4b:d4:5e";
@@ -159,7 +163,7 @@
       };
       gh-dressingroom = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.52";
             ipv4method = "dhcpstatic";
             mac = "20:df:b9:2d:f2:92";
@@ -168,7 +172,7 @@
       };
       gh-kitchen = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.53";
             ipv4method = "dhcpstatic";
             mac = "48:d6:d5:f4:1b:bd";
@@ -177,7 +181,7 @@
       };
       gh-lounge = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.54";
             ipv4method = "dhcpstatic";
             mac = "d4:f5:47:bd:39:6d";
@@ -186,7 +190,7 @@
       };
       gh-garage = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.55";
             ipv4method = "dhcpstatic";
             mac = "48:d6:d5:db:83:2d";
@@ -195,7 +199,7 @@
       };
       ca-kitchen = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.60";
             ipv4method = "dhcpstatic";
             mac = "54:60:09:f9:ef:da";
@@ -204,7 +208,7 @@
       };
       ca-garage = {
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.61";
             ipv4method = "dhcpstatic";
             mac = "54:60:09:f9:f0:ae";
@@ -214,7 +218,7 @@
       cxn-lounge = {
         description = "CXNv2";
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.62";
             ipv4method = "dhcpstatic";
             mac = "b4:bc:7c:bf:01:ca";
@@ -224,7 +228,7 @@
       gtv-bedroom = {
         description = "Google TV";
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.63";
             ipv4method = "dhcpstatic";
             mac = "e2:3e:79:61:b6:bd";
@@ -234,7 +238,7 @@
       sb-mediaroom = {
         description = "Sonos Beam";
         netdevice = {
-          default = {
+          lan = {
             ipv4 = "10.44.0.64";
             ipv4method = "dhcpstatic";
             mac = "94:9f:3e:c5:56:fe";
@@ -281,6 +285,12 @@
     };
 
     serviceHandlers = {
+      camo = {
+        # host = "thebrain";
+        host = "127.0.0.1";
+        port = "8081";
+      };
+
       coredns = {
         host = "pinky";
         port = 53;
@@ -290,16 +300,25 @@
       };
 
       elasticsearch = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
+      };
+
+      gitea = {
+        # host = "thebrain";
+        host = "127.0.0.1";
+        port = 3000;
       };
 
       graylog = {
-        host = "thebrain";
-        port = 9013;
+        # host = "thebrain";
+        host = "127.0.0.1";
+        port = 9011;
       };
 
       home-assistant = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
         port = 8123;
       };
 
@@ -325,20 +344,24 @@
       };
 
       mongodb = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
       };
 
       nextcloud = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
       };
 
       portainer = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
         port = 9000;
       };
 
       prometheus = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
         port = 9153;
       };
 
@@ -351,12 +374,13 @@
       traefik = {
         host = "pinky";
         ports = {
-          dashboard = "8080";
+          dashboard = 8080;
         };
       };
 
       zigbee2mqtt = {
-        host = "thebrain";
+        # host = "thebrain";
+        host = "127.0.0.1";
         port = 8080;
       };
     };
