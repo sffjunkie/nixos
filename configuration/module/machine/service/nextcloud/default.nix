@@ -6,7 +6,6 @@
   ...
 }: let
   cfg = config.looniversity.service.nextcloud;
-  nextcloudHandler = lib.network.getServiceHandler "nextcloud";
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
