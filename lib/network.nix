@@ -1,4 +1,4 @@
-{lib, ...}: let
+{lib, ...}: rec {
   # netdevice :: attrSet -> str -> str -> str
   # Gets a hosts network device given an alias
   netdevice = config: host: ifname: config.looniversity.network.hosts.${host}.netdevice.${ifname}.device;
@@ -44,13 +44,4 @@
 
   # serviceServiceHandler :: attrSet -> str -> attrSet
   serviceServiceHandler = config: serviceName: serviceHandler config (serviceServiceHandlerName config serviceName);
-in {
-  inherit netdevice lanIpv4;
-
-  inherit serviceHandler;
-  inherit serviceHandlerNamedPort;
-  inherit serviceHandlerHostName serviceHandlerFQDN;
-
-  inherit serviceHostName serviceDomainName serviceFQDN;
-  inherit serviceServiceHandlerName serviceServiceHandler;
 }
