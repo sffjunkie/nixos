@@ -5,7 +5,7 @@
     ./nix.nix
     ./packages.nix
     ./workaround.nix
-    ../../site
+    ../../../siteconfig
   ];
 
   config = {
