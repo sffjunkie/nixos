@@ -1,6 +1,4 @@
-{lib, ...}: let
-  network = import ../network.nix;
-
+let
   testConfig = {
     network = "10.44.0.0";
     prefixLength = 21;
@@ -23,7 +21,7 @@
   };
 in {
   testGetHandlerNameForService = {
-    expr = lib.network.serviceHandlerNameForService "ca";
+    actual = lib.network.serviceServiceHandlerName "ca";
     expected = "step-ca";
   };
 }
