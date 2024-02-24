@@ -6,8 +6,8 @@
 }: let
   cfg = config.looniversity.service.minio;
 
-  listenPort = lib.network.getHandlerNamedPort config "minio" "listen";
-  consolePort = lib.network.getHandlerNamedPort config "minio" "console";
+  listenPort = lib.network.serviceHandlerNamedPort config "minio" "listen";
+  consolePort = lib.network.serviceHandlerNamedPort config "minio" "console";
 
   inherit (lib) mkEnableOption mkIf;
 in {

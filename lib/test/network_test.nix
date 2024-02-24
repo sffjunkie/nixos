@@ -23,7 +23,7 @@
   };
 in {
   testGetHandlerNameForService = {
-    expr = lib.network.getHandlerNameForService "ca";
+    expr = lib.network.serviceHandlerNameForService "ca";
     expected = "step-ca";
   };
 }
