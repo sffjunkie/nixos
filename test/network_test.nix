@@ -76,12 +76,12 @@ in [
     actual = lib.network.serviceHandlerFQDN testData.config "step-ca";
     expected = "bigbox.lan.internal";
   }
-  # {
-  #   skip = "Need to find out how config values are linked to options";
-  #   name = "network.serviceHostName";
-  #   actual = lib.network.serviceHostName testData.config "ca";
-  #   expected = "ca";
-  # }
+  {
+    skip = "Need to find out how config values are linked to options";
+    name = "network.serviceHostName";
+    actual = lib.network.serviceHostName testData.config "ca";
+    expected = "ca";
+  }
   {
     name = "network.serviceServiceHandlerName";
     actual = lib.network.serviceServiceHandlerName testData.config "ca";
