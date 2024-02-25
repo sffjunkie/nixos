@@ -1,6 +1,11 @@
-# Adapted from https://github.com/jetpack-io/nixtest/ to take a reference
-# to `lib`
+# Adapted from https://github.com/jetpack-io/nixtest/
+# - takes a reference to `lib`
+# - Adding a 'skip' attribute to a test skips it
+# - Adding a 'skipIf' attribute skips the test if the attribute value is Trueish
 {lib, ...}: rec {
+  # TestResult = attrSet{ passed: list[Test], failed: list[Test], skipped: list[Test] }
+  # Test =  attrSet{ name, actual, expected, skip };
+
   # Function `run` takes a directory as an argument, finds all test files
   # matching the pattern `**/*.test.nix`, and runs all of those tests.
   #
@@ -13,11 +18,34 @@
   run = dir: attrs @ {lib, ...}: let
     results = runDir dir attrs;
   in (
-    assertTests results
+    showTestResults results
+  );
+
+  # runDir = path -> list[TestResult]
+  #
+  # It returns a list of attrSets, one for each test file.
+  runDir = dir: attrs @ {lib, ...}: (
+    let
+      results =
+        builtins.foldl' (
+          acc: filepath: (
+            let
+              tests = import filepath {inherit lib;};
+              result = runTests tests filepath;
+            in
+              acc ++ [result]
+          )
+        ) []
+        (testFiles dir);
+    in
+      results
   );
 
   # testFiles = path -> list[str]
-  # Returns a
+  #
+  # Function `testFiles` takes a directory as an argument, finds all test files
+  # matching the pattern `**/*.test.nix` in this directory and its
+  # sub-directories.
   testFiles = dir: (
     let
       fileTypes = builtins.readDir dir;
@@ -25,7 +53,7 @@
       allTestFiles =
         builtins.foldl' (
           acc: filename: let
-            path = dir + "/${filename}";
+            path = lib.concatStringsSep "/" [dir "${filename}"];
             fileType = builtins.getAttr filename fileTypes;
             isTestFile = (fileType == "regular") && (builtins.match ".*_test\.nix" filename) != null;
           in (
@@ -41,32 +69,48 @@
       allTestFiles
   );
 
-  # Function `runDir` takes a directory as an argument, finds all test files
-  # matching the pattern `**/*.test.nix`, and runs all of those tests.
-  #
-  # It returns a list of results, one for each test.
-  runDir = dir: attrs @ {lib, ...}: (
+  addFilePath = filepath: result: (
     let
-      results =
-        builtins.foldl' (
-          acc: filepath: (
-            acc ++ (runTests ((import filepath) {inherit lib;}))
-          )
-        ) []
-        (testFiles dir);
+      newResult = result // {path = filepath;};
     in
-      results
+      newResult
   );
 
-  # Function runTests runs all of the given tests, by calling `runTest` on each
-  # of them.
+  isTrueish = value:
+    (lib.isList value && value != [])
+    || (lib.isAttrs value && value != {})
+    || (lib.isBool value && value != false)
+    || (lib.isString value && value != "")
+    || ((lib.isInt value || lib.isFloat value) && value != 0);
+
+  # runTests = list[Test] -> TestResult
+  # Runs all of the non skipped tests, by calling `runTest` on each of them.
   #
-  # It takes a list of tests as an argument.
-  runTests = tests: (
+  # It takes a list of tests as an argument
+  # and returns an attrSet with the following attrs
+  #   passed = the results from tests that passed
+  #   failed = the results from tests that failed
+  #   skipped = list of tests that have been skipped.
+  runTests = tests: filepath: (
     let
-      results = builtins.map (test: runTest test) tests;
-    in
-      results
+      skipIf = builtins.filter (test: lib.hasAttrByPath ["skipIf"] test) tests;
+      skipIfSkip = builtins.filter (test: isTrueish test.skipIf) skipIf;
+      skipIfRun = builtins.filter (test: !isTrueish test.skipIf) skipIf;
+      skipped = builtins.filter (test: lib.hasAttrByPath ["skip"] test) tests ++ skipIfSkip;
+
+      testsToRun =
+        builtins.filter
+        (test: (!lib.hasAttrByPath ["skip"] test) && (!lib.hasAttrByPath ["skipIf"] test))
+        tests
+        ++ skipIfRun;
+
+      results = builtins.map (test: addFilePath filepath (runTest test)) testsToRun;
+
+      failed = builtins.filter (test: test.passed == false) results;
+      passed = builtins.filter (test: test.passed == true) results;
+    in {
+      inherit failed passed skipped;
+    }
   );
 
   # Function `runTest` runs the gives test. A test is defined as a structure
@@ -93,32 +137,43 @@
     }
   );
 
-  # Function `assertTests` takes in a list of test results (as returned by the
-  # `run` functions) and throws an error if any of the tests failed.
-  assertTests = results: let
-    numTests = builtins.length results;
-    failures = builtins.filter (test: test.passed == false) results;
-    numFailures = builtins.length failures;
-  in (
-    # results
-    if (builtins.length failures) == 0
-    then "[PASS] ${toString numTests}/${toString numTests} tests passed\n"
-    else
-      throw ("${toString numFailures}/${toString numTests} tests failed\n\n"
-        + failureMsg failures)
+  # showTestResults = list[TestResult] -> str
+  showTestResults = results: (
+    let
+      failed = lib.flatten (map (item: item.failed) results);
+      passed = lib.flatten (map (item: item.passed) results);
+      skipped = lib.flatten (map (item: item.skipped) results);
+
+      numFailed = builtins.length failed;
+      numPassed = builtins.length passed;
+      numSkipped = builtins.length skipped;
+      numTests = numFailed + numPassed + numSkipped;
+
+      failedText =
+        if numFailed > 0
+        then
+          "[FAIL] ${toString numFailed}/${toString numTests} tests failed\n"
+          + failedMsg failed
+        else "";
+      passedText = "[PASS] ${toString numPassed}/${toString numTests} tests passed\n";
+      skippedText =
+        if numSkipped > 0
+        then "[SKIP] ${toString numSkipped}/${toString numTests} tests skipped\n"
+        else "";
+      msg = failedText + passedText + skippedText;
+    in
+      msg
   );
 
-  failureMsg = results: (
+  failedMsg = failed_tests: (
     builtins.foldl' (
       acc: result:
         acc
-        + ''
-          [FAIL] ${result.name}
-            Expected: ${builtins.toJSON result.expected}
-            Actual:   ${builtins.toJSON result.actual}
-
-        ''
+        + "    ${result.name}\n"
+        + "         File:     ${builtins.toJSON result.path}\n"
+        + "         Expected: ${builtins.toJSON result.expected}\n"
+        + "         Actual:   ${builtins.toJSON result.actual}\n\n"
     ) ""
-    results
+    failed_tests
   );
 }
