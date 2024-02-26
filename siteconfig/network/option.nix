@@ -7,96 +7,116 @@
   inherit (lib) mkOption types;
 
   netdevice = types.submodule {
-    options.device = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.mac = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.ipv4 = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.ipv4method = mkOption {
-      type = types.enum ["static" "dhcpstatic" "dhcp" "pppoe"];
-      default = "";
+    options = {
+      device = mkOption {
+        type = types.str;
+        default = "";
+      };
+      mac = mkOption {
+        type = types.str;
+        default = "";
+      };
+      ipv4 = mkOption {
+        type = types.str;
+        default = "";
+      };
+      ipv4method = mkOption {
+        type = types.enum ["static" "dhcpstatic" "dhcp" "pppoe"];
+        default = "";
+      };
     };
   };
 
   host = types.submodule ({name, ...}: {
-    options.name = mkOption {
-      type = types.str;
-      default = name;
-    };
-    options.description = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.netdevice = mkOption {
-      type = types.attrsOf netdevice;
-      description = "Named network devices";
-      default = {};
+    options = {
+      name = mkOption {
+        type = types.str;
+        default = name;
+      };
+      description = mkOption {
+        type = types.str;
+        default = "";
+      };
+      netdevice = mkOption {
+        type = types.attrsOf netdevice;
+        description = "Named network devices";
+        default = {};
+      };
     };
   });
 
+  dhcp = types.submodule {
+    options = {
+      start = mkOption {
+        type = types.int;
+      };
+      end = mkOption {
+        type = types.int;
+      };
+    };
+  };
+
   vlan = types.submodule {
-    options.id = mkOption {
-      type = types.int;
-    };
-    options.network = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.netmask = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.broadcast = mkOption {
-      type = types.str;
-      default = "";
+    options = {
+      id = mkOption {
+        type = types.int;
+      };
+      network = mkOption {
+        type = types.str;
+        default = "";
+      };
+      prefixLength = mkOption {
+        type = types.int;
+        default = 24;
+      };
+      dhcp = mkOption {
+        type = types.nullOr dhcp;
+      };
     };
   };
 
   service = types.submodule ({name}: {
-    options.hostName = mkOption {
-      type = types.str;
-      default = name;
-    };
-    options.domainName = mkOption {
-      type = types.str;
-      default = options.looniversity.network.domainName.default;
-    };
-    options.addToDns = mkOption {
-      type = types.bool;
-      default = false;
-    };
-    options.addToProxy = mkOption {
-      type = types.bool;
-      default = false;
-    };
-    options.handlerName = mkOption {
-      type = types.str;
+    options = {
+      hostName = mkOption {
+        type = types.str;
+        default = name;
+      };
+      domainName = mkOption {
+        type = types.str;
+        default = options.looniversity.network.domainName.default;
+      };
+      addToDns = mkOption {
+        type = types.bool;
+        default = false;
+      };
+      addToProxy = mkOption {
+        type = types.bool;
+        default = false;
+      };
+      handlerName = mkOption {
+        type = types.str;
+      };
     };
   });
 
   serviceHandler = types.submodule {
-    options.host = mkOption {
-      type = types.str;
-      default = "";
-    };
-    options.port = mkOption {
-      type = types.int;
-      default = -1;
-    };
-    options.ports = mkOption {
-      type = types.attrsOf types.int;
-      default = {};
-    };
-    options.config = mkOption {
-      type = types.attrsOf types.anything;
-      default = {};
+    options = {
+      host = mkOption {
+        type = types.str;
+        default = "";
+      };
+      port = mkOption {
+        type = types.int;
+        default = -1;
+      };
+      ports = mkOption {
+        type = types.attrsOf types.int;
+        default = {};
+      };
+      config = mkOption {
+        type = types.attrsOf types.anything;
+        default = {};
+      };
     };
   };
 in {
