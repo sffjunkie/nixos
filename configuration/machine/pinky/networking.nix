@@ -8,25 +8,23 @@
 
   vlans = config.looniversity.network.vlans;
   vlanInterfaces =
-    map
+    lib.mapAttrs
     (
-      name: let
+      name: value: let
         vlanInfo = vlans.${name};
       in {
-        ${name} = {
-          useDHCP = false;
-          ipv4 = {
-            addresses = [
-              {
-                address = lib.ipv4.constructIpv4Address vlanInfo.network "1";
-                prefixLength = vlanInfo.prefixLength;
-              }
-            ];
-          };
+        useDHCP = false;
+        ipv4 = {
+          addresses = [
+            {
+              address = lib.ipv4.constructIpv4Address vlanInfo.network "1";
+              prefixLength = vlanInfo.prefixLength;
+            }
+          ];
         };
       }
     )
-    (lib.attrNames vlans);
+    vlans;
 in {
   config = {
     networking = {
