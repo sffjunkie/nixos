@@ -156,12 +156,14 @@
           "[FAIL] ${toString numFailed}/${toString numTests} tests failed\n"
           + failedMsg failed
         else "";
-      passedText = "[PASS] ${toString numPassed}/${toString numTests} tests passed\n";
       skippedText =
         if numSkipped > 0
-        then "[SKIP] ${toString numSkipped}/${toString numTests} tests skipped\n"
+        then
+          "[SKIP] ${toString numSkipped}/${toString numTests} tests skipped\n"
+          + skippedMsg skipped
         else "";
-      msg = failedText + passedText + skippedText;
+      passedText = "[PASS] ${toString numPassed}/${toString numTests} tests passed\n";
+      msg = failedText + skippedText + passedText;
     in
       msg
   );
@@ -176,5 +178,23 @@
         + "         Actual:   ${builtins.toJSON result.actual}\n\n"
     ) ""
     failed_tests
+  );
+
+  skippedMsg = skipped_tests: (
+    builtins.foldl' (
+      acc: result: (
+        let
+          skipText =
+            if result.skip != ""
+            then result.skip
+            else "skipIf: ?";
+        in
+          acc
+          + "    ${result.name}\n"
+          + "         Skipped:  ${skipText}\n"
+          + "         File:     ${builtins.toJSON result.path}\n\n"
+      )
+    ) ""
+    skipped_tests
   );
 }
