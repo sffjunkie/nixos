@@ -5,7 +5,6 @@
 {lib, ...}: rec {
   # Function `run` takes a Attribute set as an argument
   # The only required attribute is 'dir' the directory to load tests from.
-  # All attributes are passed through to the test file.
   # It then finds all test files matching the pattern `**/*.test.nix`,
   # and runs all of those tests.
   #
@@ -15,6 +14,8 @@
   #
   # Note that every _test.nix file should evaluate to a list of tests. Each test
   # in the list should have the following schema.
+
+  # All attributes are passed through to the test file.
 
   # Test =  AttrSet {
   #   name     # The name of the test. Used in the test results output
