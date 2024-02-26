@@ -1,4 +1,4 @@
-{lib, ...}: let
+{lib, ...} @ inputs: let
   testData = {
     config = {
       looniversity.network = {
@@ -77,7 +77,7 @@ in [
     expected = "bigbox.lan.internal";
   }
   {
-    skip = "Need to find out how config values are linked to options";
+    skip = "Need to find out how config values are linked to options so that we can test for defaults";
     name = "network.serviceHostName";
     actual = lib.network.serviceHostName testData.config "ca";
     expected = "ca";
