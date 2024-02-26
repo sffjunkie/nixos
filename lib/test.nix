@@ -14,23 +14,21 @@
   # exiting with a non-zero exit code.
   #
   # Note that every _test.nix file should evaluate to a list of tests. Each test
-  # in the list should have the schema defined in `runTest`.
-  run = dir: attrs @ {lib, ...}: let
-    results = runDir dir attrs;
+  run = {dir, ...} @ inputs: let
+    results = runDir dir inputs;
   in (
     showTestResults results
   );
 
   # runDir = path -> list[TestResult]
   #
-  # It returns a list of attrSets, one for each test file.
-  runDir = dir: attrs @ {lib, ...}: (
+  runDir = dir: inputs: (
     let
       results =
         builtins.foldl' (
           acc: filepath: (
             let
-              tests = import filepath {inherit lib;};
+              tests = import filepath inputs;
               result = runTests tests filepath;
             in
               acc ++ [result]
