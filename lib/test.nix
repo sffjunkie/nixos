@@ -96,7 +96,8 @@
       skipIf = builtins.filter (test: lib.hasAttrByPath ["skipIf"] test) tests;
       skipIfSkip = builtins.filter (test: isTrueish test.skipIf) skipIf;
       skipIfRun = builtins.filter (test: !isTrueish test.skipIf) skipIf;
-      skipped = builtins.filter (test: lib.hasAttrByPath ["skip"] test) tests ++ skipIfSkip;
+      skippedTests = builtins.filter (test: lib.hasAttrByPath ["skip"] test) tests ++ skipIfSkip;
+      skipped = map (test: addFilePath filepath test) skippedTests;
 
       testsToRun =
         builtins.filter
