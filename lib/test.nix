@@ -3,25 +3,49 @@
 # - Adding a 'skip' attribute to a test skips it
 # - Adding a 'skipIf' attribute skips the test if the attribute value is Trueish
 {lib, ...}: rec {
-  # TestResult = attrSet{ passed: list[Test], failed: list[Test], skipped: list[Test] }
-  # Test =  attrSet{ name, actual, expected, skip };
-
-  # Function `run` takes a directory as an argument, finds all test files
-  # matching the pattern `**/*.test.nix`, and runs all of those tests.
+  # Function `run` takes a Attribute set as an argument
+  # The only required attribute is 'dir' the directory to load tests from.
+  # All attributes are passed through to the test file.
+  # It then finds all test files matching the pattern `**/*.test.nix`,
+  # and runs all of those tests.
   #
   # Once the tests have run, it prints a summary of the results. If any of
   # the tests failed, it prints the summary by throwing an exception and
   # exiting with a non-zero exit code.
   #
   # Note that every _test.nix file should evaluate to a list of tests. Each test
+  # in the list should have the following schema.
+
+  # Test =  AttrSet {
+  #   name     # The name of the test. Used in the test results output
+  #   expected # THe expected result of the test
+  #   actual   # The actual result of the test
+  #   skip     # If set this unconditionally skips the test
+  #   skipIf   # If this evaluates to a Trueish value then the test is skipped.
+  # }
+  #
+  # Where Trueish is
+  isTrueish = value:
+    (lib.isList value && value != [])
+    || (lib.isAttrs value && value != {})
+    || (lib.isBool value && value != false)
+    || (lib.isString value && value != "")
+    || ((lib.isInt value || lib.isFloat value) && value != 0);
+
+  # Run all the tests found in `dir` and show the test results
   run = {dir, ...} @ inputs: let
     results = runDir dir inputs;
   in (
     showTestResults results
   );
 
-  # runDir = path -> list[TestResult]
+  # runDir = path -> list[TestFileResults]
   #
+  # TestFileResults = AttrSet {
+  #   passed = the results from tests that passed
+  #   failed = the results from tests that failed
+  #   skipped = list of tests that have been skipped.
+  # }
   runDir = dir: inputs: (
     let
       results =
@@ -39,11 +63,10 @@
       results
   );
 
-  # testFiles = path -> list[str]
+  # testFiles = path -> list[path]
   #
-  # Function `testFiles` takes a directory as an argument, finds all test files
-  # matching the pattern `**/*.test.nix` in this directory and its
-  # sub-directories.
+  # Takes a directory as an argument, finds all test files
+  # matching the pattern `**/*.test.nix` in this directory and its sub-directories.
   testFiles = dir: (
     let
       fileTypes = builtins.readDir dir;
@@ -74,21 +97,9 @@
       newResult
   );
 
-  isTrueish = value:
-    (lib.isList value && value != [])
-    || (lib.isAttrs value && value != {})
-    || (lib.isBool value && value != false)
-    || (lib.isString value && value != "")
-    || ((lib.isInt value || lib.isFloat value) && value != 0);
-
-  # runTests = list[Test] -> TestResult
-  # Runs all of the non skipped tests, by calling `runTest` on each of them.
+  # runTests = list[Test] -> path -> TestFileResults
   #
-  # It takes a list of tests as an argument
-  # and returns an attrSet with the following attrs
-  #   passed = the results from tests that passed
-  #   failed = the results from tests that failed
-  #   skipped = list of tests that have been skipped.
+  # Runs all of the non skipped tests, by calling `evaluateTest` on each of them.
   runTests = tests: filepath: (
     let
       skipIf = builtins.filter (test: lib.hasAttrByPath ["skipIf"] test) tests;
@@ -112,6 +123,8 @@
     }
   );
 
+  # evaluateTest = Test -> AttrSet
+  # Evaluate a single test
   evaluateTest = test: (
     if test.actual == test.expected
     then {
@@ -129,7 +142,7 @@
     }
   );
 
-  # showTestResults = list[TestResult] -> str
+  # showTestResults = list[TestFileResults] -> str
   showTestResults = results: (
     let
       failed = lib.flatten (map (item: item.failed) results);
