@@ -24,8 +24,12 @@
 - installer - ISO installation image creation
 
 - lib - custom library functions
+  - ipv4 - Functions to manipulate IPv4 addresses
   - network - Retrieve values from the site.network configuration
   - tool - Retrieve tool information from the site.tool configuration
+  - test - Provides a `run` function to run unit tests
+
+- test - Functions to custom library functions. Uses `lib.test.run` to execute them.
 
 ## devshell
 
