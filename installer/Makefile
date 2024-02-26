@@ -1,3 +1,4 @@
+# TODO: This is just a collection of thoughts. Need to make it a real Makefile or maybe a Justfile
 sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko -- --mode disko /etc/disko/disk1-b-r-zfs.nix
 
 # download nixos's sops key
