@@ -201,8 +201,10 @@
     tests = lib.test.run {
       dir = ./test;
       inherit lib; # Needed by test functions
+      # Optional attrs
       # include = ".*_test\.nix";
       # exclude = "";
+      # quiet = false;
     };
   };
 }
