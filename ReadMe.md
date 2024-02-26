@@ -8,7 +8,7 @@
     - mount - mount points
   - role - a role enables a group of modules
   - secret - sops-nix secrets
-  - site - site wide configuration
+  - siteconfig - site wide configuration
     - network - hosts, services, serviceHandlers
     - tool - tools
   - user - user definitions
