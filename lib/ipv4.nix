@@ -1,38 +1,58 @@
 {lib, ...}: rec {
-  ipv4Octets = ipv4: map (item: lib.toInt item) (lib.splitString "." ipv4);
+  # ipv4Octets = str -> list[int]
+  # Convert an IPv4 address into a list of octets.
+  # Only returns the first four octets
+  ipv4Octets = ipv4: lib.sublist 0 4 (map lib.toIntBase10 (lib.splitString "." ipv4));
+
+  # ipv4Address = list[int] -> str
+  # Constructs a valid IPv4 address from a list of octets
+  ipv4Address = octets: lib.concatMapStringsSep "." toString (lib.sublist 0 4 octets);
 
   # ipv4IsValid = str -> bool
+  # Retuirn tru if the address is a valid IPv4 address
   ipv4IsValid = ipv4: let
-    octets = map (item: lib.toInt item) (lib.splitString "." ipv4);
+    octets = ipv4Octets ipv4;
   in
-    all (item: item < 256) octets;
+    (lib.length octets == 4) && (builtins.all (item: item < 256) octets);
 
-  # ipv4Is24BitBlock = str -> bool
-  ipv4Is24BitBlock = ipv4: (lib.elemAt 0 (lib.splitString "." ipv4)) == "10";
-
-  # ipv4Is20BitBlock = str -> bool
-  ipv4Is20BitBlock = ipv4: let
-    octets = map (item: lib.toInt item) (lib.splitString "." ipv4);
-    part1 = lib.elemAt 1 octets;
+  # ipv4IsPrivate24BitBlock = str -> bool
+  # Returns true if the IPv4 address is part of
+  # the 24 bit '10' private address block.
+  ipv4IsPrivate24BitBlock = ipv4: let
+    octets = ipv4Octets ipv4;
   in
-    (lib.elemAt 0 octets) == 172 && (part1 >= 16 && part1 <= 31);
+    ipv4IsValid ipv4 && (lib.elemAt octets 0) == 10;
 
-  # ipv4Is16BitBlock = str -> bool
-  ipv4Is16BitBlock = ipv4: let
-    octets = map (item: lib.toInt item) (lib.splitString "." ipv4);
+  # ipv4IsPrivate20BitBlock = str -> bool
+  # Returns true if the IPv4 address is part of
+  # the 20 bit '172.16' to '172.31' private address block.
+  ipv4IsPrivate20BitBlock = ipv4: let
+    octets = ipv4Octets ipv4;
+    part1 = lib.elemAt octets 1;
   in
-    (lib.elemAt 0 octets) == 192 && (lib.elemAt 1 octets) == 168;
+    ipv4IsValid ipv4 && (lib.elemAt octets 0) == 172 && (part1 >= 16 && part1 <= 31);
+
+  # ipv4IsPrivate16BitBlock = str -> bool
+  # Returns true if the IPv4 address is part of
+  # the 16 bit '192.168' private address block.
+  ipv4IsPrivate16BitBlock = ipv4: let
+    octets = ipv4Octets ipv4;
+  in
+    ipv4IsValid ipv4 && (lib.elemAt octets 0) == 192 && (lib.elemAt octets 1) == 168;
 
   # constructIpv4Address = str -> str -> str
-  constructIpv4Address = networkPart: hostPart: let
-    networkOctets = ipv4Octets networkPart;
-    hostOctets = ipv4Octets hostPart;
+  # Constructs an IPv4 address from a network and a host
+  # `network` is a full 4 octet network address
+  # `host` is a mltui-octet host part
+  #
+  # e.g. constructIpv4Address "192.168.0.0" "12.13" returns "192.168.12.13"
+  constructIpv4Address = network: host: let
+    hostOctets = ipv4Octets host;
+    networkOctets = ipv4Octets network;
+    length = (lib.length networkOctets) - (lib.length hostOctets);
+    octets = (lib.sublist 0 length networkOctets) ++ hostOctets;
 
-    addr = lib.concatStringsSep "." [(lib.init networkOctets) hostPart];
+    addr = ipv4Address octets;
   in
     addr;
 }
-# 172.16.x.x -> 172.31.x.255
-# 192.168.x.x -> 192.168.255.255
-# 10.x.x.x
-
