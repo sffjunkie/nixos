@@ -3,7 +3,43 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  vlans = config.looniversity.network.vlans;
+  vlanDHCP =
+    lib.map
+    (
+      name: value: let
+        vlanInfo = lib.traceVal vlans.${name};
+
+        vlanNetwork =
+          lib.ipv4.constructIpv4Address
+          config.looniversity.network.network
+          "${vlanInfo.id}.0";
+
+        vlanPoolStart =
+          lib.ipv4.constructIpv4Address
+          vlanNetwork
+          (lib.toString vlanInfo.dhcp.start);
+
+        vlanPoolStart =
+          lib.ipv4.constructIpv4Address
+          vlanNetwork
+          (lib.toString vlanInfo.dhcp.end);
+      in {
+        id = vlanInfo.id;
+        subnet =
+          lib.concatStringsSep "/"
+          [vlanNetwork (toString vlaninfo.prefixLength)];
+
+        pools = [
+          {
+            pool = "${vlanPoolStart} - ${vlanPoolEnd}";
+          }
+        ];
+      }
+    )
+    (lib.attrNames vlans);
+in {
   config = {
     services.kea = {
       dhcp4 = {
@@ -45,47 +81,50 @@
             }
           ];
 
-          subnet4 = [
-            {
-              id = 1;
-              subnet = lib.concatStringsSep "/" [
-                "${config.looniversity.network.network}"
-                "${toString config.looniversity.network.prefixLength}"
-              ];
-              pools = [
-                {pool = "10.44.0.101 - 10.44.0.149";}
-              ];
+          subnet4 =
+            [
+              {
+                id = 1;
+                subnet = lib.concatStringsSep "/" [
+                  "${config.looniversity.network.network}"
+                  "${toString config.looniversity.network.prefixLength}"
+                ];
+                pools = [
+                  {pool = "10.44.0.101 - 10.44.0.149";}
+                ];
 
-              reservations = [
-                {
-                  hostname = "sw1";
-                  hw-address = "10:da:43:d9:d9:d1";
-                  ip-address = "10.44.0.2";
-                }
-              ];
-            }
-            {
-              id = 10;
-              subnet = "10.44.20.0/24";
-              pools = [
-                {pool = "10.44.10.101 - 10.44.10.199";}
-              ];
-            }
-            {
-              id = 20;
-              subnet = "10.44.20.0/24";
-              pools = [
-                {pool = "10.44.20.101 - 10.44.20.199";}
-              ];
-            }
-            {
-              id = 30;
-              subnet = "10.44.30.0/24";
-              pools = [
-                {pool = "10.44.30.101 - 10.44.30.199";}
-              ];
-            }
-          ];
+                reservations = [
+                  {
+                    hostname = "sw1";
+                    hw-address = "10:da:43:d9:d9:d1";
+                    ip-address = "10.44.0.2";
+                  }
+                ];
+              }
+            ]
+            ++ vlanDHCP;
+          #   {
+          #     id = 10;
+          #     subnet = "10.44.20.0/24";
+          #     pools = [
+          #       {pool = "10.44.10.101 - 10.44.10.199";}
+          #     ];
+          #   }
+          #   {
+          #     id = 20;
+          #     subnet = "10.44.20.0/24";
+          #     pools = [
+          #       {pool = "10.44.20.101 - 10.44.20.199";}
+          #     ];
+          #   }
+          #   {
+          #     id = 30;
+          #     subnet = "10.44.30.0/24";
+          #     pools = [
+          #       {pool = "10.44.30.101 - 10.44.30.199";}
+          #     ];
+          #   }
+          # ];
         };
       };
     };
