@@ -3,7 +3,6 @@
     ./acme
     ./autoupgrade
     ./coredns
-    ./dhcp4
     ./elasticsearch
     ./fail2ban
     ./graylog

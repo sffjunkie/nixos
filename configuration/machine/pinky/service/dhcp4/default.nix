@@ -3,16 +3,8 @@
   lib,
   pkgs,
   ...
-}: let
-  cfg = config.looniversity.dhcp4;
-
-  inherit (lib) mkEnableOption mkIf;
-in {
-  options.looniversity.dhcp4 = {
-    enable = mkEnableOption "dhcp4";
-  };
-
-  config = mkIf cfg.enable {
+}: {
+  config = {
     services.kea = {
       dhcp4 = {
         enable = true;
@@ -31,11 +23,15 @@ in {
           option-data = [
             {
               name = "domain-name";
-              data = "looniversity.net";
+              data = config.looniversity.network.domainName;
             }
             {
               name = "domain-name-servers";
-              data = "10.44.0.1";
+              data = [
+                config.looniversity.network.nameServer
+                "8.8.8.8"
+                "1.1.1.1"
+              ];
             }
             {
               name = "routers";
@@ -52,7 +48,10 @@ in {
           subnet4 = [
             {
               id = 1;
-              subnet = "10.44.0.0/21";
+              subnet = lib.concatStringsSep "/" [
+                "${config.looniversity.network.network}"
+                "${toString config.looniversity.network.prefixLength}"
+              ];
               pools = [
                 {pool = "10.44.0.101 - 10.44.0.149";}
               ];
