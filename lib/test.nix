@@ -36,8 +36,7 @@
     || (lib.isString value && value != "")
     || ((lib.isInt value || lib.isFloat value) && value != 0);
 
-  # Run all the tests found in `dir` and show the test results
-  run = {dir, ...} @ inputs: let
+  setInputDefaults = inputs: let
     newInputs =
       inputs
       // {
@@ -54,6 +53,12 @@
           then inputs.quiet
           else false;
       };
+  in
+    newInputs;
+
+  # Run all the tests found in `dir` and show the test results
+  run = {dir, ...} @ inputs: let
+    newInputs = setInputDefaults inputs;
     results = runDir dir newInputs;
     noMatchText =
       "No test files found matching "
