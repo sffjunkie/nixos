@@ -49,9 +49,11 @@
     options = {
       start = mkOption {
         type = types.int;
+        default = 101;
       };
       end = mkOption {
         type = types.int;
+        default = 150;
       };
     };
   };
