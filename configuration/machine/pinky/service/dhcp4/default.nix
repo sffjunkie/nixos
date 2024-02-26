@@ -8,7 +8,7 @@
   vlanDHCP =
     map
     (
-      name: value: let
+      name: let
         vlanInfo = lib.traceVal vlans.${name};
 
         vlanNetwork =
