@@ -4,7 +4,7 @@
       looniversity.network = {
         network = "192.168.1.0";
         prefixLength = 21;
-        domainName = "lan.internal";
+        domainName = "network.arpa";
 
         hosts = {
           hosta = {
@@ -74,7 +74,7 @@ in [
   {
     name = "network.serviceHandlerFQDN";
     actual = lib.network.serviceHandlerFQDN testData.config "step-ca";
-    expected = "bigbox.lan.internal";
+    expected = "bigbox.network.arpa";
   }
   {
     skip = "Need to find out how config values are linked to options so that we can test for defaults";
