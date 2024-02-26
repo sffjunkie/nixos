@@ -9,7 +9,7 @@
     map
     (
       name: let
-        vlanInfo = lib.traceVal vlans.${name};
+        vlanInfo = vlans.${name};
 
         vlanNetwork =
           lib.ipv4.constructIpv4Address
