@@ -6,7 +6,7 @@
 }: let
   vlans = config.looniversity.network.vlans;
   vlanDHCP =
-    lib.map
+    map
     (
       name: value: let
         vlanInfo = lib.traceVal vlans.${name};
@@ -14,14 +14,14 @@
         vlanNetwork =
           lib.ipv4.constructIpv4Address
           config.looniversity.network.network
-          "${vlanInfo.id}.0";
+          "${toString vlanInfo.id}.0";
 
         vlanPoolStart =
           lib.ipv4.constructIpv4Address
           vlanNetwork
           (lib.toString vlanInfo.dhcp.start);
 
-        vlanPoolStart =
+        vlanPoolEnd =
           lib.ipv4.constructIpv4Address
           vlanNetwork
           (lib.toString vlanInfo.dhcp.end);
@@ -29,7 +29,7 @@
         id = vlanInfo.id;
         subnet =
           lib.concatStringsSep "/"
-          [vlanNetwork (toString vlaninfo.prefixLength)];
+          [vlanNetwork (toString vlanInfo.prefixLength)];
 
         pools = [
           {
