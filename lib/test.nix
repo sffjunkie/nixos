@@ -49,6 +49,10 @@
           if lib.hasAttr "exclude" inputs
           then inputs.exclude
           else "";
+        quiet =
+          if lib.hasAttr "quiet" inputs
+          then inputs.quiet
+          else false;
       };
     results = runDir dir newInputs;
     noMatchText =
@@ -170,10 +174,6 @@
   # showTestResults = list[TestFileResults] -> str
   showTestResults = results: inputs: (
     let
-      quiet =
-        if lib.hasAttr "quiet" inputs
-        then inputs.quiet
-        else false;
       failed = lib.flatten (map (item: item.failed) results);
       passed = lib.flatten (map (item: item.passed) results);
       skipped = lib.flatten (map (item: item.skipped) results);
@@ -187,14 +187,14 @@
         if numFailed > 0
         then
           "[FAIL] ${toString numFailed}/${toString numTests} tests failed\n"
-          + failedMsg failed quiet
+          + failedMsg failed inputs.quiet
         else "";
 
       skippedText =
         if numSkipped > 0
         then
           "[SKIP] ${toString numSkipped}/${toString numTests} tests skipped\n"
-          + (skippedMsg skipped quiet)
+          + (skippedMsg skipped inputs.quiet)
         else "";
 
       passedText = "[PASS] ${toString numPassed}/${toString numTests} tests passed\n";
