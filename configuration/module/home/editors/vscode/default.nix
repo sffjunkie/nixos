@@ -18,6 +18,7 @@
     dotjoshjohnson.xml
     github.vscode-github-actions
     golang.go
+    gruntfuggly.todo-tree
     humao.rest-client
     ms-python.python
     ms-vscode.makefile-tools
@@ -78,6 +79,9 @@ in {
         "explorer.compactFolders" = false;
 
         "files.insertFinalNewline" = true;
+        "files.exclude" = {
+          "**/.tox" = true;
+        };
 
         "git.confirmSync" = false;
         "git.openRepositoryInParentFolders" = "never";
