@@ -41,7 +41,7 @@ in {
 
       config = ''
         .:${toString dnsPort} {
-          forward . 1.1.1.1 8.8.8.8
+          forward . ${toString config.looniversity.network.extraNameServers}
           cache
           log
         }

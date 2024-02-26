@@ -63,11 +63,11 @@ in {
             }
             {
               name = "domain-name-servers";
-              data = [
-                config.looniversity.network.nameServer
-                "8.8.8.8"
-                "1.1.1.1"
-              ];
+              data =
+                [
+                  config.looniversity.network.nameServer
+                ]
+                ++ config.looniversity.network.extraNameServers;
             }
             {
               name = "routers";
