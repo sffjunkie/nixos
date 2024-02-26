@@ -167,6 +167,11 @@ in {
       default = "";
     };
 
+    extraNameServers = mkOption {
+      type = types.listOf types.str;
+      default = [];
+    };
+
     hosts = mkOption {
       type = types.attrsOf host;
       default = {};

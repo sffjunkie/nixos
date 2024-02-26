@@ -5,6 +5,10 @@
     domainName = "looniversity.net";
     ldapRoot = "dc=looniversity,dc=net";
     nameServer = "10.44.0.1";
+    extraNameServers = [
+      "8.8.8.8"
+      "1.1.1.1"
+    ];
 
     hosts = {
       pinky = {
