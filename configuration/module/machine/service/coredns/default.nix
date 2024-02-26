@@ -13,7 +13,8 @@
 
   ttl = 180;
 
-  # TODO: version number needs to change before auto will load new zone files
+  # TODO: version number needs to change before auto will load new zone files.
+  # Need some way to increment these numbers.
   staticZoneDataFile = pkgs.writeText "looniversity.zone" ''
     $ORIGIN ${config.looniversity.network.domainName}.
     @       IN SOA ns nomail (
