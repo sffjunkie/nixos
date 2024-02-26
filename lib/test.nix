@@ -191,6 +191,8 @@
           skipText =
             if result.skip != ""
             then result.skip
+            # TODO: skipIf is currently nix code. Need to find way to convert
+            # this to a string to display (rnix?)
             else "skipIf: ?";
         in
           acc
