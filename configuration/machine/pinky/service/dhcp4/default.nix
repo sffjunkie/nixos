@@ -19,12 +19,12 @@
         vlanPoolStart =
           lib.ipv4.constructIpv4Address
           vlanNetwork
-          (lib.toString vlanInfo.dhcp.start);
+          (toString vlanInfo.dhcp_start);
 
         vlanPoolEnd =
           lib.ipv4.constructIpv4Address
           vlanNetwork
-          (lib.toString vlanInfo.dhcp.end);
+          (toString vlanInfo.dhcp_end);
       in {
         id = vlanInfo.id;
         subnet =
@@ -93,13 +93,13 @@ in {
                   {pool = "10.44.0.101 - 10.44.0.149";}
                 ];
 
-                reservations = [
-                  {
-                    hostname = "sw1";
-                    hw-address = "10:da:43:d9:d9:d1";
-                    ip-address = "10.44.0.2";
-                  }
-                ];
+                # reservations = [
+                #   {
+                #     hostname = "sw1";
+                #     hw-address = "10:da:43:d9:d9:d1";
+                #     ip-address = "10.44.0.2";
+                #   }
+                # ];
               }
             ]
             ++ vlanDHCP;

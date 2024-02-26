@@ -45,19 +45,6 @@
     };
   });
 
-  dhcp = types.submodule {
-    options = {
-      start = mkOption {
-        type = types.int;
-        default = 101;
-      };
-      end = mkOption {
-        type = types.int;
-        default = 150;
-      };
-    };
-  };
-
   vlan = types.submodule {
     options = {
       id = mkOption {
@@ -71,8 +58,13 @@
         type = types.int;
         default = 24;
       };
-      dhcp = mkOption {
-        type = types.nullOr dhcp;
+      dhcp_start = mkOption {
+        type = types.int;
+        default = 101;
+      };
+      dhcp_end = mkOption {
+        type = types.int;
+        default = 150;
       };
     };
   };
