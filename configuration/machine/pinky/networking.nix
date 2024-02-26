@@ -46,8 +46,8 @@ in {
             ipv4 = {
               addresses = [
                 {
-                  address = "10.44.0.1";
-                  prefixLength = 21;
+                  address = lib.ipv4.constructIpv4Address config.looniversity.network.network "1";
+                  prefixLength = config.looniversity.network.prefixLength;
                 }
               ];
             };
