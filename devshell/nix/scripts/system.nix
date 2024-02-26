@@ -42,9 +42,21 @@
           -d "${pkgs.figlet}/share/figlet" \
           -f doom \
           -w "''${COLUMNS}" \
-          "$target  :  $1"
+          "$target  :  build"
 
-        nixos-rebuild "$1" --flake ".#''${target}" \
+        nixos-rebuild build --flake ".#''${target}" \
+          --impure --log-format internal-json "''${extra_args[@]}" |& \
+          ${pkgs.nix-output-monitor}/bin/nom --json
+        ;;
+
+      dry-build)
+        ${pkgs.figlet}/bin/figlet \
+          -d "${pkgs.figlet}/share/figlet" \
+          -f doom \
+          -w "''${COLUMNS}" \
+          "$target  :  dry build"
+
+        nixos-rebuild dry-build --flake ".#''${target}" \
           --impure --log-format internal-json "''${extra_args[@]}" |& \
           ${pkgs.nix-output-monitor}/bin/nom --json
         ;;
