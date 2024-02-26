@@ -93,6 +93,7 @@ in {
                   {pool = "10.44.0.101 - 10.44.0.149";}
                 ];
 
+                # TODO: Create dhcpstatic reservations
                 # reservations = [
                 #   {
                 #     hostname = "sw1";
