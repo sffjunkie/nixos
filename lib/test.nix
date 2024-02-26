@@ -36,7 +36,7 @@
   run = {dir, ...} @ inputs: let
     results = runDir dir inputs;
   in (
-    showTestResults results
+    showTestResults results inputs
   );
 
   # runDir = path -> list[TestFileResults]
@@ -143,8 +143,12 @@
   );
 
   # showTestResults = list[TestFileResults] -> str
-  showTestResults = results: (
+  showTestResults = results: inputs: (
     let
+      quiet =
+        if lib.hasAttr "quiet" inputs
+        then inputs.quiet
+        else false;
       failed = lib.flatten (map (item: item.failed) results);
       passed = lib.flatten (map (item: item.passed) results);
       skipped = lib.flatten (map (item: item.skipped) results);
@@ -158,33 +162,46 @@
         if numFailed > 0
         then
           "[FAIL] ${toString numFailed}/${toString numTests} tests failed\n"
-          + failedMsg failed
+          + failedMsg failed quiet
         else "";
+
       skippedText =
         if numSkipped > 0
         then
           "[SKIP] ${toString numSkipped}/${toString numTests} tests skipped\n"
-          + skippedMsg skipped
+          + (skippedMsg skipped quiet)
         else "";
+
       passedText = "[PASS] ${toString numPassed}/${toString numTests} tests passed\n";
+
       msg = failedText + skippedText + passedText;
     in
       msg
   );
 
-  failedMsg = failed_tests: (
+  failedMsg = failed_tests: quiet: (
     builtins.foldl' (
-      acc: result:
-        acc
-        + "    ${result.name}\n"
-        + "         File:     ${builtins.toJSON result.path}\n"
-        + "         Expected: ${builtins.toJSON result.expected}\n"
-        + "         Actual:   ${builtins.toJSON result.actual}\n\n"
+      acc: result: (
+        let
+          nameText = "    ${result.name}\n";
+          verboseText =
+            "         File:     ${builtins.toJSON result.path}\n"
+            + "         Expected: ${builtins.toJSON result.expected}\n"
+            + "         Actual:   ${builtins.toJSON result.actual}\n\n";
+        in
+          acc
+          + nameText
+          + (
+            if !quiet
+            then verboseText
+            else ""
+          )
+      )
     ) ""
     failed_tests
   );
 
-  skippedMsg = skipped_tests: (
+  skippedMsg = skipped_tests: quiet: (
     builtins.foldl' (
       acc: result: (
         let
@@ -194,11 +211,18 @@
             # TODO: skipIf is currently nix code. Need to find way to convert
             # this to a string to display (rnix?)
             else "skipIf: ?";
+          nameText = "    ${result.name}\n";
+          verboseText =
+            "         Skipped:  ${skipText}\n"
+            + "         File:     ${builtins.toJSON result.path}\n\n";
         in
           acc
-          + "    ${result.name}\n"
-          + "         Skipped:  ${skipText}\n"
-          + "         File:     ${builtins.toJSON result.path}\n\n"
+          + nameText
+          + (
+            if !quiet
+            then verboseText
+            else ""
+          )
       )
     ) ""
     skipped_tests
