@@ -20,6 +20,7 @@
     golang.go
     humao.rest-client
     ms-python.python
+    ms-vscode.makefile-tools
     oderwat.indent-rainbow
     pkief.material-icon-theme
     serayuzgur.crates
@@ -37,8 +38,6 @@
     github.remotehub
     keesschollaart.vscode-home-assistant
     ms-vscode.cpptools-extension-pack
-    # TODO: 2024-02-24 Currently fails to build. Need to check later
-    # ms-vscode.makefile-tools
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
     shipitsmarter.sops-edit
