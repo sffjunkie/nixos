@@ -87,4 +87,9 @@ in [
     actual = lib.network.serviceServiceHandlerName testData.config "ca";
     expected = "step-ca";
   }
+  {
+    name = "network.serviceHandlerFQDN";
+    actual = lib.network.serviceHandlerFQDN testData.config "nextcloud";
+    expected = "cloud.network.arpa";
+  }
 ]
