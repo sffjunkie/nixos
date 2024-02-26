@@ -103,7 +103,7 @@
         tests
         ++ skipIfRun;
 
-      results = builtins.map (test: addFilePath filepath (runTest test)) testsToRun;
+      results = builtins.map (test: addFilePath filepath (evaluateTest test)) testsToRun;
 
       failed = builtins.filter (test: test.passed == false) results;
       passed = builtins.filter (test: test.passed == true) results;
@@ -112,14 +112,7 @@
     }
   );
 
-  # Function `runTest` runs the gives test. A test is defined as a structure
-  # with the following schema:
-  # {
-  #  name: string             # Name of the test
-  #  actual:   any            # The return value from the functionality you want to test
-  #  expected: any            # Expected return value of `fn(input)`
-  # }
-  runTest = test: (
+  evaluateTest = test: (
     if test.actual == test.expected
     then {
       name = test.name;
