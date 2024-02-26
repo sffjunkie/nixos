@@ -5,8 +5,11 @@
 {lib, ...}: rec {
   # Function `run` takes a Attribute set as an argument
   # The only required attribute is 'dir' the directory to load tests from.
-  # It then finds all test files matching the pattern `**/*.test.nix`,
+  # By default it then finds all test files matching the pattern `**/*.test.nix`,
   # and runs all of those tests.
+  #
+  # Passing an `include` attribute to `run` will only include files that match that pattern.
+  # If an `exclude` attribute is also passed then the file name must not match the pattern.
   #
   # Once the tests have run, it prints a summary of the results. If any of
   # the tests failed, it prints the summary by throwing an exception and
@@ -35,9 +38,27 @@
 
   # Run all the tests found in `dir` and show the test results
   run = {dir, ...} @ inputs: let
-    results = runDir dir inputs;
+    newInputs =
+      inputs
+      // {
+        include =
+          if lib.hasAttr "include" inputs
+          then inputs.include
+          else ".*_test\.nix";
+        exclude =
+          if lib.hasAttr "exclude" inputs
+          then inputs.exclude
+          else "";
+      };
+    results = runDir dir newInputs;
+    noMatchText =
+      "No test files found matching "
+      + "include pattern \"${newInputs.include}\""
+      + " and exclude pattern \"${newInputs.exclude}\"";
   in (
-    showTestResults results inputs
+    if lib.length results != 0
+    then showTestResults results newInputs
+    else noMatchText
   );
 
   # runDir = path -> list[TestFileResults]
@@ -59,7 +80,7 @@
               acc ++ [result]
           )
         ) []
-        (testFiles dir);
+        (testFiles dir inputs);
     in
       results
   );
@@ -67,8 +88,8 @@
   # testFiles = path -> list[path]
   #
   # Takes a directory as an argument, finds all test files
-  # matching the pattern `**/*.test.nix` in this directory and its sub-directories.
-  testFiles = dir: (
+  # matching the pattern `*_test.nix` in this directory and its sub-directories.
+  testFiles = dir: inputs: (
     let
       fileTypes = builtins.readDir dir;
       filenames = builtins.attrNames fileTypes;
@@ -77,7 +98,10 @@
           acc: filename: let
             path = lib.concatStringsSep "/" [dir "${filename}"];
             fileType = builtins.getAttr filename fileTypes;
-            isTestFile = (fileType == "regular") && (builtins.match ".*_test\.nix" filename) != null;
+            isTestFile =
+              (fileType == "regular")
+              && (builtins.match inputs.exclude filename) == null
+              && (builtins.match inputs.include filename) != null;
           in (
             if fileType == "directory"
             then acc ++ (testFiles path)
