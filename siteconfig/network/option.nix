@@ -103,17 +103,17 @@ in {
   options.looniversity.network = {
     network = mkOption {
       type = types.str;
-      default = "";
+      default = "192.168.0.0";
     };
 
     prefixLength = mkOption {
       type = types.int;
-      default = -1;
+      default = 24;
     };
 
     domainName = mkOption {
       type = types.str;
-      default = "looniversity.net";
+      default = "network.arpa";
     };
 
     ldapRoot = mkOption {
