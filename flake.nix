@@ -200,6 +200,7 @@
     # under the `tests` attribute
     tests = lib.test.run {
       dir = ./test;
+      inherit lib; # Needed by test functions
       # include = ".*_test\.nix";
       # exclude = "";
     };
