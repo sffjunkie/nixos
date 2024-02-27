@@ -1,7 +1,10 @@
 # Adapted from https://github.com/jetpack-io/nixtest/
-# - takes a reference to `lib`
+# - Passing a 'include' attribute sets the regex used to select files to include
+# - Passing a 'exclude' attribute sets the regex used to select files to exclude
+# - Passing a 'quiet' attribute set to true to the run function outputs less information
 # - Adding a 'skip' attribute to a test skips it
 # - Adding a 'skipIf' attribute skips the test if the attribute value is Trueish
+# - Requires a reference to `lib` to be passed to the `run` function
 {lib, ...}: rec {
   # Function `run` takes a Attribute set as an argument
   # The only required attribute is 'dir' the directory to load tests from.
