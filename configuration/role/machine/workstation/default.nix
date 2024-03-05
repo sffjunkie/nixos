@@ -13,6 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
+      admin.mqtt.enable = true;
       libnotify.enable = true;
       keyring.enable = true;
       pipewire.enable = true;
