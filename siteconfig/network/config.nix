@@ -352,6 +352,10 @@
         host = "127.0.0.1";
       };
 
+      mosquitto = {
+        host = "10.44.1.1";
+      };
+
       nextcloud = {
         # host = "thebrain";
         host = "127.0.0.1";
