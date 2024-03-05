@@ -7,11 +7,11 @@
 }: let
   cfg = config.looniversity.admin.mqtt;
 
-  mqttHost = lib.network.serviceHandlerHostName "mosquitto";
+  mqttHost = lib.network.serviceHandlerHostName config "mosquitto";
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.mqtt = {
+  options.looniversity.admin.mqtt = {
     enable = mkEnableOption "mqtt";
   };
 
