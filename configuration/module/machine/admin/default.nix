@@ -1,6 +1,7 @@
 {
   imports = [
     ./mongodb
+    ./mqttui
     ./postgresql
   ];
 }
