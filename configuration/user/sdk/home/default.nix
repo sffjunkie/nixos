@@ -1,6 +1,7 @@
 {
   imports = [
     ../../../module/home
+    ../../../role/home
 
     ./accounts
     ./settings/qt
@@ -22,6 +23,8 @@
     };
 
     looniversity = {
+      role.podcaster.enable = true;
+
       bat.enable = true;
       bottom.enable = true;
       direnv.enable = true;
