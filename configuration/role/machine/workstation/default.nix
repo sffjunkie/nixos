@@ -22,6 +22,10 @@ in {
       role.xserver.enable = true;
     };
 
+    environment.systemPackages = [
+      pkgs.d-spy
+    ];
+
     networking.networkmanager.enable = true;
     networking.firewall.enable = false;
 
