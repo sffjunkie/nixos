@@ -88,6 +88,7 @@ in {
 
         "terminal.integrated.scrollback" = 5000;
         "terminal.integrated.fontSize" = 12;
+        "terminal.integrated.defaultProfile.linux" = "bash";
 
         "update.mode" = "manual";
 
