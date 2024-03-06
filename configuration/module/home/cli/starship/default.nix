@@ -22,6 +22,9 @@ in {
         hostname = {
           format = "[$ssh_symbol$hostname]($style) ";
         };
+        directory = {
+          truncate_to_repo = false;
+        };
         fill = {
           symbol = " ";
         };
