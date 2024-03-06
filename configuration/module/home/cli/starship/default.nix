@@ -15,7 +15,7 @@ in {
     programs.starship = {
       enable = true;
       settings = {
-        format = "$username$hostname$directory$git_branch$git_commit$git_state$git_metrics$cmd_duration$fill$python$nodejs$line_break$character";
+        format = "$username$hostname$directory$git_branch$git_commit$git_state$git_metrics$cmd_duration$fill$direnv$python$nodejs$line_break$character";
         username = {
           format = "[$user]($style) ";
         };
@@ -24,6 +24,9 @@ in {
         };
         fill = {
           symbol = " ";
+        };
+        direnv = {
+          disabled = false;
         };
         python = {
           python_binary = "python3";
