@@ -26,6 +26,7 @@
     pkief.material-icon-theme
     serayuzgur.crates
     shd101wyy.markdown-preview-enhanced
+    tamasfe.even-better-toml
     timonwong.shellcheck
     twxs.cmake
     yzhang.markdown-all-in-one
