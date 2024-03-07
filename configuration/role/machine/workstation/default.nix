@@ -20,6 +20,7 @@ in {
       service.sshd.enable = true;
       pinentry.enable = true;
       role.xserver.enable = true;
+      service.homepage-dashboard.enable = true;
     };
 
     environment.systemPackages = [
