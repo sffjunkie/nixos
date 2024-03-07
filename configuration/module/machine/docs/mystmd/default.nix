@@ -12,8 +12,12 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environemnt.systemPackages = [
+    environment.systemPackages = [
       pkgs.mystmd
     ];
+
+    looniversity = {
+      nodejs.enable = true;
+    };
   };
 }

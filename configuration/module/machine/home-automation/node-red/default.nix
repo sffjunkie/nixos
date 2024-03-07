@@ -22,10 +22,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      nodejs
-    ];
-
+    looniversity = {
+      nodejs.enable = true;
+    };
+    
     environment.shellAliases = {
       node-red-pm = "npm --prefix=${config.services.node-red.userDir} --save";
     };

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.looniversity.nodejs;
@@ -13,7 +14,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      nodejs_20
+      pkgs.nodejs_20
     ];
   };
 }
