@@ -3,6 +3,7 @@
     ./audio
     ./cli
     ./development
+    ./docs
     ./editors
     ./gui
     ./scripts
