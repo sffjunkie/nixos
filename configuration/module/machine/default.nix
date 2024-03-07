@@ -2,6 +2,7 @@
   imports = [
     ./admin
     ./desktop
+    ./development
     ./docs
     ./games
     ./home-automation
