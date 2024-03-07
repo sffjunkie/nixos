@@ -14,8 +14,10 @@ in {
     programs.obs-studio = {
       enable = true;
     };
-    audio.easyeffects = {
-      enable = true;
+    looniversity = {
+      audio.easyeffects = {
+        enable = true;
+      };
     };
   };
 }
