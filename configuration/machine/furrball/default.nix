@@ -35,6 +35,8 @@
       rclone.enable = true;
       spotify.enable = true;
 
+      mystmd.enable = true;
+
       admin = {
         mongodb.enable = true;
         postgresql.enable = true;
