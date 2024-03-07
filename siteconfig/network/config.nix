@@ -317,7 +317,7 @@
       graylog = {
         # host = "thebrain";
         host = "127.0.0.1";
-        port = 9011;
+        port = 9013;
       };
 
       home-assistant = {
