@@ -14,5 +14,8 @@ in {
     programs.obs-studio = {
       enable = true;
     };
+    audio.easyeffects = {
+      enable = true;
+    };
   };
 }
