@@ -26,6 +26,7 @@
     pkief.material-icon-theme
     serayuzgur.crates
     shd101wyy.markdown-preview-enhanced
+    stkb.rewrap
     tamasfe.even-better-toml
     timonwong.shellcheck
     twxs.cmake
@@ -69,7 +70,7 @@ in {
             "comments" = "#94b9a6";
           };
         };
-        "editor.formatOnSave" = true;
+        "editor.formatOnSave" = false;
 
         "editor.rulers" = [
           80

@@ -1,10 +1,10 @@
 {
   imports = [
+    ./audio
     ./cli
     ./development
     ./editors
     ./gui
-    ./music
     ./scripts
     ./service
     ./shells
