@@ -326,6 +326,10 @@
         port = 8123;
       };
 
+      homepage-dashboard = {
+        port = 9014;
+      };
+
       jellyfin = {
         host = "mary";
         ports = {
