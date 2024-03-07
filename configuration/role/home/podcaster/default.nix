@@ -11,6 +11,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.obs-studio.enable = treu;
+    programs.obs-studio = {
+      enable = true;
+    };
   };
 }
