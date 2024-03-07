@@ -6,6 +6,7 @@
     ./elasticsearch
     ./fail2ban
     ./graylog
+    ./homepage-dashboard
     ./lldap
     ./mongodb
     ./nextcloud
