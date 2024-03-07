@@ -63,6 +63,8 @@
       preCommit.enable = true;
       shellcheck.enable = true;
 
+      mystmd.enable = true;
+
       alacritty.enable = true;
       brave.enable = true;
       darktable.enable = true;
