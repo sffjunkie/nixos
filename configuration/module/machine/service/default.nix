@@ -10,6 +10,7 @@
     ./lldap
     ./mongodb
     ./nextcloud
+    ./openvpn
     ./postgresql
     ./sshd
     ./step-ca
