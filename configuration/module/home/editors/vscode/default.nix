@@ -70,7 +70,7 @@ in {
             "comments" = "#94b9a6";
           };
         };
-        "editor.formatOnSave" = false;
+        "editor.formatOnSave" = true;
 
         "editor.rulers" = [
           80
