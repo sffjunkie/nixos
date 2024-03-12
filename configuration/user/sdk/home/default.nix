@@ -71,6 +71,7 @@
       gittyup.enable = true;
       gnomeApps.enable = true;
       gns3.enable = true;
+      gramps.enable = true;
       inkscape.enable = true;
       keepassxc.enable = true;
       kitty.enable = false;
