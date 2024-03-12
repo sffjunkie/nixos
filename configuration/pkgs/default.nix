@@ -2,9 +2,11 @@
   pkgs,
   lib ? pkgs.lib,
   debug ? false,
+  ...
 }:
 with lib; let
   pkgsFolder = ./pkgs;
+  inherit (lib) mapAttrs' removeSuffix filterAttrs;
 in
   mapAttrs' (name: type: {
     name = removeSuffix ".nix" name;
