@@ -25,6 +25,6 @@ stdenv.mkDerivation rec {
     description = "Apache Trino";
     homepage = "https://github.com/trinodb/trino";
     license = licenses.asl20;
-    # maintainers = with maintainers; [ majiir ];
+    # maintainers = with maintainers; [  ];
   };
 }
