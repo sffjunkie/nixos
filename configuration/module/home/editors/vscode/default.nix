@@ -20,6 +20,7 @@
     golang.go
     gruntfuggly.todo-tree
     humao.rest-client
+    kamadorueda.alejandra
     ms-python.python
     ms-vscode.makefile-tools
     oderwat.indent-rainbow
