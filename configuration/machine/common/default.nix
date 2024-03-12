@@ -5,6 +5,11 @@
     ./nix.nix
     ./packages.nix
     ./workaround.nix
+
+    ../../module/machine
+    ../../module/mount
+    ../../role/machine
+
     ../../../siteconfig
   ];
 

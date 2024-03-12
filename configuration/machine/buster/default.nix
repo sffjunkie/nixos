@@ -13,10 +13,6 @@
     ./networking.nix
 
     ../common
-    ../../module/machine
-    ../../module/mount
-
-    ../../role/machine
 
     sops-nix.nixosModules.sops
   ];
@@ -33,6 +29,8 @@
 
     looniversity = {
       spotify.enable = true;
+      # TODO: Disable until secrets added to Sops
+      service.openvpn.enable = false;
       role.laptop.enable = true;
     };
 
