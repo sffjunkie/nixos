@@ -15,6 +15,7 @@
     ./sshd
     ./step-ca
     ./traefik
+    ./trino
     ./unbound
   ];
 }
