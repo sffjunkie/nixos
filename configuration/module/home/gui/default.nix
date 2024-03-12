@@ -7,6 +7,7 @@
     ./gittyup
     ./gnome-apps
     ./gns3
+    ./gramps
     ./inkscape
     ./keepassxc
     ./libreoffice
