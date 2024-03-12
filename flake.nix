@@ -36,6 +36,7 @@
     ...
   } @ inputs: let
     lib = nixpkgs.lib.extend (import ./lib {inherit lib;});
+    pkgs = nixpkgs.pkgs.extend (import ./pkgs {inherit pkgs;});
 
     hmCommonConfig = {
       config = {
