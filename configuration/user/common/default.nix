@@ -1,6 +1,6 @@
 {
   imports = [
-    ../../../module/home
-    ../../../role/home
+    ../../module/home
+    ../../role/home
   ];
 }

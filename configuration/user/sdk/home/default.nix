@@ -5,7 +5,7 @@
     ./settings/qtile
     ./settings/gnome
 
-    ../common
+    ../../common
   ];
 
   # //config.home-manager.users.sdk.config
