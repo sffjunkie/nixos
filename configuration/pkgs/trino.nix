@@ -2,7 +2,6 @@
   lib,
   fetchurl,
   jre,
-  makeWrapper,
   stdenv,
   ...
 }:
@@ -11,22 +10,19 @@ stdenv.mkDerivation rec {
   version = "440";
 
   src = fetchurl {
-    url = "https://repo1.maven.org/maven2/io/trino/trino-server/440/trino-server-440.tar.gz";
+    url = "https://repo1.maven.org/maven2/io/trino/${pname}/${version}/${pname}-${version}.tar.gz";
     hash = "sha256-dwrG+p3/acx+wsYysrJ5uAJVY5jHolVh1tIKPtXxVyk=";
   };
 
-  nativeBuildInputs = [makeWrapper];
+  nativeBuildInputs = [jre];
 
   installPhase = ''
-    mkdir -p $out/bin $out/share/${pname}
-    install -Dm644 ${pname}/target/${pname}.jar $out/share/${pname}
-
-    #   makeWrapper ${jre}/bin/java $out/bin/${pname} \
-    #     --add-flags "-jar $out/share/${pname}/${pname}.jar"
+    mkdir -p $out
+    cp -r {bin,lib,plugin} $out
   '';
 
   meta = with lib; {
-    description = "Apache trino";
+    description = "Apache Trino";
     homepage = "https://github.com/trinodb/trino";
     license = licenses.asl20;
     # maintainers = with maintainers; [ majiir ];

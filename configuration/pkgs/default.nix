@@ -1,5 +1,3 @@
 {pkgs, ...}: {
-  environment.systemPackages = [
-    (pkgs.callPackage ./trino.nix {})
-  ];
+  trino = pkgs.callPackage ./trino.nix {};
 }
