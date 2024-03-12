@@ -9,6 +9,7 @@
     ../../module/machine
     ../../module/mount
     ../../role/machine
+    ../../pkgs
 
     ../../../siteconfig
   ];
