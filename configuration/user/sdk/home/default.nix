@@ -1,12 +1,11 @@
 {
   imports = [
-    ../../../module/home
-    ../../../role/home
-
     ./accounts
     ./settings/qt
     ./settings/qtile
     ./settings/gnome
+
+    ../common
   ];
 
   # //config.home-manager.users.sdk.config

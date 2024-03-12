@@ -1,6 +1,6 @@
 {
   imports = [
-    ../../../module/home
+    ../common
   ];
 
   config = {
