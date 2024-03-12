@@ -23,6 +23,8 @@
     };
 
     looniversity = {
+      audio.qpwgraph.enable = true;
+
       role.podcaster.enable = true;
 
       bat.enable = true;
