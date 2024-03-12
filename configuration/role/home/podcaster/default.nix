@@ -15,8 +15,10 @@ in {
       enable = true;
     };
     looniversity = {
-      audio.easyeffects = {
-        enable = true;
+      audio = {
+        easyeffects = {
+          enable = true;
+        };
       };
     };
   };
