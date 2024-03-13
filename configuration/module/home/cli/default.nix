@@ -13,6 +13,7 @@
     ./htop
     ./jc
     ./jq
+    ./just
     ./khal
     ./lazydocker
     ./lazygit
