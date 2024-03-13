@@ -185,7 +185,7 @@
     };
 
     # Generic development shells
-    # The default 'nix' shell includes scripts to build systems
+    # The default 'nix' shell includes scripts to build nixos systems
     # using nix-ouptut-monitor
     devShells.x86_64-linux = let
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
