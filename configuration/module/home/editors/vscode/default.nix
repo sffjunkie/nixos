@@ -22,7 +22,9 @@
     humao.rest-client
     kamadorueda.alejandra
     ms-python.python
+    ms-pyright.pyright
     ms-vscode.makefile-tools
+    ms-vscode-remote.remote-containers
     oderwat.indent-rainbow
     pkief.material-icon-theme
     serayuzgur.crates
