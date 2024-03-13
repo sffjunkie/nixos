@@ -90,7 +90,7 @@
 
       *)
         [ $# -eq 0 ] && echo -n "No mode specified. "
-        echo "Mode must be one of 'build', 'build-vm' or 'switch'"
+        echo "Mode must be one of 'list' or 'delete'"
         exit 1
         ;;
     esac
