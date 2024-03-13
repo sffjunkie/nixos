@@ -45,6 +45,7 @@
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
     shipitsmarter.sops-edit
+    techer.open-in-browser
   ];
 in {
   options.looniversity.vscode = {
