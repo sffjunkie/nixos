@@ -39,6 +39,7 @@
       htop.enable = true;
       jc.enable = true;
       jq.enable = true;
+      just.enable = true;
       khal.enable = true;
       lazydocker.enable = true;
       lazygit.enable = true;
