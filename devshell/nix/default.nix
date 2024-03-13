@@ -25,5 +25,8 @@ in
           echo "No tests output attribute found"
         fi
       }
+
+      alias nog="nixos-generations"
+      alias nos="nixos-system"
     '';
   }
