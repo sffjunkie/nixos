@@ -22,7 +22,7 @@
     humao.rest-client
     kamadorueda.alejandra
     ms-python.python
-    ms-pyright.pyright
+    ms-python.vscode-pylance
     ms-vscode.makefile-tools
     ms-vscode-remote.remote-containers
     oderwat.indent-rainbow
@@ -91,6 +91,8 @@ in {
 
         "git.confirmSync" = false;
         "git.openRepositoryInParentFolders" = "never";
+
+        "python.analysis.diagnosticMode" = "workspace";
 
         "terminal.integrated.scrollback" = 5000;
         "terminal.integrated.fontSize" = 12;
