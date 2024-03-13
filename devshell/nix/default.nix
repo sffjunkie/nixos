@@ -16,6 +16,7 @@ in
       ]
       ++ nixosScripts;
 
+    # To get this to work with direnv you need to add `eval "$shellHook"` to `.envrc`
     shellHook = ''
       nix-test() {
         $(nix flake show --json | jq -e .tests 2>&1 > /dev/null)
