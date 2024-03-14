@@ -4,7 +4,7 @@
     ./gnome
     ./greetd
     ./libnotify
-    ./nordic
+    ./nord
     ./papirus
     ./qtile
     ./waylock
