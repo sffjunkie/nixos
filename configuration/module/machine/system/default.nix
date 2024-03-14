@@ -8,6 +8,5 @@
     ./polkit
     ./rclone
     ./sops
-    ./virtualisation
   ];
 }

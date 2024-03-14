@@ -12,7 +12,10 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      virtualisation.enable = true;
+      virtualisation = {
+        system.enable = true;
+        quickemu.enable = true;
+      };
 
       # TODO: Fix NAS
       mount.iso.enable = false;

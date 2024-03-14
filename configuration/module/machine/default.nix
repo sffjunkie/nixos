@@ -13,5 +13,6 @@
     ./shells
     ./storage
     ./system
+    ./virtualisation
   ];
 }

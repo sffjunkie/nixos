@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.virtualisation;
+  cfg = config.looniversity.virtualisation.system;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.virtualisation = {
-    enable = mkEnableOption "virtualisation";
+  options.looniversity.virtualisation.system = {
+    enable = mkEnableOption "virtualisation system config";
   };
 
   config = mkIf cfg.enable {
