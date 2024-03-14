@@ -18,6 +18,7 @@
       sessionVariables = {
         MANWIDTH = 100;
         VAULT_ADDR = "http://thebrain.looniversity.net:8200";
+        DEVELOPMENT_HOME = "$HOME/development";
       };
     };
 
