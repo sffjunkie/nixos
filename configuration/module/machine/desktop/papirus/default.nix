@@ -12,6 +12,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [pkgs.papirus-icon-theme];
+    environment.systemPackages = [
+      pkgs.papirus-icon-theme
+    ];
   };
 }
