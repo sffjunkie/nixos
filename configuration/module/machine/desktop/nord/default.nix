@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [
       pkgs.nordic
-      pkgs.papirus-nord
+      (pkgs.hiPrio pkgs.papirus-nord)
     ];
   };
 }
