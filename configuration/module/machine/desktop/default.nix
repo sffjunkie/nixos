@@ -4,6 +4,7 @@
     ./gnome
     ./greetd
     ./libnotify
+    ./papirus
     ./qtile
     ./waylock
   ];
