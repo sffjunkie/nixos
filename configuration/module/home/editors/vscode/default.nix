@@ -47,6 +47,7 @@
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
     shipitsmarter.sops-edit
+    skellock.just
     techer.open-in-browser
   ];
 in {
