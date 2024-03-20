@@ -55,6 +55,11 @@
         workstation.enable = true;
         xserver.enable = true;
       };
+
+      theme = {
+        nord.enable = true;
+        papirus.enable = true;
+      };
     };
 
     sops = {

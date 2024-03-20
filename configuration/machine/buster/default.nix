@@ -31,7 +31,10 @@
       spotify.enable = true;
       # TODO: Disable until secrets added to Sops
       service.openvpn.enable = false;
-      role.laptop.enable = true;
+      theme = {
+        nord.enable = true;
+        papirus.enable = true;
+      };
     };
 
     sops.defaultSopsFile = ../../secret/secrets.yaml;
