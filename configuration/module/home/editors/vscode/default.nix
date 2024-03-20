@@ -117,6 +117,9 @@ in {
         "[python]" = {
           "editor.defaultFormatter" = "charliermarsh.ruff";
         };
+
+        "evenBetterToml.formatter.arrayTrailingComma" = true;
+        "evenBetterToml.formatter.arrayAutoExpand" = true;
       };
     };
   };
