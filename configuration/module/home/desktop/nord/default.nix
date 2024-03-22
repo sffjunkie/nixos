@@ -12,9 +12,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.nordic
-      (pkgs.hiPrio pkgs.papirus-nord)
-    ];
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface" = {
+          "cursor-theme" = "Nordic-cursors";
+          "gtk-theme" = "Nordic-darker";
+        };
+      };
+    };
   };
 }

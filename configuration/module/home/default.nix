@@ -2,6 +2,7 @@
   imports = [
     ./audio
     ./cli
+    ./desktop
     ./development
     ./editors
     ./gui

@@ -12,8 +12,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.papirus-icon-theme
-    ];
+    dconf = {
+      enable = true;
+      settings = {
+        "org/gnome/desktop/interface" = {
+          "icon-theme" = "Papirus-Dark";
+        };
+      };
+    };
   };
 }
