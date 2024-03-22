@@ -6,6 +6,8 @@
     ./packages.nix
     ./workaround.nix
 
+    ../../secret
+
     ../../module/machine
     ../../module/mount
     ../../role/machine
