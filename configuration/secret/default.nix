@@ -6,6 +6,7 @@
   config.sopsFiles = {
     default = ./secrets.yaml;
     service = ./service.yaml;
+    tool = ./tool.yaml;
     user = ./user.yaml;
   };
 }
