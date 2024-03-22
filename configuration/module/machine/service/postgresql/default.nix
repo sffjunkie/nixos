@@ -14,6 +14,13 @@ in {
     databases = mkOption {
       type = types.listOf types.str;
       default = [];
+      description = ''
+        A list of databases to create.
+
+        For each database a user will be created name the same
+        as the database.
+        Can be set in each individual service configuration.
+      '';
     };
   };
 

@@ -7,7 +7,7 @@
   wanDev = lib.network.netdevice config "pinky" "wan";
 in {
   config = {
-    sops.secrets."service/wireguard/server/private_key" = {
+    sops.secrets."wireguard/server/private_key" = {
       sopsFile = config.sopsFiles.service;
     };
 
@@ -31,7 +31,7 @@ in {
           ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.50.0.0/24 -o ${wanDev} -j MASQUERADE
         '';
 
-        privateKeyFile = config.sops.secrets."service/wireguard/server/private_key".path;
+        privateKeyFile = config.sops.secrets."wireguard/server/private_key".path;
 
         peers = [
           {

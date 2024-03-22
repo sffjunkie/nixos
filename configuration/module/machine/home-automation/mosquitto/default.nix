@@ -13,15 +13,15 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/mosquitto/password/homeassistant" = {
+    sops.secrets."mosquitto/password/homeassistant" = {
       owner = config.users.users.mosquitto.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/mosquitto/password/zigbee2mqtt" = {
+    sops.secrets."mosquitto/password/zigbee2mqtt" = {
       owner = config.users.users.mosquitto.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/mosquitto/password/nodered" = {
+    sops.secrets."mosquitto/password/nodered" = {
       owner = config.users.users.mosquitto.name;
       sopsFile = config.sopsFiles.service;
     };
@@ -35,13 +35,13 @@ in {
 
           users = {
             homeassistant = {
-              hashedPasswordFile = config.sops.secrets."service/mosquitto/password/homeassistant".path;
+              hashedPasswordFile = config.sops.secrets."mosquitto/password/homeassistant".path;
             };
             zigbee2mqtt = {
-              hashedPasswordFile = config.sops.secrets."service/mosquitto/password/zigbee2mqtt".path;
+              hashedPasswordFile = config.sops.secrets."mosquitto/password/zigbee2mqtt".path;
             };
             nodered = {
-              hashedPasswordFile = config.sops.secrets."service/mosquitto/password/nodered".path;
+              hashedPasswordFile = config.sops.secrets."mosquitto/password/nodered".path;
             };
           };
         }

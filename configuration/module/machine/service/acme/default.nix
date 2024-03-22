@@ -13,13 +13,13 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # sops.secrets."service/acme/cloudflare_email" = {};
-    # sops.secrets."service/acme/cloudflare_api_key" = {};
-    sops.secrets."service/acme/cloudflare_dns_api_token" = {
+    # sops.secrets."acme/cloudflare_email" = {};
+    # sops.secrets."acme/cloudflare_api_key" = {};
+    sops.secrets."acme/cloudflare_dns_api_token" = {
       owner = config.users.users.acme.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/acme/cloudflare_zone_api_token" = {
+    sops.secrets."acme/cloudflare_zone_api_token" = {
       owner = config.users.users.acme.name;
       sopsFile = config.sopsFiles.service;
     };
@@ -39,10 +39,10 @@ in {
 
           dnsProvider = "cloudflare";
           credentialsFiles = {
-            # "CF_API_EMAIL_FILE" = config.sops.secrets."service/acme/cloudflare_email".path;
-            # "CF_API_KEY_FILE" = config.sops.secrets."service/acme/cloudflare_api_key".path;
-            "CF_DNS_API_TOKEN_FILE" = config.sops.secrets."service/acme/cloudflare_dns_api_token".path;
-            "CF_ZONE_API_TOKEN_FILE" = config.sops.secrets."service/acme/cloudflare_zone_api_token".path;
+            # "CF_API_EMAIL_FILE" = config.sops.secrets."acme/cloudflare_email".path;
+            # "CF_API_KEY_FILE" = config.sops.secrets."acme/cloudflare_api_key".path;
+            "CF_DNS_API_TOKEN_FILE" = config.sops.secrets."acme/cloudflare_dns_api_token".path;
+            "CF_ZONE_API_TOKEN_FILE" = config.sops.secrets."acme/cloudflare_zone_api_token".path;
           };
         };
       };

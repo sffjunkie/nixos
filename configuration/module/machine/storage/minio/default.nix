@@ -16,19 +16,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/minio/root_user" = {
+    sops.secrets."minio/root_user" = {
       owner = config.users.users.minio.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/minio/root_password" = {
+    sops.secrets."minio/root_password" = {
       owner = config.users.users.minio.name;
       sopsFile = config.sopsFiles.service;
     };
 
     sops.templates."minio_env_file" = {
       content = ''
-        MINIO_ROOT_USER=${config.sops.placeholder."service/minio/root_user"}
-        MINIO_ROOT_PASSWORD=${config.sops.placeholder."service/minio/root_password"}
+        MINIO_ROOT_USER=${config.sops.placeholder."minio/root_user"}
+        MINIO_ROOT_PASSWORD=${config.sops.placeholder."minio/root_password"}
       '';
       owner = config.users.users.minio.name;
     };

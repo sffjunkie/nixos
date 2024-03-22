@@ -16,19 +16,19 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/step_ca/intermediate_password" = {
+    sops.secrets."step_ca/intermediate_password" = {
       owner = config.users.users.step-ca.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/step_ca/certs/root_ca_crt" = {
+    sops.secrets."step_ca/certs/root_ca_crt" = {
       owner = config.users.users.step-ca.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/step_ca/certs/intermediate_ca_crt" = {
+    sops.secrets."step_ca/certs/intermediate_ca_crt" = {
       owner = config.users.users.step-ca.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/step_ca/secrets/intermediate_ca_key" = {
+    sops.secrets."step_ca/secrets/intermediate_ca_key" = {
       owner = config.users.users.step-ca.name;
       sopsFile = config.sopsFiles.service;
     };
@@ -42,9 +42,9 @@ in {
 
       settings = {
         commonName = "Looniversity CA";
-        root = config.sops.secrets."service/step_ca/certs/root_ca_crt".path;
-        crt = config.sops.secrets."service/step_ca/certs/intermediate_ca_crt".path;
-        key = config.sops.secrets."service/step_ca/secrets/intermediate_ca_key".path;
+        root = config.sops.secrets."step_ca/certs/root_ca_crt".path;
+        crt = config.sops.secrets."step_ca/certs/intermediate_ca_crt".path;
+        key = config.sops.secrets."step_ca/secrets/intermediate_ca_key".path;
 
         db = {
           type = "badgerv2";

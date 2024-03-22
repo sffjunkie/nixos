@@ -17,11 +17,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/gitea/root_password" = {
+    sops.secrets."gitea/root_password" = {
       owner = config.users.users.gitea.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/gitea/db_password" = {
+    sops.secrets."gitea/db_password" = {
       owner = config.users.users.gitea.name;
       sopsFile = config.sopsFiles.service;
     };
@@ -34,7 +34,7 @@ in {
         type = "postgres";
         host = postgresql_hostname;
         user = "gitea";
-        passwordFile = config.sops.secrets."service/gitea/db_password".path;
+        passwordFile = config.sops.secrets."gitea/db_password".path;
       };
 
       setings = {

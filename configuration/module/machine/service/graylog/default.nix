@@ -96,24 +96,24 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/graylog/password_secret" = {
+    sops.secrets."graylog/password_secret" = {
       owner = config.users.users.graylog.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/graylog/root_user_name" = {
+    sops.secrets."graylog/root_user_name" = {
       owner = config.users.users.graylog.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/graylog/root_password_hash" = {
+    sops.secrets."graylog/root_password_hash" = {
       owner = config.users.users.graylog.name;
       sopsFile = config.sopsFiles.service;
     };
 
     sops.templates."graylog_env_file" = {
       content = ''
-        GRAYLOG_PASSWORD_SECRET=${config.sops.placeholder."service/graylog/password_secret"}
-        GRAYLOG_ROOT_USERNAME=${config.sops.placeholder."service/graylog/root_user_name"}
-        GRAYLOG_ROOT_PASSWORD_SHA2=${config.sops.placeholder."service/graylog/root_password_hash"}
+        GRAYLOG_PASSWORD_SECRET=${config.sops.placeholder."graylog/password_secret"}
+        GRAYLOG_ROOT_USERNAME=${config.sops.placeholder."graylog/root_user_name"}
+        GRAYLOG_ROOT_PASSWORD_SHA2=${config.sops.placeholder."graylog/root_password_hash"}
       '';
       owner = config.users.users.graylog.name;
     };

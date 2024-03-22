@@ -14,11 +14,11 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/nextcloud/admin_password" = {
+    sops.secrets."nextcloud/admin_password" = {
       owner = config.users.users.nextcloud.name;
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/nextcloud/db_password" = {
+    sops.secrets."nextcloud/db_password" = {
       owner = config.users.users.nextcloud.name;
       sopsFile = config.sopsFiles.service;
     };
@@ -40,9 +40,9 @@ in {
         dbuser = "nextcloud";
         dbhost = "/run/postgresql";
         dbname = "nextcloud";
-        dbpassFile = config.sops.secrets."service/nextcloud/db_password".path;
+        dbpassFile = config.sops.secrets."nextcloud/db_password".path;
 
-        adminpassFile = config.sops.secrets."service/nextcloud/admin_password".path;
+        adminpassFile = config.sops.secrets."nextcloud/admin_password".path;
       };
     };
 

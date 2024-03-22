@@ -21,14 +21,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/zigbee2mqtt/mqtt_password" = {
+    sops.secrets."zigbee2mqtt/mqtt_password" = {
       owner = config.users.users.zigbee2mqtt.name;
       sopsFile = config.sopsFiles.service;
     };
 
     services.zigbee2mqtt = {
       enable = true;
-      passwordFile = config.sops.secrets."service/zigbee2mqtt/mqtt_password".path;
+      passwordFile = config.sops.secrets."zigbee2mqtt/mqtt_password".path;
 
       settings = {
         permit_join = true;

@@ -13,7 +13,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/rclone/ini" = {
+    sops.secrets."rclone/ini" = {
       sopsFile = config.sopsFiles.service;
     };
 
@@ -45,7 +45,7 @@ in {
 
           ExecStartPre = [
             "${pkgs.coreutils}/bin/mkdir -p /var/lib/rclone/mnt/%i"
-            "${pkgs.coreutils}/bin/cp ${config.sops.secrets."service/rclone/ini".path} /var/lib/rclone/rclone.conf"
+            "${pkgs.coreutils}/bin/cp ${config.sops.secrets."rclone/ini".path} /var/lib/rclone/rclone.conf"
           ];
           ExecStart = "${pkgs.rclone}/bin/rclone --config=/var/lib/rclone/rclone.conf --log-level INFO --log-file /tmp/rclone-%i.log mount --umask 022 --allow-other %i: /var/lib/rclone/mnt/%i";
           ExecStop = "${pkgs.fuse3}/bin/fusermount3 -u /var/lib/rclone/mnt/%i";

@@ -14,21 +14,21 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/lldap/jwt" = {
+    sops.secrets."lldap/jwt" = {
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/lldap/key_seed" = {
+    sops.secrets."lldap/key_seed" = {
       sopsFile = config.sopsFiles.service;
     };
-    sops.secrets."service/lldap/admin_password" = {
+    sops.secrets."lldap/admin_password" = {
       sopsFile = config.sopsFiles.service;
     };
 
     sops.templates."lldap_env_file" = {
       content = ''
-        LLDAP_KEY_SEED=${config.sops.placeholder."service/lldap/key_seed"}
-        LLDAP_JWT_SECRET=${config.sops.placeholder."service/lldap/jwt"}
-        LLDAP_LDAP_USER_PASS=${config.sops.placeholder."service/lldap/admin_password"}
+        LLDAP_KEY_SEED=${config.sops.placeholder."lldap/key_seed"}
+        LLDAP_JWT_SECRET=${config.sops.placeholder."lldap/jwt"}
+        LLDAP_LDAP_USER_PASS=${config.sops.placeholder."lldap/admin_password"}
       '';
     };
 
