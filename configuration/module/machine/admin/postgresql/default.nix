@@ -14,7 +14,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."tool/pgadmin/initial_password" = {
+    sops.secrets."pgadmin/initial_password" = {
       owner = config.users.users.pgadmin.name;
       sopsFile = config.sopsFiles.tool;
     };
@@ -24,7 +24,7 @@ in {
       port = port;
 
       initialEmail = "siteadmin@looniversity.lan";
-      initialPasswordFile = config.sops.secrets."tool/pgadmin/initial_password".path;
+      initialPasswordFile = config.sops.secrets."pgadmin/initial_password".path;
     };
   };
 }
