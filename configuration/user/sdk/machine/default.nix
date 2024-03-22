@@ -5,7 +5,7 @@
   ...
 }: {
   # https://github.com/Mic92/sops-nix#setting-a-users-password
-  sops.secrets."user/sdk/password_hash" = {
+  sops.secrets."sdk/password_hash" = {
     neededForUsers = true;
     sopsFile = config.sopsFiles.user;
   };
@@ -21,8 +21,12 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFugnsOEmySWbh2hIrAjroWAO+PB4RznGnt+oDuERsU ed25519-key-20200312"
       ];
     };
-    hashedPasswordFile = config.sops.secrets."user/sdk/password_hash".path;
+    hashedPasswordFile = config.sops.secrets."sdk/password_hash".path;
   };
 
   services.openssh.settings.AllowUsers = ["sdk"];
+
+  environment.variables = {
+    "SOPS_AGE_KEY_FILE" = "$HOME/secrets/sops/age/keys.txt";
+  };
 }
