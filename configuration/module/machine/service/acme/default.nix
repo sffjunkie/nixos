@@ -15,8 +15,14 @@ in {
   config = mkIf cfg.enable {
     # sops.secrets."service/acme/cloudflare_email" = {};
     # sops.secrets."service/acme/cloudflare_api_key" = {};
-    sops.secrets."service/acme/cloudflare_dns_api_token" = {owner = config.users.users.acme.name;};
-    sops.secrets."service/acme/cloudflare_zone_api_token" = {owner = config.users.users.acme.name;};
+    sops.secrets."service/acme/cloudflare_dns_api_token" = {
+      owner = config.users.users.acme.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/acme/cloudflare_zone_api_token" = {
+      owner = config.users.users.acme.name;
+      sopsFile = config.sopsFiles.service;
+    };
 
     security.acme = {
       acceptTerms = true;

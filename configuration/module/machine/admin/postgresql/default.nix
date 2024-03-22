@@ -14,7 +14,10 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."tool/pgadmin/initial_password" = {owner = config.users.users.pgadmin.name;};
+    sops.secrets."tool/pgadmin/initial_password" = {
+      owner = config.users.users.pgadmin.name;
+      sopsFile = config.sopsFiles.tool;
+    };
 
     services.pgadmin = {
       enable = true;

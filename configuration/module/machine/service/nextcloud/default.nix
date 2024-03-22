@@ -16,9 +16,11 @@ in {
   config = mkIf cfg.enable {
     sops.secrets."service/nextcloud/admin_password" = {
       owner = config.users.users.nextcloud.name;
+      sopsFile = config.sopsFiles.service;
     };
     sops.secrets."service/nextcloud/db_password" = {
       owner = config.users.users.nextcloud.name;
+      sopsFile = config.sopsFiles.service;
     };
 
     services.nextcloud = {

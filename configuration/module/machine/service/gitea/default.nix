@@ -17,8 +17,14 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/gitea/root_password" = {owner = config.users.users.gitea.name;};
-    sops.secrets."service/gitea/db_password" = {owner = config.users.users.gitea.name;};
+    sops.secrets."service/gitea/root_password" = {
+      owner = config.users.users.gitea.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/gitea/db_password" = {
+      owner = config.users.users.gitea.name;
+      sopsFile = config.sopsFiles.service;
+    };
 
     services.gitea = {
       enable = true;

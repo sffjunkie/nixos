@@ -13,7 +13,9 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/rclone/ini" = {};
+    sops.secrets."service/rclone/ini" = {
+      sopsFile = config.sopsFiles.service;
+    };
 
     environment.variables = {
       "RCLONE_CONFIG" = "/var/lib/rclone/rclone.conf";

@@ -96,9 +96,18 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/graylog/password_secret" = {owner = config.users.users.graylog.name;};
-    sops.secrets."service/graylog/root_user_name" = {owner = config.users.users.graylog.name;};
-    sops.secrets."service/graylog/root_password_hash" = {owner = config.users.users.graylog.name;};
+    sops.secrets."service/graylog/password_secret" = {
+      owner = config.users.users.graylog.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/graylog/root_user_name" = {
+      owner = config.users.users.graylog.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/graylog/root_password_hash" = {
+      owner = config.users.users.graylog.name;
+      sopsFile = config.sopsFiles.service;
+    };
 
     sops.templates."graylog_env_file" = {
       content = ''

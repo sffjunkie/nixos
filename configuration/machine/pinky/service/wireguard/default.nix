@@ -7,7 +7,9 @@
   wanDev = lib.network.netdevice config "pinky" "wan";
 in {
   config = {
-    sops.secrets."service/wireguard/server/private_key" = {};
+    sops.secrets."service/wireguard/server/private_key" = {
+      sopsFile = config.sopsFiles.service;
+    };
 
     environment.systemPackages = [
       pkgs.wireguard-tools

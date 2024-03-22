@@ -5,7 +5,10 @@
   ...
 }: {
   # https://github.com/Mic92/sops-nix#setting-a-users-password
-  sops.secrets."user/sdk/password_hash" = {neededForUsers = true;};
+  sops.secrets."user/sdk/password_hash" = {
+    neededForUsers = true;
+    sopsFile = config.sopsFiles.user;
+  };
 
   users.users.sdk = {
     isNormalUser = true;

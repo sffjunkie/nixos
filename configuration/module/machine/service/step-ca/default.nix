@@ -16,10 +16,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."service/step_ca/intermediate_password" = {owner = config.users.users.step-ca.name;};
-    sops.secrets."service/step_ca/certs/root_ca_crt" = {owner = config.users.users.step-ca.name;};
-    sops.secrets."service/step_ca/certs/intermediate_ca_crt" = {owner = config.users.users.step-ca.name;};
-    sops.secrets."service/step_ca/secrets/intermediate_ca_key" = {owner = config.users.users.step-ca.name;};
+    sops.secrets."service/step_ca/intermediate_password" = {
+      owner = config.users.users.step-ca.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/step_ca/certs/root_ca_crt" = {
+      owner = config.users.users.step-ca.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/step_ca/certs/intermediate_ca_crt" = {
+      owner = config.users.users.step-ca.name;
+      sopsFile = config.sopsFiles.service;
+    };
+    sops.secrets."service/step_ca/secrets/intermediate_ca_key" = {
+      owner = config.users.users.step-ca.name;
+      sopsFile = config.sopsFiles.service;
+    };
 
     services.step-ca = {
       enable = true;
