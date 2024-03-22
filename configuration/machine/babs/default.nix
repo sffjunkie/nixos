@@ -46,11 +46,6 @@
       };
     };
 
-    sops = {
-      defaultSopsFile = ../../secret/secrets.yaml;
-      defaultSopsFormat = "yaml";
-    };
-
     system.stateVersion = "23.05"; # Did you read the comment?
   };
 }

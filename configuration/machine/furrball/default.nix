@@ -62,11 +62,6 @@
       };
     };
 
-    sops = {
-      defaultSopsFile = ../../secret/secrets.yaml;
-      defaultSopsFormat = "yaml";
-    };
-
     systemd.services = {
       "rclone@gdrive" = {
         wantedBy = ["default.target"];

@@ -37,9 +37,6 @@
       };
     };
 
-    sops.defaultSopsFile = ../../secret/secrets.yaml;
-    sops.defaultSopsFormat = "yaml";
-
     programs.zsh = {
       enable = true;
       loginShellInit = ''
