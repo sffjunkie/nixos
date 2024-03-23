@@ -16,8 +16,8 @@ in {
       admin.mqtt.enable = true;
       libnotify.enable = true;
       keyring.enable = true;
+      minio-client.enable = true;
       pipewire.enable = true;
-      service.sshd.enable = true;
       pinentry.enable = true;
       role.xserver.enable = true;
       service.homepage-dashboard.enable = true;
