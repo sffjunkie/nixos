@@ -19,8 +19,13 @@ in {
       minio-client.enable = true;
       pipewire.enable = true;
       pinentry.enable = true;
-      role.xserver.enable = true;
-      service.homepage-dashboard.enable = true;
+      role = {
+        xserver.enable = true;
+      };
+      service = {
+        homepage-dashboard.enable = true;
+        sshd.enable = true;
+      };
     };
 
     environment.systemPackages = [
