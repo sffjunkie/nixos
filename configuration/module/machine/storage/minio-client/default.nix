@@ -13,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      minio-clinet
+      pkgs.minio-client
     ];
   };
 }
