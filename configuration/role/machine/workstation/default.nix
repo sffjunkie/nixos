@@ -13,15 +13,21 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      admin.mqtt.enable = true;
+      admin = {
+        mqtt.enable = true;
+        mongodb.enable = true;
+      };
+
       libnotify.enable = true;
       keyring.enable = true;
       minio-client.enable = true;
       pipewire.enable = true;
       pinentry.enable = true;
+
       role = {
         xserver.enable = true;
       };
+
       service = {
         homepage-dashboard.enable = true;
         sshd.enable = true;
