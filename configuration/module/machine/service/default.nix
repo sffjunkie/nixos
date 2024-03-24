@@ -16,5 +16,6 @@
     ./step-ca
     ./traefik
     ./unbound
+    ./unifi
   ];
 }
