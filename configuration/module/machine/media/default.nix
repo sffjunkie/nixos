@@ -1,5 +1,6 @@
 {
   imports = [
+    ./droidcam
     ./jellyfin
     ./mopidy
     ./pavucontrol
