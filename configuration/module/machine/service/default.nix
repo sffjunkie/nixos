@@ -2,20 +2,13 @@
   imports = [
     ./acme
     ./autoupgrade
-    ./coredns
     ./elasticsearch
-    ./fail2ban
     ./graylog
     ./homepage-dashboard
     ./lldap
     ./mongodb
     ./nextcloud
-    ./openvpn
     ./postgresql
-    ./sshd
     ./step-ca
-    ./traefik
-    ./unbound
-    ./unifi
   ];
 }
