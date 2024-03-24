@@ -1,6 +1,7 @@
 {
   imports = [
     ./admin
+    ./audio
     ./desktop
     ./development
     ./docs
