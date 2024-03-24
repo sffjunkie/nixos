@@ -17,6 +17,7 @@ in {
       enable = true;
       plugins = [
         obs-plugins.droidcam-obs
+        obs-plugins.wlrobs
       ];
     };
   };
