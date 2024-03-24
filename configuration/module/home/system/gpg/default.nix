@@ -7,13 +7,7 @@
   cfg = config.looniversity.gpg;
   inherit (lib) mkDefault mkEnableOption mkIf mkOption;
 in {
-  options.looniversity.gpg = {
-    enable = mkEnableOption "gpg";
-    pinentryFlavor = mkOption {
-      type = lib.types.str;
-      default = "gtk2";
-    };
-  };
+  options.looniversity.gpg.enable = mkEnableOption "gpg";
 
   config = mkIf cfg.enable {
     programs.gpg = {
@@ -25,7 +19,6 @@ in {
       enable = true;
       enableSshSupport = true;
       defaultCacheTtl = 1800;
-      pinentryFlavor = cfg.pinentryFlavor;
     };
   };
 }
