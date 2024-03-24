@@ -36,7 +36,12 @@
     ...
   } @ inputs: let
     lib = nixpkgs.lib.extend (import ./lib {inherit lib;});
-    pkgs = nixpkgs.pkgs.extend (import ./pkgs {inherit pkgs;});
+
+    forAllSystems = nixpkgs.lib.genAttrs [
+      "aarch64-linux"
+      "x86_64-darwin"
+      "x86_64-linux"
+    ];
 
     hmCommonConfig = {
       config = {
@@ -187,15 +192,15 @@
     # Generic development shells
     # The default 'nix' shell includes scripts to build nixos systems
     # using nix-ouptut-monitor
-    devShells.x86_64-linux = let
-      pkgs = nixpkgs.legacyPackages.x86_64-linux;
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
     in {
       default = import ./devshell/nix {inherit pkgs;};
       go = import ./devshell/go {inherit pkgs;};
       python = import ./devshell/python {inherit pkgs;};
       rust = import ./devshell/rust {inherit pkgs;};
       net = import ./devshell/net {inherit pkgs;};
-    };
+    });
 
     # The nix devShell above adds a nix-test function which runs the tests
     # under the `tests` attribute
