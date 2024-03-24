@@ -6,7 +6,7 @@
       nano
       pciutils
       pipx
-      toybox
+      # toybox
       unzip
       usbutils
       zip
