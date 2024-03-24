@@ -7,5 +7,8 @@
     mongodb-admin = {
       module = "admin.mongodb";
     };
+    netbox = {
+      port = 8001;
+    };
   };
 }
