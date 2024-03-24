@@ -6,6 +6,7 @@
     ./development
     ./editors
     ./gui
+    ./media
     ./scripts
     ./service
     ./shells
