@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.looniversity.role.podcaster;
@@ -11,10 +12,8 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.obs-studio = {
-      enable = true;
-    };
     looniversity = {
+      obs-studio.enable = true;
       audio = {
         easyeffects = {
           enable = true;
