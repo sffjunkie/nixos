@@ -14,6 +14,7 @@
     ./shells
     ./storage
     ./system
+    ./theme
     ./virtualisation
   ];
 }
