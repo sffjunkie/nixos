@@ -2,6 +2,7 @@
   config,
   lib,
   nixos-hardware,
+  pkgs,
   ...
 }: let
   inherit (lib) mkEnableOption mkIf;
@@ -21,7 +22,7 @@ in {
     };
 
     environment.systemPackages = [
-      pkgs.pinentry-gtk-2
+      pkgs.pinentry-gtk2
     ];
 
     boot.initrd.kernelModules = [

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.looniversity.role.server;
@@ -24,7 +25,7 @@ in {
       allowedTCPPorts = [80 443];
     };
 
-    environment.systemPackage = [
+    environment.systemPackages = [
       pkgs.pinentry-curses
     ];
   };
