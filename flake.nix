@@ -159,8 +159,8 @@
           hmCommonConfig
           {
             config.home-manager.users.sdk =
-              # TODO: Fix sdk_buster
               import ./configuration/user/sdk/home;
+            # TODO: Fix sdk_buster
             # // (import ./configuration/user/sdk_buster/home);
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
