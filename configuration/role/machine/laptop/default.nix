@@ -17,9 +17,12 @@ in {
       libnotify.enable = true;
       keyring.enable = true;
       pipewire.enable = true;
-      pinentry.enable = true;
       role.xserver.enable = true;
     };
+
+    environment.systemPackages = [
+      pkgs.pinentry-gtk-2
+    ];
 
     boot.initrd.kernelModules = [
       "intel_lpss"

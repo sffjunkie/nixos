@@ -12,8 +12,6 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      pinentry.enable = true;
-
       # profile.hardened.enable = true;
 
       service.autoUpgrade.enable = true;
@@ -25,5 +23,9 @@ in {
       enable = true;
       allowedTCPPorts = [80 443];
     };
+
+    environment.systemPackage = [
+      pkgs.pinentry-curses
+    ];
   };
 }

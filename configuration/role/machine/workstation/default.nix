@@ -22,7 +22,6 @@ in {
       keyring.enable = true;
       minio-client.enable = true;
       pipewire.enable = true;
-      pinentry.enable = true;
 
       role = {
         xserver.enable = true;
@@ -35,6 +34,7 @@ in {
     };
 
     environment.systemPackages = [
+      pkgs.pinentry-gtk-2
       pkgs.d-spy
     ];
 
