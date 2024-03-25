@@ -72,7 +72,7 @@
       gimp.enable = true;
       gittyup.enable = true;
       gnomeApps.enable = true;
-      gns3.enable = true;
+      # gns3.enable = true; # BUG: Failing tests
       gramps.enable = true;
       inkscape.enable = true;
       keepassxc.enable = true;
