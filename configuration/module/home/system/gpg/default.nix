@@ -19,6 +19,7 @@ in {
       enable = true;
       enableSshSupport = true;
       defaultCacheTtl = 1800;
+      pinentryPackage = pkgs.pinentry-gtk2;
     };
   };
 }
