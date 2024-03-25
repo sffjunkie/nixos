@@ -62,6 +62,10 @@
       };
     };
 
+    environment.systemPackages = with pkgs; [
+      zoom-us
+    ];
+
     systemd.services = {
       "rclone@gdrive" = {
         wantedBy = ["default.target"];

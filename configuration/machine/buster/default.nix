@@ -43,6 +43,10 @@
       };
     };
 
+    environment.systemPackages = with pkgs; [
+      zoom-us
+    ];
+
     programs.zsh = {
       enable = true;
       loginShellInit = ''
