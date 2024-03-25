@@ -42,7 +42,6 @@
     dlasagno.rasi
     executablebookproject.myst-highlight
     github.remotehub
-    keesschollaart.vscode-home-assistant
     ms-vscode.cpptools-extension-pack
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
