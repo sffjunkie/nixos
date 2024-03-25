@@ -44,6 +44,7 @@
     };
 
     environment.systemPackages = [
+      pkgs.teams-for-linux
       pkgs.zoom-us
     ];
 
