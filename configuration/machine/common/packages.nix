@@ -5,8 +5,7 @@
       git-lfs
       nano
       pciutils
-      pipx
-      # toybox
+      # pipx  # BUG: Failing tests
       unzip
       usbutils
       zip
