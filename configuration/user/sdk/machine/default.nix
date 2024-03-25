@@ -5,7 +5,7 @@
   ...
 }: {
   imports = [
-    ./backup
+    ./backup/local.nix
   ];
 
   config = {
@@ -30,7 +30,6 @@
     };
 
     services.openssh.settings.AllowUsers = ["sdk"];
-    looniversity.restic.enable = true;
 
     environment.variables = {
       "SOPS_AGE_KEY_FILE" = "$HOME/secrets/sops/age/keys.txt";

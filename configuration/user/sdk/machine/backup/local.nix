@@ -6,17 +6,21 @@
 }: let
   mkHome = p: "/home/sdk/${p}";
 in {
-  config = lib.mkIf config.looniversity.restic.enable {
+  config = {
     sops.secrets."restic/repositories/sdk/local/password" = {
+      owner = config.users.users.sdk.name;
       sopsFile = config.sopsFiles.tool;
     };
 
-    services.restic.backups.local = {
+    services.restic.backups.sdk_local = {
+      user = "sdk";
+      initialize = true;
       paths = map mkHome [
-        "secrets"
         "development"
         "documents"
         "persona"
+        "pictures"
+        "secrets"
       ];
       exclude = [
         "__pycache__"
@@ -32,7 +36,7 @@ in {
     };
 
     system.activationScripts."restic_sdk_local" = ''
-      mkdir /home/sdk/backup 2>/dev/null
+      mkdir /home/sdk/backup 2>/dev/null && chown sdk:users /home/sdk/backup
     '';
   };
 }
