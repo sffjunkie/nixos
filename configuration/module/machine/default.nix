@@ -1,6 +1,7 @@
 {
   imports = [
     ./admin
+    ./backup
     ./desktop
     ./development
     ./docs

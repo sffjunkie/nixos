@@ -4,6 +4,10 @@
   sops,
   ...
 }: {
+  imports = [
+    ./backup
+  ];
+
   config = {
     # https://github.com/Mic92/sops-nix#setting-a-users-password
     sops.secrets."sdk/password_hash" = {
@@ -26,7 +30,7 @@
     };
 
     services.openssh.settings.AllowUsers = ["sdk"];
-    looniversity.restic.local.enable = true;
+    looniversity.restic.enable = true;
 
     environment.variables = {
       "SOPS_AGE_KEY_FILE" = "$HOME/secrets/sops/age/keys.txt";
