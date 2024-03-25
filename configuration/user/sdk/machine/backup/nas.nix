@@ -3,7 +3,9 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  mkHome = p: "/home/sdk/${p}";
+in {
   config = {
     sops.secrets."restic/repositories/sdk/s3/password" = {
       sopsFile = config.sopsFiles.tool;
