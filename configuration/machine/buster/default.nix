@@ -43,8 +43,8 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      zoom-us
+    environment.systemPackages = [
+      pkgs.zoom-us
     ];
 
     programs.zsh = {

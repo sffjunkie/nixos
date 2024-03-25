@@ -49,8 +49,10 @@
       role = {
         # TODO: Remove when testing complete
         log_server.enable = true;
+
         container_host.enable = true;
         games_machine.enable = true;
+        podcaster.enable = true;
         vm_host.enable = true;
         workstation.enable = true;
         xserver.enable = true;
@@ -62,8 +64,8 @@
       };
     };
 
-    environment.systemPackages = with pkgs; [
-      zoom-us
+    environment.systemPackages = [
+      pkgs.zoom-us
     ];
 
     systemd.services = {
