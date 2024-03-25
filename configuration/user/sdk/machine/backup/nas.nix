@@ -21,6 +21,7 @@ in {
 
     sops.templates."sdk_nas_env_file" = {
       content = ''
+        AWS_DEFAULT_REGION="eu-west-2"
         AWS_ACCESS_KEY_ID=${config.sops.placeholder."restic/repositories/sdk/s3/access_key"}
         AWS_SECRET_ACCESS_KEY=${config.sops.placeholder."restic/repositories/sdk/s3/secret_key"}
       '';
