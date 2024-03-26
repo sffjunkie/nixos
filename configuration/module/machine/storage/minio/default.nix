@@ -13,6 +13,12 @@
 in {
   options.looniversity.service.minio = {
     enable = mkEnableOption "minio";
+
+    dataDir = mkOption {
+      default = ["/var/lib/minio/data"];
+      type = types.listOf (types.either types.path types.str);
+      description = lib.mdDoc "The list of data directories or nodes for storing the objects. Use one path for regular operation and the minimum of 4 endpoints for Erasure Code mode.";
+    };
   };
 
   config = mkIf cfg.enable {
