@@ -24,7 +24,10 @@
     looniversity = {
       net-tools.enable = true;
       service = {
-        minio.enable = true;
+        minio = {
+          enable = true;
+          dataDir = "/tank0/minio";
+        };
         nfs.enable = true;
         samba = {
           enable = true;
