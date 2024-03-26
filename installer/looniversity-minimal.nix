@@ -3,15 +3,10 @@
   lib,
   options,
   pkgs,
-  sops-nix,
   isoTarget ? "/run/media/sdk/Ventoy/",
   ...
 }:
 with lib; {
-  imports = [
-    sops-nix.nixosModules.sops
-  ];
-
   config = {
     sops = {
       defaultSopsFile = ../configuration/secret/secrets.yaml;
