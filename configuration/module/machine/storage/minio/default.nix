@@ -9,7 +9,7 @@
   listenPort = lib.network.serviceHandlerNamedPort config "minio" "listen";
   consolePort = lib.network.serviceHandlerNamedPort config "minio" "console";
 
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.looniversity.service.minio = {
     enable = mkEnableOption "minio";
