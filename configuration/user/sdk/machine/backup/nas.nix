@@ -8,14 +8,17 @@
 in {
   config = {
     sops.secrets."restic/repositories/sdk/s3/password" = {
+      owner = config.users.users.${config.services.restic.backups.sdk_nas.user}.name;
       sopsFile = config.sopsFiles.tool;
     };
 
     sops.secrets."restic/repositories/sdk/s3/access_key" = {
+      owner = config.users.users.${config.services.restic.backups.sdk_nas.user}.name;
       sopsFile = config.sopsFiles.tool;
     };
 
     sops.secrets."restic/repositories/sdk/s3/secret_key" = {
+      owner = config.users.users.${config.services.restic.backups.sdk_nas.user}.name;
       sopsFile = config.sopsFiles.tool;
     };
 
