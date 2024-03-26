@@ -3,7 +3,6 @@
   lib,
   config,
   pkgs,
-  sops-nix,
   ...
 }: {
   imports = [
@@ -13,8 +12,6 @@
     ./networking.nix
 
     ../common
-
-    sops-nix.nixosModules.sops
   ];
 
   config = {

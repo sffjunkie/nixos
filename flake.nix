@@ -48,7 +48,7 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {
-          inherit nix-vscode-extensions sops-nix;
+          inherit nix-vscode-extensions;
         };
         home-manager.sharedModules = [
           sops-nix.homeManagerModules.sops
@@ -61,7 +61,7 @@
       pinky = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix disko;
+          inherit lib disko;
         };
 
         modules = [
@@ -81,7 +81,7 @@
       thebrain = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix disko;
+          inherit lib disko;
         };
 
         modules = [
@@ -101,7 +101,7 @@
       furrball = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix disko;
+          inherit lib disko;
         };
 
         modules = [
@@ -126,7 +126,7 @@
       babs = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix disko;
+          inherit lib disko;
         };
 
         modules = [
@@ -151,7 +151,7 @@
       buster = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix disko;
+          inherit lib disko;
         };
 
         modules = [
@@ -178,7 +178,7 @@
       installer = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib sops-nix;
+          inherit lib;
         };
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"

@@ -3,7 +3,6 @@
   inputs,
   lib,
   pkgs,
-  sops-nix,
   ...
 }: {
   imports = [
@@ -14,8 +13,6 @@
     ./service
 
     ../common
-
-    sops-nix.nixosModules.sops
   ];
 
   config = {
