@@ -13,8 +13,6 @@
     ./networking.nix
 
     ../common
-
-    sops-nix.nixosModules.sops
   ];
 
   config = {

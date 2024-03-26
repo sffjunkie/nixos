@@ -14,8 +14,6 @@
     ./services
 
     ../common
-
-    sops-nix.nixosModules.sops
   ];
 
   config = {

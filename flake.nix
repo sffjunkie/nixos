@@ -68,6 +68,7 @@
           ./configuration/machine/pinky
           ./configuration/user/sysadmin/machine
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -87,6 +88,7 @@
           ./configuration/machine/thebrain
           ./configuration/user/sysadmin/machine
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -107,6 +109,7 @@
           ./configuration/user/sdk/machine
           ./configuration/user/sysadmin/machine
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -132,6 +135,7 @@
 
           attic.nixosModules.atticd
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -155,6 +159,7 @@
           ./configuration/user/sdk/machine
           ./configuration/user/sysadmin/machine
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -182,6 +187,7 @@
           disko.nixosModules.disko
           {config.disko.enableConfig = false;}
 
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
           {config.home-manager.users.nixos = import ./configuration/user/nixos/home;}
