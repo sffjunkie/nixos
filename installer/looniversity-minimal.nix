@@ -20,7 +20,7 @@ with lib; {
     isoImage.isoName = lib.mkForce "looniversity-minimal-${pkgs.stdenv.hostPlatform.system}.iso";
 
     environment.etc = {
-      configuration.source = ../configuration;
+      nixos.source = ../configuration;
       disko.source = ../disko;
     };
 
