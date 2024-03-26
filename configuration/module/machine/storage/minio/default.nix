@@ -44,6 +44,7 @@ in {
       listenAddress = ":${toString listenPort}";
       consoleAddress = ":${toString consolePort}";
       rootCredentialsFile = config.sops.templates."minio_env_file".path;
+      dataDir = config.looniversity.service.minio.dataDir;
     };
 
     networking.firewall.allowedTCPPorts = [listenPort consolePort];
