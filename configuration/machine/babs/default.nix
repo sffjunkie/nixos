@@ -26,7 +26,7 @@
       service = {
         minio = {
           enable = true;
-          dataDir = "/tank0/minio";
+          dataDir = "/tank0/minio/data";
         };
         nfs.enable = true;
         samba = {
