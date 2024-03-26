@@ -8,6 +8,7 @@
 }: {
   imports = [
     ./boot.nix
+    ./backup.nix
     ./fs.nix
     ./hardware.nix
     ./networking.nix
