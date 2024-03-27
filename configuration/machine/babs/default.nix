@@ -6,6 +6,7 @@
   ...
 }: {
   imports = [
+    ./backup.nix
     ./boot.nix
     ./fs.nix
     ./hardware.nix
