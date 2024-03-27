@@ -15,6 +15,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.yubikey-manager
+      pkgs.yubikey-manager-qt
     ];
   };
 }
