@@ -42,5 +42,7 @@ in {
     networking.firewall.enable = false;
 
     hardware.bluetooth.enable = true;
+
+    services.pcscd.enable = true;
   };
 }
