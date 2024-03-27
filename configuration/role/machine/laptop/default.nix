@@ -19,6 +19,7 @@ in {
       keyring.enable = true;
       pipewire.enable = true;
       role.xserver.enable = true;
+      yubikey_plus.enable = true;
     };
 
     environment.systemPackages = [

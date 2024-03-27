@@ -18,6 +18,8 @@ in {
         mongodb.enable = true;
       };
 
+      yubikey_plus.enable = true;
+
       libnotify.enable = true;
       keyring.enable = true;
       minio-client.enable = true;
