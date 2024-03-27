@@ -7,5 +7,6 @@
     ./polkit
     ./rclone
     ./sops
+    ./yubikey
   ];
 }
