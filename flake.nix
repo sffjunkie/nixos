@@ -4,6 +4,9 @@
 
     attic.url = "github:zhaofengli/attic";
 
+    deploy-rs.url = "github:serokell/deploy-rs";
+    deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -28,6 +31,7 @@
     self,
     nixpkgs,
     attic,
+    deploy-rs,
     disko,
     home-manager,
     nix-vscode-extensions,
@@ -194,6 +198,8 @@
         ];
       };
     };
+
+    deploy.nodes = lib.deploy.deployNodes ["babs"];
 
     # Generic development shells
     # The default 'nix' shell includes scripts to build nixos systems
