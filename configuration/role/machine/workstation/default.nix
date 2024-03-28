@@ -36,6 +36,7 @@ in {
     };
 
     environment.systemPackages = [
+      pkgs.deploy-rs
       pkgs.pinentry-gtk2
       pkgs.d-spy
     ];
