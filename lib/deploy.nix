@@ -11,7 +11,7 @@ in {
       {
         hostname = "${host}.${domaninName}";
         profiles.system = {
-          user = "root";
+          user = config.users.users.sysadmin.name;
           path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${host};
         };
       })
