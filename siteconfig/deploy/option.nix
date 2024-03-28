@@ -15,7 +15,7 @@ in {
       default = "";
     };
     targets = mkOption {
-      type = types.listOf str;
+      type = types.listOf types.str;
       default = [];
     };
   };
