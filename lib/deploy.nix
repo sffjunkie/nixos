@@ -6,8 +6,8 @@
   domaninName = config.looniversity.network.domainName;
 in {
   deployNodes = hosts:
-    pkgs.lib.listToAttrs (map (host:
-      pkgs.lib.nameValuePair host
+    lib.listToAttrs (map (host:
+      lib.nameValuePair host
       {
         hostname = "${host}.${domaninName}";
         profiles.system = {
