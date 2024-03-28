@@ -10,7 +10,7 @@ in {
     lib.listToAttrs (map (host:
       lib.nameValuePair host
       {
-        hostname = "${host}.${domaninName}";
+        hostname = "${host}.${domainName}";
         profiles.system = {
           user = config.users.users.sysadmin.name;
           path = deploy-rs.lib.${system}.activate.nixos self.nixosConfigurations.${host};
