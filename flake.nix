@@ -199,8 +199,15 @@
       };
     };
 
-    deploy.nodes = lib.deploy.deployNodes ["babs"];
-    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+    deploy = lib.deploy.mkDeploy {
+      inherit (inputs) self;
+      targets = ["babs"];
+    };
+
+    checks =
+      builtins.mapAttrs
+      (system: deployLib: deployLib.deployChecks self.deploy)
+      deploy-rs.lib;
 
     # Generic development shells
     # The default 'nix' shell includes scripts to build nixos systems

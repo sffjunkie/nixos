@@ -4,7 +4,7 @@
   ...
 }: final: prev: {
   enabled = {enable = true;};
-  deploy = import ./deploy.nix {inherit lib;};
+  deploy = import ./deploy.nix {inherit lib inputs;};
   ipv4 = import ./ipv4.nix {inherit lib;};
   network = import ./network.nix {inherit lib;};
   tool = import ./tool.nix {inherit lib;};
