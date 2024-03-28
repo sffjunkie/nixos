@@ -1,4 +1,8 @@
-{lib, ...}: final: prev: {
+{
+  lib,
+  inputs,
+  ...
+}: final: prev: {
   enabled = {enable = true;};
   deploy = import ./deploy.nix {inherit lib;};
   ipv4 = import ./ipv4.nix {inherit lib;};

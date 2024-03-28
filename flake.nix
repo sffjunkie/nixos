@@ -39,7 +39,7 @@
     sops-nix,
     ...
   } @ inputs: let
-    lib = nixpkgs.lib.extend (import ./lib {inherit lib;});
+    lib = nixpkgs.lib.extend (import ./lib {inherit lib inputs;});
 
     forAllSystems = nixpkgs.lib.genAttrs [
       "aarch64-linux"
