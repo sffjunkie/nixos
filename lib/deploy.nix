@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  deploy-rs,
   ...
 }: let
   domaninName = config.looniversity.network.domainName;
