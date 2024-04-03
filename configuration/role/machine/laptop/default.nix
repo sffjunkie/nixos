@@ -15,10 +15,10 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
+      gui.enable = true;
       libnotify.enable = true;
       keyring.enable = true;
       pipewire.enable = true;
-      role.xserver.enable = true;
       yubikey_plus.enable = true;
     };
 

@@ -17,6 +17,7 @@ in {
         mqtt.enable = true;
         mongodb.enable = true;
       };
+      gui.enable = true;
 
       yubikey_plus.enable = true;
 
@@ -24,10 +25,6 @@ in {
       keyring.enable = true;
       minio-client.enable = true;
       pipewire.enable = true;
-
-      role = {
-        xserver.enable = true;
-      };
 
       service = {
         homepage-dashboard.enable = true;

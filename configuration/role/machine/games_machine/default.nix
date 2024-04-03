@@ -12,11 +12,11 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
+      gui.enable = true;
       steam.enable = true;
       lutris.enable = true;
       pipewire.enable = true;
       retroarch.enable = true;
-      role.xserver.enable = true;
 
       mount = {
         roms.enable = false;
