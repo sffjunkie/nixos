@@ -3,5 +3,6 @@
     ./dunst
     ./nord
     ./papirus
+    ./wallpaper
   ];
 }
