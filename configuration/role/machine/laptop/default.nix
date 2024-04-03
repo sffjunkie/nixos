@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      gui.enable = true;
+      role.gui.enable = true;
       libnotify.enable = true;
       keyring.enable = true;
       pipewire.enable = true;

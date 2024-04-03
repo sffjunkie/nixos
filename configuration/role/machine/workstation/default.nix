@@ -17,7 +17,7 @@ in {
         mqtt.enable = true;
         mongodb.enable = true;
       };
-      gui.enable = true;
+      role.gui.enable = true;
 
       yubikey_plus.enable = true;
 

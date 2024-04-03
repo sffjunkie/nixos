@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      gui.enable = true;
+      role.gui.enable = true;
       steam.enable = true;
       lutris.enable = true;
       pipewire.enable = true;
