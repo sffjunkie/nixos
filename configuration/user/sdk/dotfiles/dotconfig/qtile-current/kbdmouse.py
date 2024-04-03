@@ -57,11 +57,13 @@ def bind_keys(settings) -> List[Key]:
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
         ),
-        # Toggle between different layouts as defined below
+        # endregion
+        # region Toggle between different layouts as defined below
         Key(
             [settings["mod"]], "grave", lazy.next_layout(), desc="Switch to next layout"
         ),
-        # Move window in stack
+        # endregion
+        # region Move window in stack
         Key(
             [settings["mod"], "shift"],
             "Right",
@@ -86,12 +88,14 @@ def bind_keys(settings) -> List[Key]:
             lazy.layout.shuffle_up(),
             desc="Move window up in stack",
         ),
-        # Switch between windows in current stack pane
+        # endregion
+        # region Switch between windows in current stack pane
         Key([settings["mod"]], "h", lazy.layout.up(), desc="Previous window"),
         Key([settings["mod"]], "l", lazy.layout.down(), desc="Next window"),
         Key([settings["mod"]], "Left", lazy.layout.up(), desc="Previous window"),
         Key([settings["mod"]], "Right", lazy.layout.down(), desc="Next window"),
-        # Resize
+        # endregion
+        # region Resize
         Key(
             [settings["mod"], "control"],
             "Right",
