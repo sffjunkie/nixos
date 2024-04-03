@@ -29,14 +29,14 @@ in {
     services.xserver.windowManager.qtile = {
       enable = true;
       backend = "wayland";
-      extraPackages = python3Packages:
-        with python3Packages; [
-          qtile-extras
+      # extraPackages = python3Packages:
+      #   with python3Packages; [
+      #     qtile-extras
 
-          # Add packages required by the qtile config
-          pyyaml
-          requests
-        ];
+      #     # Add packages required by the qtile config
+      #     pyyaml
+      #     requests
+      #   ];
     };
 
     looniversity.display_manager.tuigreet.script = startScript;
@@ -67,6 +67,9 @@ in {
       pyEnv = pkgs.python3.withPackages (_p: [
         pkgs.python3.pkgs.qtile
         pkgs.python3.pkgs.iwlib
+        pkgs.python3.pkgs.requests
+        pkgs.python3.pkgs.pyyaml
+        pkgs.python3.pkgs.qtile-extras
       ]);
     in {
       description = "Qtile - Wayland window manager";
