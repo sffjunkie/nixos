@@ -53,6 +53,7 @@ in {
 
     environment.systemPackages = [
       pkgs.qtile
+      pkgs.dconf
     ];
 
     systemd.user.targets.qtile-session = {
