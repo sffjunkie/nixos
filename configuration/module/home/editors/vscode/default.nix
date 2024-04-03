@@ -93,6 +93,9 @@ in {
         "git.openRepositoryInParentFolders" = "never";
 
         "python.analysis.diagnosticMode" = "workspace";
+        "python.analysis.exclude" = [
+          "/result"
+        ];
 
         "terminal.integrated.scrollback" = 5000;
         "terminal.integrated.fontSize" = 12;
