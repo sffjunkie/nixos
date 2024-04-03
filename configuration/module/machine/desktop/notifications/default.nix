@@ -1,6 +1,5 @@
 {
   imports = [
-    ./dunst
     ./libnotify
   ];
 }

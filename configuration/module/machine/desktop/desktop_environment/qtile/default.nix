@@ -18,7 +18,6 @@ in {
 
       window_manager.qtile.enable = true;
 
-      dunst.enable = true;
       polkit.enable = true;
       waylock.enable = true;
     };
