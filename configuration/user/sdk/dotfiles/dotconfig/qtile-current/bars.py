@@ -8,6 +8,7 @@ from libqtile import qtile, bar, widget
 
 from widgets import NetMin, EscapedWindowName, FixedWidthVolume, OpenWeatherMap
 
+NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
@@ -335,8 +336,8 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             background=theme_colors["powerline_bg"][3],
         ),
         widget.CheckUpdates(
-            distro="Arch",
-            execute="alacritty -e ~/.local/bin/updateinfo",
+            distro="Nixos",
+            # execute="alacritty -e ~/.local/bin/updateinfo",
             update_interval=1800,
             display_format="{updates} Updates",
             colour_no_updates=theme_colors["powerline_fg"],
@@ -376,7 +377,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         NetMin(
             font=font,
             fontsize=fontsize,
-            interface="wlp3s0",
+            interface=NET_INTERFACE,
             format="{up} ",
             foreground=theme_colors["powerline_fg"],
             background=theme_colors["powerline_bg"][4],
@@ -392,7 +393,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         NetMin(
             font=font,
             fontsize=fontsize,
-            interface="wlan0",
+            interface=NET_INTERFACE,
             format="{down}",
             foreground=theme_colors["powerline_fg"],
             background=theme_colors["powerline_bg"][4],
