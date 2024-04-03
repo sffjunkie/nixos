@@ -33,6 +33,6 @@ in {
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.desktop.tuigreet.script}";
+    services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.display_manager.tuigreet.script}";
   };
 }

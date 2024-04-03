@@ -8,7 +8,7 @@
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.desktop.qtile = {
-    enable = mkEnableOption "qtile";
+    enable = mkEnableOption "qtile desktop";
   };
 
   config = mkIf cfg.enable {
@@ -19,7 +19,6 @@ in {
       window_manager.qtile.enable = true;
 
       dunst.enable = true;
-      pavucontrol.enable = true;
       polkit.enable = true;
       waylock.enable = true;
     };
