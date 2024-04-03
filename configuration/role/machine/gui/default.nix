@@ -7,8 +7,8 @@
   cfg = config.looniversity.role.xserver;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.role.xserver = {
-    enable = mkEnableOption "xserver role";
+  options.looniversity.role.gui = {
+    enable = mkEnableOption "gui role";
   };
 
   config = mkIf cfg.enable {
@@ -23,8 +23,8 @@ in {
 
     looniversity = {
       desktop = {
-        gnome.enable = true;
-        qtile.enable = false;
+        gnome.enable = false;
+        qtile.enable = true;
       };
     };
   };

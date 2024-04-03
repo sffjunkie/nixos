@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.qtile;
+  cfg = config.looniversity.window_manager.qtile;
 
   startScript = pkgs.writeScript "startqtile" ''
     #! ${pkgs.bash}/bin/bash
@@ -21,7 +21,7 @@
 
   inherit (lib) mkEnableOption mkIf mkOption;
 in {
-  options.looniversity.desktop.qtile = {
+  options.looniversity.window_manager.qtile = {
     enable = mkEnableOption "qtile";
   };
 
@@ -39,6 +39,8 @@ in {
         ];
     };
 
+    looniversity.display_manager.tuigreet.script = startScript;
+
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       XDG_SESSION_TYPE = "wayland";
@@ -50,21 +52,8 @@ in {
     };
 
     environment.systemPackages = [
-      pkgs.greetd.tuigreet
       pkgs.qtile
     ];
-
-    looniversity = {
-      greetd = {
-        enable = true;
-        script = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${startScript}";
-      };
-
-      dunst.enable = true;
-      pavucontrol.enable = true;
-      polkit.enable = true;
-      waylock.enable = true;
-    };
 
     systemd.user.targets.qtile-session = {
       description = "Qtile compositor session";
