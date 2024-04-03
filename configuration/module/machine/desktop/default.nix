@@ -1,10 +1,9 @@
 {
   imports = [
-    ./dunst
-    ./gnome
-    ./greetd
-    ./libnotify
-    ./qtile
-    ./waylock
+    ./desktop_environment
+    ./display_manager
+    ./notifications
+    ./wayland
+    ./window_mananger
   ];
 }
