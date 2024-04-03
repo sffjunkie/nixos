@@ -1,6 +1,6 @@
 # Keybindings for groups are defined in groups.py
 
-# from os import environ
+from os import environ
 from typing import List  # noqa: F401
 
 # from libqtile import extension
@@ -12,6 +12,16 @@ alt = "mod1"
 
 def bind_keys(settings) -> List[Key]:
     return [
+        Key(
+          [settings["mod"], "shift"],
+          "t",
+          lazy.spawn(environ.get("TERMINAL", "alacritty")),
+        ),
+        Key(
+          [settings["mod"]],
+          "Space",
+          lazy.spawn("rofi -show drun"),
+        ),
         # region QTile Control
         Key([settings["mod"], alt], "r", lazy.restart(), desc="Restart QTile"),
         Key([settings["mod"], alt], "q", lazy.shutdown(), desc="Quit QTile"),

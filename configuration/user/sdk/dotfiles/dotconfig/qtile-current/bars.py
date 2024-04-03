@@ -54,7 +54,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         _fg_sep(),
         # person icon
         widget.TextBox(
-            text=chr(0xf0004),
+            text=chr(0xF0004),
             font=iconfont,
             fontsize=iconfontsize,
             padding=6,
@@ -122,30 +122,30 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             padding=6,
             background=theme_colors["powerline_bg"][4],
         ),
-        widget.Systray(
-            font=font,
-            fontsize=fontsize,
-            foreground=theme_colors["powerline_fg"],
-            background=theme_colors["powerline_bg"][4],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=theme_colors["powerline_bg"][4],
-        ),
-        widget.TextBox(
-            text=chr(987798),
-            font=iconfont,
-            fontsize=iconfontsize,
-            padding=6,
-            foreground=theme_colors["powerline_fg"],
-            background=theme_colors["powerline_bg"][4],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=theme_colors["powerline_bg"][4],
-        ),
+        # widget.Systray(
+        #     font=font,
+        #     fontsize=fontsize,
+        #     foreground=theme_colors["powerline_fg"],
+        #     background=theme_colors["powerline_bg"][4],
+        # ),
+        # widget.Sep(
+        #     linewidth=0,
+        #     padding=6,
+        #     background=theme_colors["powerline_bg"][4],
+        # ),
+        # widget.TextBox(
+        #     text=chr(987798),
+        #     font=iconfont,
+        #     fontsize=iconfontsize,
+        #     padding=6,
+        #     foreground=theme_colors["powerline_fg"],
+        #     background=theme_colors["powerline_bg"][4],
+        # ),
+        # widget.Sep(
+        #     linewidth=0,
+        #     padding=6,
+        #     background=theme_colors["powerline_bg"][4],
+        # ),
         # OpenWeatherMap
         widget.TextBox(
             text=theme["powerline_separator"][0],
@@ -279,6 +279,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
     ]
 
     if "logo" in theme:
+
         def system_menu(*args, **kwargs):
             # script = os.path.expanduser("~/.local/bin/updateinfo")
             script = ["dnf", "check-update"]
@@ -289,7 +290,11 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         top_bar_widgets.append(
             widget.CheckUpdates(
                 distro="Arch",
-                mouse_callbacks={"Button1": lambda qtile: run([os.path.expanduser("~/.local/bin/updateinfo")])},
+                mouse_callbacks={
+                    "Button1": lambda qtile: run(
+                        [os.path.expanduser("~/.local/bin/updateinfo")]
+                    )
+                },
                 update_interval=1800,
                 display_format="{updates} Updates",
                 colour_no_updates=theme_colors["powerline_fg"],
@@ -452,7 +457,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         widget.TextBox(
             text=chr(986848),
             font=iconfont,
-            fontsize=iconfontsize+4,
+            fontsize=iconfontsize + 4,
             padding=6,
             margin=0,
             foreground=theme_colors["powerline_fg"],

@@ -4,6 +4,7 @@ from typing import List
 
 from libqtile import layout, hook
 from libqtile.config import Screen
+from libqtile.backend.wayland import InputConfig
 
 import bars
 import group
@@ -31,7 +32,7 @@ screens = [Screen(top=top_bar, bottom=bottom_bar)]
 auto_fullscreen = True
 bring_front_click = "floating_only"
 cursor_warp = False
-dgroups_app_rules = rule.build_rules()  # type: List
+# dgroups_app_rules = rule.build_rules()  # type: List
 dgroups_key_binder = None
 extension_defaults = theme["extension"].copy()
 focus_on_window_activation = "smart"
@@ -47,7 +48,15 @@ wmname = "QTile"
 #         client.togroup(group_name)
 # lazy.group[group_name].cmd_toscreen()
 
-@hook.subscribe.startup_once
-def autostart():
-    home = os.path.expanduser('~/.config/qtile/autostart.sh')
-    subprocess.Popen([home])
+# to get ids use `qtile cmd-obj -o core -f get_inputs`
+wl_input_rules = {
+    "1452:591:Keychron Keychron K1": InputConfig(
+        kb_options="altwin:swap_lalt_lwin", kb_layout="us"
+    ),
+    "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
+}
+
+# @hook.subscribe.startup_once
+# def autostart():
+#     home = os.path.expanduser("~/.config/qtile/autostart.sh")
+#     subprocess.Popen([home])
