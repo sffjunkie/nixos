@@ -39,7 +39,7 @@ in {
       #   ];
     };
 
-    looniversity.display_manager.tuigreet.script = startScript;
+    looniversity.display_manager.tuigreet.script = "${startScript}";
 
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
