@@ -1,4 +1,4 @@
-{
+{osConfig, ...}: {
   imports = [
     ./accounts
     ./settings/qt
@@ -99,7 +99,10 @@
       veracrypt.enable = true;
 
       music.control.enable = true;
-      music.playback.enable = true;
+      music.playback = {
+        enable = true;
+        uid = osConfig.users.users.sdk.uid;
+      };
       music.notify.enable = true;
 
       scripts.linkhandler.enable = true;

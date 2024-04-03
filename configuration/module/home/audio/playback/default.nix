@@ -5,14 +5,19 @@
   ...
 }: let
   cfg = config.looniversity.music.playback;
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 
-  mpdListenAddress = "/run/user/1001/mpd.sock";
-  mpdFifoAddress = "/run/user/1001/mpd.fifo";
+  mpdListenAddress = "/run/user/${toString cfg.uid}/mpd.sock";
+  mpdFifoAddress = "/run/user/${toString cfg.uid}/mpd.fifo";
   mpdVisualizerFeedName = "MPD visualizer FIFO";
 in {
   options.looniversity.music.playback = {
     enable = mkEnableOption "music_playback";
+
+    uid = mkOption {
+      type = types.int;
+      default = 1000;
+    };
   };
 
   config = mkIf cfg.enable {
