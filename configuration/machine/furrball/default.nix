@@ -53,7 +53,7 @@
         podcaster.enable = true;
         vm_host.enable = true;
         workstation.enable = true;
-        xserver.enable = true;
+        gui.enable = true;
       };
 
       theme = {

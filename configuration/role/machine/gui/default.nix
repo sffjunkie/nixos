@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.role.xserver;
+  cfg = config.looniversity.role.gui;
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.role.gui = {
