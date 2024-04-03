@@ -4,8 +4,8 @@ from os import environ
 from typing import List  # noqa: F401
 
 # from libqtile import extension
-from libqtile.config import Key, Drag, Click
 from libqtile.command import lazy
+from libqtile.config import Key, Drag, Click
 
 alt = "mod1"
 
@@ -13,14 +13,14 @@ alt = "mod1"
 def bind_keys(settings) -> List[Key]:
     return [
         Key(
-          [settings["mod"], "shift"],
-          "t",
-          lazy.spawn(environ.get("TERMINAL", "alacritty")),
+            [settings["mod"], "shift"],
+            "t",
+            lazy.spawn(environ.get("TERMINAL", "alacritty")),
         ),
         Key(
-          [settings["mod"]],
-          "Space",
-          lazy.spawn("rofi -show drun"),
+            [settings["mod"]],
+            "Space",
+            lazy.spawn("rofi -modi drun -show drun"),
         ),
         # region QTile Control
         Key([settings["mod"], alt], "r", lazy.restart(), desc="Restart QTile"),
