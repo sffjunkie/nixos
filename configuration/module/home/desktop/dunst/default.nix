@@ -5,8 +5,12 @@
   ...
 }: let
   cfg = config.looniversity.dunst;
-  inherit (lib) mkIf;
+  inherit (lib) mkIf mkEnableOption;
 in {
+  options.looniversity.dunst = {
+    enable = mkEnableOption "dunst user service";
+  };
+
   config = mkIf cfg.enable {
     services.dunst = {
       enable = true;
