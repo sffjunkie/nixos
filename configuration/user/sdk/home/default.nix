@@ -27,6 +27,15 @@
 
       role.podcaster.enable = true;
 
+      cava = {
+        enable = true;
+        settings = {
+          input = {
+            method = "pipewire";
+            source = "auto";
+          };
+        };
+      };
       dunst.enable = true;
       bat.enable = true;
       bottom.enable = true;

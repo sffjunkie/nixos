@@ -3,6 +3,7 @@
     ./atuin
     ./bat
     ./bottom
+    ./cava
     ./dircolors
     ./exiftool
     ./feh

@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  cfg = config.programs.cava;
+  cfg = config.looniversity.cava;
 
   iniFmt = pkgs.formats.ini {};
 
@@ -14,7 +14,7 @@ with lib; let
 in {
   meta.maintainers = [maintainers.bddvlpr];
 
-  options.programs.cava = {
+  options.looniversity.cava = {
     enable = mkEnableOption "Cava audio visualizer";
 
     package = mkPackageOption pkgs "cava" {};
