@@ -13,8 +13,15 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      (pkgs.nerdfonts.override {fonts = ["Hack" "DroidSansMono"];})
+      pkgs.font-awesome
+      pkgs.material-design-icons
       pkgs.roboto
+      (pkgs.nerdfonts.override {
+        fonts = [
+          "Hack"
+          "DroidSansMono"
+        ];
+      })
     ];
   };
 }
