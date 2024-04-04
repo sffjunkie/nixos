@@ -1,4 +1,4 @@
-import os
+import shlex
 import subprocess
 from typing import List
 
@@ -56,7 +56,54 @@ wl_input_rules = {
     "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
 }
 
-# @hook.subscribe.startup_once
-# def autostart():
-#     home = os.path.expanduser("~/.config/qtile/autostart.sh")
-#     subprocess.Popen([home])
+
+def systemd_run(command: list[str]) -> list[str]:
+    return [
+        "systemd-run",
+        "--collect",
+        "--user",
+        f"--unit={command[0]}",
+        "--",
+        *command,
+    ]
+
+
+@hook.subscribe.startup
+def autostart():
+    subprocess.run(
+        [
+            "systemctl",
+            "--user",
+            "import-environment",
+            "WAYLAND_DISPLAY",
+        ]
+    )
+    sway_lock = [
+        "swaylock",
+        "--screenshots",
+        "--clock",
+        "--indicator",
+        "--indicator-radius 100",
+        "--indicator-thickness 7",
+        "--ring-color bb00cc",
+        "--key-hl-color 880033",
+        "--line-color 00000000",
+        "--inside-color 00000088",
+        "--separator-color 00000000",
+        "--grace 10",
+        "--fade-in 0.2",
+    ]
+    commands = [
+        [
+            "swayidle",
+            "-w",
+            "timeout",
+            "300",
+            shlex.join(sway_lock),
+            "before-sleep",
+            shlex.join(sway_lock),
+        ],
+    ]
+    # fmt: on
+    for command in commands:
+        subprocess.Popen(systemd_run(command))
