@@ -145,17 +145,6 @@ def bind_keys(settings) -> List[Key]:
             desc="Decrease Sub Window Size",
         ),
         # endregion
-        # region DMenu
-        # Key([settings["mod"], "alt"], "r", lazy.run_extension(extension.DmenuRun(
-        #     dmenu_prompt=">",
-        #     dmenu_font=settings["theme"]["font"],
-        #     background=settings["theme"]["bar"]["foreground"],
-        #     foreground=settings["theme"]["bar"]["background"],
-        #     selected_background=settings["theme"]["bar"]["background"],
-        #     selected_foreground=settings["theme"]["bar"]["foreground"],
-        #     dmenu_height=24,  # Only supported by some dmenu forks
-        # ))),
-        # endregion
     ]
 
 
