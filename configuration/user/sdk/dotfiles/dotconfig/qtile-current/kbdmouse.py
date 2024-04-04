@@ -23,7 +23,7 @@ def bind_keys(settings) -> List[Key]:
             lazy.spawn("rofi -modi drun -show drun"),
         ),
         # region QTile Control
-        Key([settings["mod"], alt], "r", lazy.restart(), desc="Restart QTile"),
+        Key([settings["mod"], alt], "r", lazy.reload_config(), desc="Reload QTile"),
         Key([settings["mod"], alt], "q", lazy.shutdown(), desc="Quit QTile"),
         # endregion
         # region Window Control
