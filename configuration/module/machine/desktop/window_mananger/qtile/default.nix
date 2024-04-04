@@ -68,7 +68,9 @@ in {
       pyEnv = pkgs.python3.withPackages (_p: [
         pkgs.python3.pkgs.qtile
         pkgs.python3.pkgs.iwlib
+
         pkgs.python3.pkgs.requests
+        pkgs.python3.pkgs.psutil
         pkgs.python3.pkgs.pyyaml
         pkgs.python3.pkgs.qtile-extras
       ]);
