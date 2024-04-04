@@ -16,5 +16,9 @@ in {
       pkgs.swaylock
       pkgs.swayidle
     ];
+
+    security.pam.services.swaylock.text = ''
+      auth include login
+    '';
   };
 }
