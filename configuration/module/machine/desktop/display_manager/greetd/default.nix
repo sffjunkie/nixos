@@ -14,5 +14,14 @@ in {
 
   config = mkIf cfg.enable {
     services.greetd.enable = true;
+
+    systemd.services.greetd.serviceConfig = {
+      StandardInput = "tty";
+      StandardOutput = "tty";
+      StandardError = "journal";
+      TTYReset = true;
+      TTYVHangup = true;
+      TTYVTDisallocate = true;
+    };
   };
 }
