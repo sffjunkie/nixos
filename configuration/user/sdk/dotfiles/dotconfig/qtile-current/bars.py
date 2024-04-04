@@ -110,43 +110,6 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         widget.Spacer(),
         # endregion
         # region RHS
-        # Systray
-        widget.TextBox(
-            text=theme["powerline_separator"][0],
-            font=iconfont,
-            fontsize=barheight,
-            foreground=theme_colors["powerline_bg"][4],
-            background=theme_colors["panel_bg"],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=theme_colors["powerline_bg"][4],
-        ),
-        # widget.Systray(
-        #     font=font,
-        #     fontsize=fontsize,
-        #     foreground=theme_colors["powerline_fg"],
-        #     background=theme_colors["powerline_bg"][4],
-        # ),
-        # widget.Sep(
-        #     linewidth=0,
-        #     padding=6,
-        #     background=theme_colors["powerline_bg"][4],
-        # ),
-        # widget.TextBox(
-        #     text=chr(987798),
-        #     font=iconfont,
-        #     fontsize=iconfontsize,
-        #     padding=6,
-        #     foreground=theme_colors["powerline_fg"],
-        #     background=theme_colors["powerline_bg"][4],
-        # ),
-        # widget.Sep(
-        #     linewidth=0,
-        #     padding=6,
-        #     background=theme_colors["powerline_bg"][4],
-        # ),
         # OpenWeatherMap
         widget.TextBox(
             text=theme["powerline_separator"][0],
@@ -155,7 +118,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             margin=0,
             padding=0,
             foreground=theme_colors["powerline_bg"][3],
-            background=theme_colors["powerline_bg"][4],
+            background=theme_colors["panel_bg"],
         ),
         widget.Sep(
             linewidth=0,
@@ -316,50 +279,6 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         )
 
     bottom_bar_widgets = [
-        # Updates
-        widget.Sep(
-            linewidth=0,
-            padding=16,
-            background=theme_colors["powerline_bg"][3],
-        ),
-        widget.TextBox(
-            text=chr(984752),
-            font=iconfont,
-            fontsize=iconfontsize,
-            padding=6,
-            foreground=theme_colors["powerline_fg"],
-            background=theme_colors["powerline_bg"][3],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=theme_colors["powerline_bg"][3],
-        ),
-        widget.CheckUpdates(
-            distro="Nixos",
-            # execute="alacritty -e ~/.local/bin/updateinfo",
-            update_interval=1800,
-            display_format="{updates} Updates",
-            colour_no_updates=theme_colors["powerline_fg"],
-            colour_have_updates=theme_colors["panel_fg"],
-            font=font,
-            fontsize=fontsize,
-            background=theme_colors["powerline_bg"][3],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=theme_colors["powerline_bg"][3],
-        ),
-        widget.TextBox(
-            text=theme["powerline_separator"][1],
-            font=iconfont,
-            fontsize=barheight,
-            padding=0,
-            margin=2,
-            foreground=theme_colors["powerline_bg"][3],
-            background=theme_colors["powerline_bg"][4],
-        ),
         # region Net
         widget.Sep(
             linewidth=0,
@@ -428,7 +347,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             background=theme_colors["powerline_bg"][5],
         ),
         widget.Memory(
-            format="{MemUsed:5d}M/{MemTotal}M",
+            format="{MemUsed:6.0f}M/{MemTotal:.0f}M",
             font=font,
             fontsize=fontsize,
             foreground=theme_colors["powerline_fg"],
@@ -580,30 +499,6 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         ),
         # endregion
     ]
-
-    # bottom_pl = Powerline(
-    #     theme_colors["powerline_fg"], theme_colors["powerline_bg"], barheight,
-    # )
-    # ud = Segment(
-    #     [
-    #         widget.TextBox(
-    #             text=chr(984752),
-    #             font=iconfont,
-    #             foreground=self.fg,
-    #             background=self.segment_colors[3],
-    #         ),
-    #         widget.Sep(linewidth=0, padding=6, background=self.segment_colors[3],),
-    #         widget.CheckUpdates(
-    #             distro="Arch",
-    #             execute="alacritty",
-    #             update_interval=1800,
-    #             display_format="{updates} Updates",
-    #             colour_no_updates=self.fg,
-    #             colour_have_updates=theme_colors["panel_fg"],
-    #             background=self.segment_colors[3],
-    #         ),
-    #     ]
-    # )
 
     return [
         bar.Bar(top_bar_widgets, size=barheight, background=theme_colors["panel_bg"]),
