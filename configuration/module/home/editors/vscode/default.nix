@@ -95,6 +95,7 @@ in {
         "python.analysis.diagnosticMode" = "workspace";
         "python.analysis.exclude" = [
           "**/result"
+          "**/.direnv"
         ];
 
         "terminal.integrated.scrollback" = 5000;
