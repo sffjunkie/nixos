@@ -136,7 +136,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         ),
         widget.Sep(
             linewidth=0,
-            padding=6,
+            padding=10,
             foreground=theme_colors["panel_fg"],
             background=theme_colors["powerline_bg"][3],
         ),
