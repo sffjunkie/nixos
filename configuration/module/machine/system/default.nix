@@ -1,6 +1,7 @@
 {
   imports = [
     ./age
+    ./font
     ./hardened
     ./keyring
     ./podman
