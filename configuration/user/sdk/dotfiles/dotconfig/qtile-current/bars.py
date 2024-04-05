@@ -240,43 +240,19 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             background=theme_colors["powerline_bg"][0],
         ),
         # endregion
+        widget.TextBox(
+            text=f"{theme['logo']}",
+            width=barheight,
+            font=theme["logofont"],
+            fontsize=iconfontsize,
+            padding=8,
+            foreground=theme_colors["powerline_fg"],
+            background=theme_colors["powerline_bg"][-1],
+            mouse_callbacks={
+                "Button1": lazy.spawn("rofi -show p -modi p:rofi-power-menu")
+            },
+        ),
     ]
-
-    if "logo" in theme:
-
-        def system_menu(*args, **kwargs):
-            # script = os.path.expanduser("~/.local/bin/updateinfo")
-            script = ["dnf", "check-update"]
-            cmd = [TERMINAL, "-e"].extend(script)
-            cmd = TERMINAL
-            qtile.cmd_spawn(cmd)
-
-        top_bar_widgets.append(
-            widget.CheckUpdates(
-                distro="Arch",
-                mouse_callbacks={
-                    "Button1": lambda qtile: run(
-                        [os.path.expanduser("~/.local/bin/updateinfo")]
-                    )
-                },
-                update_interval=1800,
-                display_format="{updates} Updates",
-                colour_no_updates=theme_colors["powerline_fg"],
-                colour_have_updates=theme_colors["panel_bg"],
-                font=font,
-                fontsize=fontsize,
-                background=theme_colors["powerline_bg"][3],
-            ),
-            # widget.TextBox(
-            #     text=f"{theme['logo']}",
-            #     font=theme["logofont"],
-            #     fontsize=fontsize + 10,
-            #     padding=6,
-            #     foreground=theme_colors["powerline_fg"],
-            #     background=theme_colors["powerline_bg"][-1],
-            #     mouse_callbacks={"Button1": system_menu},
-            # ),
-        )
 
     bottom_bar_widgets = [
         # region Net
