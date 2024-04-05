@@ -86,10 +86,12 @@ in {
       bindsTo = ["graphical-session.target"];
       wants = ["graphical-session-pre.target"];
       after = ["graphical-session-pre.target"];
+
       # We explicitly unset PATH here, as we want it to be set by
       # systemctl --user import-environment in startqtile
       environment.PATH = lib.mkForce null;
       environment.PYTHONPATH = lib.mkForce null;
+
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pyEnv}/bin/qtile start -b wayland";
