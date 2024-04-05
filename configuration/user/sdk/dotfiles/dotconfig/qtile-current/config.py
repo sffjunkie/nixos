@@ -16,26 +16,24 @@ import setting
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
-sec = secret.load_secrets()
-s = setting.load_settings()
+secrets = secret.load_secrets()
+settings = setting.load_settings()
 
-keys = kbdmouse.bind_keys(s)
-mouse = kbdmouse.bind_mouse_buttons(s)
+groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
+keys = (
+    kbdmouse.build_keys(settings)
+    + group.build_keys(settings)
+    + scratchpad.build_keys(settings)
+)
+mouse = kbdmouse.bind_mouse_buttons(settings)
 
-scratchpads = scratchpad.build_scratchpads(s)
-scratchpads.bind_scratchpad_keys(s, keys)
-
-groups = group.build_groups(s)
-groups.extend(scratchpads)
-group.bind_group_keys(s, keys)
-
-theme = s["theme"]
+theme = settings["theme"]
 layouts = [
     layout.MonadTall(**theme["layout"]),
     layout.Max(**theme["layout"]),
 ]
 
-top_bar, bottom_bar = bars.build_bars(s, sec)
+top_bar, bottom_bar = bars.build_bars(settings, secrets)
 screens = [Screen(top=top_bar, bottom=bottom_bar)]
 
 auto_fullscreen = True
