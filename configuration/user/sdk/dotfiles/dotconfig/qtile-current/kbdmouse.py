@@ -22,6 +22,11 @@ def bind_keys(settings) -> List[Key]:
             "Space",
             lazy.spawn("rofi -modi drun -show drun"),
         ),
+        Key(
+            [settings["mod"], Alt],
+            "l",
+            lazy.spawn("swaylock -f -c 000000"),
+        ),
         # region QTile Control
         Key([settings["mod"], alt], "r", lazy.reload_config(), desc="Reload QTile"),
         Key([settings["mod"], alt], "q", lazy.shutdown(), desc="Quit QTile"),
