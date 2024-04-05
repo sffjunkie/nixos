@@ -7,7 +7,7 @@ from typing import List  # noqa: F401
 from libqtile.command import lazy
 from libqtile.config import Key, Drag, Click
 
-alt = "mod1"
+Alt = "mod1"
 
 
 def bind_keys(settings) -> List[Key]:
@@ -33,8 +33,8 @@ def bind_keys(settings) -> List[Key]:
             lazy.spawn("rofi -show p -modi p:rofi-power-menu"),
         ),
         # region QTile Control
-        Key([settings["mod"], alt], "r", lazy.reload_config(), desc="Reload QTile"),
-        Key([settings["mod"], alt], "q", lazy.shutdown(), desc="Quit QTile"),
+        Key([settings["mod"], Alt], "r", lazy.reload_config(), desc="Reload QTile"),
+        Key([settings["mod"], Alt], "q", lazy.shutdown(), desc="Quit QTile"),
         # endregion
         # region Window Control
         Key(
@@ -62,7 +62,7 @@ def bind_keys(settings) -> List[Key]:
             desc="Switch to previous group",
         ),
         Key(
-            [settings["mod"], alt],
+            [settings["mod"], Alt],
             "f",
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
