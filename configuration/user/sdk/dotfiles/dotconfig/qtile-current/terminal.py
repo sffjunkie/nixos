@@ -1,21 +1,11 @@
-import os
+def terminal_run_command(terminal: str, command: list[str]) -> str:
+    if terminal in ("kitty",):
+        cl = [terminal] + command
 
-TERMINAL = os.environ.get("TERMINAL", None)
+    elif terminal in ("tilda",):
+        cl = [terminal, "-c"] + command
 
+    else:
+        cl = [terminal, "-e"] + command
 
-def terminal_run_command(command: str) -> str:
-    if TERMINAL is None or TERMINAL in (
-        "alacritty",
-        "terminator",
-        "guake",
-        "tilix",
-        "st",
-        "xterm",
-    ):
-        return [TERMINAL, "-e", command]
-
-    elif TERMINAL in ("kitty",):
-        return [TERMINAL, command]
-
-    elif TERMINAL == ("tilda",):
-        return [TERMINAL, "-c", command]
+    return " ".join(cl)

@@ -10,7 +10,7 @@ from libqtile.config import Key, Drag, Click
 Alt = "mod1"
 
 
-def bind_keys(settings) -> List[Key]:
+def build_keys(settings) -> List[Key]:
     return [
         Key(
             [settings["mod"], "shift"],

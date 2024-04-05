@@ -1,34 +1,36 @@
 from libqtile.command import lazy
 from libqtile.config import Key, ScratchPad, DropDown
-from .terminal import terminal_run_command
+from terminal import terminal_run_command
 
 
 def build_scratchpads(settings) -> list[ScratchPad]:
     return [
         ScratchPad(
             "0",
-            [
+            dropdowns=[
                 DropDown(
                     "ncmpcpp",
-                    terminal_run_command + ["ncmpcpp"],
+                    terminal_run_command(
+                        "alacritty", ["ncmpcpp", "-h", "/run/user/1001/mpd.sock"]
+                    ),
                     height=0.4,
                     width=0.5,
-                    x=0.1,
+                    x=0.25,
                     y=0.0,
-                    on_focus_lost_hide=False,
-                    opacity=0.85,
+                    opacity=1.0,
                     warp_pointer=False,
                 ),
             ],
+            single=True,
         )
     ]
 
 
-def bind_scratchpad_keys(settings: dict, keys: list[Key]) -> None:
-    keys.append(
+def build_keys(settings: dict) -> list[Key]:
+    return [
         Key(
-            [],
-            "F10",
+            [settings["mod"]],
+            "0",
             lazy.group["0"].dropdown_toggle("ncmpcpp"),
         ),
-    )
+    ]
