@@ -21,5 +21,17 @@ in {
       polkit.enable = true;
       lockscreen.enable = true;
     };
+
+    xdg.portal.enable = true;
+    xdg.portal.wlr.enable = true;
+
+    environment.systemPackages = [
+      pkgs.gsettings-desktop-schemas
+    ];
+
+    programs = {
+      dconf.enable = true;
+      xwayland.enable = true;
+    };
   };
 }
