@@ -1,6 +1,5 @@
 {
   imports = [
-    ./control
     ./easyeffects
     ./playback
     ./qpwgraph
