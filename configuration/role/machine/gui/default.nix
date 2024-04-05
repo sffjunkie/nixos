@@ -26,6 +26,7 @@ in {
         gnome.enable = false;
         qtile.enable = true;
       };
+      base16-schemes.enable = true;
     };
   };
 }
