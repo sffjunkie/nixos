@@ -1,6 +1,5 @@
 import shlex
 import subprocess
-from typing import List
 
 from libqtile import layout, hook
 from libqtile.config import Screen
