@@ -103,7 +103,10 @@ def autostart():
             "before-sleep",
             shlex.join(sway_lock),
         ],
+        [
+            "waypaper",
+            "--restore",
+        ],
     ]
-    # fmt: on
     for command in commands:
         subprocess.Popen(systemd_run(command))
