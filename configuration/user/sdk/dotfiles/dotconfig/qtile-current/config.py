@@ -9,6 +9,7 @@ import bars
 import group
 import kbdmouse
 import rule
+import scratchpad
 import secret
 import setting
 
