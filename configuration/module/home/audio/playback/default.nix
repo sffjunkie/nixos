@@ -10,6 +10,34 @@
   mpdListenAddress = "/run/user/${toString cfg.uid}/mpd.sock";
   mpdFifoAddress = "/run/user/${toString cfg.uid}/mpd.fifo";
   mpdVisualizerFeedName = "MPD visualizer FIFO";
+
+  notify_send = "${pkgs.libnotify}/bin/notify-send";
+  musicctl = pkgs.writeScriptBin "musicctl" ''
+    #!${pkgs.runtimeShell}
+    case "$1" in
+        next)
+            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} next && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
+                ;;
+        previous)
+            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} previous && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
+                ;;
+        toggle)
+            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} toggle && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc | sed -n 2p)" && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
+                ;;
+        stop)
+            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} stop && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
+            ;;
+
+        mixer)
+            ${pkgs.pulsemixer}/bin/pulsemixer
+            ;;
+
+        *)
+            ${pkgs.mpc-cli}/bin/mpc status
+    esac
+
+    exit 0
+  '';
 in {
   options.looniversity.music.playback = {
     enable = mkEnableOption "music_playback";
@@ -23,6 +51,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       mpc-cli
+      musicctl
     ];
 
     services.mpd = {
