@@ -4,6 +4,7 @@ import os
 from subprocess import run
 from typing import List
 
+from libqtile.command import lazy
 from libqtile import qtile, bar, widget
 
 from widgets import NetMin, EscapedWindowName, FixedWidthVolume, OpenWeatherMap
