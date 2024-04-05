@@ -16,7 +16,12 @@ sec = secret.load_secrets()
 s = setting.load_settings()
 keys = kbdmouse.bind_keys(s)
 mouse = kbdmouse.bind_mouse_buttons(s)
+
+scratchpads = scratchpad.build_scratchpads(s)
+scratchpads.bind_scratchpad_keys(s, keys)
+
 groups = group.build_groups(s)
+groups.extend(scratchpads)
 group.bind_group_keys(s, keys)
 
 theme = s["theme"]
