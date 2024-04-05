@@ -1,5 +1,4 @@
 ---
-#font: "Roboto Mono for Powerline"
 font: "Hack Nerd Font"
 fontsize: 18
 iconfont: "Hack Nerd Font"
@@ -40,7 +39,7 @@ powerline_separator:
   # - "\uE0BE"
   # - "\uE0BC"
 logofont: "font-logos"
-logo: "\uf30a" # Fedora logo
+logo: "\uf313" # Nixos logo
 powerline_color_repeat:
   function: cycle
   indices:

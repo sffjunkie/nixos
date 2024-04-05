@@ -2,8 +2,10 @@ import os
 from pathlib import Path
 
 import yaml
+from libqtile.log_utils import logger
 
 FILENAME = "secrets.yaml"
+
 
 def load_secrets() -> dict:
     secrets_file = None

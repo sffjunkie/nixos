@@ -1,3 +1,4 @@
+import os
 import shlex
 import subprocess
 
@@ -13,8 +14,11 @@ import scratchpad
 import secret
 import setting
 
+is_nixos = os.path.exists("/etc/NIXOS")
+
 sec = secret.load_secrets()
 s = setting.load_settings()
+
 keys = kbdmouse.bind_keys(s)
 mouse = kbdmouse.bind_mouse_buttons(s)
 
@@ -53,6 +57,7 @@ wmname = "QTile"
 #         client.togroup(group_name)
 # lazy.group[group_name].cmd_toscreen()
 
+
 # to get ids use `qtile cmd-obj -o core -f get_inputs`
 wl_input_rules = {
     "1452:591:Keychron Keychron K1": InputConfig(
@@ -83,6 +88,7 @@ def autostart():
             "WAYLAND_DISPLAY",
         ]
     )
+
     sway_lock = [
         "swaylock",
         "--clock",

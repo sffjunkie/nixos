@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional  # noqa: F401
+from typing import Optional  # noqa: F401
 
 from libqtile.command import lazy
 from libqtile.config import Key, Group
@@ -16,11 +16,12 @@ group_config = [
 ]
 
 
-def build_groups(settings) -> List[Group]:
-    return [Group(name, **kwargs) for name, kwargs in group_config]
+def build_groups(settings: dict) -> list[Group]:
+    named_groups = [Group(name, **kwargs) for name, kwargs in group_config]
+    return named_groups
 
 
-def bind_group_keys(settings: Dict, keys: List[Key]) -> None:
+def bind_group_keys(settings: dict, keys: list[Key]) -> None:
     for i, (name, _) in enumerate(group_config, 1):
         keys.append(
             Key(

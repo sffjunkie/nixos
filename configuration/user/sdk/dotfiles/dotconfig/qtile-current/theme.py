@@ -5,12 +5,12 @@ import yaml
 
 from utils import is_base16, is_color
 
-FONT = "Roboto Mono for Powerline"
-ICON_FONT = "Material Icons"
-FONT_SIZE = 14
-BAR_HEIGHT = 22
+DEFAULT_FONT = "Hack Nerd Font Mono"
+DEFAULT_ICON_FONT = "Material Design Icons"
+DEFAULT_FONT_SIZE = 12
+DEFAULT_BAR_HEIGHT = 22
 
-COLOR_SCHEME = {
+DEFAULT_COLOR_SCHEME = {
     "base00": "f9f5d7",
     "base01": "ebdbb2",
     "base02": "d5c4a1",
@@ -29,9 +29,9 @@ COLOR_SCHEME = {
     "base0F": "d65d0e",
 }
 
-WIDGET = {
-    "font": FONT,
-    "fontsize": FONT_SIZE,
+DEFAULT_WIDGET_PROPS = {
+    "font": DEFAULT_FONT,
+    "fontsize": DEFAULT_FONT_SIZE,
     "margin": 0,
     "padding": 0,
     "foreground": "base07",
@@ -39,14 +39,14 @@ WIDGET = {
 }
 
 
-EXTENSION = {
-    "font": FONT,
-    "fontsize": FONT_SIZE,
+DEFAULT_EXTENSION_PROPS = {
+    "font": DEFAULT_FONT,
+    "fontsize": DEFAULT_FONT_SIZE,
     "foreground": "base07",
     "background": "base01",
 }
 
-LAYOUT = {
+DEFAULT_LAYOUT_PROPS = {
     "margin": 3,
     "border_width": 3,
     "border_focus": "d5c4a1",
@@ -66,7 +66,7 @@ LAYOUT = {
 #     return res
 
 
-def _default_colors(color_scheme: Dict = COLOR_SCHEME) -> Dict:
+def _default_colors(color_scheme: Dict = DEFAULT_COLOR_SCHEME) -> Dict:
     return {
         "panel_fg": color_scheme["base07"],
         "panel_bg": color_scheme["base01"],
@@ -91,14 +91,14 @@ def _default_colors(color_scheme: Dict = COLOR_SCHEME) -> Dict:
 
 
 DEFAULT_THEME = {
-    "font": FONT,
-    "iconfont": ICON_FONT,
-    "fontsize": FONT_SIZE,
-    "barheight": BAR_HEIGHT,
-    "color": COLOR_SCHEME,
-    "widget": WIDGET,
-    "layout": LAYOUT,
-    "extension": EXTENSION,
+    "font": DEFAULT_FONT,
+    "iconfont": DEFAULT_ICON_FONT,
+    "fontsize": DEFAULT_FONT_SIZE,
+    "barheight": DEFAULT_BAR_HEIGHT,
+    "color": DEFAULT_COLOR_SCHEME,
+    "widget": DEFAULT_WIDGET_PROPS,
+    "layout": DEFAULT_LAYOUT_PROPS,
+    "extension": DEFAULT_EXTENSION_PROPS,
 }
 
 
@@ -108,7 +108,7 @@ def _deref_colors(theme_info, color_scheme, colors):
         if not isinstance(value, (int, float, bool)) and not is_color(value):
             if is_base16(value):
                 if color_scheme is None:
-                    color_scheme = COLOR_SCHEME
+                    color_scheme = DEFAULT_COLOR_SCHEME
                 value = color_scheme[value]
             elif value in colors:
                 value = colors[value]
@@ -136,7 +136,7 @@ def _load_color_scheme(
             with open(file_path, "r") as fp:
                 colors = yaml.load(fp, Loader=yaml.SafeLoader)
                 return colors
-    return COLOR_SCHEME
+    return DEFAULT_COLOR_SCHEME
 
 
 def _load_theme_config(filename: str) -> Dict:
@@ -164,25 +164,25 @@ def load_theme(filename: str = "theme.yaml") -> Dict:
         color_scheme = _load_color_scheme(theme_config.pop("base16_scheme_name"))
         theme_config["base16_scheme"] = color_scheme
     elif "base16_scheme" not in theme_config:
-        theme_config["base16_scheme"] = COLOR_SCHEME
+        theme_config["base16_scheme"] = DEFAULT_COLOR_SCHEME
 
     colors = _default_colors(theme_config["base16_scheme"])
 
-    widget = WIDGET.copy()
+    widget = DEFAULT_WIDGET_PROPS.copy()
     if "widget" in theme_config:
         widget.update(theme_config["widget"])
 
     tc = _deref_colors(widget, theme_config["base16_scheme"], colors)
     widget.update(tc)
 
-    extension = EXTENSION.copy()
+    extension = DEFAULT_EXTENSION_PROPS.copy()
     if "extension" in theme_config:
         extension.update(theme_config["extension"])
 
     tc = _deref_colors(extension, theme_config["base16_scheme"], colors)
     extension.update(tc)
 
-    layout = LAYOUT.copy()
+    layout = DEFAULT_LAYOUT_PROPS.copy()
     if "layout" in theme_config:
         layout.update(theme_config["layout"])
 

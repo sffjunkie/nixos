@@ -17,21 +17,42 @@ def bind_keys(settings) -> List[Key]:
             "t",
             lazy.spawn(environ.get("TERMINAL", "alacritty")),
         ),
+        # App launcher
         Key(
             [settings["mod"]],
             "Space",
             lazy.spawn("rofi -modi drun -show drun"),
         ),
+        # Lock screen
         Key(
             [settings["mod"], Alt],
             "l",
             lazy.spawn("swaylock -f -c 000000"),
         ),
+        # Power menu
         Key(
             [settings["mod"], Alt],
             "F12",
             lazy.spawn("rofi -show p -modi p:rofi-power-menu"),
         ),
+        # region MPD Control
+        # Play / Pause
+        Key(
+            [settings["mod"]],
+            "F8",
+            lazy.spawn("musicctl toggle"),
+        ),
+        Key(
+            [settings["mod"]],
+            "F7",
+            lazy.spawn("musicctl previous"),
+        ),
+        Key(
+            [settings["mod"]],
+            "F9",
+            lazy.spawn("musicctl next"),
+        ),
+        # endregion
         # region QTile Control
         Key([settings["mod"], Alt], "r", lazy.reload_config(), desc="Reload QTile"),
         Key([settings["mod"], Alt], "q", lazy.shutdown(), desc="Quit QTile"),
