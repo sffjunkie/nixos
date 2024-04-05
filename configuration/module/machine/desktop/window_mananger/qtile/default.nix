@@ -26,6 +26,21 @@ in {
   };
 
   config = mkIf cfg.enable {
+    sops.secrets."sdk/location/latitude" = {
+      sopsFile = config.sopsFiles.user;
+    };
+
+    sops.secrets."sdk/location/longitude" = {
+      sopsFile = config.sopsFiles.user;
+    };
+
+    sops.templates."sdk_location" = {
+      content = ''
+        SDK_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
+        SDK_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
+      '';
+    };
+
     services.xserver.windowManager.qtile = {
       enable = true;
       backend = "wayland";
@@ -81,6 +96,8 @@ in {
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
+
+        EnvironmentFile = config.sops.templates."sdk_location".path;
       };
     };
   };
