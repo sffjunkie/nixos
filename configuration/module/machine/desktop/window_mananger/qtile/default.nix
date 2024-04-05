@@ -29,14 +29,6 @@ in {
     services.xserver.windowManager.qtile = {
       enable = true;
       backend = "wayland";
-      # extraPackages = python3Packages:
-      #   with python3Packages; [
-      #     qtile-extras
-
-      #     # Add packages required by the qtile config
-      #     pyyaml
-      #     requests
-      #   ];
     };
 
     looniversity.display_manager.tuigreet.script = "${startScript}";
