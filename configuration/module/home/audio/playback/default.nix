@@ -14,18 +14,23 @@
   notify_send = "${pkgs.libnotify}/bin/notify-send";
   musicctl = pkgs.writeScriptBin "musicctl" ''
     #!${pkgs.runtimeShell}
+    mpc_command="${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress}"
     case "$1" in
         next)
-            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} next && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
-                ;;
+            $mpc_command next
+            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$($mpc_command current)"
+            ;;
         previous)
-            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} previous && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
-                ;;
+            $mpc_command previous
+            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$($mpc_command current)"
+            ;;
         toggle)
-            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} toggle && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc | sed -n 2p)" && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${pkgs.mpc-cli}/bin/mpc current)"
-                ;;
+            $mpc_command toggle
+            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$($mpc_command current)\\n$($mpc_command | sed -n 2p)"
+            ;;
         stop)
-            ${pkgs.mpc-cli}/bin/mpc --host=${mpdListenAddress} stop && ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
+            $mpc_command stop
+            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
             ;;
 
         mixer)
@@ -33,7 +38,7 @@
             ;;
 
         *)
-            ${pkgs.mpc-cli}/bin/mpc status
+            $mpc_command status
     esac
 
     exit 0
