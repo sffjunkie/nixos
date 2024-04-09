@@ -45,9 +45,6 @@
       script.wake.enable = true;
 
       role = {
-        # TODO: Remove when testing complete
-        log_server.enable = true;
-
         container_host.enable = true;
         games_machine.enable = true;
         podcaster.enable = true;
