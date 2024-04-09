@@ -5,7 +5,7 @@
       git-lfs
       nano
       pciutils
-      # pipx # BUG: Failing tests
+      pipx
       psmisc
       unzip
       usbutils
