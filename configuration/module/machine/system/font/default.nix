@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
+    fonts.packages = [
       pkgs.font-awesome
       pkgs.material-design-icons
       pkgs.roboto
