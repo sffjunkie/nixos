@@ -13,7 +13,7 @@ wmclass_float = [
 ]
 
 wmclass_group = {
-    "brave-browser": "WWW",
+    "brave-browser|chromium|firefox": "WWW",
     "code-url-handler": "DEV",
     "Darktable": "GFX",
     "Gimp": "GFX",
