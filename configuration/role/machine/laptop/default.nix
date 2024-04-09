@@ -20,6 +20,7 @@ in {
       keyring.enable = true;
       pipewire.enable = true;
       yubikey_plus.enable = true;
+      font.enable = true;
     };
 
     environment.systemPackages = [

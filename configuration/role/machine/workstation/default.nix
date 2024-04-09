@@ -18,6 +18,7 @@ in {
         mongodb.enable = true;
       };
       role.gui.enable = true;
+      font.enable = true;
 
       yubikey_plus.enable = true;
 
