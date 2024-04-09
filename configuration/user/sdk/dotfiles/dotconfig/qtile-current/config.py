@@ -20,6 +20,9 @@ secrets = secret.load_secrets()
 settings = setting.load_settings()
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
+
+dgroups_app_rules = rule.build_rules()
+
 keys = (
     kbdmouse.build_keys(settings)
     + group.build_keys(settings)
@@ -39,8 +42,6 @@ screens = [Screen(top=top_bar, bottom=bottom_bar)]
 auto_fullscreen = True
 bring_front_click = "floating_only"
 cursor_warp = False
-# dgroups_app_rules = rule.build_rules()  # type: List
-dgroups_key_binder = None
 extension_defaults = theme["extension"].copy()
 focus_on_window_activation = "smart"
 follow_mouse_focus = False
