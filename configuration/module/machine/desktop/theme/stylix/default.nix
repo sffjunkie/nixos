@@ -45,6 +45,7 @@ in {
           terminal = 13;
         };
       };
+      polarity = "dark";
     };
   };
 }
