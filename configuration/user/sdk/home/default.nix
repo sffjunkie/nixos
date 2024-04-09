@@ -110,7 +110,7 @@
       rofi.enable = true;
       thunderbird.enable = true;
       vscode.enable = true;
-      wallpaper.enable = true;
+      desktop.wallpaper.enable = true;
       wofi.enable = true;
       zathura.enable = true;
 
