@@ -33,7 +33,9 @@ def build_keys(settings) -> List[Key]:
         Key(
             [settings["mod"], Alt],
             "F12",
-            lazy.spawn("rofi -show p -modi p:rofi-power-menu"),
+            lazy.spawn(
+                "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"power-menu\"'"
+            ),
         ),
         # region MPD Control
         # Play / Pause
@@ -175,6 +177,14 @@ def build_keys(settings) -> List[Key]:
             lazy.layout.shrink(),
             desc="Decrease Sub Window Size",
         ),
+        # endregion
+        # region VT Switching
+        Key(["control", "mod1"], "F1", lazy.core.change_vt(1), desc="Switch to VT 1"),
+        Key(["control", "mod1"], "F2", lazy.core.change_vt(2), desc="Switch to VT 2"),
+        Key(["control", "mod1"], "F3", lazy.core.change_vt(3), desc="Switch to VT 3"),
+        Key(["control", "mod1"], "F4", lazy.core.change_vt(4), desc="Switch to VT 4"),
+        Key(["control", "mod1"], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
+        Key(["control", "mod1"], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
         # endregion
     ]
 
