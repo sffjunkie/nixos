@@ -16,8 +16,8 @@ in {
       enable = true;
       settings = {
         "org/gnome/desktop/interface" = {
-          font-name = "Cantarell 14";
-          document-font-name = "Cantarell 14";
+          # font-name = "Cantarell 14";
+          # document-font-name = "Cantarell 14";
           enable-hot-corners = false;
           font-antialiasing = "rgba";
           font-hinting = "slight";

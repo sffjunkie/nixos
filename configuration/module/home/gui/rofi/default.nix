@@ -14,7 +14,7 @@ in {
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      theme = ./nord.rasi;
+      # theme = ./nord.rasi;
     };
 
     home.packages = [

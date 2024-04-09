@@ -6,6 +6,13 @@
   ...
 }: let
   cfg = config.looniversity.desktop.stylix;
+
+  nerdfonts = pkgs.nerdfonts.override {
+    fonts = [
+      "Hack"
+    ];
+  };
+
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
   imports = [
@@ -19,7 +26,19 @@ in {
   config = mkIf cfg.enable {
     stylix = {
       homeManagerIntegration.autoImport = false;
+
       image = ./nix-wallpaper-stripes-logo.png;
+
+      fonts = {
+        monospace = {
+          name = "Hack Nerd Font Mono";
+          package = nerdfonts;
+        };
+
+        sizes = {
+          terminal = 13;
+        };
+      };
     };
   };
 }

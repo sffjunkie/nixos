@@ -23,6 +23,7 @@
     sops-nix.url = "github:Mic92/sops-nix";
 
     stylix.url = "github:danth/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   nixConfig = {
@@ -34,9 +35,7 @@
     nixpkgs,
     attic,
     deploy-rs,
-    disko,
     home-manager,
-    nix-vscode-extensions,
     nixos-hardware,
     sops-nix,
     stylix,
@@ -55,11 +54,10 @@
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = {
-          inherit nix-vscode-extensions;
+          inherit inputs;
         };
         home-manager.sharedModules = [
           sops-nix.homeManagerModules.sops
-          stylix.homeManagerModules.stylix
         ];
       };
     };
@@ -109,7 +107,7 @@
       furrball = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib disko;
+          inherit lib inputs;
         };
 
         modules = [

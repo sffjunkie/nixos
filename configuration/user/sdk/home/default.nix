@@ -1,5 +1,12 @@
-{osConfig, ...}: {
+{
+  inputs,
+  osConfig,
+  pkgs,
+  ...
+}: {
   imports = [
+    inputs.stylix.homeManagerModules.stylix
+
     ./accounts
     ./settings/qt
     ./settings/qtile
@@ -21,6 +28,12 @@
         DEVELOPMENT_HOME = "$HOME/development";
       };
     };
+
+    stylix = {
+      image = ./settings/desktop/paint_explosion.jpg;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+    };
+
 
     looniversity = {
       audio.qpwgraph.enable = true;

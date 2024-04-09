@@ -1,8 +1,8 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
-  nix-vscode-extensions,
   ...
 }: let
   cfg = config.looniversity.vscode;
@@ -37,7 +37,7 @@
     zxh404.vscode-proto3
   ];
 
-  marketplaceExtensionsList = with nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+  marketplaceExtensionsList = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
     charliermarsh.ruff
     dlasagno.rasi
     executablebookproject.myst-highlight
@@ -68,7 +68,7 @@ in {
         "diffEditor.ignoreTrimWhitespace" = false;
 
         "editor.fontSize" = 12;
-        "editor.fontFamily" = "'Hack Nerd Font Mono', 'monospace', monospace";
+        # "editor.fontFamily" = "'Hack Nerd Font Mono', 'monospace', monospace";
         "editor.tokenColorCustomizations" = {
           "[Nord]" = {
             "comments" = "#94b9a6";
@@ -107,7 +107,7 @@ in {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = mkDefault 2;
 
-        "workbench.colorTheme" = "Nord";
+        # "workbench.colorTheme" = "Nord";
         "workbench.panel.defaultLocation" = "right";
         "workbench.startupEditor" = "readme";
 

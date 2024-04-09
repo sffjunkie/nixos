@@ -26,6 +26,8 @@
     };
 
     looniversity = {
+      desktop.stylix.enable = true;
+
       net-tools.enable = true;
       rclone.enable = true;
       spotify.enable = true;
