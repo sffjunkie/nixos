@@ -93,6 +93,7 @@
       alacritty.enable = true;
       brave.enable = true;
       darktable.enable = true;
+      discord.enable = true;
       gimp.enable = true;
       gittyup.enable = true;
       gnomeApps.enable = true;
