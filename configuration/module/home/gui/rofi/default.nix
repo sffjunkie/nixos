@@ -16,6 +16,8 @@ in {
       enable = true;
     };
 
+    xdg.configFile."rofi/power-menu.rasi".source = ./power-menu.rasi;
+
     home.packages = [
       pkgs.rofi-power-menu
     ];
