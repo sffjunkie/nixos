@@ -1,8 +1,4 @@
-{
-  config,
-  sops,
-  ...
-}: {
+{config, ...}: {
   config = {
     # https://github.com/Mic92/sops-nix#setting-a-users-password
     sops.secrets."sysadmin/password_hash" = {
