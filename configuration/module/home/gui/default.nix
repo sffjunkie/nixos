@@ -2,6 +2,7 @@
   imports = [
     ./brave
     ./darktable
+    ./discord
     ./firefox
     ./gimp
     ./gittyup
