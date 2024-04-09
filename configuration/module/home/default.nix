@@ -12,6 +12,5 @@
     ./shells
     ./system
     ./terminals
-    ./wallpaper
   ];
 }
