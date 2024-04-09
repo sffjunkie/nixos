@@ -34,6 +34,7 @@
       base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
     };
 
+    xdg.mime.enable = true;
 
     looniversity = {
       audio.qpwgraph.enable = true;
@@ -136,7 +137,5 @@
 
       user-dirs.enable = true;
     };
-
-    xdg.mime.enable = true;
   };
 }
