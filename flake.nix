@@ -21,6 +21,8 @@
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     sops-nix.url = "github:Mic92/sops-nix";
+
+    stylix.url = "github:danth/stylix";
   };
 
   nixConfig = {
@@ -37,6 +39,7 @@
     nix-vscode-extensions,
     nixos-hardware,
     sops-nix,
+    stylix,
     ...
   } @ inputs: let
     lib = nixpkgs.lib.extend (import ./lib {inherit lib inputs;});
@@ -114,6 +117,7 @@
           ./configuration/user/sysadmin/machine
 
           sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -164,6 +168,7 @@
           ./configuration/user/sysadmin/machine
 
           sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
           home-manager.nixosModules.default
           hmCommonConfig
           {
