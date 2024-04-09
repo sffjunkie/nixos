@@ -114,7 +114,6 @@
       wofi.enable = true;
       zathura.enable = true;
 
-      font.enable = true;
       gpg.enable = true;
       imagemagick.enable = true;
       pavucontrol.enable = true;
