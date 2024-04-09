@@ -59,6 +59,7 @@
         };
         home-manager.sharedModules = [
           sops-nix.homeManagerModules.sops
+          stylix.homeManagerModules.stylix
         ];
       };
     };
@@ -117,7 +118,6 @@
           ./configuration/user/sysadmin/machine
 
           sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
           home-manager.nixosModules.default
           hmCommonConfig
           {
@@ -168,7 +168,6 @@
           ./configuration/user/sysadmin/machine
 
           sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
           home-manager.nixosModules.default
           hmCommonConfig
           {
