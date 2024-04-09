@@ -68,7 +68,6 @@ in {
         "diffEditor.ignoreTrimWhitespace" = false;
 
         "editor.fontSize" = 12;
-        # "editor.fontFamily" = "'Hack Nerd Font Mono', 'monospace', monospace";
         "editor.tokenColorCustomizations" = {
           "[Nord]" = {
             "comments" = "#94b9a6";
@@ -107,7 +106,6 @@ in {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = mkDefault 2;
 
-        # "workbench.colorTheme" = "Nord";
         "workbench.panel.defaultLocation" = "right";
         "workbench.startupEditor" = "readme";
 
