@@ -16,8 +16,5 @@ in {
       pkgs.swww
       pkgs.waypaper
     ];
-
-    home.file.".local/share/backgrounds/nix-wallpaper-stripes-logo.png".source = ./nix-wallpaper-stripes-logo.png;
-    stylix.image = ./nix-wallpaper-stripes-logo.png;
   };
 }
