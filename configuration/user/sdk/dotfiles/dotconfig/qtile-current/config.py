@@ -85,6 +85,7 @@ def autostart():
             "--user",
             "import-environment",
             "WAYLAND_DISPLAY",
+            "MPD_HOST",
         ]
     )
 
