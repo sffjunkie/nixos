@@ -20,7 +20,8 @@
     previewname="$previewdir/$(${mpc} --format %album% current | base64).png"
     [ -e "$previewname" ] || ${ffmpeg} -y -i "$filename" -an -vf scale=256:256 "$previewname" > /dev/null 2>&1
 
-    ${notify_send} -r 27072 "Now Playing" "$(${mpc} --format '%title% by %artist% in %album%' current)" -i "$previewname"  '';
+    ${notify_send} -r 27072 "Now Playing" "$(${mpc} --format '%title% by %artist% in %album%' current)" -i "$previewname"
+  '';
 in {
   options.looniversity.music.notify = {
     enable = mkEnableOption "music_notify";
