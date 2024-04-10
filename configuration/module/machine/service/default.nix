@@ -7,6 +7,7 @@
     ./homepage-dashboard
     ./lldap
     ./mongodb
+    ./netbox
     ./nextcloud
     ./postgresql
     ./step-ca
