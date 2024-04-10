@@ -12,15 +12,18 @@
     fi
 
     extra_args=()
+    extra_info=""
     eval set -- "$VALID_ARGS"
     while [ : ]; do
       case "$1" in
         -v | --verbose)
             extra_args+=("--verbose")
+            extra_info+=" + verbose"
             shift
             ;;
         -s | --show-trace)
             extra_args+=("--show-trace")
+            extra_info+=" + trace"
             shift
             ;;
         --) shift;
@@ -42,7 +45,7 @@
           -d "${pkgs.figlet}/share/figlet" \
           -f doom \
           -w "''${COLUMNS}" \
-          "$target  :  build"
+          "$target  :  build''${extra_info}"
 
         nixos-rebuild build --flake ".#''${target}" \
           --impure --log-format internal-json "''${extra_args[@]}" |& \
@@ -54,7 +57,7 @@
           -d "${pkgs.figlet}/share/figlet" \
           -f doom \
           -w "''${COLUMNS}" \
-          "$target  :  dry build"
+          "$target  :  dry build''${extra_info}"
 
         nixos-rebuild dry-build --flake ".#''${target}" \
           --impure --log-format internal-json "''${extra_args[@]}" |& \
@@ -66,7 +69,7 @@
           -d "${pkgs.figlet}/share/figlet" \
           -f doom \
           -w "''${COLUMNS}" \
-          "$target  :  build + switch"
+          "$target  :  switch''${extra_info}"
 
         sudo nixos-rebuild switch --flake ".#''${target}" \
           --impure --log-format internal-json "''${extra_args[@]}" |& \
