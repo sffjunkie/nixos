@@ -1,10 +1,13 @@
 import os
 import shlex
 import subprocess
+import sys
 
+from libqtile import __path__ as libqtile_path
 from libqtile import layout, hook
 from libqtile.config import Screen
 from libqtile.backend.wayland import InputConfig
+from libqtile.log_utils import logger
 
 import bars
 import group
@@ -15,6 +18,11 @@ import secret
 import setting
 
 is_nixos = os.path.exists("/etc/NIXOS")
+
+logger.debug(f"python prefix: {sys.prefix}")
+logger.debug(f"python version: {sys.version}")
+logger.debug(f"python platform: {sys.platform}")
+logger.debug(f"libqtile path: {libqtile_path}")
 
 secrets = secret.load_secrets()
 settings = setting.load_settings()
