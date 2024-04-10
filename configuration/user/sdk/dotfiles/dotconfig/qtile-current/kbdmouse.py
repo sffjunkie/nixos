@@ -21,7 +21,9 @@ def build_keys(settings) -> List[Key]:
         Key(
             [settings["mod"]],
             "Space",
-            lazy.spawn("rofi -modi drun -show drun"),
+            lazy.spawn(
+                "rofi -modi drun -show drun -theme-str '@import \"looniversity\"'"
+            ),
         ),
         # Lock screen
         Key(
