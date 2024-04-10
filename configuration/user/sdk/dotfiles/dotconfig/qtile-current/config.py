@@ -16,13 +16,14 @@ import rule
 import scratchpad
 import secret
 import setting
+import wallpaper
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
-logger.debug(f"python prefix: {sys.prefix}")
-logger.debug(f"python version: {sys.version}")
-logger.debug(f"python platform: {sys.platform}")
-logger.debug(f"libqtile path: {libqtile_path}")
+logger.info(f"python prefix: {sys.prefix}")
+logger.info(f"python version: {sys.version}")
+logger.info(f"python platform: {sys.platform}")
+logger.info(f"libqtile path: {libqtile_path}")
 
 secrets = secret.load_secrets()
 settings = setting.load_settings()
@@ -45,7 +46,13 @@ layouts = [
 ]
 
 top_bar, bottom_bar = bars.build_bars(settings, secrets)
-screens = [Screen(top=top_bar, bottom=bottom_bar)]
+screens = [
+    Screen(
+        top=top_bar,
+        bottom=bottom_bar,
+        set_wallpaper=wallpaper.get_wallpaper(),
+    ),
+]
 
 auto_fullscreen = True
 bring_front_click = "floating_only"
@@ -85,18 +92,24 @@ def systemd_run(command: list[str]) -> list[str]:
     ]
 
 
-@hook.subscribe.startup
-def autostart():
-    subprocess.run(
+@hook.subscribe.startup_once
+def start_once():
+    commands = [
         [
             "systemctl",
             "--user",
             "import-environment",
             "WAYLAND_DISPLAY",
             "MPD_HOST",
-        ]
-    )
+        ],
+        ["swww-daemon", "-q"],
+    ]
+    for command in commands:
+        subprocess.Popen(systemd_run(command))
 
+
+@hook.subscribe.startup
+def start():
     sway_lock = [
         "swaylock",
         "--clock",
@@ -108,6 +121,7 @@ def autostart():
         "--inside-color 00000088",
     ]
     commands = [
+        ["waypaper", "--restore"],
         [
             "swayidle",
             "-w",
@@ -116,10 +130,6 @@ def autostart():
             shlex.join(sway_lock),
             "before-sleep",
             shlex.join(sway_lock),
-        ],
-        [
-            "waypaper",
-            "--restore",
         ],
     ]
     for command in commands:
