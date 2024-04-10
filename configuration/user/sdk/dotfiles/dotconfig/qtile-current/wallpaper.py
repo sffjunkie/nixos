@@ -10,7 +10,7 @@ def get_wallpaper():
 def get_waypaper_wallpaper() -> str | None:
     xdg_config = os.environ.get(
         "XDG_CONFIG_HOME",
-        os.environ.get("$HOME", None),
+        os.path.expanduser("~/.config"),
     )
 
     if xdg_config is None:
