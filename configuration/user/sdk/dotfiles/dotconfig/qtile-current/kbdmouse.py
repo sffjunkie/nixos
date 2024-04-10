@@ -34,7 +34,7 @@ def build_keys(settings) -> List[Key]:
             [settings["mod"], Alt],
             "F12",
             lazy.spawn(
-                "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"power-menu\"'"
+                "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"looniversity\"'"
             ),
         ),
         # region MPD Control

@@ -16,7 +16,7 @@ in {
       enable = true;
     };
 
-    xdg.configFile."rofi/power-menu.rasi".source = ./power-menu.rasi;
+    xdg.configFile."rofi/looniversity.rasi".source = ./looniversity.rasi;
 
     home.packages = [
       pkgs.rofi-power-menu

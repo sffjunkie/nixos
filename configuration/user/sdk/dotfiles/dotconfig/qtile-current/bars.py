@@ -250,7 +250,9 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             foreground=theme_colors["powerline_fg"],
             background=theme_colors["powerline_bg"][-1],
             mouse_callbacks={
-                "Button1": lazy.spawn("rofi -show p -modi p:rofi-power-menu")
+                "Button1": lazy.spawn(
+                    "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"looniversity\"'"
+                )
             },
         ),
     ]
