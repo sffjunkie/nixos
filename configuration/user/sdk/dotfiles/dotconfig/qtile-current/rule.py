@@ -22,11 +22,14 @@ wmclass_group = {
 
 
 def build_rules() -> List[Rule]:
+    float_escaped = [re.escape(item) for item in wmclass_float]
+    float_match = "|".join(float_escaped)
+
     rules = [
         Rule(
-            Match(wm_class=wmclass_float),
+            Match(wm_class=f"^({float_match})$"),
             float=True,
-            break_on_match=False,
+            break_on_match=True,
         ),
     ]
 
