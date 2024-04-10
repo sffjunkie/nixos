@@ -13,7 +13,7 @@
     ../../common
   ];
 
-  # //config.home-manager.users.sdk.config
+  # config = osConfig.home-manager.users.sdk.config
   config = {
     programs.home-manager.enable = true;
     home = {
