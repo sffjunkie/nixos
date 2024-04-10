@@ -35,6 +35,7 @@
     nixpkgs,
     attic,
     deploy-rs,
+    disko,
     home-manager,
     nixos-hardware,
     sops-nix,
@@ -191,7 +192,9 @@
           ./installer/looniversity-minimal.nix
 
           disko.nixosModules.disko
-          {config.disko.enableConfig = false;}
+          {
+            config.disko.enableConfig = false;
+          }
 
           sops-nix.nixosModules.sops
           home-manager.nixosModules.default
