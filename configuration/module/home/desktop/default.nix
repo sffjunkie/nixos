@@ -3,6 +3,7 @@
     ./dunst
     ./nord
     ./papirus
+    ./stylix
     ./wallpaper
   ];
 }

@@ -5,8 +5,6 @@
   ...
 }: {
   imports = [
-    inputs.stylix.homeManagerModules.stylix
-
     ./accounts
     ./settings/qt
     ./settings/qtile

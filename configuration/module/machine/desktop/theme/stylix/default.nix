@@ -25,8 +25,6 @@ in {
 
   config = mkIf cfg.enable {
     stylix = {
-      homeManagerIntegration.autoImport = false;
-
       cursor = {
         package = pkgs.nordzy-cursor-theme;
         name = "Nordzy-cursors";
