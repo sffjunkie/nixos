@@ -14,11 +14,6 @@ in {
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
-
-      # Configure keymap
-      xkb.layout = "us";
-      xkb.variant = "";
-      xkb.options = "altwin:swap_lalt_lwin";
     };
 
     looniversity = {
