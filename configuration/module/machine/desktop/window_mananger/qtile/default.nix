@@ -27,10 +27,12 @@ in {
 
   config = mkIf cfg.enable {
     sops.secrets."sdk/location/latitude" = {
+      neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
     sops.secrets."sdk/location/longitude" = {
+      neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
@@ -39,6 +41,7 @@ in {
         SDK_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
         SDK_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
       '';
+      owner = config.users.users.sdk.name;
     };
 
     services.xserver.windowManager.qtile = {
