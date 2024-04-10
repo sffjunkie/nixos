@@ -196,7 +196,9 @@
           sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
-          {config.home-manager.users.nixos = import ./configuration/user/nixos/home;}
+          {
+            config.home-manager.users.nixos = import ./configuration/user/nixos/home;
+          }
         ];
       };
     };
