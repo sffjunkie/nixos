@@ -7,9 +7,6 @@
     deploy-rs.url = "github:serokell/deploy-rs";
     deploy-rs.inputs.nixpkgs.follows = "nixpkgs";
 
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
-
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -35,7 +32,6 @@
     nixpkgs,
     attic,
     deploy-rs,
-    disko,
     home-manager,
     nixos-hardware,
     sops-nix,
@@ -68,7 +64,7 @@
       pinky = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib disko;
+          inherit lib;
         };
 
         modules = [
@@ -88,7 +84,7 @@
       thebrain = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib disko;
+          inherit lib;
         };
 
         modules = [
@@ -133,7 +129,7 @@
       babs = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib disko;
+          inherit lib;
         };
 
         modules = [
@@ -157,7 +153,7 @@
       buster = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit lib disko;
+          inherit lib;
         };
 
         modules = [
@@ -191,11 +187,6 @@
           ./installer/looniversity-minimal.nix
           {
             config.home-manager.users.nixos = import ./configuration/user/nixos/home;
-          }
-
-          disko.nixosModules.disko
-          {
-            config.disko.enableConfig = false;
           }
 
           home-manager.nixosModules.default
