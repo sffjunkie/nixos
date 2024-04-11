@@ -23,5 +23,9 @@ in {
         }
       '';
     };
+
+    home.sessionVariables = {
+      EDITOR = "micro";
+    };
   };
 }
