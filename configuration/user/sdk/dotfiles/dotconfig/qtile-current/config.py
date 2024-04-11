@@ -95,7 +95,6 @@ def start_once():
             "WAYLAND_DISPLAY",
             "MPD_HOST",
         ],
-        ["swww-daemon", "-q"],
     ]
     for command in commands:
         subprocess.Popen(systemd_run(command))
@@ -114,7 +113,6 @@ def start():
         "--inside-color 00000088",
     ]
     commands = [
-        ["waypaper", "--restore"],
         [
             "swayidle",
             "-w",
