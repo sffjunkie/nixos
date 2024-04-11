@@ -74,6 +74,7 @@ in {
           };
         };
         "editor.formatOnSave" = true;
+        "editor.lineNumbers" = "relative";
 
         "editor.rulers" = [
           80
