@@ -98,30 +98,3 @@ def start_once():
     ]
     for command in commands:
         subprocess.Popen(systemd_run(command))
-
-
-@hook.subscribe.startup
-def start():
-    sway_lock = [
-        "swaylock",
-        "--clock",
-        "--indicator-radius=100",
-        "--indicator-thickness=7",
-        "--ring-color=bb00cc",
-        "--key-hl-color=880033",
-        "--line-color=00000000",
-        "--inside-color=00000088",
-    ]
-    commands = [
-        [
-            "swayidle",
-            "-w",
-            "timeout",
-            "300",
-            shlex.join(sway_lock),
-            "before-sleep",
-            shlex.join(sway_lock),
-        ],
-    ]
-    for command in commands:
-        subprocess.Popen(systemd_run(command))

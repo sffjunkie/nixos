@@ -6,16 +6,21 @@
 }: let
   cfg = config.looniversity.settings.qtile;
 
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.looniversity.settings.qtile = {
     enable = mkEnableOption "qtile settings";
+
+    version = mkOption {
+      type = types.str;
+      default = "current";
+    };
   };
 
   config = mkIf (cfg.enable) {
     xdg.configFile = {
       "qtile" = {
-        source = ../../../dotfiles/dotconfig/qtile-current;
+        source = ./qtile-${config.looniversity.settings.qtile.version};
         recursive = true;
       };
     };

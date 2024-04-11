@@ -47,8 +47,8 @@ in {
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
           binding = ["<Super>space"];
-          command = "wofi --show drun --normal-window";
-          name = "wofi";
+          command = "rofi --show drun --normal-window";
+          name = "rofi";
         };
       };
     };

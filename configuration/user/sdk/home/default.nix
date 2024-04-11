@@ -6,9 +6,7 @@
 }: {
   imports = [
     ./accounts
-    ./settings/qt
-    ./settings/qtile
-    ./settings/gnome
+    ./settings
 
     ../../common
   ];
@@ -28,7 +26,7 @@
     };
 
     stylix = {
-      image = ./settings/desktop/paint_explosion.jpg;
+      image = ./desktop/paint_explosion.jpg;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
       targets.vscode.enable = false;
     };
