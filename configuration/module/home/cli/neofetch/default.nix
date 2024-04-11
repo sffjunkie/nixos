@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.neofetch;
+  cfg = config.looniversity.cli.neofetch;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.neofetch = {
+  options.looniversity.cli.neofetch = {
     enable = mkEnableOption "neofetch";
   };
 

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.feh;
+  cfg = config.looniversity.cli.feh;
 
   buttonsFile = ''
     # Unbind existing scroll operations
@@ -22,7 +22,7 @@
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.feh = {
+  options.looniversity.cli.feh = {
     enable = mkEnableOption "feh";
   };
 

@@ -5,11 +5,11 @@
   sops,
   ...
 }: let
-  cfg = config.looniversity.service.unifi;
+  cfg = config.looniversity.network.unifi;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.service.unifi = {
+  options.looniversity.network.unifi = {
     enable = mkEnableOption "unifi";
   };
 

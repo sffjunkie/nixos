@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.ripgrep;
+  cfg = config.looniversity.cli.ripgrep;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.ripgrep = {
+  options.looniversity.cli.ripgrep = {
     enable = mkEnableOption "ripgrep";
   };
 

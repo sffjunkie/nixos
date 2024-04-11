@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.lsd;
+  cfg = config.looniversity.cli.lsd;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.lsd = {
+  options.looniversity.cli.lsd = {
     enable = mkEnableOption "lsd";
   };
 

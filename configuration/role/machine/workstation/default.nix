@@ -17,19 +17,35 @@ in {
         mqtt.enable = true;
         mongodb.enable = true;
       };
-      role.gui.enable = true;
-      font.enable = true;
 
-      yubikey_plus.enable = true;
+      role = {
+        gui.enable = true;
+      };
 
-      libnotify.enable = true;
-      keyring.enable = true;
-      minio-client.enable = true;
-      pipewire.enable = true;
+      desktop = {
+        notification.libnotify.enable = true;
+      };
+
+      storage = {
+        minio-client.enable = true;
+      };
+
+      media = {
+        pipewire.enable = true;
+      };
+
+      network = {
+        sshd.enable = true;
+      };
 
       service = {
         homepage-dashboard.enable = true;
-        sshd.enable = true;
+      };
+
+      system = {
+        font.enable = true;
+        yubikey_plus.enable = true;
+        keyring.enable = true;
       };
     };
 

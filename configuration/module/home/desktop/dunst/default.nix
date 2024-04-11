@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.dunst;
+  cfg = config.looniversity.desktop.dunst;
   inherit (lib) mkIf mkEnableOption;
 in {
-  options.looniversity.dunst = {
+  options.looniversity.desktop.dunst = {
     enable = mkEnableOption "dunst user service";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.gnome;
+  cfg = config.looniversity.desktop.environment.gnome;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.desktop.gnome = {
+  options.looniversity.desktop.environment.gnome = {
     enable = mkEnableOption "gnome";
   };
 

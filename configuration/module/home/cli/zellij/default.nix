@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.zellij;
+  cfg = config.looniversity.cli.zellij;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.zellij = {
+  options.looniversity.cli.zellij = {
     enable = mkEnableOption "zellij";
   };
 

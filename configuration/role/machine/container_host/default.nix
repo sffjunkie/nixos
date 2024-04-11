@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      podman.enable = true;
+      system.podman.enable = true;
     };
   };
 }

@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.service.unbound;
+  cfg = config.looniversity.network.unbound;
   lanIpv4 = lib.network.lanIpv4 config "pinky";
 
   dnsPort = 1053;
@@ -13,7 +13,7 @@
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.service.unbound = {
+  options.looniversity.network.unbound = {
     enable = mkEnableOption "unbound";
   };
 

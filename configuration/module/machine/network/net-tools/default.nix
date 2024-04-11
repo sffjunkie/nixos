@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.net-tools;
+  cfg = config.looniversity.network.net-tools;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.net-tools = {
+  options.looniversity.network.net-tools = {
     enable = mkEnableOption "networking tools";
   };
 

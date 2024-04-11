@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.syncthing;
+  cfg = config.looniversity.service.syncthing;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.syncthing = {
+  options.looniversity.service.syncthing = {
     enable = mkEnableOption "syncthing";
   };
 

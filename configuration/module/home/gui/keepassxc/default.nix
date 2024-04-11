@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.keepassxc;
+  cfg = config.looniversity.gui.keepassxc;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.keepassxc = {
+  options.looniversity.gui.keepassxc = {
     enable = mkEnableOption "keepassxc";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.obsidian;
+  cfg = config.looniversity.gui.obsidian;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.obsidian = {
+  options.looniversity.gui.obsidian = {
     enable = mkEnableOption "obsidian";
   };
 

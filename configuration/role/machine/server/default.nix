@@ -17,7 +17,7 @@ in {
 
       service.autoUpgrade.enable = true;
       service.fail2ban.enable = true;
-      service.sshd.enable = true;
+      network.sshd.enable = true;
     };
 
     networking.firewall = {

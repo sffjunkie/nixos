@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.font;
+  cfg = config.looniversity.system.font;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.font = {
+  options.looniversity.system.font = {
     enable = mkEnableOption "font";
   };
 

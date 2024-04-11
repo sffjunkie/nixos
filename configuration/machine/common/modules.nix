@@ -1,8 +1,8 @@
 {
   config = {
     looniversity = {
-      age.enable = true;
-      sops.enable = true;
+      system.age.enable = true;
+      system.sops.enable = true;
     };
   };
 }

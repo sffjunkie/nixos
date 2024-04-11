@@ -4,14 +4,14 @@
   sops,
   ...
 }: let
-  cfg = config.looniversity.service.zigbee2mqtt;
+  cfg = config.looniversity.home-automation.zigbee2mqtt;
 
   format = pkgs.formats.yaml {};
   configFile = format.generate "zigbee2mqtt.yaml" cfg.settings;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.service.zigbee2mqtt = {
+  options.looniversity.home-automation.zigbee2mqtt = {
     enable = mkEnableOption "zigbee2mqtt";
 
     devices = mkOption {

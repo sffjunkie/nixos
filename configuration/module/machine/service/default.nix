@@ -3,6 +3,7 @@
     ./acme
     ./autoupgrade
     ./elasticsearch
+    ./fail2ban
     ./graylog
     ./homepage-dashboard
     ./lldap

@@ -20,19 +20,27 @@
       hostPlatform = lib.mkDefault "x86_64-linux";
 
       # Added for Obsidian
-      config.permittedInsecurePackages = [
-        "electron-25.9.0"
-      ];
+      # config.permittedInsecurePackages = [
+      #   "electron-25.9.0"
+      # ];
     };
 
     looniversity = {
-      desktop.stylix.enable = true;
+      network = {
+        net-tools.enable = true;
+      };
 
-      net-tools.enable = true;
-      rclone.enable = true;
-      spotify.enable = true;
+      system = {
+        rclone.enable = true;
+      };
 
-      mystmd.enable = true;
+      media = {
+        spotify.enable = true;
+      };
+
+      doc = {
+        mystmd.enable = true;
+      };
 
       admin = {
         mongodb.enable = true;
@@ -57,11 +65,12 @@
       theme = {
         nord.enable = true;
         papirus.enable = true;
+        stylix.enable = true;
       };
     };
 
     environment.systemPackages = [
-      pkgs.teams-for-linux
+      # pkgs.teams-for-linux # BUG: electron build failure
       pkgs.zoom-us
     ];
 

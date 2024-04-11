@@ -6,9 +6,9 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.looniversity.podman;
+  cfg = config.looniversity.system.podman;
 in {
-  options.looniversity.podman = {
+  options.looniversity.system.podman = {
     enable = mkEnableOption "podman";
   };
 

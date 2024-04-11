@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pavucontrol;
+  cfg = config.looniversity.system.pavucontrol;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.pavucontrol = {
+  options.looniversity.system.pavucontrol = {
     enable = mkEnableOption "pavucontrol";
   };
 

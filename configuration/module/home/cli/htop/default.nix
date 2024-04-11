@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.htop;
+  cfg = config.looniversity.cli.htop;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.htop = {
+  options.looniversity.cli.htop = {
     enable = mkEnableOption "htop";
   };
 

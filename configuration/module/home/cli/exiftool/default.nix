@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.exiftool;
+  cfg = config.looniversity.cli.exiftool;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.exiftool = {
+  options.looniversity.cli.exiftool = {
     enable = mkEnableOption "exiftool";
   };
 

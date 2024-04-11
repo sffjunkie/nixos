@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.brave;
+  cfg = config.looniversity.gui.brave;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.brave = {
+  options.looniversity.gui.brave = {
     enable = mkEnableOption "brave";
   };
 

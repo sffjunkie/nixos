@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.rofi;
+  cfg = config.looniversity.gui.rofi;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.rofi = {
+  options.looniversity.gui.rofi = {
     enable = mkEnableOption "rofi";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.alejandra;
+  cfg = config.looniversity.development.alejandra;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.alejandra = {
+  options.looniversity.development.alejandra = {
     enable = mkEnableOption "alejandra";
   };
 

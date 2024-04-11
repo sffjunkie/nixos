@@ -4,14 +4,14 @@
   sops,
   ...
 }: let
-  cfg = config.looniversity.service.minio;
+  cfg = config.looniversity.storage.minio;
 
   listenPort = lib.network.serviceHandlerNamedPort config "minio" "listen";
   consolePort = lib.network.serviceHandlerNamedPort config "minio" "console";
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.service.minio = {
+  options.looniversity.storage.minio = {
     enable = mkEnableOption "minio";
 
     dataDir = mkOption {

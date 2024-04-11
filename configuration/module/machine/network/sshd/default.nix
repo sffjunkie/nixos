@@ -6,9 +6,9 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.looniversity.service.sshd;
+  cfg = config.looniversity.network.sshd;
 in {
-  options.looniversity.service.sshd = {
+  options.looniversity.network.sshd = {
     enable = mkEnableOption "sshd";
   };
 

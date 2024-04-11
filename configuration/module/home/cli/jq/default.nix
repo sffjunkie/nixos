@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.jq;
+  cfg = config.looniversity.cli.jq;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.jq = {
+  options.looniversity.cli.jq = {
     enable = mkEnableOption "jq";
   };
 

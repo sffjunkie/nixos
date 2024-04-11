@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.age;
+  cfg = config.looniversity.system.age;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.age = {
+  options.looniversity.system.age = {
     enable = mkEnableOption "age";
   };
 

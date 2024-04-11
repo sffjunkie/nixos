@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pywal;
+  cfg = config.looniversity.system.pywal;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.pywal = {
+  options.looniversity.system.pywal = {
     enable = mkEnableOption "pywal";
   };
 

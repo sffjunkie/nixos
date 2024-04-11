@@ -5,10 +5,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.rclone;
+  cfg = config.looniversity.system.rclone;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.rclone = {
+  options.looniversity.system.rclone = {
     enable = mkEnableOption "rclone";
   };
 

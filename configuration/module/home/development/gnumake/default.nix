@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gnumake;
+  cfg = config.looniversity.development.gnumake;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gnumake = {
+  options.looniversity.development.gnumake = {
     enable = mkEnableOption "gnumake";
   };
 

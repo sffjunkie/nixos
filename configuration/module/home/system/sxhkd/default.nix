@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.sxhkd;
+  cfg = config.looniversity.system.sxhkd;
   inherit (lib) mkIf;
 in {
   config = mkIf cfg.enable {

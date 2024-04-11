@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.starship;
+  cfg = config.looniversity.cli.starship;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.starship = {
+  options.looniversity.cli.starship = {
     enable = mkEnableOption "starship";
   };
 

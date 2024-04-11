@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gimp;
+  cfg = config.looniversity.gui.gimp;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gimp = {
+  options.looniversity.gui.gimp = {
     enable = mkEnableOption "gimp";
   };
 

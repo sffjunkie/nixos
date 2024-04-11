@@ -18,10 +18,11 @@ in {
 
     looniversity = {
       desktop = {
-        gnome.enable = false;
-        qtile.enable = true;
+        environment = {
+          gnome.enable = false;
+          qtile.enable = true;
+        };
       };
-      base16-schemes.enable = true;
     };
   };
 }

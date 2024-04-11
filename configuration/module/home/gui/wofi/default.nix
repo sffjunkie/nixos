@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.wofi;
+  cfg = config.looniversity.gui.wofi;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.wofi = {
+  options.looniversity.gui.wofi = {
     enable = mkEnableOption "wofi";
   };
 

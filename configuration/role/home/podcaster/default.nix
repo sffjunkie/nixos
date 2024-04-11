@@ -13,11 +13,8 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      obs-studio.enable = true;
-      audio = {
-        easyeffects = {
-          enable = true;
-        };
+      media = {
+        obs-studio.enable = true;
       };
     };
   };

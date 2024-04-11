@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.zathura;
+  cfg = config.looniversity.gui.zathura;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.zathura = {
+  options.looniversity.gui.zathura = {
     enable = mkEnableOption "zathura";
   };
 

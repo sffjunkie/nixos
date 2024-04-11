@@ -5,11 +5,11 @@
   sops,
   ...
 }: let
-  cfg = config.looniversity.user-dirs;
+  cfg = config.looniversity.system.user-dirs;
 
   inherit (lib) mkEnableOption mkIf types;
 in {
-  options.looniversity.user-dirs = {
+  options.looniversity.system.user-dirs = {
     enable = mkEnableOption "user-dirs";
   };
 

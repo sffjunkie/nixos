@@ -4,22 +4,25 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.qtile;
+  cfg = config.looniversity.desktop.environment.qtile;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.desktop.qtile = {
+  options.looniversity.desktop.environment.qtile = {
     enable = mkEnableOption "qtile desktop";
   };
 
   config = mkIf cfg.enable {
     looniversity = {
-      display_manager.greetd.enable = true;
-      display_manager.tuigreet.enable = true;
+      desktop = {
+        display_manager.greetd.enable = true;
+        display_manager.tuigreet.enable = true;
+        lockscreen.swaylock.enable = true;
+        window_manager.qtile.enable = true;
+      };
 
-      window_manager.qtile.enable = true;
-
-      polkit.enable = true;
-      lockscreen.enable = true;
+      system = {
+        polkit.enable = true;
+      };
     };
 
     xdg.portal.enable = true;

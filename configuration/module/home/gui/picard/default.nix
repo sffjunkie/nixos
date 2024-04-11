@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.picard;
+  cfg = config.looniversity.gui.picard;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.picard = {
+  options.looniversity.gui.picard = {
     enable = mkEnableOption "picard";
   };
 

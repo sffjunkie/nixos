@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.libreoffice;
+  cfg = config.looniversity.gui.libreoffice;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.libreoffice = {
+  options.looniversity.gui.libreoffice = {
     enable = mkEnableOption "libreoffice";
   };
 

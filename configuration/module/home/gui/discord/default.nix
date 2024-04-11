@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.discord;
+  cfg = config.looniversity.gui.discord;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.discord = {
+  options.looniversity.gui.discord = {
     enable = mkEnableOption "discord";
   };
 

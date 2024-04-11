@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.sops;
+  cfg = config.looniversity.system.sops;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.sops = {
+  options.looniversity.system.sops = {
     enable = mkEnableOption "sops";
   };
 

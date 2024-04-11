@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.htmldoc;
+  cfg = config.looniversity.cli.htmldoc;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.htmldoc = {
+  options.looniversity.cli.htmldoc = {
     enable = mkEnableOption "htmldoc";
   };
 

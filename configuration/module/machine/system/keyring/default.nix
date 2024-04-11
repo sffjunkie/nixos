@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.keyring;
+  cfg = config.looniversity.system.keyring;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.keyring = {
+  options.looniversity.system.keyring = {
     enable = mkEnableOption "keyring";
   };
 

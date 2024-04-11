@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.atuin;
+  cfg = config.looniversity.cli.atuin;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.atuin = {
+  options.looniversity.cli.atuin = {
     enable = mkEnableOption "atuin";
   };
 

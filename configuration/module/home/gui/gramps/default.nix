@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gramps;
+  cfg = config.looniversity.gui.gramps;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gramps = {
+  options.looniversity.gui.gramps = {
     enable = mkEnableOption "gramps";
   };
 

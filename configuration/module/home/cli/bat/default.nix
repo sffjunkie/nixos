@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.bat;
+  cfg = config.looniversity.cli.bat;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.bat = {
+  options.looniversity.cli.bat = {
     enable = mkEnableOption "bat";
   };
 

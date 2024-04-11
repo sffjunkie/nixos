@@ -3,29 +3,29 @@
   lib,
   ...
 }: let
-  cfg = config.looniversity.service.node-red;
+  cfg = config.looniversity.home-automation.node-red;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.service.node-red = {
+  options.looniversity.home-automation.node-red = {
     enable = mkEnableOption "node-red";
 
     nodes = mkOption {
       type = types.attrsOf types.str;
       default = {};
-    }
+    };
 
     nodes = mkOption {
       type = types.attrsOf types.str;
       default = {};
-    }
+    };
   };
 
   config = mkIf cfg.enable {
     looniversity = {
-      nodejs.enable = true;
+      development.nodejs.enable = true;
     };
-    
+
     environment.shellAliases = {
       node-red-pm = "npm --prefix=${config.services.node-red.userDir} --save";
     };

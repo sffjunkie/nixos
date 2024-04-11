@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.dircolors;
+  cfg = config.looniversity.cli.dircolors;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.dircolors = {
+  options.looniversity.cli.dircolors = {
     enable = mkEnableOption "dircolors";
   };
 

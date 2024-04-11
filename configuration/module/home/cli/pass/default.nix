@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pass;
+  cfg = config.looniversity.cli.pass;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.pass = {
+  options.looniversity.cli.pass = {
     enable = mkEnableOption "pass";
   };
 

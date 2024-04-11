@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.yq;
+  cfg = config.looniversity.cli.yq;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.yq = {
+  options.looniversity.cli.yq = {
     enable = mkEnableOption "yq";
   };
 

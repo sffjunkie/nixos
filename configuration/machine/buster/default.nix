@@ -19,15 +19,19 @@
     nixpkgs = {
       hostPlatform = lib.mkDefault "x86_64-linux";
 
-      config.permittedInsecurePackages = [
-        "electron-25.9.0"
-      ];
+      # config.permittedInsecurePackages = [
+      #   "electron-25.9.0"
+      # ];
     };
 
     looniversity = {
-      spotify.enable = true;
+      media = {
+        spotify.enable = true;
+      };
       # TODO: Disable until secrets added to Sops
-      service.openvpn.enable = false;
+      network = {
+        openvpn.enable = false;
+      };
 
       role = {
         laptop.enable = true;
@@ -41,7 +45,7 @@
     };
 
     environment.systemPackages = [
-      pkgs.teams-for-linux
+      # pkgs.teams-for-linux # BUG: electron build failure
       pkgs.zoom-us
     ];
 

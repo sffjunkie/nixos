@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.qutebrowser;
+  cfg = config.looniversity.gui.qutebrowser;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.qutebrowser = {
+  options.looniversity.gui.qutebrowser = {
     enable = mkEnableOption "qutebrowser";
   };
 

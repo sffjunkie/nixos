@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.khal;
+  cfg = config.looniversity.cli.khal;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.khal = {
+  options.looniversity.cli.khal = {
     enable = mkEnableOption "khal";
   };
 

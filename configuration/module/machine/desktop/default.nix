@@ -2,9 +2,8 @@
   imports = [
     ./desktop_environment
     ./display_manager
-    ./notifications
-    ./theme
-    ./wayland
+    ./lockscreen
+    ./notification
     ./window_mananger
   ];
 }

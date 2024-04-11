@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.window_manager.qtile;
+  cfg = config.looniversity.desktop.window_manager.qtile;
 
   startScript = pkgs.writeScript "startqtile" ''
     #! ${pkgs.bash}/bin/bash
@@ -21,7 +21,7 @@
 
   inherit (lib) mkEnableOption mkIf mkOption;
 in {
-  options.looniversity.window_manager.qtile = {
+  options.looniversity.desktop.window_manager.qtile = {
     enable = mkEnableOption "qtile";
   };
 
@@ -49,7 +49,7 @@ in {
       backend = "wayland";
     };
 
-    looniversity.display_manager.tuigreet.script = "${startScript}";
+    looniversity.desktop.display_manager.tuigreet.script = "${startScript}";
 
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";

@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.service.jellyfin;
+  cfg = config.looniversity.media.jellyfin;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.service.jellyfin = {
+  options.looniversity.media.jellyfin = {
     enable = mkEnableOption "jellyfin";
   };
 

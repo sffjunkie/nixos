@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gh;
+  cfg = config.looniversity.cli.gh;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gh = {
+  options.looniversity.cli.gh = {
     enable = mkEnableOption "gh";
   };
 

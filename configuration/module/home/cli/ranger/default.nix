@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.ranger;
+  cfg = config.looniversity.cli.ranger;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.ranger = {
+  options.looniversity.cli.ranger = {
     enable = mkEnableOption "ranger";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.direnv;
+  cfg = config.looniversity.development.direnv;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.direnv = {
+  options.looniversity.development.direnv = {
     enable = mkEnableOption "direnv";
   };
 

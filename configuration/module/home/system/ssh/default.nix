@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.ssh;
+  cfg = config.looniversity.system.ssh;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.ssh = {
+  options.looniversity.system.ssh = {
     enable = mkEnableOption "ssh";
   };
 

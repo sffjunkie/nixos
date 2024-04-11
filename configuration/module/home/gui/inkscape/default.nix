@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.inkscape;
+  cfg = config.looniversity.gui.inkscape;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.inkscape = {
+  options.looniversity.gui.inkscape = {
     enable = mkEnableOption "inkscape";
   };
 

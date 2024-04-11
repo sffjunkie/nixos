@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.service.nfs;
+  cfg = config.looniversity.storage.nfs;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.service.nfs = {
+  options.looniversity.storage.nfs = {
     enable = mkEnableOption "nfs";
 
     exports = mkOption {

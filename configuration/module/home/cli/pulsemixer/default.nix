@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pulsemixer;
+  cfg = config.looniversity.cli.pulsemixer;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.pulsemixer = {
+  options.looniversity.cli.pulsemixer = {
     enable = mkEnableOption "pulsemixer";
   };
 

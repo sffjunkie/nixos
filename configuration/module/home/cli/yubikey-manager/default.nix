@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.yubikeyManager;
+  cfg = config.looniversity.cli.yubikeyManager;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.yubikeyManager = {
+  options.looniversity.cli.yubikeyManager = {
     enable = mkEnableOption "Yubikey Manager";
   };
 

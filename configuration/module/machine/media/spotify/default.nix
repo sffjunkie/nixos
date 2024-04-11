@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.spotify;
+  cfg = config.looniversity.media.spotify;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.spotify = {
+  options.looniversity.media.spotify = {
     enable = mkEnableOption "spotify";
   };
 

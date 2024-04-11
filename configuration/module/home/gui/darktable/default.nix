@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.darktable;
+  cfg = config.looniversity.gui.darktable;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.darktable = {
+  options.looniversity.gui.darktable = {
     enable = mkEnableOption "darktable";
   };
 

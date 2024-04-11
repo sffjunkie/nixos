@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gns3;
+  cfg = config.looniversity.gui.gns3;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gns3 = {
+  options.looniversity.gui.gns3 = {
     enable = mkEnableOption "gns3";
   };
 

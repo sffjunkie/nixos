@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.obs-studio;
+  cfg = config.looniversity.media.obs-studio;
   obs-plugins = pkgs.obs-studio-plugins;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.obs-studio = {
+  options.looniversity.media.obs-studio = {
     enable = mkEnableOption "obs-studio";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.just;
+  cfg = config.looniversity.cli.just;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.just = {
+  options.looniversity.cli.just = {
     enable = mkEnableOption "just";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.shellcheck;
+  cfg = config.looniversity.development.shellcheck;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.shellcheck = {
+  options.looniversity.development.shellcheck = {
     enable = mkEnableOption "shellcheck";
   };
 

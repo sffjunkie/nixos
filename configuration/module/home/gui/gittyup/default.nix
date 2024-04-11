@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.gittyup;
+  cfg = config.looniversity.gui.gittyup;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.gittyup = {
+  options.looniversity.gui.gittyup = {
     enable = mkEnableOption "gittyup";
   };
 

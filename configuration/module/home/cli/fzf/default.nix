@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.fzf;
+  cfg = config.looniversity.cli.fzf;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.fzf = {
+  options.looniversity.cli.fzf = {
     enable = mkEnableOption "fzf";
   };
 

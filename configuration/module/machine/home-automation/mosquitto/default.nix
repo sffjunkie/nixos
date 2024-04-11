@@ -4,11 +4,11 @@
   sops,
   ...
 }: let
-  cfg = config.looniversity.service.mosquitto;
+  cfg = config.looniversity.home-automation.mosquitto;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.service.mosquitto = {
+  options.looniversity.home-automation.mosquitto = {
     enable = mkEnableOption "mosquitto";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.firefox;
+  cfg = config.looniversity.gui.firefox;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.firefox = {
+  options.looniversity.gui.firefox = {
     enable = mkEnableOption "firefox";
   };
 

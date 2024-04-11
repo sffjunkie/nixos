@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.mpv;
+  cfg = config.looniversity.gui.mpv;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.mpv = {
+  options.looniversity.gui.mpv = {
     enable = mkEnableOption "mpv";
   };
 

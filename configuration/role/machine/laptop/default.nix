@@ -15,12 +15,27 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      role.gui.enable = true;
-      libnotify.enable = true;
-      keyring.enable = true;
-      pipewire.enable = true;
-      yubikey_plus.enable = true;
-      font.enable = true;
+      role = {
+        gui.enable = true;
+      };
+
+      desktop = {
+        notification.libnotify.enable = true;
+      };
+
+      media = {
+        pipewire.enable = true;
+      };
+
+      service = {
+        homepage-dashboard.enable = true;
+      };
+
+      system = {
+        font.enable = true;
+        yubikey_plus.enable = true;
+        keyring.enable = true;
+      };
     };
 
     environment.systemPackages = [

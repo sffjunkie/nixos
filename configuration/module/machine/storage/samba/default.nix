@@ -3,11 +3,11 @@
   lib,
   ...
 }: let
-  cfg = config.looniversity.service.samba;
+  cfg = config.looniversity.storage.samba;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options = {
-    looniversity.service.samba = {
+    looniversity.storage.samba = {
       enable = mkEnableOption "samba";
 
       shares = mkOption {

@@ -1,9 +1,7 @@
 {
   imports = [
     ./dunst
-    ./nord
-    ./papirus
-    ./stylix
+    ./swaylock
     ./wallpaper
   ];
 }

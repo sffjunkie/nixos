@@ -6,9 +6,9 @@
 }: let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.looniversity.polkit;
+  cfg = config.looniversity.system.polkit;
 in {
-  options.looniversity.polkit = {
+  options.looniversity.system.polkit = {
     enable = mkEnableOption "polkit";
   };
 

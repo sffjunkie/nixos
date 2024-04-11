@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.youtubeDl;
+  cfg = config.looniversity.cli.youtubeDl;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.youtubeDl = {
+  options.looniversity.cli.youtubeDl = {
     enable = mkEnableOption "youtube-dl";
   };
 

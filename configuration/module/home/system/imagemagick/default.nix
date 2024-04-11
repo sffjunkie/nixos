@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.imagemagick;
+  cfg = config.looniversity.system.imagemagick;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.imagemagick = {
+  options.looniversity.system.imagemagick = {
     enable = mkEnableOption "imagemagick";
   };
 

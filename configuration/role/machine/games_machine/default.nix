@@ -13,10 +13,15 @@ in {
   config = mkIf cfg.enable {
     looniversity = {
       role.gui.enable = true;
-      steam.enable = true;
-      lutris.enable = true;
-      pipewire.enable = true;
-      retroarch.enable = true;
+      game = {
+        steam.enable = true;
+        lutris.enable = true;
+
+        retroarch.enable = true;
+      };
+      media = {
+        pipewire.enable = true;
+      };
 
       mount = {
         roms.enable = false;

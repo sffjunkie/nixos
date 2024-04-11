@@ -3,14 +3,14 @@
     ./admin
     ./desktop
     ./development
-    ./docs
-    ./games
+    ./doc
+    ./game
     ./home-automation
     ./media
     ./network
-    ./scripts
+    ./script
     ./service
-    ./shells
+    ./shell
     ./storage
     ./system
     ./theme

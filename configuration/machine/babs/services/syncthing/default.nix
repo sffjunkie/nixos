@@ -1,6 +1,4 @@
-{config, ...}: let
-  cfg = config.services.syncthing;
-in {
+{
   config = {
     networking.firewall.allowedTCPPorts = [8384];
 

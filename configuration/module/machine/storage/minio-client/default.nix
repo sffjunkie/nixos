@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.minio-client;
+  cfg = config.looniversity.storage.minio-client;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.minio-client = {
+  options.looniversity.storage.minio-client = {
     enable = mkEnableOption "minio-client";
   };
 

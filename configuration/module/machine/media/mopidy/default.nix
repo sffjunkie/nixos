@@ -9,11 +9,11 @@
   mopidy-spotify,
   ...
 }: let
-  cfg = config.looniversity.mopidy;
+  cfg = config.looniversity.media.mopidy;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.mopidy = {
+  options.looniversity.media.mopidy = {
     enable = mkEnableOption "mopidy";
   };
 

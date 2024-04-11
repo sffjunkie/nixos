@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.git;
+  cfg = config.looniversity.cli.git;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.git = {
+  options.looniversity.cli.git = {
     enable = mkEnableOption "git";
   };
 
@@ -26,7 +26,7 @@ in {
       };
     };
 
-    programs.zsh.shellAliases = mkIf config.looniversity.zsh.enable {
+    programs.zsh.shellAliases = mkIf config.looniversity.shell.zsh.enable {
       gvl = "git config --list --show-origin";
     };
   };

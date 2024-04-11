@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.lazygit;
+  cfg = config.looniversity.cli.lazygit;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.lazygit = {
+  options.looniversity.cli.lazygit = {
     enable = mkEnableOption "lazygit";
   };
 

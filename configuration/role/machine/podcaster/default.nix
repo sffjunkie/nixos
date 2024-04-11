@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     looniversity = {
-      droidcam = {
+      media.droidcam = {
         enable = true;
       };
     };

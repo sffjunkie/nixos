@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pavucontrol;
+  cfg = config.looniversity.media.pavucontrol;
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.pavucontrol = {
+  options.looniversity.media.pavucontrol = {
     enable = mkEnableOption "pavucontrol";
   };
 

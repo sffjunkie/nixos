@@ -4,13 +4,14 @@
     ./cli
     ./desktop
     ./development
-    ./editors
+    ./editor
     ./gui
     ./media
-    ./scripts
+    ./music
+    ./script
     ./service
-    ./shells
+    ./shell
     ./system
-    ./terminals
+    ./terminal
   ];
 }

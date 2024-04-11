@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.pipewire;
+  cfg = config.looniversity.media.pipewire;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.pipewire = {
+  options.looniversity.media.pipewire = {
     enable = mkEnableOption "pipewire";
   };
 

@@ -20,8 +20,11 @@
     nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 
     looniversity = {
-      net-tools.enable = true;
-      service = {
+      network = {
+        net-tools.enable = true;
+        sshd.enable = true;
+      };
+      storage = {
         minio = {
           enable = true;
           dataDir = ["/tank0/minio/data"];
@@ -39,7 +42,6 @@
             };
           };
         };
-        sshd.enable = true;
       };
 
       role = {

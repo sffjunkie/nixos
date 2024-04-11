@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.profile.hardened;
+  cfg = config.looniversity.system.hardened;
   inherit (lib) mkDefault mkEnableOption mkIf mkOverride;
 in {
-  options.looniversity.profile.hardened = {
+  options.looniversity.system.hardened = {
     enable = mkEnableOption "hardened";
   };
 

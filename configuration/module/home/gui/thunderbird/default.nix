@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.thunderbird;
+  cfg = config.looniversity.gui.thunderbird;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.thunderbird = {
+  options.looniversity.gui.thunderbird = {
     enable = mkEnableOption "thunderbird";
   };
 

@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.bottom;
+  cfg = config.looniversity.cli.bottom;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.bottom = {
+  options.looniversity.cli.bottom = {
     enable = mkEnableOption "bottom";
   };
 

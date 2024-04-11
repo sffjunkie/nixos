@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.looniversity.droidcam;
+  cfg = config.looniversity.media.droidcam;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.droidcam = {
+  options.looniversity.media.droidcam = {
     enable = mkEnableOption "droidcam";
   };
 

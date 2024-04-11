@@ -1,7 +1,6 @@
 {
   imports = [
     ./coredns
-    ./fail2ban
     ./net-tools
     ./openvpn
     ./sshd

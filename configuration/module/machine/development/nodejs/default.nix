@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.nodejs;
+  cfg = config.looniversity.development.nodejs;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.nodejs = {
+  options.looniversity.development.nodejs = {
     enable = mkEnableOption "nodejs";
   };
 

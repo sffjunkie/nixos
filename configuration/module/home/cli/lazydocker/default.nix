@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.lazydocker;
+  cfg = config.looniversity.cli.lazydocker;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.lazydocker = {
+  options.looniversity.cli.lazydocker = {
     enable = mkEnableOption "lazydocker";
   };
 

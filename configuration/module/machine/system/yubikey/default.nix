@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.yubikey_plus;
+  cfg = config.looniversity.system.yubikey_plus;
 
   # https://github.com/systemd/systemd/issues/4288#issuecomment-348166161
   udev_rule = pkgs.writeTextFile {
@@ -17,7 +17,7 @@
 
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.yubikey_plus = {
+  options.looniversity.system.yubikey_plus = {
     enable = mkEnableOption "Yubikey Plus udev rule";
   };
 
