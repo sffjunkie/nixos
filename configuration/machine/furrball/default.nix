@@ -64,6 +64,8 @@
         workstation.enable = true;
       };
 
+      shell.zsh.enable = true;
+
       theme = {
         nord.enable = true;
         papirus.enable = true;
@@ -84,8 +86,6 @@
         wantedBy = ["default.target"];
       };
     };
-
-    programs.zsh.enable = true;
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";

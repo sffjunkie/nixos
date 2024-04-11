@@ -38,6 +38,8 @@
         vm_host.enable = true;
       };
 
+      shell.zsh.enable = true;
+
       theme = {
         nord.enable = true;
         papirus.enable = true;
@@ -48,14 +50,6 @@
       # pkgs.teams-for-linux # BUG: electron build failure
       pkgs.zoom-us
     ];
-
-    programs.zsh = {
-      enable = true;
-      loginShellInit = ''
-        # do not glob # (conflicts with nix flakes)
-        disable -p '#'
-      '';
-    };
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
