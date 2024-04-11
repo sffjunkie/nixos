@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.cli.nushell;
+  cfg = config.looniversity.shell.nushell;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.cli.nushell = {
+  options.looniversity.shell.nushell = {
     enable = mkEnableOption "nushell";
   };
 

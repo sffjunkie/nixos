@@ -20,7 +20,6 @@
     ./lazygit
     ./lsd
     ./neofetch
-    ./nushell
     ./pass
     ./pulsemixer
     ./ranger
