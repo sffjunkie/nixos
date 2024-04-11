@@ -102,7 +102,7 @@
       kitty.enable = false;
       libreoffice.enable = true;
       mpv.enable = true;
-      obsidian.enable = true;
+      # obsidian.enable = true;
       picard.enable = true;
       qutebrowser.enable = true;
       rofi.enable = true;
