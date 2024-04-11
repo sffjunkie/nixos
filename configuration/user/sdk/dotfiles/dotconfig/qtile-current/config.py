@@ -50,7 +50,8 @@ screens = [
     Screen(
         top=top_bar,
         bottom=bottom_bar,
-        set_wallpaper=wallpaper.get_wallpaper(),
+        wallpaper=wallpaper.get_wallpaper(),
+        wallpaper_mode="fill",
     ),
 ]
 
