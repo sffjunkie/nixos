@@ -63,14 +63,6 @@ follow_mouse_focus = False
 widget_defaults = theme["widget"].copy()
 wmname = "QTile"
 
-# @hook.subscribe.client_new
-# def client_to_group(client):
-#     wm_class = client.window.get_wm_class()[0]
-#     group_name = group.find_group_for(wm_class)
-#     if group_name:
-#         client.togroup(group_name)
-# lazy.group[group_name].cmd_toscreen()
-
 
 # to get ids use `qtile cmd-obj -o core -f get_inputs`
 wl_input_rules = {
