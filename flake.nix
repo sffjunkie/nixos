@@ -74,13 +74,13 @@
         modules = [
           ./configuration/machine/pinky
           ./configuration/user/sysadmin/machine
-
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.default
-          hmCommonConfig
           {
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
+
+          home-manager.nixosModules.default
+          hmCommonConfig
+          sops-nix.nixosModules.sops
         ];
       };
 
@@ -94,13 +94,13 @@
         modules = [
           ./configuration/machine/thebrain
           ./configuration/user/sysadmin/machine
-
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.default
-          hmCommonConfig
           {
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
+
+          home-manager.nixosModules.default
+          hmCommonConfig
+          sops-nix.nixosModules.sops
         ];
       };
 
@@ -115,18 +115,17 @@
           ./configuration/machine/furrball
           ./configuration/user/sdk/machine
           ./configuration/user/sysadmin/machine
-
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.default
-          hmCommonConfig
           {
             config.home-manager.users.sdk = import ./configuration/user/sdk/home;
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
 
+          home-manager.nixosModules.default
+          hmCommonConfig
           nixos-hardware.nixosModules.common-pc
           nixos-hardware.nixosModules.common-pc-ssd
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
         ];
       };
 
@@ -142,16 +141,15 @@
           ./configuration/user/sysadmin/machine
 
           attic.nixosModules.atticd
-
-          sops-nix.nixosModules.sops
-          home-manager.nixosModules.default
-          hmCommonConfig
           {
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
 
+          home-manager.nixosModules.default
+          hmCommonConfig
           nixos-hardware.nixosModules.common-pc
           nixos-hardware.nixosModules.common-pc-ssd
+          sops-nix.nixosModules.sops
         ];
       };
 
@@ -166,11 +164,6 @@
           ./configuration/machine/buster
           ./configuration/user/sdk/machine
           ./configuration/user/sysadmin/machine
-
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-          home-manager.nixosModules.default
-          hmCommonConfig
           {
             config.home-manager.users.sdk =
               import ./configuration/user/sdk/home;
@@ -179,7 +172,11 @@
             config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
           }
 
+          home-manager.nixosModules.default
+          hmCommonConfig
           nixos-hardware.nixosModules.microsoft-surface-pro-intel
+          sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
         ];
       };
 
@@ -192,18 +189,18 @@
         modules = [
           "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./installer/looniversity-minimal.nix
+          {
+            config.home-manager.users.nixos = import ./configuration/user/nixos/home;
+          }
 
           disko.nixosModules.disko
           {
             config.disko.enableConfig = false;
           }
 
-          sops-nix.nixosModules.sops
           home-manager.nixosModules.default
           hmCommonConfig
-          {
-            config.home-manager.users.nixos = import ./configuration/user/nixos/home;
-          }
+          sops-nix.nixosModules.sops
         ];
       };
     };
