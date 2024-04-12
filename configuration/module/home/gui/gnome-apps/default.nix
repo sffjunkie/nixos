@@ -18,6 +18,7 @@ in {
       gnome.dconf-editor
       gnome.ghex
       gnome.gnome-boxes
+      gnome.gnome-calculator
       gnome.gnome-characters
       gnome.gnome-tweaks
     ];
