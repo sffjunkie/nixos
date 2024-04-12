@@ -74,7 +74,7 @@
     };
 
     environment.systemPackages = [
-      # pkgs.teams-for-linux # BUG: electron build failure
+      pkgs.teams-for-linux
       pkgs.zoom-us
     ];
 
