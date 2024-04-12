@@ -2,7 +2,7 @@
   imports = [
     ./musicctl
     ./ncmpcpp
-    ./playback
+    ./mpd
     ./track-change-notify
   ];
 }
