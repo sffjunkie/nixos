@@ -29,6 +29,7 @@ in {
           icon_position = "left";
           min_icon_size = 32;
           max_icon_size = 128;
+          vertical_alignment = "top";
         };
       };
     };
