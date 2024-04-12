@@ -20,11 +20,6 @@
   config = {
     nixpkgs = {
       hostPlatform = lib.mkDefault "x86_64-linux";
-
-      # Added for Obsidian
-      # config.permittedInsecurePackages = [
-      #   "electron-25.9.0"
-      # ];
     };
 
     looniversity = {
