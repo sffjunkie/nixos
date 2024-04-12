@@ -161,7 +161,6 @@
       system = {
         gpg.enable = true;
         imagemagick.enable = true;
-        pavucontrol.enable = true;
         pywal.enable = true;
         veracrypt.enable = true;
         user-dirs.enable = true;
