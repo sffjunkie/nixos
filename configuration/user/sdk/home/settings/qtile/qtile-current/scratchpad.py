@@ -10,9 +10,7 @@ def build_scratchpads(settings) -> list[ScratchPad]:
             dropdowns=[
                 DropDown(
                     "ncmpcpp",
-                    terminal_run_command(
-                        "alacritty", ["ncmpcpp", "-h", "/run/user/1001/mpd.sock"]
-                    ),
+                    terminal_run_command("alacritty", ["ncmpcpp"]),
                     height=0.4,
                     width=0.5,
                     x=0.25,
