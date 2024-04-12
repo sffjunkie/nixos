@@ -5,7 +5,7 @@ from socket import gethostname
 from typing import List
 
 from libqtile.command import lazy
-from libqtile import qtile, bar, widget
+from libqtile import bar, widget
 
 from widgets import NetMin, EscapedWindowName, FixedWidthVolume, OpenWeatherMap
 
