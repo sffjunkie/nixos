@@ -32,6 +32,7 @@
       };
 
       media = {
+        pavucontrol.enable = true;
         spotify.enable = true;
       };
 

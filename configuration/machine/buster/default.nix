@@ -22,6 +22,7 @@
 
     looniversity = {
       media = {
+        pavucontrol.enable = true;
         spotify.enable = true;
       };
       # TODO: Disable until secrets added to Sops
