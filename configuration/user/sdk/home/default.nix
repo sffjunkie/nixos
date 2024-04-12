@@ -135,10 +135,12 @@
       };
 
       music = {
-        playback = {
+        mpd = {
           enable = true;
           uid = osConfig.users.users.sdk.uid;
         };
+        musicctl.enable = true;
+        ncmpcpp.enable = true;
         notify.enable = true;
       };
 
