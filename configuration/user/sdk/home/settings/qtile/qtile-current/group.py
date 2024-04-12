@@ -3,10 +3,10 @@ from libqtile.config import Key, Group
 
 group_config = [
     ("WWW", {"layout": "monadtall"}),
-    ("DEV", {"layout": "monadtall"}),
+    ("BRAIN", {"layout": "monadtall"}),
+    ("DEV", {"layout": "max"}),
     ("SYS", {"layout": "monadtall"}),
     ("DOC", {"layout": "monadtall"}),
-    ("VxM", {"layout": "monadtall"}),
     ("CHAT", {"layout": "monadtall"}),
     ("MUS", {"layout": "monadtall"}),
     ("VID", {"layout": "monadtall"}),
