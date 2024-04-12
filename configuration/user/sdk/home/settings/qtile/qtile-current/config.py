@@ -39,6 +39,9 @@ keys = (
 )
 mouse = kbdmouse.bind_mouse_buttons(settings)
 
+floating_layout = layout.Floating(
+    float_rules=layout.Floating.default_float_rules + rule.float_rules(),
+)
 theme = settings["theme"]
 layouts = [
     layout.MonadTall(**theme["layout"]),
