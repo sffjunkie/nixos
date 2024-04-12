@@ -1,7 +1,7 @@
 """Bars for Qtile"""
 
 import os
-from subprocess import run
+from socket import gethostname
 from typing import List
 
 from libqtile.command import lazy
@@ -11,6 +11,9 @@ from widgets import NetMin, EscapedWindowName, FixedWidthVolume, OpenWeatherMap
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
+
+USER = os.environ["USER"]
+HOSTNAME = gethostname()
 
 
 def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
@@ -66,7 +69,7 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
         _fg_sep(),
         _bg_sep(),
         widget.TextBox(
-            text="sdk@furrball",
+            text=f"{USER}@{HOSTNAME}",
             font=font,
             fontsize=fontsize,
             foreground=theme_colors["panel_fg"],
