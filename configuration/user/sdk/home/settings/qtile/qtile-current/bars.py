@@ -453,7 +453,6 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
             background=theme_colors["powerline_bg"][1],
         ),
         widget.Mpd2(
-            host="/run/user/1001/mpd.sock",
             status_format="{play_status} {title} | {artist} | {album}",
             idle_format="Play queue empty",
             font=font,
