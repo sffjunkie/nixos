@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     services.dunst = {
       enable = true;
+      waylandDisplay = "wayland-0";
       settings = {
         global = {
           width = 500;
