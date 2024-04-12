@@ -70,7 +70,6 @@
         lazygit.enable = true;
         lsd.enable = true;
         neofetch.enable = true;
-        nushell.enable = true;
         pass.enable = true;
         pulsemixer.enable = true;
         ranger.enable = true;
@@ -126,6 +125,7 @@
       };
 
       shell = {
+        nushell.enable = true;
         zsh.enable = true;
       };
 
