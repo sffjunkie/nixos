@@ -30,7 +30,7 @@ settings = setting.load_settings()
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
-dgroups_app_rules = rule.build_rules()
+dgroups_app_rules = rule.dgroup_rules()
 
 keys = (
     kbdmouse.build_keys(settings)
