@@ -167,6 +167,11 @@
         veracrypt.enable = true;
         user-dirs.enable = true;
       };
+
+      wayland = {
+        clipboard.enable = true;
+        screenshot.enable = true;
+      };
     };
   };
 }
