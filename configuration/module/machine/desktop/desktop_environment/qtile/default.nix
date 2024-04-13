@@ -25,7 +25,10 @@ in {
       };
     };
 
-    xdg.portal.enable = true;
+    xdg.portal = {
+      enable = true;
+      configPackages = [pkgs.xdg-desktop-portal-wlr];
+    };
     xdg.portal.wlr.enable = true;
 
     environment.systemPackages = [
