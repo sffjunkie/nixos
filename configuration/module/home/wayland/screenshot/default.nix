@@ -55,6 +55,8 @@
       esac
     done
 
+    [ -t 1 ] && verbose=0
+
     if [ $region -eq 1 ]; then
       if [ "$output" == "swappy" ]; then
         [ $verbose -eq 1 ] && echo "Saving screenshot to $screenshot_dir"
