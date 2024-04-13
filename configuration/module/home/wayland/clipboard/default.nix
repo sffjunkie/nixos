@@ -12,6 +12,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.wl-clipboard
+      pkgs.cliphist
     ];
   };
 }
