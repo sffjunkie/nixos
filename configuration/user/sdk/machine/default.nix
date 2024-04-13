@@ -6,6 +6,7 @@
   imports = [
     ./backup/local.nix
     ./backup/nas.nix
+    ./settings
   ];
 
   config = {
