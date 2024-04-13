@@ -9,7 +9,7 @@
 
 window {
     location:   center;
-    width:      480px;
+    width:      640px;
     border:     1px;
 }
 
