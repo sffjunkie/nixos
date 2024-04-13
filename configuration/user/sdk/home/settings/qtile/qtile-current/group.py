@@ -5,7 +5,7 @@ group_config = [
     ("WWW", {"layout": "monadtall"}),
     ("BRAIN", {"layout": "monadtall"}),
     ("DEV", {"layout": "max"}),
-    ("SYS", {"layout": "monadtall"}),
+    ("TERM", {"layout": "monadtall"}),
     ("DOC", {"layout": "monadtall"}),
     ("CHAT", {"layout": "monadtall"}),
     ("MUS", {"layout": "monadtall"}),
