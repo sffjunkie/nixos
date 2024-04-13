@@ -47,7 +47,7 @@ def build_keys(settings) -> List[Key]:
         # App launcher
         Key(
             [Super, ApplicationLaunchModKey],
-            "Space",
+            "Return",
             lazy.spawn(
                 "rofi -modi drun -show drun -theme-str '@import \"looniversity\"'"
             ),
