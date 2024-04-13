@@ -20,26 +20,28 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.nfs.server = {
-      enable = true;
-      exports =
-        lib.concatMapStringsSep
-        "\n"
-        (share: "${share} ${config.looniversity.network.network}/${toString config.looniversity.network.prefixLength}(rw,no_subtree_check)")
-        config.looniversity.service.nfs.exports;
+    services.nfs = {
+      server = {
+        enable = true;
+        exports =
+          lib.concatMapStringsSep
+          "\n"
+          (share: "${share} ${config.looniversity.network.network}/${toString config.looniversity.network.prefixLength}(rw,no_subtree_check)")
+          config.looniversity.storage.nfs.exports;
 
-      statdPort = 4000;
-      lockdPort = 4001;
-      mountdPort = 4002;
+        statdPort = 4000;
+        lockdPort = 4001;
+        mountdPort = 4002;
+      };
 
-      extraNfsdConfig = ''
-        rdma = true # Remote Direct Memory Access
-        vers3 = false
-        vers4 = true
-        vers4.0 = false
-        vers4.1 = false
-        vers4.2 = true
-      '';
+      settings = {
+        nfsd.rdma = true; # Remote Direct Memory Access
+        nfsd.vers3 = false;
+        nfsd.vers4 = true;
+        nfsd."vers4.0" = false;
+        nfsd."vers4.1" = false;
+        nfsd."vers4.2" = true;
+      };
     };
 
     networking.firewall.allowedTCPPorts = [111 2049 4000 4001 4002];
