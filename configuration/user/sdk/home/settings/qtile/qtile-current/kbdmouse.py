@@ -85,8 +85,8 @@ def build_keys(settings) -> List[Key]:
         ),
         # endregion
         # region QTile Control
-        Key([Super, Alt], "r", lazy.reload_config(), desc="Reload QTile"),
-        Key([Super, Alt], "q", lazy.shutdown(), desc="Quit QTile"),
+        Key([Super, Alt], "Escape", lazy.reload_config(), desc="Reload QTile"),
+        Key([Super, Alt, "control"], "Backspace", lazy.shutdown(), desc="Quit QTile"),
         # endregion
         # region Window Control
         Key(
