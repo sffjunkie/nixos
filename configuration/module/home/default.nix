@@ -13,5 +13,6 @@
     ./shell
     ./system
     ./terminal
+    ./wayland
   ];
 }
