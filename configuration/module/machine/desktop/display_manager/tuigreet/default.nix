@@ -12,7 +12,7 @@ in {
     enable = mkEnableOption "tuigreet";
 
     script = mkOption {
-      type = types.string;
+      type = types.str;
       default = "";
     };
   };
