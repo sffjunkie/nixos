@@ -1,5 +1,11 @@
 {
-  config = {
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.looniversity.service.homepage-dashboard;
+in {
+  config = lib.mkIf cfg.enable {
     services.homepage-dashboard = {
       widgets = [
         {
