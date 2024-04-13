@@ -48,7 +48,7 @@ in {
         server string = samba
         workgroup = LOONIVERSITY
       '';
-      shares = config.looniversity.service.samba.shares;
+      shares = config.looniversity.storage.samba.shares;
     };
 
     services.samba-wsdd.enable = true;
