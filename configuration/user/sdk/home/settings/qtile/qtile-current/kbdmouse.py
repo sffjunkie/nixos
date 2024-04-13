@@ -14,17 +14,6 @@ ApplicationLaunchModKey = Alt
 
 
 def build_keys(settings) -> List[Key]:
-    sway_lock = [
-        "swaylock",
-        "--color=3B4252",
-        "--ring-color=D8DEE9",
-        "--inside-color=4C566A",
-        "--indicator-radius=100",
-        "--indicator-thickness=10",
-        "--key-hl-color=880033",
-        "--line-color=5E81AC",
-    ]
-
     return [
         # Browser
         Key(
@@ -60,7 +49,7 @@ def build_keys(settings) -> List[Key]:
         Key(
             [Super, ApplicationLaunchModKey],
             "l",
-            lazy.spawn(shlex.join(sway_lock)),
+            lazy.spawn("loginctl lock-session"),
             desc="Lock the screen",
         ),
         # Power menu
