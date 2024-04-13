@@ -90,31 +90,25 @@ def build_keys(settings) -> List[Key]:
         # endregion
         # region Window Control
         Key(
-            [Super, "shift"],
-            "c",
-            lazy.window.kill(),
-            desc="Close window",
-        ),
-        Key(
-            [Super],
-            "Delete",
-            lazy.window.kill(),
-            desc="Close window",
-        ),
-        Key(
-            [Super, "mod1"],
+            [Super, Alt],
             "Left",
             lazy.screen.prev_group(),
             desc="Switch to next group",
         ),
         Key(
-            [Super, "mod1"],
+            [Super, Alt],
             "Right",
             lazy.screen.next_group(),
             desc="Switch to previous group",
         ),
         Key(
-            [Super, Alt],
+            [Super, "control"],
+            "c",
+            lazy.window.kill(),
+            desc="Close window",
+        ),
+        Key(
+            [Super, "control"],
             "f",
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
@@ -206,12 +200,12 @@ def build_keys(settings) -> List[Key]:
         ),
         # endregion
         # region VT Switching
-        Key(["control", "mod1"], "F1", lazy.core.change_vt(1), desc="Switch to VT 1"),
-        Key(["control", "mod1"], "F2", lazy.core.change_vt(2), desc="Switch to VT 2"),
-        Key(["control", "mod1"], "F3", lazy.core.change_vt(3), desc="Switch to VT 3"),
-        Key(["control", "mod1"], "F4", lazy.core.change_vt(4), desc="Switch to VT 4"),
-        Key(["control", "mod1"], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
-        Key(["control", "mod1"], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
+        Key(["control", Alt], "F1", lazy.core.change_vt(1), desc="Switch to VT 1"),
+        Key(["control", Alt], "F2", lazy.core.change_vt(2), desc="Switch to VT 2"),
+        Key(["control", Alt], "F3", lazy.core.change_vt(3), desc="Switch to VT 3"),
+        Key(["control", Alt], "F4", lazy.core.change_vt(4), desc="Switch to VT 4"),
+        Key(["control", Alt], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
+        Key(["control", Alt], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
         # endregion
     ]
 
