@@ -46,19 +46,30 @@
       "x86_64-linux"
     ];
 
-    hmCommonConfig = {
-      config = {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = {
-          inherit inputs;
+    machineCommonModules = [
+      sops-nix.nixosModules.sops
+      stylix.nixosModules.stylix
+    ];
+
+    hmCommonModules = [
+      home-manager.nixosModules.default
+      {
+        config = {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+          };
+          home-manager.sharedModules = [
+            sops-nix.homeManagerModules.sops
+            # stylix.homeManagerModules.stylix
+          ];
         };
-        home-manager.sharedModules = [
-          sops-nix.homeManagerModules.sops
-        ];
-      };
-    };
+      }
+    ];
   in {
+    overlays.default = import ./configuration/overlay;
+
     nixosConfigurations = {
       # Security
       pinky = nixpkgs.lib.nixosSystem {
@@ -67,17 +78,16 @@
           inherit lib;
         };
 
-        modules = [
-          ./configuration/machine/pinky
-          ./configuration/user/sysadmin/machine
-          {
-            config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-          }
-
-          home-manager.nixosModules.default
-          hmCommonConfig
-          sops-nix.nixosModules.sops
-        ];
+        modules =
+          [
+            ./configuration/machine/pinky
+            ./configuration/user/sysadmin/machine
+            {
+              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+            }
+          ]
+          ++ machineCommonModules
+          ++ hmCommonModules;
       };
 
       # Services
@@ -87,17 +97,16 @@
           inherit lib;
         };
 
-        modules = [
-          ./configuration/machine/thebrain
-          ./configuration/user/sysadmin/machine
-          {
-            config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-          }
-
-          home-manager.nixosModules.default
-          hmCommonConfig
-          sops-nix.nixosModules.sops
-        ];
+        modules =
+          [
+            ./configuration/machine/thebrain
+            ./configuration/user/sysadmin/machine
+            {
+              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+            }
+          ]
+          ++ machineCommonModules
+          ++ hmCommonModules;
       };
 
       # Workstation
@@ -107,22 +116,21 @@
           inherit lib inputs;
         };
 
-        modules = [
-          ./configuration/machine/furrball
-          ./configuration/user/sdk/machine
-          ./configuration/user/sysadmin/machine
-          {
-            config.home-manager.users.sdk = import ./configuration/user/sdk/home;
-            config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-          }
+        modules =
+          [
+            ./configuration/machine/furrball
+            ./configuration/user/sdk/machine
+            ./configuration/user/sysadmin/machine
+            {
+              config.home-manager.users.sdk = import ./configuration/user/sdk/home;
+              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+            }
 
-          home-manager.nixosModules.default
-          hmCommonConfig
-          nixos-hardware.nixosModules.common-pc
-          nixos-hardware.nixosModules.common-pc-ssd
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-        ];
+            nixos-hardware.nixosModules.common-pc
+            nixos-hardware.nixosModules.common-pc-ssd
+          ]
+          ++ machineCommonModules
+          ++ hmCommonModules;
       };
 
       # Storage
@@ -132,21 +140,21 @@
           inherit lib;
         };
 
-        modules = [
-          ./configuration/machine/babs
-          ./configuration/user/sysadmin/machine
+        modules =
+          [
+            ./configuration/machine/babs
+            ./configuration/user/sysadmin/machine
 
-          attic.nixosModules.atticd
-          {
-            config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-          }
+            attic.nixosModules.atticd
+            {
+              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+            }
 
-          home-manager.nixosModules.default
-          hmCommonConfig
-          nixos-hardware.nixosModules.common-pc
-          nixos-hardware.nixosModules.common-pc-ssd
-          sops-nix.nixosModules.sops
-        ];
+            nixos-hardware.nixosModules.common-pc
+            nixos-hardware.nixosModules.common-pc-ssd
+          ]
+          ++ machineCommonModules
+          ++ hmCommonModules;
       };
 
       # Laptop
@@ -156,24 +164,23 @@
           inherit lib;
         };
 
-        modules = [
-          ./configuration/machine/buster
-          ./configuration/user/sdk/machine
-          ./configuration/user/sysadmin/machine
-          {
-            config.home-manager.users.sdk =
-              import ./configuration/user/sdk/home;
-            # TODO: Fix sdk_buster
-            # // (import ./configuration/user/sdk_buster/home);
-            config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-          }
+        modules =
+          [
+            ./configuration/machine/buster
+            ./configuration/user/sdk/machine
+            ./configuration/user/sysadmin/machine
+            {
+              config.home-manager.users.sdk =
+                import ./configuration/user/sdk/home;
+              # TODO: Fix sdk_buster
+              # // (import ./configuration/user/sdk_buster/home);
+              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+            }
 
-          home-manager.nixosModules.default
-          hmCommonConfig
-          nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          sops-nix.nixosModules.sops
-          stylix.nixosModules.stylix
-        ];
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+          ]
+          ++ machineCommonModules
+          ++ hmCommonModules;
       };
 
       # Installer ISO
@@ -182,17 +189,16 @@
         specialArgs = {
           inherit lib;
         };
-        modules = [
-          "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-          ./installer/looniversity-minimal.nix
-          {
-            config.home-manager.users.nixos = import ./configuration/user/nixos/home;
-          }
-
-          home-manager.nixosModules.default
-          hmCommonConfig
-          sops-nix.nixosModules.sops
-        ];
+        modules =
+          [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            ./installer/looniversity-minimal.nix
+            {
+              config.home-manager.users.nixos = import ./configuration/user/nixos/home;
+            }
+            sops-nix.nixosModules.sops
+          ]
+          ++ hmCommonModules;
       };
     };
 
