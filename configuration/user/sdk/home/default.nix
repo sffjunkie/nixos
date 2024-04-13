@@ -134,6 +134,10 @@
         kitty.enable = false;
       };
 
+      media = {
+        playerctl.enable = true;
+      };
+
       music = {
         mpd = {
           enable = true;
