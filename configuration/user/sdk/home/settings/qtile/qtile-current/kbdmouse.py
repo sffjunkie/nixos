@@ -31,18 +31,21 @@ def build_keys(settings) -> List[Key]:
             [Super, ApplicationLaunchModKey],
             "b",
             lazy.spawn(environ.get("BROWSER", "brave")),
+            desc="Start the browser",
         ),
         # Code Editor
         Key(
             [Super, ApplicationLaunchModKey],
             "c",
             lazy.spawn("code"),
+            desc="Start vscode",
         ),
         # Terminal
         Key(
             [Super, ApplicationLaunchModKey],
             "t",
             lazy.spawn(environ.get("TERMINAL", "alacritty")),
+            desc="Start a terminal",
         ),
         # App launcher
         Key(
@@ -51,12 +54,14 @@ def build_keys(settings) -> List[Key]:
             lazy.spawn(
                 "rofi -modi drun -show drun -theme-str '@import \"looniversity\"'"
             ),
+            desc="Show the rofi app launcher (drun)",
         ),
         # Lock screen
         Key(
             [Super, ApplicationLaunchModKey],
             "l",
             lazy.spawn(shlex.join(sway_lock)),
+            desc="Lock the screen",
         ),
         # Power menu
         Key(
@@ -65,6 +70,7 @@ def build_keys(settings) -> List[Key]:
             lazy.spawn(
                 "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"looniversity\"'"
             ),
+            desc="Show the rofi power menu",
         ),
         # region MPD Control
         # Play / Pause
@@ -72,16 +78,19 @@ def build_keys(settings) -> List[Key]:
             [Super],
             "F8",
             lazy.spawn("musicctl toggle"),
+            desc="Toggle music play/pause",
         ),
         Key(
             [Super],
             "F7",
             lazy.spawn("musicctl previous"),
+            desc="Switch to previous music track",
         ),
         Key(
             [Super],
             "F9",
             lazy.spawn("musicctl next"),
+            desc="Switch to next music track",
         ),
         # endregion
         # region QTile Control
