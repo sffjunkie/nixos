@@ -44,6 +44,10 @@
         };
       };
 
+      theme = {
+        stylix.enable = true;
+      };
+
       role = {
         server.enable = true;
       };

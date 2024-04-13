@@ -20,6 +20,10 @@
 
     looniversity = {
       service.lldap.enable = true;
+
+      theme = {
+        stylix.enable = true;
+      };
     };
 
     programs.zsh = {

@@ -40,6 +40,7 @@
       theme = {
         nord.enable = true;
         papirus.enable = true;
+        stylix.enable = true;
       };
     };
 
