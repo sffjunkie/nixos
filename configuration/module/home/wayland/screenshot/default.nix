@@ -21,6 +21,9 @@
       echo "If '-r' not specified the entire screen will be captured"
     }
 
+    [ -f ''${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs ] && source ''${XDG_CONFIG_HOME:-$HOME/.config}/user-dirs.dirs
+    screenshot_dir="''${XDG_PICTURES_DIR:-$HOME/pictures}/Screenshots"
+
     VALID_ARGS=$(getopt -o herv --long help,edit,region,verbose -- "''$@")
     if [[ $? -ne 0 ]]; then
       help
@@ -60,6 +63,7 @@
     if [ $region -eq 1 ]; then
       if [ "$output" == "swappy" ]; then
         [ $verbose -eq 1 ] && echo "Saving screenshot to $screenshot_dir"
+        mkdir -p $screenshot_dir
         ${pkgs.grim}/bin/grim -t png -g "''$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
       else
         ${pkgs.grim}/bin/grim -t png -g "''$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.wl-clipboard}/bin/wl-copy
@@ -68,6 +72,7 @@
     else
       if [ "$output" == "swappy" ]; then
         [ $verbose -eq 1 ] && echo "Saving screenshot to $screenshot_dir"
+        mkdir -p $screenshot_dir
         ${pkgs.grim}/bin/grim -t png - | ${pkgs.swappy}/bin/swappy -f -
       else
         ${pkgs.grim}/bin/grim -t png - | ${pkgs.wl-clipboard}/bin/wl-copy
@@ -87,7 +92,7 @@ in {
 
     xdg.configFile."swappy/config".text = ''
       [Default]
-      save_dir=$HOME/pictures/screenshots
+      save_dir=$XDG_PICTURES_DIR/Screenshots
       save_filename_format=swappy-%Y%m%d-%H%M%S.png
     '';
   };
