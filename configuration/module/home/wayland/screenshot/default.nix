@@ -29,6 +29,7 @@
 
     output=""
     region=0
+    verbose=0
     eval set -- "$VALID_ARGS"
     while [ : ]; do
       case "$1" in
