@@ -3,7 +3,7 @@ from libqtile.config import Key, Group
 
 group_config = [
     ("WWW", {"layout": "monadtall"}),
-    ("BRAIN", {"layout": "monadtall"}),
+    ("BRAIN", {"layout": "max"}),
     ("DEV", {"layout": "max"}),
     ("TERM", {"layout": "monadtall"}),
     ("DOC", {"layout": "monadtall"}),
