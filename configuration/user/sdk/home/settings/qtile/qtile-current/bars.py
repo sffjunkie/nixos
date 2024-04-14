@@ -482,10 +482,16 @@ def build_bars(settings: dict, secrets: dict = {}) -> List[bar.Bar]:
     ]
 
     return [
-        bar.Bar(top_bar_widgets, size=barheight, background=theme_colors["panel_bg"]),
+        bar.Bar(
+            top_bar_widgets,
+            size=barheight,
+            background=theme_colors["panel_bg"],
+            margin=[8, 8, 0, 8],
+        ),
         bar.Bar(
             bottom_bar_widgets,
             size=barheight,
             background=theme_colors["panel_bg"],
+            margin=[0, 8, 8, 8],
         ),
     ]
