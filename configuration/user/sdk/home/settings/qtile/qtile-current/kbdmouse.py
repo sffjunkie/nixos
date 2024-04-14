@@ -61,6 +61,26 @@ def build_keys(settings) -> List[Key]:
             ),
             desc="Show the rofi power menu",
         ),
+        # region Clipboard
+        Key(
+            [Super, ApplicationLaunchModKey],
+            "Insert",
+            lazy.spawn(
+                'cliphist list | rofi -dmenu -theme-str \'@import "looniversity"\' -p "clipboard - select" -display-columns 2 | cliphist decode | wl-copy',
+                shell=True,
+            ),
+            desc="Copy an item from the clipboard history",
+        ),
+        Key(
+            [Super, ApplicationLaunchModKey],
+            "Delete",
+            lazy.spawn(
+                'cliphist list | rofi -dmenu -theme-str \'@import "looniversity"\' -p "clipboard - delete" -display-columns 2 | cliphist delete',
+                shell=True,
+            ),
+            desc="Delete an item from the clipboard history",
+        ),
+        # endregion
         # region MPD Control
         # Play / Pause
         Key(
