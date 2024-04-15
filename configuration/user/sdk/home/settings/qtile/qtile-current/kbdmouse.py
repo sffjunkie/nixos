@@ -1,6 +1,5 @@
 # Keybindings for groups are defined in groups.py
 
-import shlex
 from os import environ
 from typing import List  # noqa: F401
 
