@@ -17,9 +17,5 @@ in {
     };
 
     xdg.configFile."rofi/looniversity.rasi".source = ./looniversity.rasi;
-
-    home.packages = [
-      pkgs.rofi-power-menu
-    ];
   };
 }
