@@ -83,7 +83,7 @@
 
       desktop = {
         dunst.enable = true;
-        swaylock.enable = true;
+        lockscreen.swaylock.enable = true;
         wallpaper.enable = true;
       };
 

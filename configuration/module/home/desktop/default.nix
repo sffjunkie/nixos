@@ -1,7 +1,7 @@
 {
   imports = [
     ./dunst
-    ./swaylock
+    ./lockscreen
     ./wallpaper
   ];
 }
