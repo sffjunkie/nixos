@@ -55,9 +55,7 @@ def build_keys(settings) -> List[Key]:
         Key(
             [Super, ApplicationLaunchModKey],
             "F12",
-            lazy.spawn(
-                "rofi -show p -modi p:rofi-power-menu -theme-str '@import \"looniversity\"'"
-            ),
+            lazy.spawn("rofi-power"),
             desc="Show the rofi power menu",
         ),
         # region Clipboard
@@ -65,8 +63,7 @@ def build_keys(settings) -> List[Key]:
             [Super, ApplicationLaunchModKey],
             "Insert",
             lazy.spawn(
-                'cliphist list | rofi -dmenu -theme-str \'@import "looniversity"\' -p "clipboard - select" -display-columns 2 | cliphist decode | wl-copy',
-                shell=True,
+                "rofi-clip -c",
             ),
             desc="Copy an item from the clipboard history",
         ),
@@ -74,8 +71,7 @@ def build_keys(settings) -> List[Key]:
             [Super, ApplicationLaunchModKey],
             "Delete",
             lazy.spawn(
-                'cliphist list | rofi -dmenu -theme-str \'@import "looniversity"\' -p "clipboard - delete" -display-columns 2 | cliphist delete',
-                shell=True,
+                "rofi-clip -d",
             ),
             desc="Delete an item from the clipboard history",
         ),
