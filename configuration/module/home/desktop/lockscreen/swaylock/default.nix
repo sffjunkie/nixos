@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.swaylock;
+  cfg = config.looniversity.desktop.lockscreen.swaylock;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.desktop.swaylock = {
+  options.looniversity.desktop.lockscreen.swaylock = {
     enable = mkEnableOption "swaylock/swayidle lockscreen";
   };
 
