@@ -24,5 +24,10 @@ in {
         recursive = true;
       };
     };
+
+    looniversity.script = {
+      rofi-power.enable = true;
+      rofi-clip.enable = true;
+    };
   };
 }
