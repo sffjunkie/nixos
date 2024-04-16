@@ -19,6 +19,10 @@
       homeDirectory = "/home/sdk";
       stateVersion = "23.05";
       sessionVariables = {
+        BROWSER = "brave";
+        EDITOR = "micro";
+        TERMINAL = "alacritty";
+
         MANWIDTH = 100;
         VAULT_ADDR = "http://thebrain.looniversity.net:8200";
         DEVELOPMENT_HOME = "$HOME/development";
