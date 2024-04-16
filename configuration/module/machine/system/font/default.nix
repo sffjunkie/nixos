@@ -16,6 +16,7 @@ in {
       pkgs.font-awesome
       pkgs.material-design-icons
       pkgs.roboto
+      pkgs.weather-icons
       (pkgs.nerdfonts.override {
         fonts = [
           "Hack"
