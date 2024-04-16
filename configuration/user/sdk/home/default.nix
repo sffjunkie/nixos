@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   osConfig,
   pkgs,
@@ -128,11 +129,6 @@
         vscode.enable = true;
       };
 
-      shell = {
-        nushell.enable = true;
-        zsh.enable = true;
-      };
-
       terminal = {
         alacritty.enable = true;
         kitty.enable = false;
@@ -166,6 +162,19 @@
 
       service = {
         syncthing.enable = true;
+      };
+
+      shell = {
+        nushell.enable = true;
+        zsh = {
+          enable = true;
+
+          initExtra = ''
+            function browser() { command "''${BROWSER:-${config.home.sessionVariables.BROWSER}}" "$@"; }
+            function edit() { command "''${EDITOR:-${config.home.sessionVariables.EDITOR}}" "$@"; }
+            function terminal() { command "''${TERMINAL:-${config.home.sessionVariables.TERMINAL}}" "$@"; }
+          '';
+        };
       };
 
       system = {
