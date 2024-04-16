@@ -42,10 +42,16 @@ in {
       sopsFile = config.sopsFiles.user;
     };
 
+    sops.secrets."sdk/api_key/owm" = {
+      neededForUsers = true;
+      sopsFile = config.sopsFiles.user;
+    };
+
     sops.templates."sdk_location" = {
       content = ''
-        SDK_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
-        SDK_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
+        USER_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
+        USER_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
+        OWM_API_KEY=${config.sops.placeholder."sdk/api_key/owm"}
       '';
       owner = config.users.users.sdk.name;
     };
