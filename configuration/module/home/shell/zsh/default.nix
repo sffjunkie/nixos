@@ -5,10 +5,16 @@
   ...
 }: let
   cfg = config.looniversity.shell.zsh;
-  inherit (lib) mkDefault mkEnableOption mkIf;
+  inherit (lib) mkDefault mkEnableOption mkIf mkOption types;
 in {
   options.looniversity.shell.zsh = {
     enable = mkEnableOption "zsh";
+
+    initExtra = mkOption {
+      default = "";
+      type = types.lines;
+      description = "Extra commands that should be added to {file}`.zshrc`.";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -18,9 +24,11 @@ in {
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initExtra = ''
-        bindkey '^f' autosuggest-accept
-      '';
+      initExtra =
+        ''
+          bindkey '^f' autosuggest-accept
+        ''
+        + config.looniversity.shell.zsh.initExtra;
     };
 
     programs.zsh.antidote = {
