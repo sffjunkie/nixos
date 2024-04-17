@@ -56,11 +56,6 @@ in {
       owner = config.users.users.sdk.name;
     };
 
-    services.xserver.windowManager.qtile = {
-      enable = true;
-      backend = "wayland";
-    };
-
     looniversity.desktop.display_manager.tuigreet.script = "${startScript}";
 
     environment.sessionVariables = {
