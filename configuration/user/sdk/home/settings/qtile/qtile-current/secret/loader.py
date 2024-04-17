@@ -2,7 +2,6 @@ import os
 from pathlib import Path
 
 import yaml
-from libqtile.log_utils import logger
 
 FILENAME = "secrets.yaml"
 
@@ -14,7 +13,7 @@ def load_secrets() -> dict:
         secrets_file = Path(xdg_config) / "qtile" / FILENAME
 
     if not secrets_file:
-        secrets_file = Path(__file__).parent / FILENAME
+        secrets_file = Path(__file__).parent.parent / FILENAME
 
     if secrets_file.exists():
         with open(secrets_file, "r") as fp:

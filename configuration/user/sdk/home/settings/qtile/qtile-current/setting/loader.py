@@ -2,11 +2,6 @@ from pathlib import Path
 
 import yaml
 
-from secret import load_secrets
-from theme import load_theme
-
-__settings = None
-
 DEFAULT_SETTINGS = {
     "mod": "mod4",
     "term": "alacritty",
@@ -27,15 +22,12 @@ def volume_control_commands() -> dict:
 
 def load_settings() -> dict:
     settings = {
-        "theme": load_theme(),
         "volume": volume_control_commands(),
     }
 
     settings.update(DEFAULT_SETTINGS)
 
-    settings["secrets"] = load_secrets()
-
-    settings_file = Path(__file__).parent / "settings.yaml"
+    settings_file = Path(__file__).parent.parent / "settings.yaml"
     if settings_file.exists():
         with settings_file.open() as fp:
             settings_yaml = yaml.load(fp, yaml.SafeLoader)

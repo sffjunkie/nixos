@@ -1,7 +1,8 @@
 import os
-import shlex
 import subprocess
 import sys
+
+from pathlib import Path
 
 from libqtile import __path__ as libqtile_path
 from libqtile import layout, hook
@@ -9,24 +10,41 @@ from libqtile.config import Screen
 from libqtile.backend.wayland import InputConfig
 from libqtile.log_utils import logger
 
+from secret.loader import load_secrets
+from setting.loader import load_settings
+from theme.loader import load_theme
+
 import bars
 import group
 import kbdmouse
 import rule
 import scratchpad
-import secret
-import setting
 import wallpaper
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
-logger.info(f"python prefix: {sys.prefix}")
-logger.info(f"python version: {sys.version}")
-logger.info(f"python platform: {sys.platform}")
-logger.info(f"libqtile path: {libqtile_path}")
+logger.warning(f"python prefix: {sys.prefix}")
+logger.warning(f"python version: {sys.version}")
+logger.warning(f"python platform: {sys.platform}")
+logger.warning(f"libqtile path: {libqtile_path}")
 
-secrets = secret.load_secrets()
-settings = setting.load_settings()
+secrets = load_secrets()
+settings = load_settings()
+
+fwd = Path(__file__).parent
+theme_path = fwd / "theme.yaml"
+theme = load_theme(theme_path.absolute())
+logger.warning(theme_path)
+
+top_bar, bottom_bar = bars.build_bars(settings=settings, theme=theme)
+screens = [
+    Screen(
+        top=top_bar,
+        bottom=bottom_bar,
+        wallpaper=wallpaper.get_wallpaper(),
+        wallpaper_mode="fill",
+    ),
+]
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
@@ -42,20 +60,9 @@ mouse = kbdmouse.bind_mouse_buttons(settings)
 floating_layout = layout.Floating(
     float_rules=layout.Floating.default_float_rules + rule.float_rules(),
 )
-theme = settings["theme"]
 layouts = [
     layout.MonadTall(**theme["layout"]),
     layout.Max(**theme["layout"]),
-]
-
-top_bar, bottom_bar = bars.build_bars(settings, secrets)
-screens = [
-    Screen(
-        top=top_bar,
-        bottom=bottom_bar,
-        wallpaper=wallpaper.get_wallpaper(),
-        wallpaper_mode="fill",
-    ),
 ]
 
 auto_fullscreen = True
