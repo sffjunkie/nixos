@@ -226,6 +226,10 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
             background=color_scheme["powerline_bg"][2],
+            menu_font=text_font,
+            menu_fontsize=int(text_font_size * 0.8),
+            menu_width=500,
+            menu_offset_x=-250,
         ),
         widget.Sep(
             linewidth=0,
@@ -551,7 +555,7 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     return bar.Bar(
         bar_widgets,
         size=bottom_bar_height,
-        background=color_scheme["panel_bg"],
+        background=f"{color_scheme['panel_bg']}{opacity_str}",
         margin=[0, 8, 8, 8],
     )
 
