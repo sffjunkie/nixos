@@ -85,10 +85,16 @@ in {
         pkgs.python3.pkgs.qtile
         pkgs.python3.pkgs.iwlib
 
-        pkgs.python3.pkgs.requests
-        pkgs.python3.pkgs.psutil
-        pkgs.python3.pkgs.pyyaml
+        # Extra widgets
         pkgs.python3.pkgs.qtile-extras
+
+        # Packages required by widgets
+        pkgs.python3.pkgs.dbus-next # Bluetooth
+        pkgs.python3.pkgs.psutil # CPU
+        pkgs.python3.pkgs.pulsectl-asyncio # PulseVolume
+
+        # Packages required by config
+        pkgs.python3.pkgs.pyyaml
       ]);
     in {
       description = "Qtile - Wayland window manager";
