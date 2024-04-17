@@ -62,7 +62,6 @@
           };
           home-manager.sharedModules = [
             sops-nix.homeManagerModules.sops
-            # stylix.homeManagerModules.stylix
           ];
         };
       }
