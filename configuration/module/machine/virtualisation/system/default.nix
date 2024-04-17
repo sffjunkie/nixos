@@ -35,7 +35,6 @@ in {
       pkgs.spice
       pkgs.spice-gtk
       pkgs.spice-protocol
-      pkgs.vagrant
       pkgs.virt-manager
       pkgs.virt-viewer
       pkgs.python3Packages.libvirt

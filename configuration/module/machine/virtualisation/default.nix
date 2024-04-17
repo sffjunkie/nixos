@@ -2,5 +2,6 @@
   imports = [
     ./quickemu
     ./system
+    ./vagrant
   ];
 }

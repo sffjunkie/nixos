@@ -13,8 +13,9 @@ in {
   config = mkIf cfg.enable {
     looniversity = {
       virtualisation = {
-        system.enable = true;
         quickemu.enable = true;
+        system.enable = true;
+        vagrant.enable = true;
       };
 
       # TODO: Fix NAS
