@@ -18,7 +18,7 @@ font:
 bar:
   top:
     height: 40
-    opacity: 1.0
+    opacity: 0.75
     margin:
       - 8
       - 8
@@ -26,7 +26,7 @@ bar:
       - 8
   bottom:
     height: 40
-    opacity: 1.0
+    opacity: 0.75
     margin:
       - 0
       - 8
