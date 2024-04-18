@@ -186,6 +186,7 @@
 
       wayland = {
         clipboard.cliphist.enable = true;
+        display.kanshi.enable = true;
         screenshot.sshot.enable = true;
         lockscreen.swaylock.enable = true;
       };
