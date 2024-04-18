@@ -5,6 +5,7 @@
   ...
 }: let
   cfg = config.looniversity.wayland.screenshot.swappy;
+  inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.wayland.screenshot.swappy.enable = mkEnableOption "swappy";
 

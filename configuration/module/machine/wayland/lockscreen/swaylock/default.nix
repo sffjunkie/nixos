@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.lockscreen.swaylock;
+  cfg = config.looniversity.wayland.lockscreen.swaylock;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.looniversity.desktop.lockscreen.swaylock = {
+  options.looniversity.wayland.lockscreen.swaylock = {
     enable = mkEnableOption "swaylock";
   };
 
