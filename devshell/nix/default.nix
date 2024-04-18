@@ -6,13 +6,16 @@ in
       [
         pkgs.alejandra
         pkgs.jq
+        pkgs.nh
         pkgs.nix-info
+        pkgs.nix-output-monitor
         pkgs.nix-template
         pkgs.nix-tree
         pkgs.nix-update
         pkgs.nixpkgs-fmt
         pkgs.nixpkgs-review
         pkgs.node2nix
+        pkgs.nvd
       ]
       ++ nixosScripts;
 
