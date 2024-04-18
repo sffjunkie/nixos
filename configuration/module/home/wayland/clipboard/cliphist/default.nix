@@ -11,7 +11,7 @@ in {
     enable = mkEnableOption "cliphist";
   };
 
-  config = mkIf {
+  config = mkIf cfg.enable {
     services.cliphist.enable = true;
     looniversity.wayland.clipboard.wl-clipboard.enable = true;
   };

@@ -88,7 +88,6 @@
 
       desktop = {
         dunst.enable = true;
-        lockscreen.swaylock.enable = true;
         wallpaper.enable = true;
       };
 
@@ -186,8 +185,9 @@
       };
 
       wayland = {
-        clipboard.enable = true;
-        screenshot.enable = true;
+        clipboard.cliphist.enable = true;
+        screenshot.sshot.enable = true;
+        lockscreen.swaylock.enable = true;
       };
     };
   };

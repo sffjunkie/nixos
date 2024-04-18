@@ -16,12 +16,15 @@ in {
       desktop = {
         display_manager.greetd.enable = true;
         display_manager.tuigreet.enable = true;
-        lockscreen.swaylock.enable = true;
         window_manager.qtile.enable = true;
       };
 
       system = {
         polkit.enable = true;
+      };
+
+      wayland = {
+        lockscreen.swaylock.enable = true;
       };
     };
 

@@ -14,8 +14,8 @@ in {
   config = mkIf cfg.enable {
     services.kanshi = {
       enable = true;
-      undocked = {
-        profiles = {
+      profiles = {
+        undocked = {
           outputs = [
             {
               criteria = "HDMI-A-1";

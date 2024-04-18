@@ -75,7 +75,11 @@ in {
   config = mkIf cfg.enable {
     assertions = [
       {
-        assertion = config.looniversity.wayland.clipboard.enable;
+        assertion = config.looniversity.wayland.clipboard.wl-clipboard.enable;
+        message = "wayland clipboard must be enabled";
+      }
+      {
+        assertion = config.looniversity.wayland.clipboard.cliphist.enable;
         message = "wayland clipboard must be enabled";
       }
     ];
