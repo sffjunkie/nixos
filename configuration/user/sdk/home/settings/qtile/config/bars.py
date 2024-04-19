@@ -20,9 +20,9 @@ def opacity_to_str(opacity: float) -> str:
 
 
 class ForegroundSeparator(widget.Sep):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             linewidth=0,
             padding=12,
@@ -31,9 +31,9 @@ class ForegroundSeparator(widget.Sep):
 
 
 class BackgroundSeparator(widget.Sep):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             linewidth=0,
             padding=12,
@@ -42,9 +42,9 @@ class BackgroundSeparator(widget.Sep):
 
 
 class LineSeparator(widget.Sep):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             size_percent=50,
             padding=18,
@@ -55,9 +55,9 @@ class LineSeparator(widget.Sep):
 
 
 class UserMenuWidget(widget.TextBox):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             text=chr(0xF0004),
             font=theme["font"]["icon"]["family"],
@@ -69,14 +69,14 @@ class UserMenuWidget(widget.TextBox):
 
 
 class UserHostWidget(widget.TextBox):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         user = os.environ["USER"]
         hostname = gethostname()
 
         font_family = theme["font"]["text"]["family"]
         font_size = theme["font"]["text"]["size"]
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             text=f"{user}@{hostname}",
             font=font_family,
@@ -87,13 +87,12 @@ class UserHostWidget(widget.TextBox):
 
 
 class LogoMenuWidget(widget.TextBox):
-    def __init__(self, theme: Theme, bar_name: str):
+    def __init__(self, theme: Theme):
         color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"][bar_name]["opacity"])
+        opacity_str = opacity_to_str(theme["bar"]["opacity"])
         (
             super().__init__(
                 text=f"{theme['logo']}",
-                width=theme["bar"][bar_name]["height"],
                 font=theme["font"]["logo"]["family"],
                 fontsize=theme["font"]["logo"]["size"],
                 padding=8,
@@ -117,15 +116,15 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     text_font_size = theme["font"]["text"]["size"]
     icon_font = theme["font"]["icon"]["family"]
     icon_font_size = theme["font"]["icon"]["size"]
-    opacity = theme["bar"]["top"].get("opacity", 1.0)
+    opacity = theme["bar"].get("opacity", 1.0)
     opacity_str = opacity_to_str(opacity)
 
     bar_widgets = [
         # region LHS
-        UserMenuWidget(theme, bar_name="top"),
-        BackgroundSeparator(theme, bar_name="top"),
-        UserHostWidget(theme, bar_name="top"),
-        LineSeparator(theme, bar_name="top"),
+        UserMenuWidget(theme),
+        BackgroundSeparator(theme),
+        UserHostWidget(theme),
+        LineSeparator(theme),
         widget.GroupBox(
             borderwidth=0,
             margin_y=2,
@@ -146,7 +145,7 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             # other_current_screen_border=theme_colors["panel_bg"],
             # other_screen_border=theme_colors["panel_bg"],
         ),
-        LineSeparator(theme, bar_name="top"),
+        LineSeparator(theme),
         widget.CurrentLayout(
             font=text_font,
             fontsize=text_font_size,
@@ -306,7 +305,7 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=color_scheme["powerline_bg"][0],
         ),
         # endregion
-        LogoMenuWidget(theme, bar_name="top"),
+        LogoMenuWidget(theme),
     ]
 
     return bar.Bar(
@@ -328,7 +327,7 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     text_font_size = theme["font"]["text"]["size"]
     icon_font = theme["font"]["icon"]["family"]
     icon_font_size = theme["font"]["icon"]["size"]
-    opacity = theme["bar"]["bottom"].get("opacity", 1.0)
+    opacity = theme["bar"].get("opacity", 1.0)
     opacity_str = opacity_to_str(opacity)
 
     bar_widgets = [

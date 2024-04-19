@@ -1,3 +1,4 @@
+from libqtile.config import Match, Rule
 from libqtile.command import lazy
 from libqtile.config import Key, Group
 
@@ -12,6 +13,15 @@ group_config = [
     ("VID", {"layout": "monadtall"}),
     ("GFX", {"layout": "max"}),
 ]
+
+wmclass_group = {
+    "brave-browser|chromium|firefox": "WWW",
+    "obsidian": "BRAIN",
+    "code-url-handler": "DEV",
+    "Darktable": "GFX",
+    "Gimp": "GFX",
+    "discord": "CHAT",
+}
 
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
@@ -56,3 +66,10 @@ def build_keys(settings: dict) -> list[Key]:
             )
         )
     return keys
+
+
+def build_rules() -> list[Rule]:
+    return [
+        Rule(Match(wm_class=wmclass), group=group)
+        for wmclass, group in wmclass_group.items()
+    ]

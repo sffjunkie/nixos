@@ -1,7 +1,6 @@
 # Keybindings for groups are defined in groups.py
 
 from os import environ
-from typing import List  # noqa: F401
 
 # from libqtile import extension
 from libqtile.command import lazy
@@ -14,7 +13,7 @@ Super = "mod4"
 ApplicationLaunchModKey = Alt
 
 
-def build_keys(settings) -> List[Key]:
+def build_keys(settings) -> list[Key]:
     return [
         # Browser
         Key(

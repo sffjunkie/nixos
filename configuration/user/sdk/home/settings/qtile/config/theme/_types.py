@@ -8,6 +8,7 @@ Properties = dict[str, str | int]
 
 
 class NamedColors(TypedDict):
+    window_border: NotRequired[Color]
     panel_fg: NotRequired[Color]
     panel_bg: NotRequired[Color]
     group_current_fg: NotRequired[Color]

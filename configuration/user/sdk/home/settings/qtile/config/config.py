@@ -1,25 +1,22 @@
 import os
 import subprocess
 import sys
-
 from pathlib import Path
 
+import bars
+import floating
+import group
+import kbdmouse
+import scratchpad
+import wallpaper
 from libqtile import __path__ as libqtile_path
-from libqtile import layout, hook
-from libqtile.config import Screen
+from libqtile import hook, layout
 from libqtile.backend.wayland import InputConfig
+from libqtile.config import Screen
 from libqtile.log_utils import logger
-
 from secret.loader import load_secrets
 from setting.loader import load_settings
 from theme.loader import load_theme
-
-import bars
-import group
-import kbdmouse
-import rule
-import scratchpad
-import wallpaper
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
@@ -34,7 +31,7 @@ settings = load_settings()
 fwd = Path(__file__).parent
 theme_path = fwd / "theme.yaml"
 theme = load_theme(theme_path.absolute())
-logger.warning(theme_path)
+logger.warning(f"theme path: {theme_path}")
 
 top_bar, bottom_bar = bars.build_bars(settings=settings, theme=theme)
 screens = [
@@ -48,7 +45,7 @@ screens = [
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
-dgroups_app_rules = rule.dgroup_rules()
+dgroups_app_rules = group.build_rules()
 
 keys = (
     kbdmouse.build_keys(settings)
@@ -57,9 +54,7 @@ keys = (
 )
 mouse = kbdmouse.bind_mouse_buttons(settings)
 
-floating_layout = layout.Floating(
-    float_rules=layout.Floating.default_float_rules + rule.float_rules(),
-)
+floating_layout = floating.build_floating(theme=theme)
 layouts = [
     layout.MonadTall(**theme["layout"]),
     layout.Max(**theme["layout"]),
@@ -103,7 +98,6 @@ def start_once():
             "--user",
             "import-environment",
             "WAYLAND_DISPLAY",
-            "MPD_HOST",
         ],
     ]
     for command in commands:

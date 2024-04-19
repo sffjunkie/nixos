@@ -73,14 +73,13 @@ DEFAULT_THEME: dict = {
     },
     "logo": "\uf313",
     "bar": {
+        "opacity": 1.0,
         "top": {
             "height": DEFAULT_BAR_HEIGHT,
-            "opacity": 1.0,
             "margin": (8, 8, 0, 8),
         },
         "bottom": {
             "height": DEFAULT_BAR_HEIGHT,
-            "opacity": 1.0,
             "margin": (0, 8, 8, 8),
         },
     },

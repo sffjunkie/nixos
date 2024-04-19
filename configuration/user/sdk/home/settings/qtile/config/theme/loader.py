@@ -3,13 +3,37 @@ from pathlib import Path
 
 import yaml
 
-from .utils import is_base16, is_color
-from ._types import Base16Colors, Theme
+from ._types import Base16Colors, Theme, NamedColors
 from .base import (
     BASE16_DEFAULT_COLOR_SCHEME,
     DEFAULT_THEME,
 )
-from .colors import base16_to_named_colors
+from .utils import is_base16, is_color
+
+
+def base16_to_named_colors(base16: Base16Colors) -> NamedColors:
+    return {
+        "window_border": base16["base06"],
+        "panel_fg": base16["base07"],
+        "panel_bg": base16["base01"],
+        "group_current_fg": base16["base05"],
+        "group_current_bg": base16["base03"],
+        "group_active_fg": base16["base07"],
+        "group_active_bg": base16["base04"],
+        "group_inactive_fg": base16["base07"],
+        "group_inactive_bg": base16["base04"],
+        "powerline_fg": base16["base01"],
+        "powerline_bg": [
+            base16["base08"],
+            base16["base09"],
+            base16["base0A"],
+            base16["base0B"],
+            base16["base0C"],
+            base16["base0D"],
+            base16["base0E"],
+            base16["base0F"],
+        ],
+    }
 
 
 def load_theme(filepath: Path) -> Theme:
@@ -85,28 +109,28 @@ def _load_theme_yaml(filepath: Path) -> dict:
         return DEFAULT_THEME
 
 
-def _load_color_scheme(
-    scheme_file: str, scheme_folder: str | None = None
-) -> dict | None:
-    if scheme_folder is None:
-        xdg_data_home = os.environ.get("XDG_DATA_HOME", None)
-        if xdg_data_home is not None:
-            search_folder = Path(xdg_data_home) / "base16" / "schemes"
-        else:
-            search_folder = Path(__file__).parent / "schemes"
-    else:
-        search_folder = Path(scheme_folder)
+# def _load_color_scheme(
+#     scheme_file: str, scheme_folder: str | None = None
+# ) -> dict | None:
+#     if scheme_folder is None:
+#         xdg_data_home = os.environ.get("XDG_DATA_HOME", None)
+#         if xdg_data_home is not None:
+#             search_folder = Path(xdg_data_home) / "base16" / "schemes"
+#         else:
+#             search_folder = Path(__file__).parent / "schemes"
+#     else:
+#         search_folder = Path(scheme_folder)
 
-    scheme_path = Path(scheme_file)
-    if scheme_path.suffix != ".yaml":
-        scheme_path = scheme_path.with_suffix(".yaml")
+#     scheme_path = Path(scheme_file)
+#     if scheme_path.suffix != ".yaml":
+#         scheme_path = scheme_path.with_suffix(".yaml")
 
-    for file_path in search_folder.rglob(os.path.join("**", "*.yaml")):
-        if file_path.name.endswith(scheme_path.name):
-            with open(file_path, "r") as fp:
-                colors = yaml.load(fp, Loader=yaml.SafeLoader)
-                return colors
-    return BASE16_DEFAULT_COLOR_SCHEME
+#     for file_path in search_folder.rglob(os.path.join("**", "*.yaml")):
+#         if file_path.name.endswith(scheme_path.name):
+#             with open(file_path, "r") as fp:
+#                 colors = yaml.load(fp, Loader=yaml.SafeLoader)
+#                 return colors
+#     return BASE16_DEFAULT_COLOR_SCHEME
 
 
 def _deref_colors(theme_info, color_scheme, colors):
