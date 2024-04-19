@@ -23,6 +23,7 @@ in {
     looniversity.script = {
       rofi-power.enable = true;
       rofi-clip.enable = true;
+      rofi-launcher.enable = true;
     };
   };
 }

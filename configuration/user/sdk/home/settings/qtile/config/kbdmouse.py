@@ -39,9 +39,7 @@ def build_keys(settings) -> List[Key]:
         Key(
             [Super, ApplicationLaunchModKey],
             "Return",
-            lazy.spawn(
-                "rofi -modi drun -show drun -theme-str '@import \"looniversity\"'"
-            ),
+            lazy.spawn("rofi-launcher"),
             desc="Show the rofi app launcher (drun)",
         ),
         # Lock screen
