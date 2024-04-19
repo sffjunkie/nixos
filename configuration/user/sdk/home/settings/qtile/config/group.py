@@ -13,28 +13,46 @@ group_config = [
     ("GFX", {"layout": "max"}),
 ]
 
+SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
+SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
+
+DECORATION = ""
+
+
+def decoration(group_idx: int) -> str:
+    if DECORATION == "superscript":
+        return SUPERSCRIPT[group_idx]
+    elif DECORATION == "subscript":
+        return SUBSCRIPT[group_idx]
+    else:
+        return ""
+
 
 def build_groups(settings: dict) -> list[Group]:
-    return [Group(name, **kwargs) for name, kwargs in group_config]
+    return [
+        Group(name + decoration(i), **kwargs)
+        for i, (name, kwargs) in enumerate(group_config, 1)
+    ]
 
 
 def build_keys(settings: dict) -> list[Key]:
     keys = []
     for i, (name, _) in enumerate(group_config, 1):
+        group_name = name + decoration(i)
         keys.append(
             Key(
                 [settings["mod"]],
                 str(i),
-                lazy.group[name].toscreen(),
-                desc=f"Switch to group {name}",
+                lazy.group[group_name].toscreen(),
+                desc=f"Switch to group {group_name}",
             )
         )
         keys.append(
             Key(
                 [settings["mod"], "shift"],
                 str(i),
-                lazy.window.togroup(name),
-                desc=f"Send current window to group {name}",
+                lazy.window.togroup(group_name),
+                desc=f"Send current window to group {group_name}",
             )
         )
     return keys
