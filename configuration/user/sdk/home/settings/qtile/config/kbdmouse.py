@@ -7,6 +7,8 @@ from typing import List  # noqa: F401
 from libqtile.command import lazy
 from libqtile.config import Click, Drag, Key
 
+from window import float_to_front
+
 Alt = "mod1"
 Super = "mod4"
 ApplicationLaunchModKey = Alt
@@ -218,6 +220,7 @@ def build_keys(settings) -> List[Key]:
         Key(["control", Alt], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
         Key(["control", Alt], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
         # endregion
+        Key([Super, "shift"], "f", float_to_front),
     ]
 
 
