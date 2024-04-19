@@ -9,7 +9,7 @@
   rofi-launcher-script = pkgs.writeScriptBin "rofi-launcher" ''
     #!${lib.getExe pkgs.bash}
     ${lib.getExe pkgs.rofi} \
-      -theme-str '@import \"looniversity\"'
+      -theme-str '@import "looniversity"' \
       -modi drun \
       -show drun
   '';
