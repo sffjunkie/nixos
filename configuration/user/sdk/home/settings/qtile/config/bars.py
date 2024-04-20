@@ -4,10 +4,14 @@ import os
 from socket import gethostname
 
 from libqtile.command import lazy
-from libqtile import bar, widget
+from libqtile import bar
 
-from widgets import NetMin, FixedWidthVolume
-from qtile_extras.widget import PulseVolume
+# from qwidgets.volume import FixedWidthVolume
+from qwidgets.net_min import NetMin
+from qwidgets.icon import MDIcon
+
+from qtile_extras import widget
+from qtile_extras.widget.decorations import PowerLineDecoration
 
 from theme._types import Theme
 
@@ -15,61 +19,44 @@ NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
+powerline_right = {"decorations": [PowerLineDecoration(path="forward_slash")]}
+powerline_left = {"decorations": [PowerLineDecoration(path="back_slash")]}
+
+
 def opacity_to_str(opacity: float) -> str:
     return hex(int(opacity * 255.0))[2:]
 
 
-class ForegroundSeparator(widget.Sep):
-    def __init__(self, theme: Theme):
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            linewidth=0,
-            padding=12,
-            background=f"{color_scheme['panel_fg']}{opacity_str}",
-        )
-
-
-class BackgroundSeparator(widget.Sep):
-    def __init__(self, theme: Theme):
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            linewidth=0,
-            padding=12,
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-        )
-
-
 class LineSeparator(widget.Sep):
-    def __init__(self, theme: Theme):
+    def __init__(self, theme: Theme, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
             size_percent=50,
-            padding=18,
             linewidth=1,
+            padding=12,
             foreground=color_scheme["panel_fg"],
             background=f"{color_scheme['panel_bg']}{opacity_str}",
+            **config,
         )
 
 
-class UserMenuWidget(widget.TextBox):
-    def __init__(self, theme: Theme):
+class UserMenuWidget(MDIcon):
+    def __init__(self, theme: Theme, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
-            text=chr(0xF0004),
+            name="user",
             font=theme["font"]["icon"]["family"],
             fontsize=theme["font"]["icon"]["size"],
-            padding=12,
             foreground=color_scheme["panel_bg"],
             background=f"{color_scheme['panel_fg']}{opacity_str}",
+            **config,
         )
 
 
 class UserHostWidget(widget.TextBox):
-    def __init__(self, theme: Theme):
+    def __init__(self, theme: Theme, **config):
         user = os.environ["USER"]
         hostname = gethostname()
 
@@ -83,23 +70,24 @@ class UserHostWidget(widget.TextBox):
             fontsize=font_size,
             foreground=color_scheme["panel_fg"],
             background=f"{color_scheme['panel_bg']}{opacity_str}",
+            padding=12,
+            **config,
         )
 
 
 class LogoMenuWidget(widget.TextBox):
-    def __init__(self, theme: Theme):
+    def __init__(self, theme: Theme, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        (
-            super().__init__(
-                text=f"{theme['logo']}",
-                font=theme["font"]["logo"]["family"],
-                fontsize=theme["font"]["logo"]["size"],
-                padding=8,
-                foreground=color_scheme["powerline_fg"],
-                background=f"{color_scheme['powerline_bg'][-1]}{opacity_str}",
-                mouse_callbacks={"Button1": lazy.spawn("rofi-power")},
-            ),
+        super().__init__(
+            text=f"{theme['logo']}",
+            font=theme["font"]["logo"]["family"],
+            fontsize=theme["font"]["logo"]["size"],
+            padding=8,
+            foreground=color_scheme["powerline_fg"],
+            background=f"{color_scheme['powerline_bg'][-1]}{opacity_str}",
+            mouse_callbacks={"Button1": lazy.spawn("rofi-power")},
+            **config,
         )
 
 
@@ -108,10 +96,8 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     if top_bar_defs is None:
         return None
 
-    print(theme)
-
     color_scheme = theme["named_colors"]
-    top_bar_height = theme["bar"]["top"]["height"]
+    bar_height = theme["bar"]["top"]["height"]
     text_font = theme["font"]["text"]["family"]
     text_font_size = theme["font"]["text"]["size"]
     icon_font = theme["font"]["icon"]["family"]
@@ -121,15 +107,14 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
 
     bar_widgets = [
         # region LHS
-        UserMenuWidget(theme),
-        BackgroundSeparator(theme),
+        UserMenuWidget(theme, width=bar_height),
         UserHostWidget(theme),
-        LineSeparator(theme),
+        LineSeparator(theme, width=bar_height),
         widget.GroupBox(
             borderwidth=0,
-            margin_y=2,
+            margin_y=3,
             padding_y=4,
-            margin_x=4,
+            margin_x=6,
             padding_x=6,
             font=text_font,
             fontsize=text_font_size,
@@ -145,18 +130,18 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             # other_current_screen_border=theme_colors["panel_bg"],
             # other_screen_border=theme_colors["panel_bg"],
         ),
-        LineSeparator(theme),
+        LineSeparator(theme, width=bar_height),
         widget.CurrentLayout(
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["panel_fg"],
             background=f"{color_scheme['panel_bg']}{opacity_str}",
+            padding=12,
         ),
         widget.Spacer(
             background=f"{color_scheme['panel_bg']}{opacity_str}",
         ),
         widget.WindowName(
-            padding=5,
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["panel_fg"],
@@ -164,24 +149,10 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         ),
         widget.Spacer(
             background=f"{color_scheme['panel_bg']}{opacity_str}",
+            **powerline_right,
         ),
         # endregion
         # region RHS
-        # OpenWeatherMap
-        widget.TextBox(
-            text=theme["powerline_separator"][0],
-            font=icon_font,
-            fontsize=top_bar_height,
-            margin=0,
-            padding=0,
-            foreground=color_scheme["powerline_bg"][3],
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][3],
-        ),
         widget.OpenWeather(
             app_key=os.environ.get("OWM_API_KEY", ""),
             coordinates={
@@ -192,30 +163,11 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][3],
+            background=f"{color_scheme['powerline_bg'][3]}{opacity_str}",
+            **powerline_right,
+            padding=12,
         ),
-        widget.Sep(
-            linewidth=0,
-            padding=10,
-            foreground=color_scheme["panel_fg"],
-            background=color_scheme["powerline_bg"][3],
-        ),
-        # volume control
-        widget.TextBox(
-            text=theme["powerline_separator"][0],
-            font=icon_font,
-            fontsize=top_bar_height,
-            margin=0,
-            padding=0,
-            foreground=color_scheme["powerline_bg"][2],
-            background=color_scheme["powerline_bg"][3],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][2],
-        ),
-        PulseVolume(
+        widget.PulseVolume(
             # iconfont = "Material Design Icons",
             volume_up_command=settings["volume"]["up"],
             volume_down_command=settings["volume"]["down"],
@@ -224,93 +176,66 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][2],
+            background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
             menu_font=text_font,
             menu_fontsize=int(text_font_size * 0.8),
             menu_width=500,
             menu_offset_x=-250,
+            **powerline_right,
+            padding=12,
         ),
         widget.Sep(
             linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][2],
-        ),
-        # Clock
-        widget.TextBox(
-            text=theme["powerline_separator"][0],
-            font=icon_font,
-            fontsize=top_bar_height,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][0],
-            background=color_scheme["powerline_bg"][2],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][0],
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
+            padding=12,
         ),
         widget.Clock(
             format="%a %Y-%m-%d",
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][0],
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # calendar symbol
-        widget.TextBox(
-            text=chr(983277),
+        MDIcon(
+            name="calendar",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
+            width=bar_height,
         ),
         widget.Sep(
             linewidth=0,
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
             padding=12,
-            foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
         ),
         widget.Clock(
             format="%H:%M",
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # clock symbol
-        widget.TextBox(
-            text=chr(983376),
+        MDIcon(
+            name="clock",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][0],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][0],
+            background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
+            width=bar_height,
         ),
         # endregion
-        LogoMenuWidget(theme),
+        LogoMenuWidget(
+            theme,
+            width=bar_height,
+        ),
     ]
 
     return bar.Bar(
         bar_widgets,
-        size=top_bar_height,
+        size=bar_height,
         background=f"{color_scheme['panel_bg']}{opacity_str}",
         margin=theme["bar"]["top"]["margin"],
     )
@@ -322,7 +247,7 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         return None
 
     color_scheme = theme["named_colors"]
-    bottom_bar_height = theme["bar"]["bottom"]["height"]
+    bar_height = theme["bar"]["bottom"]["height"]
     text_font = theme["font"]["text"]["family"]
     text_font_size = theme["font"]["text"]["size"]
     icon_font = theme["font"]["icon"]["family"]
@@ -331,19 +256,15 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     opacity_str = opacity_to_str(opacity)
 
     bar_widgets = [
+        # region LHS
         # region Net
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][4],
-        ),
-        widget.TextBox(
-            text=chr(986631),
+        MDIcon(
+            name="net_up",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][4],
+            background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
+            width=bar_height,
         ),
         NetMin(
             font=text_font,
@@ -351,15 +272,15 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             interface=NET_INTERFACE,
             format="{up} ",
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][4],
+            background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
-        widget.TextBox(
-            text=chr(985999),
+        MDIcon(
+            name="net_down",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][4],
+            background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
+            width=bar_height,
         ),
         NetMin(
             font=text_font,
@@ -367,78 +288,46 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             interface=NET_INTERFACE,
             format="{down}",
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][4],
+            background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         widget.Sep(
             linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][4],
-        ),
-        widget.TextBox(
-            text=theme["powerline_separator"][1],
-            font=icon_font,
-            fontsize=bottom_bar_height - 4,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][4],
-            background=color_scheme["powerline_bg"][5],
+            background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
+            padding=12,
+            **powerline_left,
         ),
         # endregion
         # region Memory
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][5],
-        ),
-        widget.TextBox(
-            text=chr(983899),
+        MDIcon(
+            name="memory",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][5],
+            background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
+            width=bar_height,
         ),
         widget.Memory(
             format="{MemUsed:6.0f}M/{MemTotal:.0f}M",
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][5],
+            background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
         ),
         widget.Sep(
             linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][5],
-        ),
-        widget.TextBox(
-            text=theme["powerline_separator"][1],
-            font=icon_font,
-            fontsize=bottom_bar_height - 4,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][5],
-            background=color_scheme["powerline_bg"][6],
+            background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
+            padding=12,
+            **powerline_left,
         ),
         # endregion
         # region CPU
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][6],
-        ),
-        widget.TextBox(
-            text=chr(986848),
+        MDIcon(
+            name="cpu_usage",
             font=icon_font,
             fontsize=icon_font_size + 4,
-            padding=6,
-            margin=0,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][6],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][6],
+            background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
+            width=bar_height,
         ),
         widget.CPU(
             format="{load_percent:4.1f}%",
@@ -446,81 +335,47 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][6],
+            background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
         ),
         widget.Sep(
             linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][6],
-        ),
-        widget.TextBox(
-            text=theme["powerline_separator"][1],
-            font=icon_font,
-            fontsize=bottom_bar_height - 4,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][6],
-            background=color_scheme["powerline_bg"][7],
+            background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
+            padding=12,
+            **powerline_left,
         ),
         # endregion
         # region Temps
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][7],
-        ),
-        widget.TextBox(
-            text=chr(984335),
+        MDIcon(
+            name="cpu_temp",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
-            margin=0,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][7],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][7],
+            background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
+            width=bar_height,
         ),
         widget.ThermalSensor(
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][7],
+            background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
         ),
         widget.Sep(
             linewidth=0,
+            background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
             padding=12,
-            background=color_scheme["powerline_bg"][7],
+            **powerline_left,
         ),
-        widget.TextBox(
-            text=theme["powerline_separator"][1],
-            font=text_font,
-            fontsize=bottom_bar_height - 4,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][7],
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-        ),
+        # endregion
         # endregion
         widget.Spacer(
             background=f"{color_scheme['panel_bg']}{opacity_str}",
+            **powerline_right,
         ),
         # region Bottom RHS
-        widget.TextBox(
-            text=theme["powerline_separator"][0],
-            font=icon_font,
-            fontsize=bottom_bar_height,
-            padding=0,
-            margin=0,
-            foreground=color_scheme["powerline_bg"][1],
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-        ),
         widget.Sep(
             linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][1],
+            background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
+            padding=12,
         ),
         widget.Mpd2(
             status_format="{play_status} {title} | {artist} | {album}",
@@ -528,32 +383,22 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][1],
+            background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
         ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][1],
-        ),
-        widget.TextBox(
-            text=chr(984922),
+        MDIcon(
+            name="music",
             font=icon_font,
             fontsize=icon_font_size,
-            padding=6,
             foreground=color_scheme["powerline_fg"],
-            background=color_scheme["powerline_bg"][1],
-        ),
-        widget.Sep(
-            linewidth=0,
-            padding=6,
-            background=color_scheme["powerline_bg"][1],
+            background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
+            width=bar_height,
         ),
         # endregion
     ]
 
     return bar.Bar(
         bar_widgets,
-        size=bottom_bar_height,
+        size=bar_height,
         background=f"{color_scheme['panel_bg']}{opacity_str}",
         margin=[0, 8, 8, 8],
     )

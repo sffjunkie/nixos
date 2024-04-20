@@ -6,7 +6,7 @@ font:
     family: "Hack Nerd Font"
     size: 18
   icon:
-    family: "Hack Nerd Font"
+    family: "Material Design Icons"
     size: 22
   weather:
     family: "Weather Icons"
@@ -16,7 +16,7 @@ font:
     size: 22
 
 bar:
-  opacity: 0.75
+  opacity: 0.8
   top:
     height: 40
     margin:
@@ -61,10 +61,10 @@ widget:
   background: "panel_bg"
 
 powerline_separator:
-  - "\uE0B2"
-  - "\uE0B0"
-  # - "\uE0BA"
-  # - "\uE0B8"
+  # - "\uE0B2"
+  # - "\uE0B0"
+  - "\uE0BA"
+  - "\uE0B8"
   # - "\uE0BE"
   # - "\uE0BC"
 

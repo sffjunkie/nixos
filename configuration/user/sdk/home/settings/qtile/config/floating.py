@@ -7,6 +7,7 @@ wmclass_float = [
     "org.gnome.Calculator",
     "org.gnome.Characters",
     "ssh-askpass",
+    "waypaper",
 ]
 
 
@@ -16,7 +17,7 @@ def float_rules() -> list[Rule]:
     ] + layout.Floating.default_float_rules
 
 
-def build_floating(theme: Theme) -> layout.Floating:
+def build_layout(theme: Theme) -> layout.Floating:
     color_scheme = theme["named_colors"]
     return layout.Floating(
         float_rules=float_rules(),

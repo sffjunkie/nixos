@@ -23,14 +23,12 @@
 from math import log
 from typing import Tuple
 
-import psutil
-
 from libqtile.log_utils import logger
 from libqtile.widget import base
-from libqtile.widget.net import Net
+from qtile_extras import widget
 
 
-class NetMin(Net):
+class NetMin(widget.Net):
     """
     Displays interface down and up speed but only above a specific threshold
 
@@ -51,7 +49,7 @@ class NetMin(Net):
     ]
 
     def __init__(self, **config):
-        Net.__init__(self, **config)
+        widget.Net.__init__(self, **config)
         self.add_defaults(NetMin.defaults)
 
     def convert_b(self, num_bytes: float) -> Tuple[float, str]:
@@ -70,7 +68,7 @@ class NetMin(Net):
         else:
             power = 0
 
-        converted_bytes = num_bytes / factor ** power
+        converted_bytes = num_bytes / factor**power
         unit = letters[power]
 
         return converted_bytes, unit

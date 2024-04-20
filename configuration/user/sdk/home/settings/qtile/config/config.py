@@ -54,7 +54,7 @@ keys = (
 )
 mouse = kbdmouse.bind_mouse_buttons(settings)
 
-floating_layout = floating.build_floating(theme=theme)
+floating_layout = floating.build_layout(theme=theme)
 layouts = [
     layout.MonadTall(**theme["layout"]),
     layout.Max(**theme["layout"]),
