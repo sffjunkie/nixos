@@ -11,8 +11,7 @@
     ../../module/machine
     ../../module/mount
     ../../role/machine
-
-    ../../../siteconfig
+    ../../site
   ];
 
   config = {
