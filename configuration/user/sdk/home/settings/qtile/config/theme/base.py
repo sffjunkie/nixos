@@ -1,4 +1,4 @@
-from ._types import Base16Colors, Properties, Theme
+from theme._types import Base16Colors, Properties
 
 DEFAULT_FONT = "Hack Nerd Font Mono"
 DEFAULT_ICON_FONT = "Material Design Icons"

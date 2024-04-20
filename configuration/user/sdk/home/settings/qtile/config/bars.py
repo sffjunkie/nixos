@@ -6,14 +6,19 @@ from socket import gethostname
 from libqtile.command import lazy
 from libqtile import bar
 
-# from qwidgets.volume import FixedWidthVolume
-from qwidgets.net_min import NetMin
-from qwidgets.icon import MDIcon
-
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 
+# from qwidgets.volume import FixedWidthVolume
+from qwidgets.net_min import NetMin
+from qwidgets.icon import MDIcon
+from qwidgets.line_sep import LineSeparator
+from qwidgets.user_menu import UserMenuWidget
+from qwidgets.user_host import UserHostWidget
+from qwidgets.logo_menu import LogoMenuWidget
+from theme.utils import opacity_to_str
 from theme._types import Theme
+
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
@@ -21,74 +26,6 @@ TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 powerline_right = {"decorations": [PowerLineDecoration(path="forward_slash")]}
 powerline_left = {"decorations": [PowerLineDecoration(path="back_slash")]}
-
-
-def opacity_to_str(opacity: float) -> str:
-    return hex(int(opacity * 255.0))[2:]
-
-
-class LineSeparator(widget.Sep):
-    def __init__(self, theme: Theme, **config):
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            size_percent=50,
-            linewidth=1,
-            padding=12,
-            foreground=color_scheme["panel_fg"],
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-            **config,
-        )
-
-
-class UserMenuWidget(MDIcon):
-    def __init__(self, theme: Theme, **config):
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            name="user",
-            font=theme["font"]["icon"]["family"],
-            fontsize=theme["font"]["icon"]["size"],
-            foreground=color_scheme["panel_bg"],
-            background=f"{color_scheme['panel_fg']}{opacity_str}",
-            **config,
-        )
-
-
-class UserHostWidget(widget.TextBox):
-    def __init__(self, theme: Theme, **config):
-        user = os.environ["USER"]
-        hostname = gethostname()
-
-        font_family = theme["font"]["text"]["family"]
-        font_size = theme["font"]["text"]["size"]
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            text=f"{user}@{hostname}",
-            font=font_family,
-            fontsize=font_size,
-            foreground=color_scheme["panel_fg"],
-            background=f"{color_scheme['panel_bg']}{opacity_str}",
-            padding=12,
-            **config,
-        )
-
-
-class LogoMenuWidget(widget.TextBox):
-    def __init__(self, theme: Theme, **config):
-        color_scheme = theme["named_colors"]
-        opacity_str = opacity_to_str(theme["bar"]["opacity"])
-        super().__init__(
-            text=f"{theme['logo']}",
-            font=theme["font"]["logo"]["family"],
-            fontsize=theme["font"]["logo"]["size"],
-            padding=8,
-            foreground=color_scheme["powerline_fg"],
-            background=f"{color_scheme['powerline_bg'][-1]}{opacity_str}",
-            mouse_callbacks={"Button1": lazy.spawn("rofi-power")},
-            **config,
-        )
 
 
 def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:

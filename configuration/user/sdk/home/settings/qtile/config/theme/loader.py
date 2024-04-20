@@ -3,12 +3,12 @@ from pathlib import Path
 
 import yaml
 
-from ._types import Base16Colors, Theme, NamedColors
-from .base import (
+from theme._types import Base16Colors, Theme, NamedColors
+from theme.base import (
     BASE16_DEFAULT_COLOR_SCHEME,
     DEFAULT_THEME,
 )
-from .utils import is_base16, is_color
+from theme.utils import is_base16, is_color
 
 
 def base16_to_named_colors(base16: Base16Colors) -> NamedColors:

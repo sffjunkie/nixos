@@ -3,26 +3,28 @@ import subprocess
 import sys
 from pathlib import Path
 
+from libqtile import __path__ as libqtile_path
+from libqtile import hook, layout
+from libqtile.backend.wayland import InputConfig
+from libqtile.config import Screen
+from libqtile.log_utils import logger
+
 import bars
 import floating
 import group
 import kbdmouse
 import scratchpad
 import wallpaper
-from libqtile import __path__ as libqtile_path
-from libqtile import hook, layout
-from libqtile.backend.wayland import InputConfig
-from libqtile.config import Screen
-from libqtile.log_utils import logger
-from secret.loader import load_secrets
-from setting.loader import load_settings
-from theme.loader import load_theme
+from secret import load_secrets
+from setting import load_settings
+from theme import load_theme
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
 logger.warning(f"python prefix: {sys.prefix}")
 logger.warning(f"python version: {sys.version}")
 logger.warning(f"python platform: {sys.platform}")
+logger.warning(f"python path: {sys.path}")
 logger.warning(f"libqtile path: {libqtile_path}")
 
 secrets = load_secrets()

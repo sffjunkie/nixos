@@ -1,6 +1,10 @@
 import string
 
 
+def opacity_to_str(opacity: float) -> str:
+    return hex(int(opacity * 255.0))[2:]
+
+
 def is_color(value: str) -> bool:
     return len(value) == 6 and all([ch in string.hexdigits for ch in value])
 
