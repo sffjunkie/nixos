@@ -20,6 +20,9 @@ in {
 
     services.swayidle = {
       enable = true;
+      extraArgs = [
+        "-d"
+      ];
       timeouts = [
         {
           timeout = 180;
@@ -27,7 +30,7 @@ in {
         }
         {
           timeout = 300;
-          command = "sleep 1; ${pkgs.systemd}/bin/systemctl suspend";
+          command = "${pkgs.coreutils}/bin/sleep 1; ${pkgs.systemd}/bin/systemctl suspend";
         }
       ];
       events = [
