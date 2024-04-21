@@ -53,7 +53,7 @@ def build_keys(settings: dict) -> list[Key]:
             Key(
                 [settings["mod"]],
                 str(i),
-                lazy.group[group_name].toscreen(),
+                lazy.group[group_name].toscreen(toggle=True),
                 desc=f"Switch to group {group_name}",
             )
         )
