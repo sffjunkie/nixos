@@ -1,9 +1,7 @@
 """Bars for Qtile"""
 
 import os
-from socket import gethostname
 
-from libqtile.command import lazy
 from libqtile import bar
 
 from qtile_extras import widget
