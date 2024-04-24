@@ -99,7 +99,6 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             padding=12,
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][3]}{opacity_str}",
             **powerline_right,
         ),
@@ -116,14 +115,12 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             # iconfont = "Material Design Icons",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
         ),
         MDIcon(
             name="volume",
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
             **powerline_right,
         ),
@@ -136,7 +133,6 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             format="%a %Y-%m-%d",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # calendar symbol
@@ -144,7 +140,6 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             name="calendar",
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
             width=bar_height,
         ),
@@ -157,7 +152,6 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             format="%H:%M",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # clock symbol
@@ -166,7 +160,6 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # endregion
@@ -216,7 +209,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         NetMin(
@@ -224,7 +216,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             format="{up} ",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         MDIcon(
@@ -232,7 +223,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         NetMin(
@@ -240,7 +230,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             format="{down}",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         widget.Sep(
@@ -256,14 +245,12 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
         ),
         widget.Memory(
             format="{MemUsed:6.0f}M/{MemTotal:.0f}M",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
         ),
         widget.Sep(
@@ -279,7 +266,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size + 4,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
         ),
         widget.CPU(
@@ -287,7 +273,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             update_interval=5,
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
         ),
         widget.Sep(
@@ -303,13 +288,11 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
         ),
         widget.ThermalSensor(
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
         ),
         widget.Sep(
@@ -335,7 +318,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             idle_format="Play queue empty",
             font=text_font,
             fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
         ),
         MDIcon(
@@ -343,7 +325,6 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
         ),
         # endregion
