@@ -11,6 +11,7 @@ MDICONS = {
     "net_down": chr(985999),
     "net_up": chr(986631),
     "user": chr(0xF0004),
+    "volume": chr(0xF057E),
 }
 
 
