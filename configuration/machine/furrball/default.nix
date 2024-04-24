@@ -67,6 +67,10 @@
         papirus.enable = true;
         stylix.enable = true;
       };
+
+      wayland = {
+        keyboard.evdevremapkeys.enable = true;
+      };
     };
 
     environment.systemPackages = [

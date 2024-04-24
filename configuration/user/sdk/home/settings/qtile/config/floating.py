@@ -8,6 +8,7 @@ wmclass_float = [
     "org.gnome.Characters",
     "ssh-askpass",
     "waypaper",
+    "yubico.org.",
 ]
 
 
