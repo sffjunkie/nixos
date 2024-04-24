@@ -47,11 +47,11 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         UserHostWidget(theme),
         LineSeparator(theme, width=bar_height),
         widget.GroupBox(
-            borderwidth=0,
             margin_y=3,
             padding_y=4,
             margin_x=6,
             padding_x=6,
+            borderwidth=0,
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["panel_fg"],
@@ -68,11 +68,11 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         ),
         LineSeparator(theme, width=bar_height),
         widget.CurrentLayout(
+            padding=12,
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["panel_fg"],
             background=f"{color_scheme['panel_bg']}{opacity_str}",
-            padding=12,
         ),
         widget.Spacer(
             background=f"{color_scheme['panel_bg']}{opacity_str}",
@@ -96,29 +96,36 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
                 "longitude": os.environ.get("USER_LOCATION_LONGITUDE", "-0.15"),
             },
             format="{main_temp}/{main_feels_like}°{units_temperature} {icon}",
+            padding=12,
             font=text_font,
             fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][3]}{opacity_str}",
             **powerline_right,
-            padding=12,
         ),
         widget.PulseVolume(
-            # iconfont = "Material Design Icons",
             volume_up_command=settings["volume"]["up"],
             volume_down_command=settings["volume"]["down"],
             mute_command=settings["volume"]["toggle"],
             volume_app=settings["volume"]["app"],
-            font=text_font,
-            fontsize=text_font_size,
-            foreground=color_scheme["powerline_fg"],
-            background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
             menu_font=text_font,
             menu_fontsize=int(text_font_size * 0.8),
             menu_width=500,
             menu_offset_x=-250,
-            **powerline_right,
             padding=12,
+            # iconfont = "Material Design Icons",
+            font=text_font,
+            fontsize=text_font_size,
+            foreground=color_scheme["powerline_fg"],
+            background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
+        ),
+        MDIcon(
+            name="volume",
+            font=icon_font,
+            fontsize=icon_font_size,
+            foreground=color_scheme["powerline_fg"],
+            background=f"{color_scheme['powerline_bg'][2]}{opacity_str}",
+            **powerline_right,
         ),
         widget.Sep(
             linewidth=0,
@@ -142,9 +149,9 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             width=bar_height,
         ),
         widget.Sep(
+            padding=6,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
-            padding=12,
         ),
         widget.Clock(
             format="%H:%M",
@@ -156,11 +163,11 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         # clock symbol
         MDIcon(
             name="clock",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
-            width=bar_height,
         ),
         # endregion
         LogoMenuWidget(
@@ -206,51 +213,51 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         # region Net
         MDIcon(
             name="net_up",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
-            width=bar_height,
         ),
         NetMin(
-            font=text_font,
-            fontsize=text_font_size,
             interface=NET_INTERFACE,
             format="{up} ",
+            font=text_font,
+            fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         MDIcon(
             name="net_down",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
-            width=bar_height,
         ),
         NetMin(
-            font=text_font,
-            fontsize=text_font_size,
             interface=NET_INTERFACE,
             format="{down}",
+            font=text_font,
+            fontsize=text_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
         ),
         widget.Sep(
+            padding=12,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][4]}{opacity_str}",
-            padding=12,
             **powerline_left,
         ),
         # endregion
         # region Memory
         MDIcon(
             name="memory",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
-            width=bar_height,
         ),
         widget.Memory(
             format="{MemUsed:6.0f}M/{MemTotal:.0f}M",
@@ -260,20 +267,20 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
         ),
         widget.Sep(
+            padding=12,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][5]}{opacity_str}",
-            padding=12,
             **powerline_left,
         ),
         # endregion
         # region CPU
         MDIcon(
             name="cpu_usage",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size + 4,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
-            width=bar_height,
         ),
         widget.CPU(
             format="{load_percent:4.1f}%",
@@ -284,20 +291,20 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
         ),
         widget.Sep(
+            padding=12,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][6]}{opacity_str}",
-            padding=12,
             **powerline_left,
         ),
         # endregion
         # region Temps
         MDIcon(
             name="cpu_temp",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
-            width=bar_height,
         ),
         widget.ThermalSensor(
             font=text_font,
@@ -306,9 +313,9 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
         ),
         widget.Sep(
+            padding=12,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][7]}{opacity_str}",
-            padding=12,
             **powerline_left,
         ),
         # endregion
@@ -319,9 +326,9 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         ),
         # region Bottom RHS
         widget.Sep(
+            padding=12,
             linewidth=0,
             background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
-            padding=12,
         ),
         widget.Mpd2(
             status_format="{play_status} {title} | {artist} | {album}",
@@ -333,11 +340,11 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         ),
         MDIcon(
             name="music",
+            width=bar_height,
             font=icon_font,
             fontsize=icon_font_size,
             foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][1]}{opacity_str}",
-            width=bar_height,
         ),
         # endregion
     ]
@@ -346,7 +353,7 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
         bar_widgets,
         size=bar_height,
         background=f"{color_scheme['panel_bg']}{opacity_str}",
-        margin=[0, 8, 8, 8],
+        margin=theme["bar"]["bottom"]["margin"],
     )
 
 
