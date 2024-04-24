@@ -74,9 +74,7 @@ wmname = "QTile"
 
 # to get ids use `qtile cmd-obj -o core -f get_inputs`
 wl_input_rules = {
-    "1452:591:Keychron Keychron K1": InputConfig(
-        kb_options="altwin:swap_lalt_lwin", kb_layout="us"
-    ),
+    "1452:591:Keychron Keychron K1": InputConfig(kb_layout="us"),
     "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
 }
 
