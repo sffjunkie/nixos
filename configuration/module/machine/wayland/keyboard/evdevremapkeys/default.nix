@@ -9,7 +9,7 @@
   udev_rule = pkgs.writeTextFile {
     name = "evdevremapkeys_udev";
     text = ''
-      KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="05ac", ATTRS{idProduct}=="024f", TAG+="uaccess", MODE="0660"
+      SUBSYSTEMS=="usb", ATTRS{idVendor}=="05ac", ATTRS{idProduct}=="024f", TAG+="uaccess", MODE="0660"
     '';
     destination = "/lib/udev/rules.d/71-evdevremapkeys.rules";
   };
