@@ -53,8 +53,8 @@ DEFAULT_NAMED_COLORS = {
 DEFAULT_EXTENSION_PROPS: Properties = {
     "font": DEFAULT_FONT,
     "fontsize": DEFAULT_FONT_SIZE,
-    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base07"],
-    "background": BASE16_DEFAULT_COLOR_SCHEME["base01"],
+    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base04"],
+    "background": BASE16_DEFAULT_COLOR_SCHEME["base00"],
 }
 
 DEFAULT_LAYOUT_PROPS: Properties = {
@@ -69,8 +69,8 @@ DEFAULT_WIDGET_PROPS: Properties = {
     "fontsize": DEFAULT_FONT_SIZE,
     "margin": 0,
     "padding": 0,
-    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base07"],
-    "background": BASE16_DEFAULT_COLOR_SCHEME["base01"],
+    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base04"],
+    "background": BASE16_DEFAULT_COLOR_SCHEME["base00"],
 }
 
 DEFAULT_THEME: dict = {

@@ -14,8 +14,8 @@ from theme.utils import is_base16, is_color
 def base16_to_named_colors(base16: Base16Colors) -> NamedColors:
     return {
         "window_border": base16["base06"],
-        "panel_fg": base16["base07"],
-        "panel_bg": base16["base01"],
+        "panel_fg": base16["base04"],
+        "panel_bg": base16["base00"],
         "group_current_fg": base16["base05"],
         "group_current_bg": base16["base03"],
         "group_active_fg": base16["base07"],
