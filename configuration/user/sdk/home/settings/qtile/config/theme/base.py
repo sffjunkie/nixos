@@ -26,6 +26,29 @@ BASE16_DEFAULT_COLOR_SCHEME: Base16Colors = {
     "base0F": "d65d0e",
 }
 
+DEFAULT_NAMED_COLORS = {
+    "window_border": BASE16_DEFAULT_COLOR_SCHEME["base06"],
+    "panel_fg": BASE16_DEFAULT_COLOR_SCHEME["base06"],
+    "panel_bg": BASE16_DEFAULT_COLOR_SCHEME["base01"],
+    "group_current_fg": BASE16_DEFAULT_COLOR_SCHEME["base05"],
+    "group_current_bg": BASE16_DEFAULT_COLOR_SCHEME["base03"],
+    "group_active_fg": BASE16_DEFAULT_COLOR_SCHEME["base07"],
+    "group_active_bg": BASE16_DEFAULT_COLOR_SCHEME["base04"],
+    "group_inactive_fg": BASE16_DEFAULT_COLOR_SCHEME["base07"],
+    "group_inactive_bg": BASE16_DEFAULT_COLOR_SCHEME["base04"],
+    "powerline_fg": BASE16_DEFAULT_COLOR_SCHEME["base01"],
+    "powerline_bg": [
+        BASE16_DEFAULT_COLOR_SCHEME["base08"],
+        BASE16_DEFAULT_COLOR_SCHEME["base09"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0A"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0B"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0C"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0D"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0E"],
+        BASE16_DEFAULT_COLOR_SCHEME["base0F"],
+    ],
+}
+
 
 DEFAULT_EXTENSION_PROPS: Properties = {
     "font": DEFAULT_FONT,
