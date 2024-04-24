@@ -5,17 +5,6 @@
   ...
 }: let
   cfg = config.looniversity.wayland.keyboard.evdevremapkeys;
-
-  remap-config = ''
-    devices:
-      - input_name: 'Keychron Keychron K1'
-        input_phys: 'usb-0000:0c:00.3-3.3/input1'
-        output_name: remap-kbd
-        remappings:
-          KEY_CAPSLOCK:
-          - KEY_ESCAPE
-  '';
-
   inherit (lib) mkEnableOption mkIf;
 in {
   options.looniversity.wayland.keyboard.evdevremapkeys = {
@@ -27,7 +16,17 @@ in {
       pkgs.evdevremapkeys
     ];
 
-    xdg.configFile."evdevremapkeys/config.yaml".source = remap-config;
+    xdg.configFile."evdevremapkeys/config.yaml".text = ''
+      devices:
+        - input_name: 'Keychron Keychron K1'
+          input_phys: 'usb-0000:0c:00.3-3.3/input0'
+          output_name: remap-kbd
+          remappings:
+            KEY_LEFTMETA:
+            - KEY_LEFTALT
+            KEY_LEFTALT:
+            - KEY_LEFTMETA
+    '';
 
     systemd.user.services.evdevremapkeys = {
       Unit = {
