@@ -9,6 +9,8 @@ from libqtile.config import Click, Drag, Key
 from window import float_to_front
 
 Alt = "mod1"
+Ctrl = "control"
+Shift = "shift"
 Super = "mod4"
 ApplicationLaunchModKey = Alt
 
