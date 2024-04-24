@@ -33,7 +33,7 @@ in {
       Unit = {
         Description = "A daemon to remap key events on linux input devices";
       };
-      Install.WantedBy = ["multi-user.target"];
+      Install.WantedBy = ["default.target"];
       Service = {
         ExecStart = "${pkgs.evdevremapkeys}/bin/evdevremapkeys";
         PrivateTmp = true;
