@@ -48,6 +48,7 @@
     shipitsmarter.sops-edit
     skellock.just
     techer.open-in-browser
+    tomphilbin.gruvbox-themes
   ];
 in {
   options.looniversity.editor.vscode = {
