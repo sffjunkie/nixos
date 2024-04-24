@@ -69,8 +69,8 @@ DEFAULT_WIDGET_PROPS: Properties = {
     "fontsize": DEFAULT_FONT_SIZE,
     "margin": 0,
     "padding": 0,
-    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base04"],
-    "background": BASE16_DEFAULT_COLOR_SCHEME["base00"],
+    "foreground": BASE16_DEFAULT_COLOR_SCHEME["base00"],
+    "background": BASE16_DEFAULT_COLOR_SCHEME["base07"],
 }
 
 DEFAULT_THEME: dict = {
