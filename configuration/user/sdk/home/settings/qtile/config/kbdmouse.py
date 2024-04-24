@@ -157,6 +157,20 @@ def build_keys(settings) -> list[Key]:
             desc="Move window up in stack",
         ),
         # endregion
+        # region Screen switching
+        Key(
+            [Super, Alt, Ctrl],
+            "Right",
+            lazy.next_scren(),
+            desc="Switch to next screen",
+        ),
+        Key(
+            [Super, Alt, Ctrl],
+            "Left",
+            lazy.prev_scren(),
+            desc="Switch to previous screen",
+        ),
+        # endregion
         # region Switch between windows in current stack pane
         Key([Super], "h", lazy.layout.up(), desc="Previous window"),
         Key([Super], "l", lazy.layout.down(), desc="Next window"),
