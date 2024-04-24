@@ -74,8 +74,8 @@ DEFAULT_WIDGET_PROPS: Properties = {
 }
 
 DEFAULT_THEME: dict = {
-    "base16_colors": {},
-    "named_colors": {},
+    "base16_colors": BASE16_DEFAULT_COLOR_SCHEME,
+    "named_colors": DEFAULT_NAMED_COLORS,
     "font": {
         "text": {
             "family": DEFAULT_FONT,
