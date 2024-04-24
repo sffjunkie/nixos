@@ -15,7 +15,6 @@ class LogoMenuWidget(widget.TextBox):
             font=theme["font"]["logo"]["family"],
             fontsize=theme["font"]["logo"]["size"],
             padding=8,
-            foreground=color_scheme["powerline_fg"],
             background=f"{color_scheme['powerline_bg'][-1]}{opacity_str}",
             mouse_callbacks={"Button1": lazy.spawn("rofi-power")},
             **config,

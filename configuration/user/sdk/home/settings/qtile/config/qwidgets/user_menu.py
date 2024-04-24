@@ -13,7 +13,6 @@ class UserMenuWidget(MDIcon):
             name="user",
             font=theme["font"]["icon"]["family"],
             fontsize=theme["font"]["icon"]["size"],
-            foreground=color_scheme["panel_bg"],
             background=f"{color_scheme['panel_fg']}{opacity_str}",
             **config,
         )
