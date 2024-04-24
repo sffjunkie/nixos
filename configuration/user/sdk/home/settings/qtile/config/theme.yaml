@@ -57,7 +57,7 @@ layout:
   border_focus: "base08"
 
 widget:
-  foreground: "base01"
+  foreground: "base04"
   background: "panel_bg"
 
 powerline_separator:
