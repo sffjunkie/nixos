@@ -7,7 +7,6 @@ from libqtile import bar
 from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 
-# from qwidgets.volume import FixedWidthVolume
 from qwidgets.net_min import NetMin
 from qwidgets.icon import MDIcon
 from qwidgets.line_sep import LineSeparator
