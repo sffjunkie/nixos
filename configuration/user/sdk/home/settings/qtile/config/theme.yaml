@@ -61,12 +61,10 @@ widget:
   background: "panel_bg"
 
 powerline_separator:
-  # - "\uE0B2"
-  # - "\uE0B0"
-  - "\uE0BA"
-  - "\uE0B8"
-  # - "\uE0BE"
-  # - "\uE0BC"
+  - "forward_slash"
+  - "back_slash"
+  # - "arrow_right"
+  # - "arrow_left"
 
 powerline_color_repeat:
   function: cycle

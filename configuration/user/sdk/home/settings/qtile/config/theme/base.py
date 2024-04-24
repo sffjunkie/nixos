@@ -109,7 +109,7 @@ DEFAULT_THEME: dict = {
     "extension": DEFAULT_EXTENSION_PROPS,
     "layout": DEFAULT_LAYOUT_PROPS,
     "widget": DEFAULT_WIDGET_PROPS,
-    "powerline_separator": ["\ue0b2", "\ue0b0"],
+    "powerline_separator": ["forward_slash", "back_slash"],
     "powerline_color_repeat": {
         "function": "cycle",
         "indices": [0, 3],

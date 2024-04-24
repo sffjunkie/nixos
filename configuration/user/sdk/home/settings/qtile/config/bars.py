@@ -22,10 +22,6 @@ NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
-powerline_right = {"decorations": [PowerLineDecoration(path="forward_slash")]}
-powerline_left = {"decorations": [PowerLineDecoration(path="back_slash")]}
-
-
 def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     top_bar_defs = theme["bar"].get("top", None)
     if top_bar_defs is None:
@@ -39,6 +35,11 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     icon_font_size = theme["font"]["icon"]["size"]
     opacity = theme["bar"].get("opacity", 1.0)
     opacity_str = opacity_to_str(opacity)
+    powerline_right = {
+        "decorations": [
+            PowerLineDecoration(path=theme["powerline_separator"][0]),
+        ]
+    }
 
     bar_widgets = [
         # region LHS
@@ -189,6 +190,16 @@ def build_bottom_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     icon_font_size = theme["font"]["icon"]["size"]
     opacity = theme["bar"].get("opacity", 1.0)
     opacity_str = opacity_to_str(opacity)
+    powerline_right = {
+        "decorations": [
+            PowerLineDecoration(path=theme["powerline_separator"][0]),
+        ]
+    }
+    powerline_left = {
+        "decorations": [
+            PowerLineDecoration(path=theme["powerline_separator"][1]),
+        ]
+    }
 
     bar_widgets = [
         # region LHS
