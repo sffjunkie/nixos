@@ -72,7 +72,6 @@
     nixosConfigurations = {
       # Security
       pinky = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit lib;
         };
@@ -91,7 +90,6 @@
 
       # Services
       thebrain = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit lib;
         };
@@ -110,7 +108,6 @@
 
       # Workstation
       furrball = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit lib inputs;
         };
@@ -134,7 +131,6 @@
 
       # Storage
       babs = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
         specialArgs = {
           inherit lib;
         };
