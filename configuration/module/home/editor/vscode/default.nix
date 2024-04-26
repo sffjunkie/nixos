@@ -85,6 +85,9 @@ in {
         "explorer.confirmDragAndDrop" = false;
         "explorer.compactFolders" = false;
 
+        "files.associations" = {
+          "*.just" = "just";
+        };
         "files.insertFinalNewline" = true;
         "files.exclude" = {
           "**/.tox" = true;
