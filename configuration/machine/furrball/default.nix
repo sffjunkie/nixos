@@ -45,6 +45,10 @@
         postgresql.enable = true;
       };
 
+      development = {
+        devenv.enable = true;
+      };
+
       mount = {
         backup.enable = true;
         music.enable = true;
