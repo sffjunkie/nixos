@@ -38,6 +38,7 @@
   ];
 
   marketplaceExtensionsList = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+    catppuccin.catppuccin-vsc
     charliermarsh.ruff
     dlasagno.rasi
     executablebookproject.myst-highlight
@@ -76,6 +77,7 @@ in {
         };
         "editor.formatOnSave" = true;
         "editor.lineNumbers" = "relative";
+        "editor.parameterHints.enabled" = false;
 
         "editor.rulers" = [
           80
@@ -111,7 +113,7 @@ in {
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = mkDefault 2;
 
-        "workbench.colorTheme" = "Nord";
+        "workbench.colorTheme" = "Catppuccin Macchiato";
         "workbench.panel.defaultLocation" = "right";
         "workbench.startupEditor" = "readme";
 
