@@ -95,7 +95,7 @@
         direnv.enable = true;
         alejandra.enable = true;
         gnumake.enable = true;
-        preCommit.enable = true;
+        pre-commit.enable = true;
         shellcheck.enable = true;
       };
 

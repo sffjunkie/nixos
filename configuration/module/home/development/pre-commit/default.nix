@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.development.preCommit;
+  cfg = config.looniversity.development.pre-commit;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.development.preCommit = {
+  options.looniversity.development.pre-commit = {
     enable = mkEnableOption "pre-commit";
   };
 
