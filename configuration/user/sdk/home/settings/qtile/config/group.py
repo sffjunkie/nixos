@@ -19,7 +19,8 @@ wmclass_group = {
     "obsidian": "BRAIN",
     "code-url-handler": "DEV",
     "Darktable": "GFX",
-    "Gimp": "GFX",
+    r"Gimp-\d+\.\d+": "GFX",
+    r"org\.inkscape\.Inkscape": "GFX",
     "discord": "CHAT",
 }
 
@@ -70,6 +71,9 @@ def build_keys(settings: dict) -> list[Key]:
 
 def build_rules() -> list[Rule]:
     return [
-        Rule(Match(wm_class=wmclass), group=group)
-        for wmclass, group in wmclass_group.items()
+        Rule(
+            Match(wm_class=re.compile(wmclass)),
+            group=group + decoration(i),
+        )
+        for i, (wmclass, group) in enumerate(wmclass_group.items(), 1)
     ]
