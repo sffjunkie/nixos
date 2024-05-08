@@ -11,8 +11,7 @@
     #!${pkgs.runtimeShell}
     width=$(tput cols)
     ${pkgs.figlet}/bin/figlet -w ''${width} "System Information"
-    ${pkgs.neofetch}/bin/neofetch
-    ${pkgs.inxi}/bin/inxi -v 2 --width ''${width}
+    ${pkgs.fastfetch}/bin/fastfetch
   '';
 in {
   options.looniversity.script.sysinfo = {
