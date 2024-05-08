@@ -69,6 +69,7 @@ in {
 
         "diffEditor.ignoreTrimWhitespace" = false;
 
+        "editor.fontFamily" = "'Hack Nerd Font', 'DejaVu Sans Mono', monospace";
         "editor.fontSize" = 12;
         "editor.tokenColorCustomizations" = {
           "[Nord]" = {
