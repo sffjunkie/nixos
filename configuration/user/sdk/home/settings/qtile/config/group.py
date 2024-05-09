@@ -1,3 +1,4 @@
+import re
 from libqtile.config import Match, Rule
 from libqtile.command import lazy
 from libqtile.config import Key, Group
@@ -27,7 +28,7 @@ wmclass_group = {
 SUPERSCRIPT = ["⁰", "¹", "²", "³", "⁴", "⁵", "⁶", "⁷", "⁸", "⁹"]
 SUBSCRIPT = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
 
-DECORATION = ""
+DECORATION = "superscript"
 
 
 def decoration(group_idx: int) -> str:
