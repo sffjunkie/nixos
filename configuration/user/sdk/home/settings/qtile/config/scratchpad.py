@@ -14,7 +14,7 @@ def build_scratchpads(settings: dict) -> list[ScratchPad]:
     home_automation_dimension = anchor_window(
         position=WindowLocation.BottomCenter,
         width=0.5,
-        height=0.4,
+        height=0.5,
     )
 
     return [
@@ -22,8 +22,8 @@ def build_scratchpads(settings: dict) -> list[ScratchPad]:
             "0",
             dropdowns=[
                 DropDown(
-                    "ncmpcpp",
-                    terminal_run_command("alacritty", ["ncmpcpp"]),
+                    name="ncmpcpp",
+                    cmd=terminal_run_command("alacritty", ["ncmpcpp"]),
                     height=ncmpcpp_dimension.height,
                     width=ncmpcpp_dimension.width,
                     x=ncmpcpp_dimension.x,
@@ -38,10 +38,8 @@ def build_scratchpads(settings: dict) -> list[ScratchPad]:
             "home-automation",
             dropdowns=[
                 DropDown(
-                    "home-automation",
-                    terminal_run_command(
-                        "alacritty", ["qutebrowser", "https://hass.looniversity.net"]
-                    ),
+                    name="home-automation",
+                    cmd="qutebrowser https://hass.looniversity.net",
                     height=home_automation_dimension.height,
                     width=home_automation_dimension.width,
                     x=home_automation_dimension.x,
