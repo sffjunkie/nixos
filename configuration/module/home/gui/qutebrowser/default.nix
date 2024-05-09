@@ -20,6 +20,12 @@ in {
         nw = "https://nixos.wiki/index.php?search={}";
         wp = "https://en.wikipedia.org/wiki/Special:Search?search={}&go=Go&ns0=1";
       };
+
+      settings = {
+        fonts = {
+          default_size = lib.mkForce "16pt";
+        };
+      };
     };
   };
 }
