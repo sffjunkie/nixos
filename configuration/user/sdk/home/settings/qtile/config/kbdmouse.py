@@ -56,8 +56,8 @@ def build_keys(settings) -> list[Key]:
         Key(
             [Super, ApplicationLaunchModKey],
             "F12",
-            lazy.spawn("rofi-power"),
-            desc="Show the rofi power menu",
+            lazy.spawn("system-menu"),
+            desc="Show the system menu",
         ),
         # region Clipboard
         Key(

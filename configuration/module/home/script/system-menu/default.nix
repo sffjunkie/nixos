@@ -4,9 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.script.rofi-power;
+  cfg = config.looniversity.script.system-menu;
 
-  rofi-power-script = pkgs.writeScriptBin "rofi-power" ''
+  rofi-power-script = pkgs.writeScriptBin "system-menu" ''
     #!${lib.getExe pkgs.bash}
     swapon --show | grep "dev" > /dev/null 2>&1
     if [ $? -eq 0 ]; then
@@ -23,14 +23,14 @@
   '';
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.script.rofi-power = {
-    enable = mkEnableOption "rofi-power script";
+  options.looniversity.script.system-menu = {
+    enable = mkEnableOption "system-menu script";
   };
 
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.rofi-power-menu
-      rofi-power-script
+      system-menu-script
     ];
   };
 }

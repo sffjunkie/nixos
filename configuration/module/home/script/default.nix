@@ -4,7 +4,7 @@
     ./paths
     ./rofi-clip
     ./rofi-launcher
-    ./rofi-power
     ./sysinfo
+    ./system-menu
   ];
 }
