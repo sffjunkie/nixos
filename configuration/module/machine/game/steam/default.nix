@@ -12,10 +12,20 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.steam.enable = true;
     hardware.opengl.driSupport32Bit = true;
 
+    programs.gamemode.enable = true;
+    programs.steam = {
+      enable = true;
+      gamescopeSession.enable = true;
+
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
+      ];
+    };
+
     environment.systemPackages = with pkgs; [
+      mangohud
       protonup-ng
       steam-run-native
     ];
