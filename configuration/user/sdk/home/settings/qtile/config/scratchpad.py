@@ -56,7 +56,7 @@ def build_scratchpads(settings: dict) -> list[ScratchPad]:
 def build_keys(settings: dict) -> list[Key]:
     return [
         Key(
-            [Super],
+            [Super, Alt],
             "0",
             lazy.group["0"].dropdown_toggle("ncmpcpp"),
         ),
