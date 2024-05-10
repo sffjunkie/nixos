@@ -35,29 +35,31 @@ class WindowLocation(Enum):
 
 
 def anchor_window(
-    position: WindowLocation,
+    location: WindowLocation,
     width: ScreenFraction,
     height: ScreenFraction,
 ) -> WindowPosition:
-    if position == WindowLocation.Left:
+    if location == WindowLocation.Left:
         return WindowPosition(0.0, width, width, 1.0)
-    elif position == WindowLocation.Right:
+    elif location == WindowLocation.Right:
         return WindowPosition(1.0 - width, 0.0, width, 1.0)
-    elif position == WindowLocation.Top:
+    elif location == WindowLocation.Top:
         return WindowPosition(0.0, 0.0, 1.0, height)
-    elif position == WindowLocation.Bottom:
+    elif location == WindowLocation.Bottom:
         return WindowPosition(0.0, 1.0 - height, 1.0, height)
-    elif position == WindowLocation.TopLeft:
+    elif location == WindowLocation.TopLeft:
         return WindowPosition(0.0, 0.0, width, height)
-    elif position == WindowLocation.TopCenter:
+    elif location == WindowLocation.TopCenter:
         return WindowPosition((1.0 - width) / 2.0, 0.0, width, height)
-    elif position == WindowLocation.TopLeft:
+    elif location == WindowLocation.TopRight:
         return WindowPosition(1.0 - width, 0.0, width, height)
-    elif position == WindowLocation.BottomLeft:
+    elif location == WindowLocation.BottomLeft:
         return WindowPosition(0.0, 1.0 - height, width, height)
-    elif position == WindowLocation.BottomRight:
-        return WindowPosition(1.0 - width, 1.0 - height, width, height)
-    elif position == WindowLocation.BottomCenter:
+    elif location == WindowLocation.BottomCenter:
         return WindowPosition((1.0 - width) / 2.0, 1.0 - height, width, height)
-    elif position == WindowLocation.Centered:
+    elif location == WindowLocation.BottomRight:
+        return WindowPosition(1.0 - width, 1.0 - height, width, height)
+    elif location == WindowLocation.Centered:
         return WindowPosition((1.0 - width) / 2.0, (1.0 - height) / 2.0, width, height)
+
+    raise ValueError("Unkown window position")
