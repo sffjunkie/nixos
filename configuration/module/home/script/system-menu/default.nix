@@ -6,7 +6,7 @@
 }: let
   cfg = config.looniversity.script.system-menu;
 
-  rofi-power-script = pkgs.writeScriptBin "system-menu" ''
+  system-menu-script = pkgs.writeScriptBin "system-menu" ''
     #!${lib.getExe pkgs.bash}
     swapon --show | grep "dev" > /dev/null 2>&1
     if [ $? -eq 0 ]; then
