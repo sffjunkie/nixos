@@ -7,12 +7,12 @@ from keys import Super, Alt
 
 def build_scratchpads(settings: dict) -> list[ScratchPad]:
     ncmpcpp_dimension = anchor_window(
-        position=WindowLocation.TopCenter,
+        location=WindowLocation.TopCenter,
         width=0.5,
         height=0.4,
     )
     home_automation_dimension = anchor_window(
-        position=WindowLocation.BottomCenter,
+        location=WindowLocation.BottomCenter,
         width=0.5,
         height=0.5,
     )
