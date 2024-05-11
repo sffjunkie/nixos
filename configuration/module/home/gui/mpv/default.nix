@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.mpv
+      pkgs.mpvScripts.mpris
     ];
   };
 }
