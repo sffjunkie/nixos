@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     services.xserver = {
       enable = true;
+      wacom.enable = true;
     };
 
     looniversity = {
