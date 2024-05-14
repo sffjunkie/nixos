@@ -2,7 +2,6 @@ import re
 from libqtile.config import Match, Rule
 from libqtile.lazy import lazy
 from libqtile.config import Key, Group
-from libqtile.log_utils import logger
 
 group_config = {
     "WWW": {"layout": "monadtall"},
@@ -50,7 +49,8 @@ def build_groups(settings: dict) -> list[Group]:
         if matches:
             kwargs["matches"] = matches
         group = Group(
-            name=name + decoration(idx),
+            name=str(idx),
+            label=name + decoration(idx),
             **kwargs,
         )
         groups.append(group)
@@ -59,22 +59,22 @@ def build_groups(settings: dict) -> list[Group]:
 
 def build_keys(settings: dict) -> list[Key]:
     keys = []
-    for idx, name in enumerate(group_config.keys(), 1):
-        group_name = name + decoration(idx)
+    for idx, _ in enumerate(group_config.keys(), 1):
+        name = str(idx)
         keys.append(
             Key(
                 [settings["mod"]],
                 str(idx),
-                lazy.group[group_name].toscreen(toggle=True),
-                desc=f"Switch to group {group_name}",
+                lazy.group[name].toscreen(toggle=True),
+                desc=f"Switch to group {name}",
             )
         )
         keys.append(
             Key(
                 [settings["mod"], "shift"],
                 str(idx),
-                lazy.window.togroup(group_name),
-                desc=f"Send current window to group {group_name}",
+                lazy.window.togroup(name),
+                desc=f"Send current window to group {name}",
             )
         )
     return keys
