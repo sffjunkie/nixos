@@ -47,7 +47,7 @@ screens = [
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
-dgroups_app_rules = group.build_rules()
+# dgroups_app_rules = None
 
 keys = (
     kbdmouse.build_keys(settings)
