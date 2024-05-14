@@ -2,6 +2,7 @@ import re
 from libqtile.config import Match, Rule
 from libqtile.command import lazy
 from libqtile.config import Key, Group
+from libqtile.core.manager import Qtile
 
 group_config = [
     ("WWW", {"layout": "monadtall"}),
@@ -71,10 +72,13 @@ def build_keys(settings: dict) -> list[Key]:
 
 
 def build_rules() -> list[Rule]:
-    return [
-        Rule(
+    rules = []
+    for i, (wmclass, group) in enumerate(wmclass_group.items(), 1):
+        _group = Qtile.groups_map[group.name + decoration(i)]
+        rule = Rule(
             Match(wm_class=re.compile(wmclass)),
-            group=group + decoration(i),
+            group=_group,
         )
-        for i, (wmclass, group) in enumerate(wmclass_group.items(), 1)
-    ]
+        rules.append(rule)
+
+    return rules
