@@ -15,9 +15,6 @@ in {
     programs.bat = {
       enable = true;
       extraPackages = with pkgs.bat-extras; [batdiff batman batgrep];
-      config = {
-        theme = "Nord";
-      };
     };
 
     programs.zsh.shellAliases = {
