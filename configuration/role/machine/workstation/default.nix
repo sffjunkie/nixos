@@ -21,7 +21,7 @@ in {
       device = {
         wacom.enable = true;
         yubikey_plus.enable = true;
-      }
+      };
 
       role = {
         gui.enable = true;
