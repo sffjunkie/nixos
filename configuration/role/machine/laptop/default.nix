@@ -23,6 +23,10 @@ in {
         notification.libnotify.enable = true;
       };
 
+      device = {
+        yubikey.enable = true;
+      };
+
       media = {
         pipewire.enable = true;
       };
@@ -32,9 +36,8 @@ in {
       };
 
       system = {
-        font.enable = true;
-        yubikey_plus.enable = true;
         keyring.enable = true;
+        font.enable = true;
       };
     };
 
