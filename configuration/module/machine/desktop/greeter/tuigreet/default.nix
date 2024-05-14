@@ -24,8 +24,8 @@ in {
         message = "greetd service must be enabled";
       }
       {
-        assertion = config.looniversity.desktop.display_manager.tuigreet.script != "";
-        message = "looniversity.display_manager.tuigreet.script must be set";
+        assertion = config.looniversity.desktop.greeter.tuigreet.script != "";
+        message = "looniversity.greeter.tuigreet.script must be set";
       }
     ];
 
@@ -33,6 +33,6 @@ in {
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.desktop.display_manager.tuigreet.script}";
+    services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.desktop.greeter.tuigreet.script}";
   };
 }

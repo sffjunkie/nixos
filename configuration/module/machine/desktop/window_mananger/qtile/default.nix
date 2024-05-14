@@ -56,7 +56,7 @@ in {
       owner = config.users.users.sdk.name;
     };
 
-    looniversity.desktop.display_manager.tuigreet.script = "${startScript}";
+    looniversity.desktop.greeter.tuigreet.script = "${startScript}";
 
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
