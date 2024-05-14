@@ -15,7 +15,7 @@ in {
     looniversity = {
       desktop = {
         display_manager.greetd.enable = true;
-        display_manager.tuigreet.enable = true;
+        greeter.tuigreet.enable = true;
         window_manager.qtile.enable = true;
       };
 

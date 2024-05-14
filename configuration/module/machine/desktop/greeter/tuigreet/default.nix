@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.desktop.display_manager.tuigreet;
+  cfg = config.looniversity.desktop.greeter.tuigreet;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.looniversity.desktop.display_manager.tuigreet = {
+  options.looniversity.desktop.greeter.tuigreet = {
     enable = mkEnableOption "tuigreet";
 
     script = mkOption {
