@@ -20,6 +20,7 @@ in {
 
       device = {
         wacom.enable = true;
+        yubikey_plus.enable = true;
       }
 
       role = {
@@ -48,7 +49,6 @@ in {
 
       system = {
         font.enable = true;
-        yubikey_plus.enable = true;
         keyring.enable = true;
       };
     };
