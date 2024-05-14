@@ -18,6 +18,10 @@ in {
         mongodb.enable = true;
       };
 
+      device = {
+        wacom.enable = true;
+      }
+
       role = {
         gui.enable = true;
       };
