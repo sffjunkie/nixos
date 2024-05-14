@@ -9,15 +9,15 @@ from libqtile.backend.wayland import InputConfig
 from libqtile.config import Screen
 from libqtile.log_utils import logger
 
-from . import bars
-from . import floating
-from . import group
-from . import kbdmouse
-from . import scratchpad
-from . import wallpaper
-from .secret import load_secrets
-from .setting import load_settings
-from .theme import load_theme
+import bars
+import floating
+import group
+import kbdmouse
+import scratchpad
+import wallpaper
+from secret import load_secrets
+from setting import load_settings
+from theme import load_theme
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
