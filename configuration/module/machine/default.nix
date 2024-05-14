@@ -3,6 +3,7 @@
     ./admin
     ./desktop
     ./development
+    ./device
     ./doc
     ./game
     ./home-automation
