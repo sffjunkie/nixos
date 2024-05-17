@@ -124,7 +124,8 @@
 
       editor = {
         micro.enable = true;
-        neovim.enable = true;
+        neovim.enable = false;
+        nixvim.enable = true;
         vscode.enable = true;
       };
 
