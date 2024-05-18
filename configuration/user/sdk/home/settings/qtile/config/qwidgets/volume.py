@@ -59,10 +59,8 @@ class FixedWidthVolume(Volume):
         ("cardid", None, "Card Id"),
         ("device", "default", "Device Name"),
         ("channel", "Master", "Channel"),
-
         ("padding", 3, "Padding left and right. Calculated if None."),
         ("update_interval", 0.2, "Update time in seconds."),
-
         ("theme_path", None, "Path of the icons"),
         # font name
         ("mute_command", None, "Mute command"),
@@ -162,13 +160,13 @@ class FixedWidthVolume(Volume):
             self.drawer.ctx.paint()
         elif self.emoji:
             if self.volume <= 0:
-                self.text = u"\U0001f507"
+                self.text = "\U0001f507"
             elif self.volume <= 30:
-                self.text = u"\U0001f508"
+                self.text = "\U0001f508"
             elif self.volume < 80:
-                self.text = u"\U0001f509"
+                self.text = "\U0001f509"
             elif self.volume >= 80:
-                self.text = u"\U0001f50a"
+                self.text = "\U0001f50a"
         else:
             if self.volume == -1:
                 self.text = "  M"
