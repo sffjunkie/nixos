@@ -149,6 +149,8 @@
 
             nixos-hardware.nixosModules.common-pc
             nixos-hardware.nixosModules.common-pc-ssd
+
+            nix-index-database.nixosModules.nix-index
           ]
           ++ machineCommonModules
           ++ hmCommonModules;
