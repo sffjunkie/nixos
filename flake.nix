@@ -87,6 +87,7 @@
           };
           home-manager.sharedModules = [
             sops-nix.homeManagerModules.sops
+            nixvim.homeManagerModules.nixvim
           ];
         };
       }
