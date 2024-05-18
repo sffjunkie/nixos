@@ -1,5 +1,3 @@
-from qtile_extras import widget
-
 from theme._types import Theme
 from theme.utils import opacity_to_str
 from qwidgets.icon import MDIcon
