@@ -47,8 +47,6 @@ screens = [
 
 groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
-# dgroups_app_rules = None
-
 keys = (
     kbdmouse.build_keys(settings)
     + group.build_keys(settings)
@@ -76,6 +74,7 @@ wmname = "QTile"
 wl_input_rules = {
     "1452:591:Keychron Keychron K1": InputConfig(kb_layout="us"),
     "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
+    "1386:828:Wacom Intuos PT S 2 Finger": InputConfig(tap=True),
 }
 
 
