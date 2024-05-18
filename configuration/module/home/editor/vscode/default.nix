@@ -100,6 +100,9 @@ in {
         "git.confirmSync" = false;
         "git.openRepositoryInParentFolders" = "never";
 
+        "markdown.preview.fontSize" = 12;
+        "markdown.preview.fontFamily" = "'Hack Nerd Font', 'DejaVu Sans Mono', monospace";
+
         "python.analysis.diagnosticMode" = "workspace";
         "python.analysis.exclude" = [
           "**/result"
