@@ -94,6 +94,7 @@ in {
         "files.insertFinalNewline" = true;
         "files.exclude" = {
           "**/.tox" = true;
+          ".direnv" = true;
         };
 
         "git.confirmSync" = false;
