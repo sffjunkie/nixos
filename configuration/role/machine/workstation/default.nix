@@ -50,6 +50,7 @@ in {
       system = {
         font.enable = true;
         keyring.enable = true;
+        nix-index.enable = true;
       };
     };
 
