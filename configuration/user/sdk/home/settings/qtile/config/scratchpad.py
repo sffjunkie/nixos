@@ -57,7 +57,7 @@ def build_keys(settings: dict) -> list[Key]:
     return [
         Key(
             [Super, Alt],
-            "0",
+            "F8",
             lazy.group["0"].dropdown_toggle("ncmpcpp"),
         ),
         Key(
