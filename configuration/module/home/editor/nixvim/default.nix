@@ -15,6 +15,13 @@ in {
     programs.nixvim = {
       enable = true;
 
+      globals = {
+        mapleader = " ";
+        maplocalleader = " ";
+        have_nerd_font = true;
+      };
+
+
       plugins = {
         lazy.enable = true;
         treesitter.enable = true;
