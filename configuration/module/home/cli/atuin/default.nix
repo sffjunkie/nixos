@@ -16,9 +16,17 @@ in {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
+
       flags = [
         "--disable-up-arrow"
       ];
+
+      settings = {
+        db_path = "/tmp/atuin-history.db";
+        dialect = "uk";
+        inline_height = 30;
+        show_preview = false;
+      };
     };
     programs.zsh.initExtra = ''
       bindkey '^[[1;5A' _atuin_search_widget
