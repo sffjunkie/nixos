@@ -63,6 +63,7 @@
         };
         dircolors.enable = true;
         exiftool.enable = true;
+        fd.enable = true;
         feh.enable = true;
         fzf.enable = true;
         gh.enable = true;

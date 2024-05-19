@@ -6,6 +6,7 @@
     ./cava
     ./dircolors
     ./exiftool
+    ./fd
     ./feh
     ./fzf
     ./gh
