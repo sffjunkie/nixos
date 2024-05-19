@@ -11,6 +11,11 @@ in {
     enable = mkEnableOption "nixvim";
   };
 
+  imports = [
+    ./alpha.nix
+    ./lsp.nix
+  ];
+
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
