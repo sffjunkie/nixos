@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.editor.neovim;
+  cfg = config.looniversity.editor.nixvim;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.editor.neovim = {
-    enable = mkEnableOption "neovim";
+  options.looniversity.editor.nixvim = {
+    enable = mkEnableOption "nixvim";
   };
 
   config = mkIf cfg.enable {
