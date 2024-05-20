@@ -6,7 +6,7 @@ from libqtile.config import Key, Group
 group_config = {
     "WWW": {"layout": "monadtall"},
     "BRAIN": {"layout": "max"},
-    "DEV": {"layout": "max"},
+    "CODE": {"layout": "max"},
     "TERM": {"layout": "monadtall"},
     "DOC": {"layout": "monadtall"},
     "CHAT": {"layout": "monadtall"},
@@ -18,7 +18,7 @@ group_config = {
 wmclass_group = {
     "WWW": ["brave-browser|chromium|firefox"],
     "BRAIN": ["obsidian"],
-    "DEV": ["code-url-handler"],
+    "CODE": ["code-url-handler"],
     "GFX": [
         "Darktable",
         r"Gimp-\d+\.\d+",

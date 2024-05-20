@@ -69,16 +69,14 @@
         papirus.enable = true;
         stylix.enable = true;
       };
-
-      wayland = {
-        keyboard.evdevremapkeys.enable = true;
-      };
     };
 
     environment.systemPackages = [
       pkgs.teams-for-linux
       pkgs.zoom-us
     ];
+
+    services.input-remapper.enable = true;
 
     systemd.services = {
       "rclone@gdrive" = {

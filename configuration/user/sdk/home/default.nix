@@ -179,11 +179,14 @@
         };
       };
 
+      storage = {
+        veracrypt.enable = true;
+      };
+
       system = {
         gpg.enable = true;
         imagemagick.enable = true;
         pywal.enable = true;
-        veracrypt.enable = true;
         user-dirs.enable = true;
       };
 
@@ -194,7 +197,7 @@
           wdisplays.enable = true;
         };
         screenshot.sshot.enable = true;
-        keyboard.evdevremapkeys.enable = true;
+        keyboard.hyper_super.enable = true;
         lockscreen.swaylock.enable = true;
       };
     };

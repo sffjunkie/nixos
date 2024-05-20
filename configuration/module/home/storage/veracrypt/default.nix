@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.looniversity.system.veracrypt;
+  cfg = config.looniversity.storage.veracrypt;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.looniversity.system.veracrypt = {
+  options.looniversity.storage.veracrypt = {
     enable = mkEnableOption "veracrypt";
   };
 

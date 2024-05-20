@@ -11,6 +11,7 @@ from window import float_to_front
 Alt = "mod1"
 Ctrl = "control"
 Shift = "shift"
+Hyper = "mod3"
 Super = "mod4"
 ApplicationLaunchModKey = Alt
 
@@ -20,16 +21,23 @@ def build_keys(settings) -> list[Key]:
         # Browser
         Key(
             [Super, ApplicationLaunchModKey],
-            "b",
+            "w",
             lazy.spawn(environ.get("BROWSER", "brave")),
             desc="Start the browser",
+        ),
+        # Brain
+        Key(
+            [Super, ApplicationLaunchModKey],
+            "b",
+            lazy.spawn("obsidian"),
+            desc="Start the Brain (Obsidian)",
         ),
         # Code Editor
         Key(
             [Super, ApplicationLaunchModKey],
             "c",
             lazy.spawn("code"),
-            desc="Start vscode",
+            desc="Start Coding (VSCode)",
         ),
         # Terminal
         Key(
@@ -99,7 +107,9 @@ def build_keys(settings) -> list[Key]:
         ),
         # endregion
         # region QTile Control
-        Key([Super, Alt], "Escape", lazy.reload_config(), desc="Reload QTile"),
+        Key(
+            [Super, Alt, "control"], "Return", lazy.reload_config(), desc="Reload QTile"
+        ),
         Key([Super, Alt, "control"], "Backspace", lazy.shutdown(), desc="Quit QTile"),
         # endregion
         # region Window Control
