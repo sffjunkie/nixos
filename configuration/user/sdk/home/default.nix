@@ -197,7 +197,7 @@
           wdisplays.enable = true;
         };
         screenshot.sshot.enable = true;
-        keyboard.evdevremapkeys.enable = true;
+        keyboard.hyper_super.enable = true;
         lockscreen.swaylock.enable = true;
       };
     };
