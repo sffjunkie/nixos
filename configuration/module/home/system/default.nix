@@ -4,6 +4,5 @@
     ./imagemagick
     ./pywal
     ./user-dirs
-    ./veracrypt
   ];
 }

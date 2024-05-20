@@ -179,11 +179,14 @@
         };
       };
 
+      storage = {
+        veracrypt.enable = true;
+      };
+
       system = {
         gpg.enable = true;
         imagemagick.enable = true;
         pywal.enable = true;
-        veracrypt.enable = true;
         user-dirs.enable = true;
       };
 
