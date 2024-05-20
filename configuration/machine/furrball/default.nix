@@ -71,7 +71,7 @@
       };
 
       wayland = {
-        keyboard.evdevremapkeys.enable = true;
+        keyboard.evdevremapkeys.enable = false;
       };
     };
 
