@@ -1,13 +1,9 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  cfg = config.looniversity.editor.nixvim;
-  inherit (lib) mkDefault mkEnableOption mkIf;
-in {
-  config = mkIf cfg.enable {
+  imports = [
+    ./python.nix
+  ];
+
+  config = {
     programs.nixvim = {
       # autoCmd = [
       #   {
@@ -23,8 +19,8 @@ in {
           enable = true;
           keymaps = {
             diagnostic = {
-              "[d" = "vim.diagnostic.goto_prev";
-              "]d" = "vim.diagnostic.goto_next";
+              "[d" = "goto_prev";
+              "]d" = "goto_next";
             };
           };
 
@@ -32,9 +28,7 @@ in {
             bashls.enable = true;
             jsonls.enable = true;
             lua-ls.enable = true;
-            ruff = {
-              enable = true;
-            };
+            nil_ls.enable = true;
             yamlls.enable = true;
           };
         };

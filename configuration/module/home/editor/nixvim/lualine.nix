@@ -2,9 +2,8 @@
   config = {
     programs.nixvim = {
       plugins = {
-        alpha = {
+        lualine = {
           enable = true;
-          theme = "dashboard";
         };
       };
     };

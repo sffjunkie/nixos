@@ -2,9 +2,8 @@
   config = {
     programs.nixvim = {
       plugins = {
-        alpha = {
+        markdown-preview = {
           enable = true;
-          theme = "dashboard";
         };
       };
     };

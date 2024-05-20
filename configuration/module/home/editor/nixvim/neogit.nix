@@ -2,9 +2,8 @@
   config = {
     programs.nixvim = {
       plugins = {
-        alpha = {
+        neogit = {
           enable = true;
-          theme = "dashboard";
         };
       };
     };

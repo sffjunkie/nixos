@@ -1,13 +1,5 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  cfg = config.looniversity.editor.nixvim;
-  inherit (lib) mkDefault mkEnableOption mkIf;
-in {
-  config = mkIf cfg.enable {
+  config = {
     programs.nixvim = {
       plugins = {
         which-key = {

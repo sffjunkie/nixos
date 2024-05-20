@@ -2,9 +2,8 @@
   config = {
     programs.nixvim = {
       plugins = {
-        alpha = {
+        fugitive = {
           enable = true;
-          theme = "dashboard";
         };
       };
     };

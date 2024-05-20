@@ -1,13 +1,5 @@
 {
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
-  cfg = config.looniversity.editor.nixvim;
-  inherit (lib) mkDefault mkEnableOption mkIf;
-in {
-  config = mkIf cfg.enable {
+  config = {
     programs.nixvim = {
       plugins = {
         telescope = {
@@ -16,11 +8,34 @@ in {
             file-browser.enable = true;
             fzf-native.enable = true;
           };
-        };
-      };
 
-      keymaps = {
-        n = {
+          keymaps = {
+            "<leader>sf" = {
+              action = "find_files";
+              options = {
+                desc = "Search for files";
+              };
+            };
+            "<leader>sg" = {
+              action = "live_grep";
+              options = {
+                desc = "Search with grep";
+              };
+            };
+
+            "<leader>sb" = {
+              action = "buffers";
+              options = {
+                desc = "Search buffers";
+              };
+            };
+            "<leader>sh" = {
+              action = "help_tags";
+              options = {
+                desc = "Search help";
+              };
+            };
+          };
         };
       };
     };

@@ -13,12 +13,28 @@ in {
 
   imports = [
     ./alpha.nix
-    ./lsp.nix
+    ./comment.nix
+    ./fugitive.nix
+    ./gitsigns.nix
+    ./keymap.nix
+    ./lualine.nix
+    ./markdown.nix
+    ./neogit.nix
+    ./tabby.nix
+    ./tree.nix
+    ./telescope.nix
+    ./which-key.nix
+
+    ./lsp
   ];
 
   config = mkIf cfg.enable {
     programs.nixvim = {
       enable = true;
+
+      extraPackages = [
+        pkgs.vimPlugins.nvim-web-devicons
+      ];
 
       globals = {
         mapleader = " ";
@@ -27,32 +43,36 @@ in {
       };
 
       opts = {
-        number = true;
-        mouse = "a";
-        showmode = false;
-        clipboard = "unnamedplus";
         breakindent = true;
-        undofile = true;
+        clipboard = "unnamedplus";
+        cursorline = true;
         ignorecase = true;
-        smartcase = true;
-        signcolumn = "yes";
-        updatetime = 250;
-        timeoutlen = 300;
-        splitright = true;
-        splitbelow = true;
+        inccommand = "split";
         list = true;
         listchars = {
           tab = "» ";
           trail = "·";
           nbsp = "␣";
         };
-        inccommand = "split";
-        cursorline = true;
+        mouse = "a";
+        number = true;
         scrolloff = 10;
+        showmode = false;
+        showtabline = 2;
+        signcolumn = "yes";
+        smartcase = true;
+        splitbelow = true;
+        splitright = true;
+        timeoutlen = 300;
+        undofile = true;
+        updatetime = 250;
       };
 
       plugins = {
+        direnv.enable = true;
+        fugitive.enable = true;
         lazy.enable = true;
+        sleuth.enable = true;
         treesitter.enable = true;
       };
     };
