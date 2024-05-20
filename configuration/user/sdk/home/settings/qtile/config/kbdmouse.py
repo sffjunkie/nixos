@@ -11,6 +11,7 @@ from window import float_to_front
 Alt = "mod1"
 Ctrl = "control"
 Shift = "shift"
+Hyper = "mod3"
 Super = "mod4"
 ApplicationLaunchModKey = Alt
 
