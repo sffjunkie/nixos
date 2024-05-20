@@ -2,7 +2,7 @@
   config = {
     programs.nixvim = {
       plugins = {
-        lualine = {
+        direnv = {
           enable = true;
         };
       };

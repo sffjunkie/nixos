@@ -10,26 +10,26 @@
           };
 
           keymaps = {
-            "<leader>sf" = {
+            "<leader>ff" = {
               action = "find_files";
               options = {
                 desc = "Search for files";
               };
             };
-            "<leader>sg" = {
+            "<leader>fg" = {
               action = "live_grep";
               options = {
                 desc = "Search with grep";
               };
             };
 
-            "<leader>sb" = {
+            "<leader>fb" = {
               action = "buffers";
               options = {
                 desc = "Search buffers";
               };
             };
-            "<leader>sh" = {
+            "<leader>fh" = {
               action = "help_tags";
               options = {
                 desc = "Search help";
