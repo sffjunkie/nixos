@@ -80,6 +80,8 @@
       pkgs.zoom-us
     ];
 
+    services.input-remapper.enable = true;
+
     systemd.services = {
       "rclone@gdrive" = {
         wantedBy = ["default.target"];
