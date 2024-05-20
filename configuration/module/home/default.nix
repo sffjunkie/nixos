@@ -11,6 +11,7 @@
     ./script
     ./service
     ./shell
+    ./storage
     ./system
     ./terminal
     ./wayland
