@@ -74,7 +74,7 @@ wmname = "QTile"
 wl_input_rules = {
     "1452:591:Keychron Keychron K1": InputConfig(
         kb_layout="hyper_super",  # configuration/module/home/wayland/keyboard/hyper_super
-        kb_options="altwin:swap_lalt_lwin,caps:hyper",
+        kb_options="altwin:swap_lalt_lwin",
     ),
     "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
     "1386:828:Wacom Intuos PT S 2 Finger": InputConfig(tap=True),
