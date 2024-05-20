@@ -1,4 +1,5 @@
-# https://www.reddit.com/r/swaywm/comments/1b8hw3u/comment/ktqd5a3/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+# key codes - /run/current-system/sw/share/X11/xkb/keycodes/evdev
+# US keyboard symbols - /run/current-system/sw/share/X11/xkb/symbols/us
 {
   config,
   lib,
@@ -23,8 +24,15 @@ in {
 
       xkb_symbols "basic" {
         include "us(basic)"
-        name[Group1] = "US Keyboard, Separate HYPER_L and SUPER_L";
-        modifier_map Mod3 { Hyper_L };
+        name[Group1] = "US Keyboard, Separate HYPER_L (CapsLock) and SUPER_L";
+
+        // Rebind CapsLock to Hyper_L
+        key <CAPS> { [ Hyper_L, Hyper_L ] };
+
+        // Rebind right Super (windows key) into a Compose key
+        key <RWIN> {[ Multi_key ]};
+
+        modifier_map Mod3 { <CAPS> };
         modifier_map Mod4 { Super_L };
       };
     '';
