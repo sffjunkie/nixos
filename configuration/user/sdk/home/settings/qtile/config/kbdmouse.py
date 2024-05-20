@@ -20,16 +20,23 @@ def build_keys(settings) -> list[Key]:
         # Browser
         Key(
             [Super, ApplicationLaunchModKey],
-            "b",
+            "w",
             lazy.spawn(environ.get("BROWSER", "brave")),
             desc="Start the browser",
+        ),
+        # Brain
+        Key(
+            [Super, ApplicationLaunchModKey],
+            "b",
+            lazy.spawn("obsidian"),
+            desc="Start the Brain (Obsidian)",
         ),
         # Code Editor
         Key(
             [Super, ApplicationLaunchModKey],
             "c",
             lazy.spawn("code"),
-            desc="Start vscode",
+            desc="Start Coding (VSCode)",
         ),
         # Terminal
         Key(
