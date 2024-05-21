@@ -51,7 +51,7 @@
         }
         {
           action = "<C-u>";
-          key = ",";
+          key = "m";
           mode = "n";
           options = {
             desc = "Scroll up";
@@ -61,7 +61,7 @@
         }
         {
           action = "<C-d>";
-          key = "m";
+          key = ",";
           mode = "n";
           options = {
             desc = "Scroll up";
