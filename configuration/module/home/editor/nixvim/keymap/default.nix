@@ -64,7 +64,27 @@
           key = ",";
           mode = "n";
           options = {
+            desc = "Scroll down";
+            noremap = true;
+            silent = true;
+          };
+        }
+        {
+          action = "<C-u>";
+          key = "<C-Up>";
+          mode = "n";
+          options = {
             desc = "Scroll up";
+            noremap = true;
+            silent = true;
+          };
+        }
+        {
+          action = "<C-d>";
+          key = "<C-Down>";
+          mode = "n";
+          options = {
+            desc = "Scroll down";
             noremap = true;
             silent = true;
           };
