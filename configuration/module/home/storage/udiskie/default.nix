@@ -14,6 +14,7 @@ in {
   config = mkIf cfg.enable {
     services.udiskie = {
       enable = true;
+      tray = "never";
     };
   };
 }
