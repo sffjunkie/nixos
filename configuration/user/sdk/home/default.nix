@@ -187,6 +187,7 @@
       system = {
         gpg.enable = true;
         imagemagick.enable = true;
+        polkit-agent.enable = true;
         pywal.enable = true;
         user-dirs.enable = true;
       };

@@ -19,14 +19,12 @@ in {
         window_manager.qtile.enable = true;
       };
 
-      system = {
-        polkit.enable = true;
-      };
-
       wayland = {
         lockscreen.swaylock.enable = true;
       };
     };
+
+    security.polkit.enable = true;
 
     xdg.portal = {
       enable = true;
