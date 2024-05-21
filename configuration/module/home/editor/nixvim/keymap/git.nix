@@ -31,6 +31,30 @@
             desc = "Git push";
           };
         }
+        {
+          action = ":DiffviewOpen HEAD<CR>";
+          key = "<leader>gdh";
+          mode = "n";
+          options = {
+            desc = "View diff against HEAD";
+          };
+        }
+        {
+          action = ":DiffviewOpen develop<CR>";
+          key = "<leader>gdd";
+          mode = "n";
+          options = {
+            desc = "View diff against develop branch";
+          };
+        }
+        {
+          action = ":DiffviewOpen origin/main...HEAD<CR>";
+          key = "<leader>gdo";
+          mode = "n";
+          options = {
+            desc = "View diff origin/main against HEAD";
+          };
+        }
       ];
     };
   };
