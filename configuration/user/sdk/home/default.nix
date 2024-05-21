@@ -180,6 +180,7 @@
       };
 
       storage = {
+        udiskie.enable = true;
         veracrypt.enable = true;
       };
 
