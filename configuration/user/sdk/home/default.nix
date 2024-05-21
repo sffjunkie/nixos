@@ -49,7 +49,7 @@
       };
 
       cli = {
-        atuin.enable = true;
+        atuin.enable = false;
         bat.enable = true;
         bottom.enable = true;
         cava = {
