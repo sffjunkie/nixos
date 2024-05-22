@@ -10,11 +10,6 @@
       fsType = "vfat";
     };
 
-    fileSystems."/tmp" = {
-      device = "tank0/tmp";
-      fsType = "zfs";
-    };
-
     fileSystems."/nix" = {
       device = "tank0/nix";
       fsType = "zfs";
