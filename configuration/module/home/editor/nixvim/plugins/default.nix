@@ -10,6 +10,7 @@
     ./markdown.nix
     ./neogit.nix
     ./notify.nix
+    ./obsidian.nix
     ./sleuth.nix
     ./tabby.nix
     ./tree.nix
