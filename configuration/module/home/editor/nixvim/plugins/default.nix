@@ -16,6 +16,7 @@
     ./treesitter.nix
     ./which-key.nix
 
+    ./dap
     ./lsp
   ];
 }
