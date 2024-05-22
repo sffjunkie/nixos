@@ -24,11 +24,7 @@ in {
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initExtra =
-        ''
-          bindkey '^f' autosuggest-accept
-        ''
-        + config.looniversity.shell.zsh.initExtra;
+      initExtra = config.looniversity.shell.zsh.initExtra;
     };
 
     programs.zsh.antidote = {

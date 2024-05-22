@@ -172,6 +172,7 @@
           enable = true;
 
           initExtra = ''
+            bindkey ^f autosuggest-accept
             function browser() { command "''${BROWSER:-${config.home.sessionVariables.BROWSER}}" "$@"; }
             function edit() { command "''${EDITOR:-${config.home.sessionVariables.EDITOR}}" "$@"; }
             function terminal() { command "''${TERMINAL:-${config.home.sessionVariables.TERMINAL}}" "$@"; }
