@@ -1,14 +1,5 @@
 {
   imports = [
-    ./python
+    ./python.nix
   ];
-
-  config = {
-    programs.nixvim = {
-      plugins = {
-        dap = {
-        };
-      };
-    };
-  };
 }
