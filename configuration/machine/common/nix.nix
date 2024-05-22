@@ -9,5 +9,7 @@
       allowUnfree = true;
       allowUnfreePredicate = _: true;
     };
+
+    systemd.services.nix-daemon.environment.TMPDIR = "/var/tmp/nix-daemon";
   };
 }
