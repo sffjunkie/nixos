@@ -9,6 +9,7 @@
     ./lualine.nix
     ./markdown.nix
     ./neogit.nix
+    ./notify.nix
     ./sleuth.nix
     ./tabby.nix
     ./tree.nix
