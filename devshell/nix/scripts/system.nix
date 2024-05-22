@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  script = pkgs.writeScriptBin "nixos-system" ''
+  script = pkgs.writeScriptBin "nos" ''
     #!${lib.getExe pkgs.bash}
     VALID_ARGS=$(getopt -o sv --long show-trace,verbose -- "''$@")
     if [[ $? -ne 0 ]]; then
