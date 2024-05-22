@@ -1,10 +1,8 @@
 {
   config = {
     programs.nixvim = {
-      plugins = {
-        markdown-preview = {
-          enable = true;
-        };
+      plugins.markdown-preview = {
+        enable = true;
       };
     };
   };

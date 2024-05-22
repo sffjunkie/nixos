@@ -2,10 +2,8 @@
 {
   config = {
     programs.nixvim = {
-      plugins = {
-        nvim-tree = {
-          enable = true;
-        };
+      plugins.nvim-tree = {
+        enable = true;
       };
     };
   };

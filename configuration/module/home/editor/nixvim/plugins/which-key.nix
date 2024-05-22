@@ -1,11 +1,9 @@
 {
   config = {
     programs.nixvim = {
-      plugins = {
-        which-key = {
-          enable = true;
-          plugins.spelling.enabled = true;
-        };
+      plugins.which-key = {
+        enable = true;
+        plugins.spelling.enabled = true;
       };
     };
   };

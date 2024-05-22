@@ -1,7 +1,7 @@
 {
   config = {
     programs.nixvim = {
-      lazy = {
+      lazy.plugins = {
         sleuth = {
           enable = true;
         };

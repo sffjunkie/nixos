@@ -2,14 +2,12 @@
 {
   config = {
     programs.nixvim = {
-      plugins = {
-        auto-session = {
+      plugins.auto-session = {
+        enable = true;
+        autoReload = {
           enable = true;
-          autoReload = {
-            enable = true;
-          }
-          dir = ''vim.fn.expand(vim.fn.stdpath("state") .. "/persistence/sessions/")'';
         };
+        dir = ''vim.fn.expand(vim.fn.stdpath("state") .. "/persistence/sessions/")'';
       };
 
       keymaps = [

@@ -1,11 +1,9 @@
 {pkgs, ...}: {
   config = {
     programs.nixvim = {
-      plugins = {
-        dap = {
-          extensions.dap-python = {
-            adapterPythonPath = pkgs.python3;
-          };
+      plugins.dap = {
+        extensions.dap-python = {
+          adapterPythonPath = pkgs.python3;
         };
       };
     };

@@ -12,6 +12,7 @@ in {
   };
 
   imports = [
+    ./autocmd.nix
     ./keymap
     ./lua-pre.nix
     ./globals.nix
