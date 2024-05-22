@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  tmpDir ? "/var/tmp/nixos-rebuild",
   ...
 }: let
   nixosScriptGenerations = pkgs.callPackage ./generations.nix {};

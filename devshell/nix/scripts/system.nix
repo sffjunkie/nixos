@@ -2,10 +2,13 @@
   config,
   lib,
   pkgs,
+  tmpDir ? "/var/tmp/nixos-rebuild",
   ...
 }: let
   script = pkgs.writeScriptBin "nos" ''
     #!${lib.getExe pkgs.bash}
+    TMPDIR=${tmpDir}
+
     VALID_ARGS=$(getopt -o sv --long show-trace,verbose -- "''$@")
     if [[ $? -ne 0 ]]; then
         exit 1;

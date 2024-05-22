@@ -1,5 +1,6 @@
 {pkgs, ...}: let
-  nixosScripts = pkgs.callPackage ./scripts {};
+  tmpDir = "/var/tmp/nixos-rebuild";
+  nixosScripts = pkgs.callPackage ./scripts {inherit tmpDir;};
 in
   pkgs.mkShell {
     buildInputs =
@@ -21,6 +22,7 @@ in
 
     # To get this to work with direnv you need to add `eval "$shellHook"` to `.envrc`
     shellHook = ''
+      [ ! -d ${tmpDir} ] && mkdir -p ${tmpDir}
       nix-test() {
         $(nix flake show --json | jq -e .tests 2>&1 > /dev/null)
         if [ $? -eq 0 ]; then
@@ -29,8 +31,5 @@ in
           echo "No tests output attribute found"
         fi
       }
-
-      alias nog="nixos-generations"
-      alias nos="nixos-system"
     '';
   }
