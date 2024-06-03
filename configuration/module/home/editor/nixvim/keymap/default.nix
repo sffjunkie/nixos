@@ -2,7 +2,6 @@
   imports = [
     ./git.nix
     ./google.nix
-    ./lsp.nix
     ./tabs.nix
     ./window.nix
   ];
