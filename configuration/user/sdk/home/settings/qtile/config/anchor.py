@@ -40,26 +40,81 @@ def anchor_window(
     height: ScreenFraction,
 ) -> WindowPosition:
     if location == WindowLocation.Left:
-        return WindowPosition(0.0, width, width, 1.0)
+        return WindowPosition(
+            x=0.0 + margin,
+            y=width + margin,
+            width=width - 2 * margin,
+            height=1.0 - 2 * margin,
+        )
     elif location == WindowLocation.Right:
-        return WindowPosition(1.0 - width, 0.0, width, 1.0)
+        return WindowPosition(
+            x=1.0 - width,
+            y=0.0,
+            width=width,
+            height=1.0,
+        )
     elif location == WindowLocation.Top:
-        return WindowPosition(0.0, 0.0, 1.0, height)
+        return WindowPosition(
+            x=0.0,
+            y=0.0,
+            width=1.0,
+            height=height,
+        )
     elif location == WindowLocation.Bottom:
-        return WindowPosition(0.0, 1.0 - height, 1.0, height)
+        return WindowPosition(
+            x=0.0,
+            y=1.0 - height,
+            width=1.0,
+            height=height,
+        )
     elif location == WindowLocation.TopLeft:
-        return WindowPosition(0.0, 0.0, width, height)
+        return WindowPosition(
+            x=0.0,
+            y=0.0,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.TopCenter:
-        return WindowPosition((1.0 - width) / 2.0, 0.0, width, height)
+        return WindowPosition(
+            x=(1.0 - width) / 2.0,
+            y=0.0,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.TopRight:
-        return WindowPosition(1.0 - width, 0.0, width, height)
+        return WindowPosition(
+            x=1.0 - width,
+            y=0.0,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.BottomLeft:
-        return WindowPosition(0.0, 1.0 - height, width, height)
+        return WindowPosition(
+            x=0.0,
+            y=1.0 - height,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.BottomCenter:
-        return WindowPosition((1.0 - width) / 2.0, 1.0 - height, width, height)
+        return WindowPosition(
+            x=(1.0 - width) / 2.0,
+            y=1.0 - height,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.BottomRight:
-        return WindowPosition(1.0 - width, 1.0 - height, width, height)
+        return WindowPosition(
+            x=1.0 - width,
+            y=1.0 - height,
+            width=width,
+            height=height,
+        )
     elif location == WindowLocation.Centered:
-        return WindowPosition((1.0 - width) / 2.0, (1.0 - height) / 2.0, width, height)
+        return WindowPosition(
+            x=(1.0 - width) / 2.0,
+            y=(1.0 - height) / 2.0,
+            width=width,
+            height=height,
+        )
 
     raise ValueError("Unkown window position")
