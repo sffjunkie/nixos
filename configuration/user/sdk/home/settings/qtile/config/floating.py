@@ -3,6 +3,7 @@ from libqtile.config import Match, Rule
 from theme._types import Theme
 
 wmclass_float = [
+    "com.github.wwmm.easyeffects",
     "pavucontrol",
     "org.gnome.Calculator",
     "org.gnome.Characters",
