@@ -2,19 +2,11 @@
 
 from os import environ
 
-# from libqtile import extension
-from libqtile.command import lazy
+from keys import Alt, Ctrl, Hyper, Shift, Super
 from libqtile.config import Click, Drag, Key
 
 from libqtile.lazy import lazy
 from window import float_to_front
-
-Alt = "mod1"
-Ctrl = "control"
-Shift = "shift"
-Hyper = "mod3"
-Super = "mod4"
-ApplicationLaunchModKey = Alt
 
 
 def build_keys(settings) -> list[Key]:
