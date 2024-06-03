@@ -41,10 +41,10 @@ def anchor_window(
 ) -> WindowPosition:
     if location == WindowLocation.Left:
         return WindowPosition(
-            x=0.0 + margin,
-            y=width + margin,
-            width=width - 2 * margin,
-            height=1.0 - 2 * margin,
+            x=0.0,
+            y=width,
+            width=width,
+            height=1.0,
         )
     elif location == WindowLocation.Right:
         return WindowPosition(
