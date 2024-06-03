@@ -23,6 +23,14 @@ in {
 
       settings = {
         fonts = {
+          default_family = lib.mkDefault "Hack Nerd Font";
+          default_size = lib.mkDefault "16pt";
+          web.size = {
+            default = lib.mkDefault 22;
+            default_fixed = lib.mkDefault 22;
+            minimum = lib.mkDefault 18;
+          };
+        };
         tabs = {
           position = "left";
           show = "multiple";
