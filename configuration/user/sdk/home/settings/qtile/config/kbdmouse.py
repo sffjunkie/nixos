@@ -97,6 +97,12 @@ def build_keys(settings) -> list[Key]:
             lazy.spawn("musicctl next"),
             desc="Switch to next music track",
         ),
+        Key(
+            [Super, Alt, Ctrl],
+            "F8",
+            lazy.spawn("pavucontrol"),
+            desc="Pavucontrol",
+        ),
         # endregion
         # region QTile Control
         Key([Super, Alt, Ctrl], "Return", lazy.reload_config(), desc="Reload QTile"),
