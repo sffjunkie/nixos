@@ -80,19 +80,19 @@ def build_keys(settings) -> list[Key]:
         # region MPD Control
         # Play / Pause
         Key(
-            [Super, Alt],
+            [Super],
             "F8",
             lazy.spawn("musicctl toggle"),
             desc="Toggle music play/pause",
         ),
         Key(
-            [Super, Alt],
+            [Super],
             "F7",
             lazy.spawn("musicctl previous"),
             desc="Switch to previous music track",
         ),
         Key(
-            [Super, Alt],
+            [Super],
             "F9",
             lazy.spawn("musicctl next"),
             desc="Switch to next music track",
