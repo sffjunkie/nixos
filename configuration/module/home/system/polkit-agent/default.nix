@@ -22,7 +22,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
+    home.packages = [
       pkgs.polkit_gnome
     ];
 
