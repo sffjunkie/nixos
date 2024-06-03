@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  inherit (lib) mkEnableOption mkIf mkoption;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 
   cfg = config.looniversity.system.polkit-agent;
 in {
