@@ -19,7 +19,7 @@
     export XDG_DATA_DIRS=/run/current-system/sw/share/gsettings-schemas:$XDG_DATA_DIRS
     systemctl --user unset-environment DISPLAY WAYLAND_DISPLAY
 
-    ${pkgs.zsh}/bin/zsh --login -c "systemctl --user import-environment XDG_DATA_DIRS PATH ${toString qtile-env-vars}"
+    ${pkgs.zsh}/bin/zsh --login -c "systemctl --user import-environment PATH XDG_DATA_DIRS ${toString qtile-env-vars}"
 
     # then start the service
     exec systemctl --user --wait start qtile.service
