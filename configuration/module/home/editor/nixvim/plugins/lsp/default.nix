@@ -5,15 +5,6 @@
 
   config = {
     programs.nixvim = {
-      # autoCmd = [
-      #   {
-      #     event = "LspAttach";
-      #     group = "vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true })";
-      #     callback = ''
-      #     '';
-      #   }
-      # ];
-
       plugins = {
         lsp = {
           enable = true;
