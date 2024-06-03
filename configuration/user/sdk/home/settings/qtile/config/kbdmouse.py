@@ -13,56 +13,55 @@ def build_keys(settings) -> list[Key]:
     return [
         # Browser
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "w",
             lazy.spawn(environ.get("BROWSER", "brave")),
             desc="Start the browser",
         ),
         # Brain
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "b",
             lazy.spawn("obsidian"),
             desc="Start the Brain (Obsidian)",
         ),
         # Code Editor
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "c",
             lazy.spawn("code"),
             desc="Start Coding (VSCode)",
         ),
         # Terminal
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "t",
             lazy.spawn(environ.get("TERMINAL", "alacritty")),
             desc="Start a terminal",
         ),
-        # App launcher
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "Return",
             lazy.spawn("rofi-launcher"),
             desc="Show the rofi app launcher (drun)",
         ),
         # Lock screen
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "l",
             lazy.spawn("loginctl lock-session"),
             desc="Lock the screen",
         ),
         # Power menu
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "F12",
             lazy.spawn("system-menu"),
             desc="Show the system menu",
         ),
         # region Clipboard
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "Insert",
             lazy.spawn(
                 "rofi-clip -c",
@@ -70,7 +69,7 @@ def build_keys(settings) -> list[Key]:
             desc="Copy an item from the clipboard history",
         ),
         Key(
-            [Super, ApplicationLaunchModKey],
+            [Super, Alt],
             "Delete",
             lazy.spawn(
                 "rofi-clip -d",
@@ -81,19 +80,19 @@ def build_keys(settings) -> list[Key]:
         # region MPD Control
         # Play / Pause
         Key(
-            [Super],
+            [Super, Alt],
             "F8",
             lazy.spawn("musicctl toggle"),
             desc="Toggle music play/pause",
         ),
         Key(
-            [Super],
+            [Super, Alt],
             "F7",
             lazy.spawn("musicctl previous"),
             desc="Switch to previous music track",
         ),
         Key(
-            [Super],
+            [Super, Alt],
             "F9",
             lazy.spawn("musicctl next"),
             desc="Switch to next music track",
