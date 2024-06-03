@@ -23,7 +23,9 @@ in {
 
       settings = {
         fonts = {
-          default_size = lib.mkForce "16pt";
+        tabs = {
+          position = "left";
+          show = "multiple";
         };
       };
     };
