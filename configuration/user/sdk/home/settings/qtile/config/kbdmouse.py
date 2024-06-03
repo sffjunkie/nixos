@@ -6,6 +6,7 @@ from os import environ
 from libqtile.command import lazy
 from libqtile.config import Click, Drag, Key
 
+from libqtile.lazy import lazy
 from window import float_to_front
 
 Alt = "mod1"

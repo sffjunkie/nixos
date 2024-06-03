@@ -1,4 +1,4 @@
-from libqtile.command import lazy
+from libqtile.lazy import lazy
 from libqtile.config import Key, ScratchPad, DropDown
 from terminal import terminal_run_command
 from anchor import anchor_window, WindowLocation
