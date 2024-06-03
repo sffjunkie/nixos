@@ -99,10 +99,8 @@ def build_keys(settings) -> list[Key]:
         ),
         # endregion
         # region QTile Control
-        Key(
-            [Super, Alt, "control"], "Return", lazy.reload_config(), desc="Reload QTile"
-        ),
-        Key([Super, Alt, "control"], "Backspace", lazy.shutdown(), desc="Quit QTile"),
+        Key([Super, Alt, Ctrl], "Return", lazy.reload_config(), desc="Reload QTile"),
+        Key([Super, Alt, Ctrl], "Backspace", lazy.shutdown(), desc="Quit QTile"),
         # endregion
         # region Window Control
         Key(
@@ -118,13 +116,13 @@ def build_keys(settings) -> list[Key]:
             desc="Switch to previous group",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "c",
             lazy.window.kill(),
             desc="Close window",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "f",
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
@@ -135,25 +133,25 @@ def build_keys(settings) -> list[Key]:
         # endregion
         # region Move window in stack
         Key(
-            [Super, "shift"],
+            [Super, Shift],
             "Right",
             lazy.layout.shuffle_down(),
             desc="Move window down in stack",
         ),
         Key(
-            [Super, "shift"],
+            [Super, Shift],
             "Left",
             lazy.layout.shuffle_up(),
             desc="Move window up in stack",
         ),
         Key(
-            [Super, "shift"],
+            [Super, Shift],
             "l",
             lazy.layout.shuffle_down(),
             desc="Move window down in stack",
         ),
         Key(
-            [Super, "shift"],
+            [Super, Shift],
             "h",
             lazy.layout.shuffle_up(),
             desc="Move window up in stack",
@@ -181,63 +179,63 @@ def build_keys(settings) -> list[Key]:
         # endregion
         # region Resize
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "Right",
             lazy.layout.grow_main(),
             desc="Increase Main Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "l",
             lazy.layout.grow_main(),
             desc="Increase Main Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "Left",
             lazy.layout.shrink_main(),
             desc="Decrease Main Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "h",
             lazy.layout.shrink_main(),
             desc="Decrease Main Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "Up",
             lazy.layout.grow(),
             desc="Increase Sub Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "j",
             lazy.layout.grow(),
             desc="Increase Sub Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "Down",
             lazy.layout.shrink(),
             desc="Decrease Sub Window Size",
         ),
         Key(
-            [Super, "control"],
+            [Super, Ctrl],
             "k",
             lazy.layout.shrink(),
             desc="Decrease Sub Window Size",
         ),
         # endregion
         # region VT Switching
-        Key(["control", Alt], "F1", lazy.core.change_vt(1), desc="Switch to VT 1"),
-        Key(["control", Alt], "F2", lazy.core.change_vt(2), desc="Switch to VT 2"),
-        Key(["control", Alt], "F3", lazy.core.change_vt(3), desc="Switch to VT 3"),
-        Key(["control", Alt], "F4", lazy.core.change_vt(4), desc="Switch to VT 4"),
-        Key(["control", Alt], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
-        Key(["control", Alt], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
+        Key([Ctrl, Alt], "F1", lazy.core.change_vt(1), desc="Switch to VT 1"),
+        Key([Ctrl, Alt], "F2", lazy.core.change_vt(2), desc="Switch to VT 2"),
+        Key([Ctrl, Alt], "F3", lazy.core.change_vt(3), desc="Switch to VT 3"),
+        Key([Ctrl, Alt], "F4", lazy.core.change_vt(4), desc="Switch to VT 4"),
+        Key([Ctrl, Alt], "F5", lazy.core.change_vt(5), desc="Switch to VT 5"),
+        Key([Ctrl, Alt], "F6", lazy.core.change_vt(6), desc="Switch to VT 6"),
         # endregion
-        Key([Super, "shift"], "f", float_to_front),
+        Key([Super, Shift], "f", float_to_front),
     ]
 
 
