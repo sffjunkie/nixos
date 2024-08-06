@@ -4,5 +4,6 @@
     ./minio-client
     ./nfs
     ./samba
+    ./udisks2
   ];
 }
