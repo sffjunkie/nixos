@@ -65,5 +65,6 @@ in {
 
     services.xserver.libinput.enable = true;
     services.pcscd.enable = true;
+    services.upower.enable = true;
   };
 }
