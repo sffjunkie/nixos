@@ -21,23 +21,6 @@
     };
 
     looniversity = {
-      network = {
-        net-tools.enable = true;
-      };
-
-      system = {
-        rclone.enable = true;
-      };
-
-      media = {
-        pavucontrol.enable = true;
-        spotify.enable = true;
-      };
-
-      doc = {
-        mystmd.enable = true;
-      };
-
       admin = {
         mongodb.enable = true;
         postgresql.enable = true;
@@ -47,12 +30,23 @@
         devenv.enable = true;
       };
 
+      doc = {
+        mystmd.enable = true;
+      };
+
+      media = {
+        pavucontrol.enable = true;
+        spotify.enable = true;
+      };
+
       mount = {
         backup.enable = true;
         music.enable = true;
       };
 
-      script.wake.enable = true;
+      network = {
+        net-tools.enable = true;
+      };
 
       role = {
         container_host.enable = true;
@@ -62,7 +56,13 @@
         workstation.enable = true;
       };
 
+      script.wake.enable = true;
+
       shell.zsh.enable = true;
+
+      system = {
+        rclone.enable = true;
+      };
 
       theme = {
         nord.enable = true;
