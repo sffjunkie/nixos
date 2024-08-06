@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  script = pkgs.writeScriptBin "nixos-generations" ''
+  script = pkgs.writeScriptBin "nog" ''
     #!${lib.getExe pkgs.bash}
 
     time_period=(-1)
