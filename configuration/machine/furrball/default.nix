@@ -60,6 +60,8 @@
 
       shell.zsh.enable = true;
 
+      storage.udisks2.enable = true;
+
       system = {
         rclone.enable = true;
       };
