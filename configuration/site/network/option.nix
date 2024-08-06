@@ -11,7 +11,7 @@
       device = mkOption {
         type = types.str;
         default = "";
-        description = "The network device interface name.";
+        description = "The network device interface name";
       };
       mac = mkOption {
         type = types.str;
@@ -45,7 +45,7 @@
       };
       netdevice = mkOption {
         type = types.attrsOf netdevice;
-        description = "Named network devices. Normally at least a 'lan' device should be defined.";
+        description = "Named network devices. Normally at least a 'lan' device should be defined";
         default = {};
       };
     };
@@ -80,7 +80,7 @@
       dhcp_reservations = mkOption {
         type = types.listOf types.str;
         default = [];
-        description = "List of hosts to create static DHCP reservations for.";
+        description = "List of hosts to create static DHCP reservations for";
       };
     };
   };
