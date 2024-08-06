@@ -69,7 +69,7 @@ in {
     };
 
     environment.systemPackages = [
-      pkgs.qtile
+      pkgs.python311Packages.qtile
     ];
 
     systemd.user.targets.qtile-session = {
