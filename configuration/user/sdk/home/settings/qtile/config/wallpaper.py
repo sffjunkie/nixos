@@ -20,7 +20,7 @@ def get_waypaper_wallpaper() -> str | None:
 
     parser = configparser.ConfigParser()
     with config_file.open() as fp:
-        parser.readfp(fp)
+        parser.read_file(fp)
 
     try:
         return parser["Settings"]["wallpaper"]
