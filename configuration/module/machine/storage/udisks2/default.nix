@@ -9,10 +9,10 @@ in {
   options = {
     looniversity.storage.udisks2 = {
       enable = mkEnableOption "udisks2";
+    };
   };
 
   config = mkIf cfg.enable {
     services.udisks2.enable = true;
   };
 }
-
