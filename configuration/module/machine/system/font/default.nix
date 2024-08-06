@@ -15,6 +15,7 @@ in {
     fonts.packages = [
       pkgs.font-awesome
       pkgs.material-design-icons
+      pkgs.noto-fonts
       pkgs.roboto
       pkgs.weather-icons
       (pkgs.nerdfonts.override {
