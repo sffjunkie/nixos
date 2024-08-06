@@ -63,7 +63,7 @@ in {
 
     hardware.bluetooth.enable = true;
 
-    services.xserver.libinput.enable = true;
+    services.libinput.enable = true;
     services.pcscd.enable = true;
     services.upower.enable = true;
   };

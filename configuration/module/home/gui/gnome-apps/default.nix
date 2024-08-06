@@ -14,13 +14,13 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      gnome.adwaita-icon-theme
-      gnome.dconf-editor
-      gnome.ghex
       gnome.gnome-boxes
-      gnome.gnome-calculator
       gnome.gnome-characters
-      gnome.gnome-tweaks
+      pkgs.adwaita-icon-theme
+      pkgs.dconf-editor
+      pkgs.ghex
+      pkgs.gnome-calculator
+      pkgs.gnome-tweaks
     ];
   };
 }

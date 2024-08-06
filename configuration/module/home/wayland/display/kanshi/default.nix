@@ -14,15 +14,16 @@ in {
   config = mkIf cfg.enable {
     services.kanshi = {
       enable = true;
-      profiles = {
-        undocked = {
-          outputs = [
+      settings = [
+        {
+          profile.name = "undocked";
+          profile.outputs = [
             {
               criteria = "HDMI-A-1";
             }
           ];
-        };
-      };
+        }
+      ];
     };
   };
 }
