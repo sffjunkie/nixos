@@ -5,16 +5,22 @@
   ...
 }: let
   cfg = config.looniversity.terminal.alacritty;
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.looniversity.terminal.alacritty = {
     enable = mkEnableOption "alacritty";
+    font-size = mkOption {
+      type = types.int;
+      default = 13;
+    };
   };
 
   config = mkIf cfg.enable {
     programs.alacritty = {
       enable = true;
       settings = {
+        font.size = cfg.font-size;
+
         window = {
           padding = {
             x = 4;

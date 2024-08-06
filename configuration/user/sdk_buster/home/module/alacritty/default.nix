@@ -8,6 +8,6 @@
   inherit (lib) mkIf mkForce;
 in {
   config = mkIf cfg.enable {
-    programs.alacritty.settings.font.size = mkForce 9;
+    cfg.font-size = mkForce 9;
   };
 }
