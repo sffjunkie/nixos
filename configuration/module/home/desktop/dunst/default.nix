@@ -20,7 +20,7 @@ in {
           width = 500;
           height = 300;
           origin = "top-right";
-          offset = "10x50";
+          offset = "10x54";
           notification_limit = 20;
           transparency = 0;
           separator_height = 2;
