@@ -37,6 +37,8 @@
 
       shell.zsh.enable = true;
 
+      storage.udisks2.enable = true;
+
       theme = {
         nord.enable = true;
         papirus.enable = true;
