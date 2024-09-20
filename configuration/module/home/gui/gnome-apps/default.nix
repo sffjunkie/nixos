@@ -14,8 +14,8 @@ in {
 
   config = mkIf cfg.enable {
     home.packages = [
-      gnome.gnome-boxes
-      gnome.gnome-characters
+      pkgs.gnome-boxes
+      pkgs.gnome-characters
       pkgs.adwaita-icon-theme
       pkgs.dconf-editor
       pkgs.ghex
