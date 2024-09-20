@@ -3,5 +3,6 @@
     ./deploy
     ./network
     ./tool
+    ./ui
   ];
 }
