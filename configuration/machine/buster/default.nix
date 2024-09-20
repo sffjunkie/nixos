@@ -25,6 +25,7 @@
         pavucontrol.enable = true;
         spotify.enable = true;
       };
+
       # TODO: Disable until secrets added to Sops
       network = {
         openvpn.enable = false;
