@@ -21,6 +21,10 @@
     };
 
     looniversity = {
+      development = {
+        devenv.enable = true;
+      };
+
       media = {
         pavucontrol.enable = true;
         spotify.enable = true;
