@@ -1,7 +1,7 @@
 {
   imports = [
-    ../../module/home
-    ../../role/home
-    ../../settings/home
+    ../../module/user
+    ../../role/user
+    ../../settings/user
   ];
 }
