@@ -3,7 +3,7 @@
     programs.nixvim = {
       plugins.lualine = {
         enable = true;
-        disabledFiletypes.statusline = ["NvimTree"];
+        settings.options.disabled_filetypes.statusline = ["NvimTree"];
       };
     };
   };
