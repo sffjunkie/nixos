@@ -1,0 +1,7 @@
+{
+  imports = [
+    ./brave
+    ./firefox
+    ./qutebrowser
+  ];
+}

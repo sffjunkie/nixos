@@ -1,21 +1,15 @@
 {
   imports = [
-    ./brave
-    ./darktable
     ./discord
-    ./firefox
-    ./gimp
     ./gittyup
     ./gnome-apps
     ./gns3
     ./gramps
-    ./inkscape
     ./keepassxc
     ./libreoffice
     ./mpv
     ./obsidian
     ./picard
-    ./qutebrowser
     ./rofi
     ./thunderbird
     ./wofi

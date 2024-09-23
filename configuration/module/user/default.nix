@@ -1,10 +1,12 @@
 {
   imports = [
     ./audio
+    ./browser
     ./cli
     ./desktop
     ./development
     ./editor
+    ./gfx
     ./gui
     ./media
     ./music
