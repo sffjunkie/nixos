@@ -16,6 +16,7 @@
     ./tree.nix
     ./telescope.nix
     ./treesitter.nix
+    ./web-devicons
     ./which-key.nix
 
     ./dap
