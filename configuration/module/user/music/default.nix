@@ -1,8 +1,8 @@
 {
   imports = [
+    ./mpd
+    ./music-notify
     ./musicctl
     ./ncmpcpp
-    ./mpd
-    ./track-change-notify
   ];
 }
