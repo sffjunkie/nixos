@@ -2,6 +2,7 @@
   imports = [
     ./atuin
     ./bat
+    ./beancount
     ./bottom
     ./cava
     ./dircolors
