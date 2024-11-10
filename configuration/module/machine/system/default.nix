@@ -9,5 +9,6 @@
     ./polkit
     ./rclone
     ./sops
+    ./ssh
   ];
 }
