@@ -1,6 +1,7 @@
 {
   imports = [
     ./dunst
+    ./streamdeck
     ./wallpaper
   ];
 }
