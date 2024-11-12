@@ -1,6 +1,7 @@
 {
   imports = [
     ./discord
+    ./fava
     ./gittyup
     ./gnome-apps
     ./gns3
