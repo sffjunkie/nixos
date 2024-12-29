@@ -4,6 +4,7 @@
     ./devenv
     ./direnv
     ./gnumake
+    ./nixfmt
     ./pre-commit
     ./shellcheck
   ];
