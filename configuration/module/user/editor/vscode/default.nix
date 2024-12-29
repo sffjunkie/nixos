@@ -43,6 +43,7 @@
     dlasagno.rasi
     executablebookproject.myst-highlight
     github.remotehub
+    lencerf.beancount
     ms-vscode.cpptools-extension-pack
     ramyaraoa.show-offset
     rust-lang.rust-analyzer
