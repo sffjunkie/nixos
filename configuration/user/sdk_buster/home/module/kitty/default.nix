@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.kitty;
   inherit (lib) mkIf mkForce;
-in {
+in
+{
   config = mkIf cfg.enable {
     programs.kitty.font.size = mkForce 9;
   };

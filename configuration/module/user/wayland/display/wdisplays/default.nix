@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.display.wdisplays;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.display.wdisplays = {
     enable = mkEnableOption "wdisplays display management";
   };

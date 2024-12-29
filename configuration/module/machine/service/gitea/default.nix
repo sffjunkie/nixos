@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.service.gitea;
 
   postgresql_hostname = lib.network.serviceHandlerFQDN "postgresql";
@@ -11,7 +11,8 @@
   http_port = lib.network.serviceHandlerMainPort "gitea";
 
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.gitea = {
     enable = mkEnableOption "gitea";
   };

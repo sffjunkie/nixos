@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.doc.mystmd;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.doc.mystmd = {
     enable = mkEnableOption "mystmd";
   };
@@ -14,10 +15,7 @@ in {
   config = mkIf cfg.enable {
     environment.systemPackages = [
       pkgs.mystmd
+      pkgs.nodejs
     ];
-
-    looniversity = {
-      development.nodejs.enable = true;
-    };
   };
 }

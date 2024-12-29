@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  osConfig,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, osConfig
+, ...
+}:
+let
   cfg = config.looniversity.settings.theme.nord;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.settings.theme.nord = {
     enable = mkEnableOption "nord theme";
   };

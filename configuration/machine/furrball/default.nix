@@ -1,8 +1,11 @@
+{ lib
+, pkgs
+, ...
+}:
+let
+  inherit (lib) enabled;
+in
 {
-  lib,
-  pkgs,
-  ...
-}: {
   imports = [
     ./boot.nix
     ./backup.nix
@@ -26,10 +29,6 @@
         postgresql.enable = true;
       };
 
-      development = {
-        devenv.enable = true;
-      };
-
       doc = {
         mystmd.enable = true;
       };
@@ -41,7 +40,9 @@
 
       mount = {
         backup.enable = true;
+        movies.enable = true;
         music.enable = true;
+        private.enable = true;
       };
 
       network = {
@@ -64,6 +65,7 @@
 
       system = {
         rclone.enable = true;
+        # ssh.enable = true;
       };
 
       theme = {
@@ -82,10 +84,10 @@
 
     systemd.services = {
       "rclone@gdrive" = {
-        wantedBy = ["default.target"];
+        wantedBy = [ "default.target" ];
       };
       "rclone@onedrive" = {
-        wantedBy = ["default.target"];
+        wantedBy = [ "default.target" ];
       };
     };
 

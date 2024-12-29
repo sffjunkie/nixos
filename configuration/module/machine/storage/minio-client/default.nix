@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.storage.minio-client;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.storage.minio-client = {
     enable = mkEnableOption "minio-client";
   };

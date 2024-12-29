@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.role.container_host;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.role.container_host = {
     enable = mkEnableOption "container host role";
   };

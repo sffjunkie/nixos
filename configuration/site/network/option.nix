@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  options,
-  ...
-}: let
+{ config
+, lib
+, options
+, ...
+}:
+let
   inherit (lib) mkOption types;
 
   netdevice = types.submodule {
@@ -24,14 +24,14 @@
         description = "IPv4 address to assign to the interface";
       };
       ipv4method = mkOption {
-        type = types.enum ["static" "dhcpstatic" "dhcp" "pppoe"];
+        type = types.enum [ "static" "dhcpstatic" "dhcp" "pppoe" ];
         default = "";
         description = "The method to be used to obtain an IP address";
       };
     };
   };
 
-  host = types.submodule ({name, ...}: {
+  host = types.submodule ({ name, ... }: {
     options = {
       name = mkOption {
         type = types.str;
@@ -46,7 +46,7 @@
       netdevice = mkOption {
         type = types.attrsOf netdevice;
         description = "Named network devices. Normally at least a 'lan' device should be defined";
-        default = {};
+        default = { };
       };
     };
   });
@@ -57,7 +57,7 @@
         type = types.int;
         description = "The VLAN Tag id to assign";
       };
-      network = mkOption {
+      networkAddress = mkOption {
         type = types.str;
         default = "";
         description = "The network address of the VLAN";
@@ -79,13 +79,13 @@
       };
       dhcp_reservations = mkOption {
         type = types.listOf types.str;
-        default = [];
+        default = [ ];
         description = "List of hosts to create static DHCP reservations for";
       };
     };
   };
 
-  service = types.submodule ({name}: {
+  service = types.submodule ({ name }: {
     options = {
       hostName = mkOption {
         type = types.str;
@@ -127,18 +127,19 @@
       };
       ports = mkOption {
         type = types.attrsOf types.int;
-        default = {};
+        default = { };
         description = "Named ports for things such as UIs";
       };
       config = mkOption {
         type = types.attrsOf types.anything;
-        default = {};
+        default = { };
       };
     };
   };
-in {
+in
+{
   options.looniversity.network = {
-    network = mkOption {
+    networkAddress = mkOption {
       type = types.str;
       default = "192.168.0.0";
       description = "The main IP network";
@@ -169,30 +170,30 @@ in {
 
     extraNameServers = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
 
     hosts = mkOption {
       type = types.attrsOf host;
-      default = {};
+      default = { };
       description = "The hosts on the network";
     };
 
     services = mkOption {
       type = types.attrsOf service;
-      default = {};
+      default = { };
       description = "Service definitions";
     };
 
     serviceHandlers = mkOption {
       type = types.attrsOf serviceHandler;
-      default = {};
+      default = { };
       description = "Service handler definitions";
     };
 
     vlans = mkOption {
       type = types.attrsOf vlan;
-      default = {};
+      default = { };
       description = "VLANs to create";
     };
   };

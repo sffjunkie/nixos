@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.mpv;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.mpv = {
     enable = mkEnableOption "mpv";
   };

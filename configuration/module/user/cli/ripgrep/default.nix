@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.ripgrep;
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.ripgrep = {
     enable = mkEnableOption "ripgrep";
   };

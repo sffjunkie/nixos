@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.development.direnv;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.development.direnv = {
     enable = mkEnableOption "direnv";
   };

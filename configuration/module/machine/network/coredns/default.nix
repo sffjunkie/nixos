@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.network.coredns;
   lanDev = lib.traceVal lib.network.netdevice config "pinky" "lan";
   lanIpv4 = lib.network.lanIpv4 config "pinky";
@@ -31,7 +31,8 @@
   '';
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.network.coredns = {
     enable = mkEnableOption "coredns";
   };
@@ -68,8 +69,8 @@ in {
 
     networking.firewall.interfaces = {
       ${lanDev} = {
-        allowedTCPPorts = [dnsPort];
-        allowedUDPPorts = [dnsPort];
+        allowedTCPPorts = [ dnsPort ];
+        allowedUDPPorts = [ dnsPort ];
       };
     };
   };

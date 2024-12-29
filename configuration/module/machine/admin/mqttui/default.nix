@@ -1,16 +1,17 @@
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.admin.mqtt;
 
   mqttHost = lib.network.serviceHandlerHostName config "mosquitto";
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.admin.mqtt = {
     enable = mkEnableOption "mqtt";
   };

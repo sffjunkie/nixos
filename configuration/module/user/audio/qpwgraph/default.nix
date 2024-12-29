@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.audio.qpwgraph;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.audio.qpwgraph = {
     enable = mkEnableOption "qpwgraph";
   };

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.storage.udiskie;
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.storage.udiskie = {
     enable = mkEnableOption "udiskie";
   };

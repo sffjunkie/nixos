@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.lazygit;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.lazygit = {
     enable = mkEnableOption "lazygit";
   };

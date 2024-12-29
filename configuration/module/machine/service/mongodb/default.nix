@@ -1,15 +1,16 @@
 # ports: 27017 - 27020
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.mongodb;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.mongodb = {
     enable = mkEnableOption "mongodb";
   };

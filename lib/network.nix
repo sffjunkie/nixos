@@ -1,4 +1,4 @@
-{lib, ...}: rec {
+{ lib, ... }: rec {
   # netdevice :: attrSet -> str -> str -> str
   # Gets a hosts network device given an alias
   netdevice = config: host: ifname: config.looniversity.network.hosts.${host}.netdevice.${ifname}.device;
@@ -28,7 +28,7 @@
   # serviceHandlerFQDN :: attrSet -> str -> str
   serviceHandlerFQDN = config: serviceHandlerName:
     lib.concatStringsSep "."
-    [(serviceHandlerHostName config serviceHandlerName) config.looniversity.network.domainName];
+      [ (serviceHandlerHostName config serviceHandlerName) config.looniversity.network.domainName ];
 
   # serviceName -> ...
 
@@ -41,7 +41,7 @@
   # serviceFQDN :: attrSet -> str -> str
   serviceFQDN = config: serviceName:
     lib.concatStringsSep "."
-    [(serviceHostName config serviceName) (serviceDomainName config serviceName)];
+      [ (serviceHostName config serviceName) (serviceDomainName config serviceName) ];
 
   # serviceServiceHandlerName :: attrSet -> str -> str
   serviceServiceHandlerName = config: serviceName: config.looniversity.network.services.${serviceName}.handler;

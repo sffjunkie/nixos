@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.display.kanshi;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.display.kanshi = {
     enable = mkEnableOption "kanshi display management";
   };

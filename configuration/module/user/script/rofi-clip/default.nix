@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.rofi-clip;
 
   rofi-clip-script = pkgs.writeScriptBin "rofi-clip" ''
@@ -67,7 +67,8 @@
     fi
   '';
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.script.rofi-clip = {
     enable = mkEnableOption "rofi-clip script";
   };
@@ -84,6 +85,6 @@ in {
       }
     ];
 
-    home.packages = [rofi-clip-script];
+    home.packages = [ rofi-clip-script ];
   };
 }

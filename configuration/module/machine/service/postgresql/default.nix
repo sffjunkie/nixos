@@ -1,19 +1,20 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.service.postgresql;
 
   inherit (lib) mkEnableOption mkIf mkOption mkOverride types;
-in {
+in
+{
   options.looniversity.service.postgresql = {
     enable = mkEnableOption "postgresql";
 
     databases = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
       description = ''
         A list of databases to create.
 
@@ -31,14 +32,15 @@ in {
 
       ensureDatabases = cfg.databases;
       ensureUsers =
-        (map (elem: {
+        (map
+          (elem: {
             name = toString elem;
             ensureDBOwnership = true;
           })
           cfg.databases)
         ++ [
-          {name = "sysadmin";}
-          {name = "dbadmin";}
+          { name = "sysadmin"; }
+          { name = "dbadmin"; }
         ];
 
       authentication = mkOverride 10 ''

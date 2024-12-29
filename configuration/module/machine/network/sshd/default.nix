@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.looniversity.network.sshd;
-in {
+in
+{
   options.looniversity.network.sshd = {
     enable = mkEnableOption "sshd";
   };

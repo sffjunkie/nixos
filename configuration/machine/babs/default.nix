@@ -1,9 +1,8 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   imports = [
     ./backup.nix
@@ -27,7 +26,7 @@
       storage = {
         minio = {
           enable = true;
-          dataDir = ["/tank0/minio/data"];
+          dataDir = [ "/tank0/minio/data" ];
         };
         nfs.enable = true;
         samba = {
@@ -52,6 +51,8 @@
         server.enable = true;
       };
     };
+
+    programs.zsh.enable = true;
 
     system.stateVersion = "23.05"; # Did you read the comment?
   };

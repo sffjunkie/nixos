@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.rofi-launcher;
 
   rofi-launcher-script = pkgs.writeScriptBin "rofi-launcher" ''
@@ -14,7 +14,8 @@
       -show drun
   '';
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.script.rofi-launcher = {
     enable = mkEnableOption "rofi-launcher script";
   };

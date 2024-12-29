@@ -2,7 +2,6 @@
   imports = [
     ./admin
     ./desktop
-    ./development
     ./device
     ./doc
     ./game

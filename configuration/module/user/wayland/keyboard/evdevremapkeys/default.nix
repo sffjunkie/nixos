@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.keyboard.evdevremapkeys;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.keyboard.evdevremapkeys = {
     enable = mkEnableOption "evdevremapkeys";
   };
@@ -32,7 +33,7 @@ in {
       Unit = {
         Description = "A daemon to remap key events on linux input devices";
       };
-      Install.WantedBy = ["default.target"];
+      Install.WantedBy = [ "default.target" ];
       Service = {
         ExecStart = "${pkgs.evdevremapkeys}/bin/evdevremapkeys";
         PrivateTmp = true;

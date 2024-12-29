@@ -1,9 +1,8 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   imports = [
     ./boot.nix
@@ -22,7 +21,7 @@
         graylog = {
           enable = true;
           extraConfig = "http_bind_address = 127.0.0.1:9011";
-          elasticsearchHosts = ["http://localhost:9200"];
+          elasticsearchHosts = [ "http://localhost:9200" ];
         };
         mongodb.enable = true;
         nextcloud.enable = true;

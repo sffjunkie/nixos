@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.linkhandler;
 
   linkhandler = pkgs.writeScriptBin "linkhandler" ''
@@ -45,12 +45,13 @@
   '';
 
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.script.linkhandler = {
     enable = mkEnableOption "linkhandler";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [linkhandler];
+    home.packages = [ linkhandler ];
   };
 }

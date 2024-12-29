@@ -1,14 +1,15 @@
 # key codes - /run/current-system/sw/share/X11/xkb/keycodes/evdev
 # US keyboard symbols - /run/current-system/sw/share/X11/xkb/symbols/us
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.keyboard.hyper_super;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.wayland.keyboard.hyper_super = {
     enable = mkEnableOption "separate hyper and super keys";
 

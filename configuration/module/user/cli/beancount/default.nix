@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.beancount;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.beancount = {
     enable = mkEnableOption "beancount";
   };

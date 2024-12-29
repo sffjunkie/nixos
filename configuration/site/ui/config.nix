@@ -1,6 +1,5 @@
-{config, ...}: {
+{ config, ... }: {
   config.looniversity.ui = {
-    font = {
-    };
+    font = { };
   };
 }

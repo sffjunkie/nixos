@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.system.user-dirs;
 
   inherit (lib) mkEnableOption mkIf types;
-in {
+in
+{
   options.looniversity.system.user-dirs = {
     enable = mkEnableOption "user-dirs";
   };

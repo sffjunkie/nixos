@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.looniversity.role.log_server;
-in {
+in
+{
   options.looniversity.role.log_server = {
     enable = mkEnableOption "log server role";
   };
@@ -18,7 +19,7 @@ in {
       service.graylog = {
         enable = true;
         extraConfig = "http_bind_address = 0.0.0.0:9011";
-        elasticsearchHosts = ["http://localhost:9200"];
+        elasticsearchHosts = [ "http://localhost:9200" ];
       };
     };
   };

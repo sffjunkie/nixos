@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 pkgs.mkShell {
   nativeBuildInputs = [
     pkgs.bind.dnsutils

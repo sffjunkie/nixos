@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.device.wacom;
 
   udev_rule = pkgs.writeTextFile {
@@ -15,7 +15,8 @@
   };
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.device.wacom = {
     enable = mkEnableOption "wacom tablet support";
   };

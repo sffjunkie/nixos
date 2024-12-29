@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }:
 # let
 #   p = config.age.secrets.secret-mail-looniversity.path;

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.role.server;
   inherit (lib) mkEnableOption mkIf optionals;
-in {
+in
+{
   options.looniversity.role.server = {
     enable = mkEnableOption "server role";
   };
@@ -22,7 +23,7 @@ in {
 
     networking.firewall = {
       enable = true;
-      allowedTCPPorts = [80 443];
+      allowedTCPPorts = [ 80 443 ];
     };
 
     environment.systemPackages = [

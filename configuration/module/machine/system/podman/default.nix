@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.looniversity.system.podman;
-in {
+in
+{
   options.looniversity.system.podman = {
     enable = mkEnableOption "podman";
   };

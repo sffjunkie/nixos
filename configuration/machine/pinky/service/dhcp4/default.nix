@@ -1,45 +1,48 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   vlans = config.looniversity.network.vlans;
   vlanDHCP =
     map
-    (
-      name: let
-        vlanInfo = vlans.${name};
+      (
+        name:
+        let
+          vlanInfo = vlans.${name};
 
-        vlanNetwork =
-          lib.ipv4.constructIpv4Address
-          config.looniversity.network.networkAddress
-          "${toString vlanInfo.id}.0";
+          vlanNetwork =
+            lib.ipv4.constructIpv4Address
+              config.looniversity.network.networkAddress
+              "${toString vlanInfo.id}.0";
 
-        vlanPoolStart =
-          lib.ipv4.constructIpv4Address
-          vlanNetwork
-          (toString vlanInfo.dhcp_start);
+          vlanPoolStart =
+            lib.ipv4.constructIpv4Address
+              vlanNetwork
+              (toString vlanInfo.dhcp_start);
 
-        vlanPoolEnd =
-          lib.ipv4.constructIpv4Address
-          vlanNetwork
-          (toString vlanInfo.dhcp_end);
-      in {
-        id = vlanInfo.id;
-        subnet =
-          lib.concatStringsSep "/"
-          [vlanNetwork (toString vlanInfo.prefixLength)];
+          vlanPoolEnd =
+            lib.ipv4.constructIpv4Address
+              vlanNetwork
+              (toString vlanInfo.dhcp_end);
+        in
+        {
+          id = vlanInfo.id;
+          subnet =
+            lib.concatStringsSep "/"
+              [ vlanNetwork (toString vlanInfo.prefixLength) ];
 
-        pools = [
-          {
-            pool = "${vlanPoolStart} - ${vlanPoolEnd}";
-          }
-        ];
-      }
-    )
-    (lib.attrNames vlans);
-in {
+          pools = [
+            {
+              pool = "${vlanPoolStart} - ${vlanPoolEnd}";
+            }
+          ];
+        }
+      )
+      (lib.attrNames vlans);
+in
+{
   config = {
     services.kea = {
       dhcp4 = {
@@ -90,7 +93,7 @@ in {
                   "${toString config.looniversity.network.prefixLength}"
                 ];
                 pools = [
-                  {pool = "10.44.0.101 - 10.44.0.149";}
+                  { pool = "10.44.0.101 - 10.44.0.149"; }
                 ];
 
                 # TODO: Create dhcpstatic reservations

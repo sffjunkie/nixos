@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.game.steam;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.game.steam = {
     enable = mkEnableOption "steam";
   };

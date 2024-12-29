@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.music.ncmpcpp;
   mpdcfg = config.looniversity.music.mpd;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.music.ncmpcpp = {
     enable = mkEnableOption "ncmpcpp";
   };

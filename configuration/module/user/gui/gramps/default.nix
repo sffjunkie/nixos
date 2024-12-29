@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.gramps;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.gramps = {
     enable = mkEnableOption "gramps";
   };

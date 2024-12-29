@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.role.gui;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.role.gui = {
     enable = mkEnableOption "gui role";
   };

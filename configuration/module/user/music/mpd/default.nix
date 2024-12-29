@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.music.mpd;
   inherit (lib) mkEnableOption mkIf mkOption types;
 
   mpdFifoAddress = "/run/user/${toString cfg.uid}/mpd.fifo";
-in {
+in
+{
   options.looniversity.music.mpd = {
     enable = mkEnableOption "music mpd";
 

@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   mkHome = p: "/home/sdk/${p}";
-in {
+in
+{
   config = {
     sops.secrets."restic/repositories/sdk/local/password" = {
       owner = config.users.users.sdk.name;

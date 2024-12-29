@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.bat;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.bat = {
     enable = mkEnableOption "bat";
   };
@@ -14,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
-      extraPackages = with pkgs.bat-extras; [batdiff batman batgrep];
+      extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep ];
     };
 
     programs.zsh.shellAliases = {

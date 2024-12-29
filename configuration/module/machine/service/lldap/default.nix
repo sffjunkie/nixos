@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.lldap;
   lanDev = lib.network.netdevice config "pinky" "lan";
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.lldap = {
     enable = mkEnableOption "lldap";
   };
@@ -48,7 +49,7 @@ in {
 
     networking.firewall.interfaces = {
       ${lanDev} = {
-        allowedTCPPorts = [config.services.lldap.settings.ldap_port];
+        allowedTCPPorts = [ config.services.lldap.settings.ldap_port ];
       };
     };
   };

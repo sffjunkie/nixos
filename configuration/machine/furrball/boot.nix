@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   config = {
     boot = {
       loader = {
@@ -8,12 +9,18 @@
         };
         efi.canTouchEfiVariables = true;
       };
-      supportedFilesystems = ["zfs"];
+      supportedFilesystems = [ "zfs" ];
 
-      initrd.availableKernelModules = ["xhci_pci" "ahci" "uas" "usbhid" "sd_mod"];
-      initrd.kernelModules = [];
-      kernelModules = ["kvm-amd"];
-      extraModulePackages = [];
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "uas"
+        "usbhid"
+        "sd_mod"
+      ];
+      initrd.kernelModules = [ ];
+      kernelModules = [ "kvm-amd" ];
+      extraModulePackages = [ ];
     };
   };
 }

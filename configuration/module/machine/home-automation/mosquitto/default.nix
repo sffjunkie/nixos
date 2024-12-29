@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.home-automation.mosquitto;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.home-automation.mosquitto = {
     enable = mkEnableOption "mosquitto";
   };

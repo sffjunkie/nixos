@@ -1,21 +1,22 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.storage.minio;
 
   listenPort = lib.network.serviceHandlerNamedPort config "minio" "listen";
   consolePort = lib.network.serviceHandlerNamedPort config "minio" "console";
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.storage.minio = {
     enable = mkEnableOption "minio";
 
     dataDir = mkOption {
-      default = ["/var/lib/minio/data"];
+      default = [ "/var/lib/minio/data" ];
       type = types.listOf (types.either types.path types.str);
       description = lib.mdDoc "The list of data directories or nodes for storing the objects. Use one path for regular operation and the minimum of 4 endpoints for Erasure Code mode.";
     };
@@ -47,6 +48,6 @@ in {
       dataDir = config.looniversity.storage.minio.dataDir;
     };
 
-    networking.firewall.allowedTCPPorts = [listenPort consolePort];
+    networking.firewall.allowedTCPPorts = [ listenPort consolePort ];
   };
 }

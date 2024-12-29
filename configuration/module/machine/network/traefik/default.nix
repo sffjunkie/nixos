@@ -1,15 +1,16 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.network.traefik;
 
   # certDir = lib.traceVal config.security.acme.certs."*.${config.looniversity.network.domainName}".directory;
   certDir = "/etc/ssl/certs";
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.network.traefik = {
     enable = mkEnableOption "traefik";
   };
@@ -77,10 +78,10 @@ in {
           routers = {
             dashboard = {
               tls = "true";
-              entryPoints = ["websecure"];
+              entryPoints = [ "websecure" ];
               rule = "Host(`traefik-dashboard.service.looniversity.net`)";
               service = "api@internal";
-              middlewares = ["dashboard-auth"];
+              middlewares = [ "dashboard-auth" ];
             };
           };
         };

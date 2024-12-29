@@ -1,8 +1,9 @@
-{lib, ...} @ inputs: let
+{ lib, ... } @ inputs:
+let
   testData = {
     config = {
       looniversity.network = {
-        network = "192.168.1.0";
+        networkAddress = "192.168.1.0";
         prefixLength = 21;
         domainName = "network.arpa";
 
@@ -40,7 +41,8 @@
       };
     };
   };
-in [
+in
+[
   {
     name = "network.netdevice";
     actual = lib.network.netdevice testData.config "hosta" "lan";

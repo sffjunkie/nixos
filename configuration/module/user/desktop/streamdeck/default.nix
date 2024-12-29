@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.streamdeck;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.streamdeck = {
     enable = mkEnableOption "streamdeck";
   };
@@ -19,7 +20,7 @@ in {
     services.status-notifier-watcher.enable = true;
 
     systemd.user.services.streamdeck = {
-      Install.WantedBy = ["default.target"];
+      Install.WantedBy = [ "default.target" ];
       Unit.Description = "A Linux compatible UI for the Elgato Stream Deck.";
       Service = {
         Type = "simple";

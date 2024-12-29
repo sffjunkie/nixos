@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.zellij;
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.zellij = {
     enable = mkEnableOption "zellij";
   };
@@ -17,7 +18,7 @@ in {
       enableZshIntegration = true;
       settings = {
         keybinds = {
-          unbind = ["Ctrl q"];
+          unbind = [ "Ctrl q" ];
         };
       };
     };

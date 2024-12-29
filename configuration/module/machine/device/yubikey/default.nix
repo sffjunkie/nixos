@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.device.yubikey;
 
   # https://github.com/systemd/systemd/issues/4288#issuecomment-348166161
@@ -16,7 +16,8 @@
   };
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.device.yubikey = {
     enable = mkEnableOption "Yubikey Plus udev rule";
   };

@@ -1,13 +1,14 @@
 # TODO: tmpfiles, /var
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.system.rclone;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.system.rclone = {
     enable = mkEnableOption "rclone";
   };
@@ -33,8 +34,8 @@ in {
           pkgs.fuse3
         ];
         description = "rclone mount.";
-        after = ["network-online.target"];
-        wants = ["network-online.target"];
+        after = [ "network-online.target" ];
+        wants = [ "network-online.target" ];
 
         environment = {
           RCLONE_CONFIG = "%S/rclone.conf";

@@ -9,7 +9,6 @@
     ../../secret
 
     ../../module/machine
-    ../../module/mount
     ../../role/machine
     ../../site
   ];

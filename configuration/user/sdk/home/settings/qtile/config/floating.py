@@ -4,9 +4,10 @@ from theme._types import Theme
 
 wmclass_float = [
     "com.github.wwmm.easyeffects",
-    "pavucontrol",
+    "org.pulseaudio.pavucontrol",
     "org.gnome.Calculator",
     "org.gnome.Characters",
+    "Pinentry",
     "ssh-askpass",
     "waypaper",
     "yubico.org.",

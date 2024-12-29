@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.desktop.environment.qtile;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.desktop.environment.qtile = {
     enable = mkEnableOption "qtile desktop";
   };
@@ -28,7 +29,7 @@ in {
 
     xdg.portal = {
       enable = true;
-      configPackages = [pkgs.xdg-desktop-portal-wlr];
+      configPackages = [ pkgs.xdg-desktop-portal-wlr ];
     };
     xdg.portal.wlr.enable = true;
 

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.system.ssh;
   inherit (lib) mkEnableOption mkIf mkOption types traceVal;
-in {
+in
+{
   options.looniversity.system.ssh = {
     enable = mkEnableOption "ssh";
     askPassword = mkOption {

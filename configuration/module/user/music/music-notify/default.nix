@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.music.notify;
   inherit (lib) mkEnableOption mkIf;
 
@@ -22,13 +22,14 @@
 
     ${notify-send} -a music-notify -r 27072 "Now Playing" "$(${mpc} --format '%title% by %artist% in %album%' current)" -i "$previewname"
   '';
-in {
+in
+{
   options.looniversity.music.notify = {
     enable = mkEnableOption "music_notify";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [music-notify];
+    home.packages = [ music-notify ];
 
     programs.ncmpcpp.settings.execute_on_song_change = mkIf config.programs.ncmpcpp.enable "${music-notify}/bin/music-notify &";
   };

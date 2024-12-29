@@ -1,10 +1,14 @@
+{ lib, ... }:
+let
+  inherit (lib) disabled enabled;
+in
 {
   imports = [
     ../../common
   ];
 
   config = {
-    programs.home-manager.enable = true;
+    programs.home-manager = enabled;
 
     home = {
       username = "sysadmin";
@@ -13,6 +17,15 @@
 
       sessionVariables = {
         VAULT_ADDR = "http://thebrain.looniversity.net:8200";
+      };
+    };
+
+    looniversity = {
+      shell = {
+        zsh = enabled;
+      };
+      system = {
+        gpg = enabled;
       };
     };
   };

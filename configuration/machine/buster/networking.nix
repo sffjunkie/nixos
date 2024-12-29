@@ -1,13 +1,27 @@
-{lib, ...}: {
+{ lib, ... }:
+let
+  lanDev = lib.network.netdevice config "buster" "lan";
+in
+{
   config = {
     networking = {
       hostId = "e9313abd";
       hostName = "buster";
-      domain = "looniversity.net";
+      domain = config.looniversity.network.domainName;
+      useDHCP = lib.mkDefault false;
+    };
 
-      useDHCP = lib.mkDefault true;
-      # interfaces.enp0s20f0u1u2.useDHCP = lib.mkDefault true;
-      # interfaces.wlp0s20f3.useDHCP = lib.mkDefault true;
+    systemd.network = {
+      enable = true;
+
+      networks = {
+        lan = {
+          matchConfig.Name = lanDev;
+          networkConfig = {
+            DHCP = "ipv4";
+          };
+        };
+      };
     };
   };
 }

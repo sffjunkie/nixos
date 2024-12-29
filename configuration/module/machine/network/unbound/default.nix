@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.network.unbound;
   lanIpv4 = lib.network.lanIpv4 config "pinky";
 
@@ -12,7 +12,8 @@
   ttl = 180;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.network.unbound = {
     enable = mkEnableOption "unbound";
   };
@@ -25,7 +26,7 @@ in {
           port = dnsPort;
           prefer-ip4 = true;
           interface = lanIpv4;
-          access-control = "${config.looniversity.network.network}/${toString config.looniversity.network.prefixLength} allow";
+          access-control = "${config.looniversity.network.networkAddress}/${toString config.looniversity.network.prefixLength} allow";
 
           aggressive-nsec = true;
           qname-minimisation = true;
@@ -44,7 +45,7 @@ in {
         forward-zone = [
           {
             name = ".";
-            forward-addr = ["1.1.1.1@853#cloudflare-dns.com"];
+            forward-addr = [ "1.1.1.1@853#cloudflare-dns.com" ];
             forward-tls-upstream = true;
           }
         ];

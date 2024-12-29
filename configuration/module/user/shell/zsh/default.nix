@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.shell.zsh;
   inherit (lib) mkDefault mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.shell.zsh = {
     enable = mkEnableOption "zsh";
 

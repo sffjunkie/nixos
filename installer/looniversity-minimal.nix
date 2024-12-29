@@ -1,10 +1,9 @@
-{
-  config,
-  lib,
-  options,
-  pkgs,
-  isoTarget ? "/run/media/sdk/Ventoy/",
-  ...
+{ config
+, lib
+, options
+, pkgs
+, isoTarget ? "/run/media/sdk/Ventoy/"
+, ...
 }:
 with lib; {
   config = {
@@ -12,8 +11,8 @@ with lib; {
       defaultSopsFile = ../configuration/secret/secrets.yaml;
       defaultSopsFormat = "yaml";
 
-      secrets."wifi/ssid" = {};
-      secrets."wifi/psk" = {};
+      secrets."wifi/ssid" = { };
+      secrets."wifi/psk" = { };
 
       templates."wpa_supplicant".content = ''
         ctrl_interface=/run/wpa_supplicant
@@ -27,7 +26,7 @@ with lib; {
     };
 
     nix.settings = {
-      experimental-features = ["nix-command" "flakes"];
+      experimental-features = [ "nix-command" "flakes" ];
     };
 
     isoImage.isoName = lib.mkForce "looniversity-minimal-${pkgs.stdenv.hostPlatform.system}.iso";

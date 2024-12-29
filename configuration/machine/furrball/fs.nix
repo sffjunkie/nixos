@@ -25,6 +25,6 @@
       fsType = "zfs";
     };
 
-    swapDevices = [];
+    swapDevices = [ ];
   };
 }

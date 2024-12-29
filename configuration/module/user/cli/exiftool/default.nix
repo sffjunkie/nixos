@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.exiftool;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.exiftool = {
     enable = mkEnableOption "exiftool";
   };

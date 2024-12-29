@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.admin.mongodb;
 
   desktopItem = pkgs.makeDesktopItem {
@@ -13,7 +13,7 @@
     comment = "MongoDB management";
     icon = "nix-snowflake";
     exec = "mongodb-compass";
-    categories = ["Database"];
+    categories = [ "Database" ];
   };
 
   wrapped = pkgs.symlinkJoin {
@@ -25,7 +25,8 @@
   };
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.admin.mongodb = {
     enable = mkEnableOption "mongodb admin";
   };

@@ -1,22 +1,23 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.home-automation.zigbee2mqtt;
 
-  format = pkgs.formats.yaml {};
+  format = pkgs.formats.yaml { };
   configFile = format.generate "zigbee2mqtt.yaml" cfg.settings;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.home-automation.zigbee2mqtt = {
     enable = mkEnableOption "zigbee2mqtt";
 
     devices = mkOption {
       type = format.type;
-      default = {};
+      default = { };
     };
   };
 

@@ -1,16 +1,17 @@
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.step-ca;
   lanDev = lib.network.netdevice config "pinky" "lan";
 
   inherit (lib) mkEnableOption mkIf types;
   inherit (builtins) isNull;
-in {
+in
+{
   options.looniversity.service.step-ca = {
     enable = mkEnableOption "step-ca";
   };
@@ -85,8 +86,8 @@ in {
                 allowRenewalAfterExpiry = false;
               };
               options = {
-                x509 = {};
-                ssh = {};
+                x509 = { };
+                ssh = { };
               };
             }
           ];
@@ -106,7 +107,7 @@ in {
 
     networking.firewall.interfaces = {
       ${lanDev} = {
-        allowedTCPPorts = [config.services.step-ca.port];
+        allowedTCPPorts = [ config.services.step-ca.port ];
       };
     };
 

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.screenshot.swappy;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.screenshot.swappy.enable = mkEnableOption "swappy";
 
   config = mkIf cfg.enable {

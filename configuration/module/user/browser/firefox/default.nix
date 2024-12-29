@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.firefox;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.firefox = {
     enable = mkEnableOption "firefox";
   };

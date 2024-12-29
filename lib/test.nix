@@ -5,7 +5,7 @@
 # - Adding a 'skip' attribute to a test skips it
 # - Adding a 'skipIf' attribute skips the test if the attribute value is Trueish
 # - Requires a reference to `lib` to be passed to the `run` function
-{lib, ...}: rec {
+{ lib, ... }: rec {
   # Function `run` takes a Attribute set as an argument
   # The only required attribute is 'dir' the directory to load tests from.
   # By default it then finds all test files matching the pattern `**/*.test.nix`,
@@ -33,45 +33,48 @@
   #
   # Where Trueish is
   isTrueish = value:
-    (lib.isList value && value != [])
-    || (lib.isAttrs value && value != {})
+    (lib.isList value && value != [ ])
+    || (lib.isAttrs value && value != { })
     || (lib.isBool value && value != false)
     || (lib.isString value && value != "")
     || ((lib.isInt value || lib.isFloat value) && value != 0);
 
-  setInputDefaults = inputs: let
-    newInputs =
-      inputs
-      // {
-        include =
-          if lib.hasAttr "include" inputs
-          then inputs.include
-          else ".*_test\.nix";
-        exclude =
-          if lib.hasAttr "exclude" inputs
-          then inputs.exclude
-          else "";
-        quiet =
-          if lib.hasAttr "quiet" inputs
-          then inputs.quiet
-          else false;
-      };
-  in
+  setInputDefaults = inputs:
+    let
+      newInputs =
+        inputs
+        // {
+          include =
+            if lib.hasAttr "include" inputs
+            then inputs.include
+            else ".*_test\.nix";
+          exclude =
+            if lib.hasAttr "exclude" inputs
+            then inputs.exclude
+            else "";
+          quiet =
+            if lib.hasAttr "quiet" inputs
+            then inputs.quiet
+            else false;
+        };
+    in
     newInputs;
 
   # Run all the tests found in `dir` and show the test results
-  run = {dir, ...} @ inputs: let
-    newInputs = setInputDefaults inputs;
-    results = runDir dir newInputs;
-    noMatchText =
-      "No test files found matching "
-      + "include pattern \"${newInputs.include}\""
-      + " and exclude pattern \"${newInputs.exclude}\"";
-  in (
-    if lib.length results != 0
-    then showTestResults results newInputs
-    else noMatchText
-  );
+  run = { dir, ... } @ inputs:
+    let
+      newInputs = setInputDefaults inputs;
+      results = runDir dir newInputs;
+      noMatchText =
+        "No test files found matching "
+        + "include pattern \"${newInputs.include}\""
+        + " and exclude pattern \"${newInputs.exclude}\"";
+    in
+    (
+      if lib.length results != 0
+      then showTestResults results newInputs
+      else noMatchText
+    );
 
   # runDir = path -> list[TestFileResults]
   #
@@ -83,18 +86,19 @@
   runDir = dir: inputs: (
     let
       results =
-        builtins.foldl' (
-          acc: filepath: (
-            let
-              tests = import filepath inputs;
-              result = runTests tests filepath;
-            in
-              acc ++ [result]
-          )
-        ) []
-        (testFiles dir inputs);
+        builtins.foldl'
+          (
+            acc: filepath: (
+              let
+                tests = import filepath inputs;
+                result = runTests tests filepath;
+              in
+              acc ++ [ result ]
+            )
+          ) [ ]
+          (testFiles dir inputs);
     in
-      results
+    results
   );
 
   # testFiles = path -> list[path]
@@ -106,32 +110,35 @@
       fileTypes = builtins.readDir dir;
       filenames = builtins.attrNames fileTypes;
       allTestFiles =
-        builtins.foldl' (
-          acc: filename: let
-            path = lib.concatStringsSep "/" [dir "${filename}"];
-            fileType = builtins.getAttr filename fileTypes;
-            isTestFile =
-              (fileType == "regular")
-              && (builtins.match inputs.exclude filename) == null
-              && (builtins.match inputs.include filename) != null;
-          in (
-            if fileType == "directory"
-            then acc ++ (testFiles path)
-            else if isTestFile
-            then acc ++ [path]
-            else acc ++ []
-          )
-        ) []
-        filenames;
+        builtins.foldl'
+          (
+            acc: filename:
+              let
+                path = lib.concatStringsSep "/" [ dir "${filename}" ];
+                fileType = builtins.getAttr filename fileTypes;
+                isTestFile =
+                  (fileType == "regular")
+                  && (builtins.match inputs.exclude filename) == null
+                  && (builtins.match inputs.include filename) != null;
+              in
+              (
+                if fileType == "directory"
+                then acc ++ (testFiles path)
+                else if isTestFile
+                then acc ++ [ path ]
+                else acc ++ [ ]
+              )
+          ) [ ]
+          filenames;
     in
-      allTestFiles
+    allTestFiles
   );
 
   addFilePath = filepath: result: (
     let
-      newResult = result // {path = filepath;};
+      newResult = result // { path = filepath; };
     in
-      newResult
+    newResult
   );
 
   # runTests = list[Test] -> path -> TestFileResults
@@ -139,23 +146,24 @@
   # Runs all of the non skipped tests, by calling `evaluateTest` on each of them.
   runTests = tests: filepath: (
     let
-      skipIf = builtins.filter (test: lib.hasAttrByPath ["skipIf"] test) tests;
+      skipIf = builtins.filter (test: lib.hasAttrByPath [ "skipIf" ] test) tests;
       skipIfSkip = builtins.filter (test: isTrueish test.skipIf) skipIf;
       skipIfRun = builtins.filter (test: !isTrueish test.skipIf) skipIf;
-      skippedTests = builtins.filter (test: lib.hasAttrByPath ["skip"] test) tests ++ skipIfSkip;
+      skippedTests = builtins.filter (test: lib.hasAttrByPath [ "skip" ] test) tests ++ skipIfSkip;
       skipped = map (test: addFilePath filepath test) skippedTests;
 
       testsToRun =
         builtins.filter
-        (test: (!lib.hasAttrByPath ["skip"] test) && (!lib.hasAttrByPath ["skipIf"] test))
-        tests
+          (test: (!lib.hasAttrByPath [ "skip" ] test) && (!lib.hasAttrByPath [ "skipIf" ] test))
+          tests
         ++ skipIfRun;
 
       results = builtins.map (test: addFilePath filepath (evaluateTest test)) testsToRun;
 
       failed = builtins.filter (test: test.passed == false) results;
       passed = builtins.filter (test: test.passed == true) results;
-    in {
+    in
+    {
       inherit failed passed skipped;
     }
   );
@@ -209,19 +217,20 @@
 
       msg = failedText + skippedText + passedText;
     in
-      msg
+    msg
   );
 
   failedMsg = failed_tests: quiet: (
-    builtins.foldl' (
-      acc: result: (
-        let
-          nameText = "    ${result.name}\n";
-          verboseText =
-            "         File:     ${builtins.toJSON result.path}\n"
-            + "         Expected: ${builtins.toJSON result.expected}\n"
-            + "         Actual:   ${builtins.toJSON result.actual}\n\n";
-        in
+    builtins.foldl'
+      (
+        acc: result: (
+          let
+            nameText = "    ${result.name}\n";
+            verboseText =
+              "         File:     ${builtins.toJSON result.path}\n"
+              + "         Expected: ${builtins.toJSON result.expected}\n"
+              + "         Actual:   ${builtins.toJSON result.actual}\n\n";
+          in
           acc
           + nameText
           + (
@@ -229,26 +238,27 @@
             then verboseText
             else ""
           )
-      )
-    ) ""
-    failed_tests
+        )
+      ) ""
+      failed_tests
   );
 
   skippedMsg = skipped_tests: quiet: (
-    builtins.foldl' (
-      acc: result: (
-        let
-          skipText =
-            if result.skip != ""
-            then result.skip
-            # TODO: skipIf is currently nix code. Need to find way to convert
-            # this to a string to display (rnix?)
-            else "skipIf: ?";
-          nameText = "    ${result.name}\n";
-          verboseText =
-            "         Skipped:  ${skipText}\n"
-            + "         File:     ${builtins.toJSON result.path}\n\n";
-        in
+    builtins.foldl'
+      (
+        acc: result: (
+          let
+            skipText =
+              if result.skip != ""
+              then result.skip
+              # TODO: skipIf is currently nix code. Need to find way to convert
+              # this to a string to display (rnix?)
+              else "skipIf: ?";
+            nameText = "    ${result.name}\n";
+            verboseText =
+              "         Skipped:  ${skipText}\n"
+              + "         File:     ${builtins.toJSON result.path}\n\n";
+          in
           acc
           + nameText
           + (
@@ -256,8 +266,8 @@
             then verboseText
             else ""
           )
-      )
-    ) ""
-    skipped_tests
+        )
+      ) ""
+      skipped_tests
   );
 }

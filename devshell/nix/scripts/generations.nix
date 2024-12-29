@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   script = pkgs.writeScriptBin "nog" ''
     #!${lib.getExe pkgs.bash}
 
@@ -96,4 +96,4 @@
     esac
   '';
 in
-  script
+script

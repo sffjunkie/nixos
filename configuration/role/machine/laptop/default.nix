@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  nixos-hardware,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, nixos-hardware
+, pkgs
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf;
 
   cfg = config.looniversity.role.laptop;
-in {
+in
+{
   options.looniversity.role.laptop = {
     enable = mkEnableOption "laptop role";
   };

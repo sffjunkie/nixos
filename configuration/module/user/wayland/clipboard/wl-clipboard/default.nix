@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.clipboard.wl-clipboard;
   inherit (lib) mkDefault mkEnableOption mkIf mkOption;
-in {
+in
+{
   options.looniversity.wayland.clipboard.wl-clipboard = {
     enable = mkEnableOption "wl-clipboard";
   };

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.virtualisation.vagrant;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.virtualisation.vagrant = {
     enable = mkEnableOption "vagrant";
   };

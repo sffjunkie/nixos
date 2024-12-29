@@ -1,6 +1,6 @@
-{config, ...}: {
+{ config, ... }: {
   config.looniversity.network = {
-    network = "10.44.0.0";
+    networkAddress = "10.44.0.0";
     prefixLength = 21;
     domainName = "looniversity.net";
     ldapRoot = "dc=looniversity,dc=net";
@@ -254,17 +254,17 @@
     vlans = {
       guest = {
         id = 10;
-        network = "10.44.10.0";
+        networkAddress = "10.44.10.0";
         prefixLength = 24;
       };
       iot = {
         id = 20;
-        network = "10.44.20.0";
+        networkAddress = "10.44.20.0";
         prefixLength = 24;
       };
       not = {
         id = 30;
-        network = "10.44.30.0";
+        networkAddress = "10.44.30.0";
         prefixLength = 24;
       };
     };
@@ -283,6 +283,7 @@
       metrics.handlerName = "prometheus";
       music.handlerName = "jellyfin";
       proxy.handlerName = "traefik";
+      smb.handlerName = "samba";
       s3.handlerName = "minio";
       sync.handlerName = "syncthing";
       zigbee.handlerName = "zigbee2mqtt";

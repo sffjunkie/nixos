@@ -1,9 +1,8 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
+{ inputs
+, lib
+, config
+, pkgs
+, ...
 }: {
   imports = [
     ./boot.nix
@@ -21,10 +20,6 @@
     };
 
     looniversity = {
-      development = {
-        devenv.enable = true;
-      };
-
       media = {
         pavucontrol.enable = true;
         spotify.enable = true;

@@ -1,15 +1,16 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.homepage-dashboard;
 
   dashboardPort = lib.network.serviceHandlerMainPort config "homepage-dashboard";
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.homepage-dashboard = {
     enable = mkEnableOption "homepage-dashboard";
   };

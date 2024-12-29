@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.terminal.kitty;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.terminal.kitty = {
     enable = mkEnableOption "kitty";
   };

@@ -1,10 +1,11 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   inherit (lib) mkOption types;
-in {
+in
+{
   options.looniversity.deploy = {
     sshUser = mkOption {
       type = types.str;
@@ -16,7 +17,7 @@ in {
     };
     targets = mkOption {
       type = types.listOf types.str;
-      default = [];
+      default = [ ];
     };
   };
 }

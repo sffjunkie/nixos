@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.acme;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.acme = {
     enable = mkEnableOption "acme";
   };

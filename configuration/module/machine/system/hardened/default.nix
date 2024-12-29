@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.system.hardened;
   inherit (lib) mkDefault mkEnableOption mkIf mkOverride;
-in {
+in
+{
   options.looniversity.system.hardened = {
     enable = mkEnableOption "hardened";
   };
@@ -14,7 +15,7 @@ in {
   config = mkIf cfg.enable {
     boot.kernelPackages = mkDefault pkgs.linuxPackages_hardened;
 
-    nix.settings.allowed-users = mkDefault ["@users"];
+    nix.settings.allowed-users = mkDefault [ "@users" ];
 
     environment.memoryAllocator.provider = mkDefault "scudo";
     environment.variables.SCUDO_OPTIONS = mkDefault "ZeroContents=1";

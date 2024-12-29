@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.editor.micro;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.editor.micro = {
     enable = mkEnableOption "micro";
   };

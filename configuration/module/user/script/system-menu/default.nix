@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.system-menu;
 
   system-menu-script = pkgs.writeScriptBin "system-menu" ''
@@ -22,7 +22,8 @@
       -modi "power-menu:rofi-power-menu --choices=''${choices}"
   '';
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.script.system-menu = {
     enable = mkEnableOption "system-menu script";
   };

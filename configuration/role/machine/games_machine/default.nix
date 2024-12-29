@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.role.games_machine;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.role.games_machine = {
     enable = mkEnableOption "games machine role";
   };

@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  osConfig,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, osConfig
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.settings.theme.papirus;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.settings.theme.papirus = {
     enable = mkEnableOption "papirus theme";
   };

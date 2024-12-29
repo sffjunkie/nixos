@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: let
-  tool = types.submodule ({name, ...}: {
+{ config
+, lib
+, ...
+}:
+let
+  tool = types.submodule ({ name, ... }: {
     options = {
       name = mkOption {
         type = types.str;
@@ -21,9 +21,10 @@
   });
 
   inherit (lib) mkOption types;
-in {
+in
+{
   options.looniversity.tools = mkOption {
     type = types.attrsOf tool;
-    default = {};
+    default = { };
   };
 }

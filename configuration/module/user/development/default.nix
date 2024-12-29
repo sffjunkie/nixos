@@ -7,5 +7,6 @@
     ./nixfmt
     ./pre-commit
     ./shellcheck
+    ./treefmt
   ];
 }

@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   config = {
     networking = {
       hostId = "8ddbb68e";

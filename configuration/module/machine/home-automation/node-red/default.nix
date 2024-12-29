@@ -1,23 +1,24 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.home-automation.node-red;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.home-automation.node-red = {
     enable = mkEnableOption "node-red";
 
     nodes = mkOption {
       type = types.attrsOf types.str;
-      default = {};
+      default = { };
     };
 
     nodes = mkOption {
       type = types.attrsOf types.str;
-      default = {};
+      default = { };
     };
   };
 

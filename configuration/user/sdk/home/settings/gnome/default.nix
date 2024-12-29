@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.settings.gnome;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.settings.gnome = {
     enable = mkEnableOption "gnome settings";
   };
@@ -33,18 +34,18 @@ in {
         "org/gnome/desktop/wm/keybindings" = {
           move-to-monitor-left = "@as []";
           move-to-monitor-right = "@as []";
-          move-to-workspace-left = ["<Shift><Super>Left"];
-          move-to-workspace-right = ["<Shift><Super>Right"];
+          move-to-workspace-left = [ "<Shift><Super>Left" ];
+          move-to-workspace-right = [ "<Shift><Super>Right" ];
           switch-input-source = "@as []";
           switch-input-source-backward = "@as []";
         };
 
         "org/gnome/settings-daemon/plugins/media-keys" = {
-          custom-keybindings = ["/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"];
+          custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/" ];
         };
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-          binding = ["<Super>space"];
+          binding = [ "<Super>space" ];
           command = "rofi --show drun --normal-window";
           name = "rofi";
         };

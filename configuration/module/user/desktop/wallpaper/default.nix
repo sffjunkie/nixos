@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.desktop.wallpaper;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.desktop.wallpaper = {
     enable = mkEnableOption "wallpaper management";
   };

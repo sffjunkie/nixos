@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.system.imagemagick;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.system.imagemagick = {
     enable = mkEnableOption "imagemagick";
   };

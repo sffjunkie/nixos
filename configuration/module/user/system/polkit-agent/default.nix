@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf mkOption types;
 
   cfg = config.looniversity.system.polkit-agent;
-in {
+in
+{
   options.looniversity.system.polkit-agent = {
     enable = mkEnableOption "polkit-agent";
 
@@ -34,7 +35,7 @@ in {
         RestartSec = 1;
         TimeoutStopSec = 10;
       };
-      Install = {WantedBy = [cfg.systemdTarget];};
+      Install = { WantedBy = [ cfg.systemdTarget ]; };
     };
   };
 }

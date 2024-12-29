@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   wanDev = lib.network.netdevice config "pinky" "wan";
-in {
+in
+{
   config = {
     sops.secrets."wireguard/server/private_key" = {
       sopsFile = config.sopsFiles.service;
@@ -15,11 +16,11 @@ in {
       pkgs.wireguard-tools
     ];
 
-    networking.firewall.interfaces.${wanDev}.allowedUDPPorts = [51820];
+    networking.firewall.interfaces.${wanDev}.allowedUDPPorts = [ 51820 ];
 
     networking.wireguard.interfaces = {
       wg0 = {
-        ips = ["10.50.0.1/24"];
+        ips = [ "10.50.0.1/24" ];
 
         listenPort = 51820;
 
@@ -36,7 +37,7 @@ in {
         peers = [
           {
             publicKey = "KiKUDMFNPA5wFSQ79FFoVnFiiBN1PYq6K1OCO6zSEjY=";
-            allowedIPs = ["10.50.0.2/32"];
+            allowedIPs = [ "10.50.0.2/32" ];
           }
         ];
       };

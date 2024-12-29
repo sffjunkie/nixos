@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.settings.qt;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.settings.qt = {
     enable = mkEnableOption "qt";
   };

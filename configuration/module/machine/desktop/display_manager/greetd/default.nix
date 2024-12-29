@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.desktop.display_manager.greetd;
 
   inherit (lib) mkEnableOption mkIf mkMerge mkOption types;
-in {
+in
+{
   options.looniversity.desktop.display_manager.greetd = {
     enable = mkEnableOption "greetd display manager";
   };

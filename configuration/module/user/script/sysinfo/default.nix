@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.sysinfo;
   inherit (lib) mkDefault mkEnableOption mkIf;
 
@@ -13,12 +13,13 @@
     ${pkgs.figlet}/bin/figlet -w ''${width} "System Information"
     ${pkgs.fastfetch}/bin/fastfetch
   '';
-in {
+in
+{
   options.looniversity.script.sysinfo = {
     enable = mkEnableOption "sysinfo";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [sysinfo];
+    home.packages = [ sysinfo ];
   };
 }

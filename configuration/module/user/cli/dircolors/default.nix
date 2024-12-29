@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.dircolors;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.dircolors = {
     enable = mkEnableOption "dircolors";
   };

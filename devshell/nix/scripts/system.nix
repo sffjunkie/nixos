@@ -1,10 +1,10 @@
-{
-  config,
-  lib,
-  pkgs,
-  tmpDir ? "/var/tmp/nixos-rebuild",
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, tmpDir ? "/var/tmp/nixos-rebuild"
+, ...
+}:
+let
   script = pkgs.writeScriptBin "nos" ''
     #!${lib.getExe pkgs.bash}
     TMPDIR=${tmpDir}
@@ -87,4 +87,4 @@
     esac
   '';
 in
-  script
+script

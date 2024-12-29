@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.service.netbox;
   port = lib.tool.getToolPort config "netbox";
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.service.netbox = {
     enable = mkEnableOption "netbox service";
   };

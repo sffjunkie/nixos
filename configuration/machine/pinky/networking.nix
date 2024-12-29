@@ -1,57 +1,85 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   wanDev = lib.network.netdevice config "pinky" "wan";
   lanDev = lib.network.netdevice config "pinky" "lan";
+  lanIp = lib.ipv4.constructIpv4Address config.looniversity.network.networkAddress "1";
 
-  vlans = config.looniversity.network.vlans;
-  vlanInterfaces =
-    lib.mapAttrs
-    (
-      name: value: let
-        vlanInfo = vlans.${name};
-      in {
-        useDHCP = false;
-        ipv4 = {
-          addresses = [
+  vlanDefs = config.looniversity.network.vlans;
+
+  vlanNetDevs =
+    lib.mapAttrs'
+      (
+        name: value:
+          lib.nameValuePair
+            name
             {
-              address = lib.ipv4.constructIpv4Address vlanInfo.network "1";
-              prefixLength = vlanInfo.prefixLength;
+              netdevConfig = {
+                Name = "${lanDev}.${toString value.id}";
+                Kind = "vlan";
+              };
+              vlanConfig = {
+                Id = value.id;
+              };
             }
-          ];
-        };
-      }
-    )
-    vlans;
-in {
+      )
+      config.looniversity.network.vlans;
+
+  vlanNetworks =
+    lib.mapAttrs'
+      (
+        name: value:
+          lib.nameValuePair
+            name
+            {
+              matchConfig = {
+                Name = "${lanDev}.${toString value.id}";
+              };
+              networkConfig = {
+                DHCP = "no";
+              };
+              address = [
+                "${value.networkAddress}/${toString value.prefixLength}"
+              ];
+            }
+      )
+      config.looniversity.network.vlans;
+in
+{
   config = {
     networking = {
       hostId = "dbe3c39e";
       hostName = "pinky";
-      domain = "looniversity.net";
 
-      interfaces =
+      domain = config.looniversity.network.domainName;
+      useDHCP = lib.mkDefault false;
+    };
+
+    systemd.network = {
+      enable = true;
+
+      netdevs = vlanNetDevs;
+
+      networks =
         {
-          "${wanDev}" = {
-            useDHCP = lib.mkDefault false;
-            # ipv4 set by pppd
-          };
-
-          "${lanDev}" = {
-            useDHCP = lib.mkDefault false;
-            ipv4 = {
-              addresses = [
-                {
-                  address = lib.ipv4.constructIpv4Address config.looniversity.network.network "1";
-                  prefixLength = config.looniversity.network.prefixLength;
-                }
-              ];
+          wan = {
+            matchConfig.Name = wanDev;
+            networkConfig = {
+              DHCP = false;
             };
           };
+          lan = {
+            matchConfig.Name = lanDev;
+            networkConfig = {
+              DHCP = false;
+              VLAN = lib.attrNames vlanDefs;
+            };
+            address = [ "${lanIp}/${toString config.looniversity.network.prefixLength}" ];
+          };
         }
-        // vlanInterfaces;
+        // vlanNetworks;
     };
   };
 }

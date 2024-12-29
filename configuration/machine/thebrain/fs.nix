@@ -12,6 +12,6 @@
       fsType = "vfat";
     };
 
-    swapDevices = [];
+    swapDevices = [ ];
   };
 }

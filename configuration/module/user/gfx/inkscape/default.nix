@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.inkscape;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.inkscape = {
     enable = mkEnableOption "inkscape";
   };

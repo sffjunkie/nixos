@@ -1,17 +1,17 @@
-{lib, ...}: [
+{ lib, ... }: [
   {
     name = "ipv4.ipv4Octets";
     actual = lib.ipv4.ipv4Octets "192.168.1.1";
-    expected = [192 168 1 1];
+    expected = [ 192 168 1 1 ];
   }
   {
     name = "ipv4.ipv4Octets too long";
     actual = lib.ipv4.ipv4Octets "192.168.1.1.2";
-    expected = [192 168 1 1];
+    expected = [ 192 168 1 1 ];
   }
   {
     name = "ipv4.ipv4Address";
-    actual = lib.ipv4.ipv4Address [192 168 1 1];
+    actual = lib.ipv4.ipv4Address [ 192 168 1 1 ];
     expected = "192.168.1.1";
   }
   {

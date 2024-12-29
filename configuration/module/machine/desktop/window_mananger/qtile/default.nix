@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.desktop.window_manager.qtile;
 
   # Env vars needed by my qtile config
@@ -26,7 +26,8 @@
   '';
 
   inherit (lib) mkEnableOption mkIf mkOption;
-in {
+in
+{
   options.looniversity.desktop.window_manager.qtile = {
     enable = mkEnableOption "qtile";
   };
@@ -76,49 +77,51 @@ in {
 
     systemd.user.targets.qtile-session = {
       description = "Qtile compositor session";
-      documentation = ["man:systemd.special(7)"];
-      bindsTo = ["graphical-session.target"];
-      wants = ["graphical-session-pre.target"];
-      after = ["graphical-session-pre.target"];
+      documentation = [ "man:systemd.special(7)" ];
+      bindsTo = [ "graphical-session.target" ];
+      wants = [ "graphical-session-pre.target" ];
+      after = [ "graphical-session-pre.target" ];
     };
 
-    systemd.user.services.qtile = let
-      pyEnv = pkgs.python3.withPackages (_p: [
-        pkgs.python3.pkgs.qtile
-        pkgs.python3.pkgs.iwlib
+    systemd.user.services.qtile =
+      let
+        pyEnv = pkgs.python3.withPackages (_p: [
+          pkgs.python3.pkgs.qtile
+          pkgs.python3.pkgs.iwlib
 
-        # Extra widgets
-        pkgs.python3.pkgs.qtile-extras
+          # Extra widgets
+          pkgs.python3.pkgs.qtile-extras
 
-        # Packages required by widgets
-        pkgs.python3.pkgs.dbus-next # Bluetooth
-        pkgs.python3.pkgs.psutil # CPU
-        pkgs.python3.pkgs.pulsectl-asyncio # PulseVolume
+          # Packages required by widgets
+          pkgs.python3.pkgs.dbus-next # Bluetooth
+          pkgs.python3.pkgs.psutil # CPU
+          pkgs.python3.pkgs.pulsectl-asyncio # PulseVolume
 
-        # Packages required by config
-        pkgs.python3.pkgs.pyyaml
-      ]);
-    in {
-      description = "Qtile - Wayland window manager";
-      documentation = ["man:qtile(5)"];
-      bindsTo = ["graphical-session.target"];
-      wants = ["graphical-session-pre.target"];
-      after = ["graphical-session-pre.target"];
+          # Packages required by config
+          pkgs.python3.pkgs.pyyaml
+        ]);
+      in
+      {
+        description = "Qtile - Wayland window manager";
+        documentation = [ "man:qtile(5)" ];
+        bindsTo = [ "graphical-session.target" ];
+        wants = [ "graphical-session-pre.target" ];
+        after = [ "graphical-session-pre.target" ];
 
-      # We explicitly unset PATH here, as we want it to be set by
-      # systemctl --user import-environment in startqtile
-      environment.PATH = lib.mkForce null;
-      environment.PYTHONPATH = lib.mkForce null;
+        # We explicitly unset PATH here, as we want it to be set by
+        # systemctl --user import-environment in startqtile
+        environment.PATH = lib.mkForce null;
+        environment.PYTHONPATH = lib.mkForce null;
 
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pyEnv}/bin/qtile start -b wayland";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pyEnv}/bin/qtile start -b wayland";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
 
-        EnvironmentFile = config.sops.templates."sdk_location".path;
+          EnvironmentFile = config.sops.templates."sdk_location".path;
+        };
       };
-    };
   };
 }

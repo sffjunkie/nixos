@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.media.jellyfin;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.media.jellyfin = {
     enable = mkEnableOption "jellyfin";
   };
@@ -24,7 +25,7 @@ in {
             routers = {
               jellyfin = {
                 tls = "true";
-                entryPoints = ["websecure"];
+                entryPoints = [ "websecure" ];
                 rule = "Host(`jellyfin.service.${config.looniversity.network.domainName}`)";
                 service = "jellyfin";
 
@@ -48,7 +49,7 @@ in {
             services = {
               jellyfin = {
                 loadBalancer = {
-                  servers = [{url = "http://127.0.0.1:8096";}];
+                  servers = [{ url = "http://127.0.0.1:8096"; }];
                 };
               };
             };

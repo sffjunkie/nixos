@@ -1,12 +1,13 @@
 # ports: 9200, 9300
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.service.elasticsearch;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options = {
     looniversity.service.elasticsearch = {
       enable = mkEnableOption "elasticsearch";

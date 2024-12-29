@@ -1,18 +1,19 @@
-{
-  config,
-  lib,
-  pkgs,
-  mopidy-iris,
-  mopidy-jellyfin,
-  mopidy-local,
-  mopidy-mpd,
-  mopidy-spotify,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, mopidy-iris
+, mopidy-jellyfin
+, mopidy-local
+, mopidy-mpd
+, mopidy-spotify
+, ...
+}:
+let
   cfg = config.looniversity.media.mopidy;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.media.mopidy = {
     enable = mkEnableOption "mopidy";
   };

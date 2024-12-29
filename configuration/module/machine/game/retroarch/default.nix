@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.game.retroarch;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.game.retroarch = {
     enable = mkEnableOption "retroarch";
   };

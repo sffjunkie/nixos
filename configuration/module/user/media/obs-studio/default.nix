@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.media.obs-studio;
   obs-plugins = pkgs.obs-studio-plugins;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.media.obs-studio = {
     enable = mkEnableOption "obs-studio";
   };

@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.feh;
 
   buttonsFile = ''
@@ -21,7 +21,8 @@
   '';
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.feh = {
     enable = mkEnableOption "feh";
   };

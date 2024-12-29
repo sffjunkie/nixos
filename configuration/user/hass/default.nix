@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.user.hass;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.user.hass = {
     enable = mkEnableOption "hass user";
   };

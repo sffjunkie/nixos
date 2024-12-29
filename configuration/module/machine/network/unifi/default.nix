@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.network.unifi;
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.network.unifi = {
     enable = mkEnableOption "unifi";
   };

@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   inherit (lib) mkEnableOption mkIf mkOption types;
 
   cfg = config.looniversity.music.musicctl;
@@ -39,12 +39,13 @@
 
     exit 0
   '';
-in {
+in
+{
   options.looniversity.music.musicctl = {
     enable = mkEnableOption "musicctl";
   };
 
   config = mkIf cfg.enable {
-    home.packages = [musicctl];
+    home.packages = [ musicctl ];
   };
 }

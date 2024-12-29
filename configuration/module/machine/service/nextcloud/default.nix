@@ -1,14 +1,15 @@
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.nextcloud;
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.service.nextcloud = {
     enable = mkEnableOption "nextcloud";
   };
@@ -48,7 +49,7 @@ in {
 
     looniversity.service.postgresql = {
       enable = true;
-      databases = [config.services.nextcloud.config.dbname];
+      databases = [ config.services.nextcloud.config.dbname ];
     };
   };
 }

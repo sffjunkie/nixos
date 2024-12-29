@@ -1,13 +1,14 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.gnomeApps;
   inherit (lib) mkEnableOption mkIf;
   inherit (pkgs) gnome;
-in {
+in
+{
   options.looniversity.gui.gnomeApps = {
     enable = mkEnableOption "gnomeApps";
   };

@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  options,
-  ...
-}: let
+{ config
+, lib
+, options
+, ...
+}:
+let
   inherit (lib) mkOption types;
 
   font = types.submodule {
@@ -20,10 +20,10 @@
       };
     };
   };
-in {
+in
+{
   options.looniversity.ui = {
-    display = {
-    };
+    display = { };
     font = {
       serif = mkOption {
         type = types.attrsOf font;

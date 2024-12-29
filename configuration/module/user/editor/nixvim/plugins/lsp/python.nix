@@ -14,16 +14,16 @@
               python = {
                 analysis = {
                   # Ignore all files for analysis to exclusively use Ruff for linting
-                  ignore = ["*"];
+                  ignore = [ "*" ];
                 };
               };
             };
           };
 
-          ruff-lsp = {
+          ruff = {
             enable = true;
             onAttach.function = ''
-              if client.name == 'ruff_lsp' then
+              if client.name == 'ruff' then
                 -- Disable hover in favor of Pyright
                 client.server_capabilities.hoverProvider = false
               end

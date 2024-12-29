@@ -1,17 +1,18 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config
+, lib
+, ...
+}:
+let
   cfg = config.looniversity.storage.samba;
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options = {
     looniversity.storage.samba = {
       enable = mkEnableOption "samba";
 
       shares = mkOption {
-        default = {};
+        default = { };
         description = lib.mdDoc ''
           A set describing shared resources.
           See {command}`man smb.conf` for options.

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.virtualisation.quickemu;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.virtualisation.quickemu = {
     enable = mkEnableOption "quickemu";
   };

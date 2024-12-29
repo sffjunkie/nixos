@@ -1,18 +1,19 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.development.devenv;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.development.devenv = {
     enable = mkEnableOption "devenv";
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [
+    home.packages = [
       pkgs.devenv
     ];
   };

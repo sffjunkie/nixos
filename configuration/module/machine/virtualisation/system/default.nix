@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.virtualisation.system;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.virtualisation.system = {
     enable = mkEnableOption "virtualisation system config";
   };
@@ -19,7 +20,7 @@ in {
           swtpm.enable = true;
           ovmf = {
             enable = true;
-            packages = [pkgs.OVMFFull.fd];
+            packages = [ pkgs.OVMFFull.fd ];
           };
         };
       };

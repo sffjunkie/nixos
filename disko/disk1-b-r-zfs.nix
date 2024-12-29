@@ -5,11 +5,10 @@
 #   - root ZFS dataset
 #   - nix ZFS dataset
 #   - home ZFS dataset
-{
-  disk0UUID,
-  tank0Name ? "tank0",
-  nixDataset ? "${tank0Name}/nix",
-  ...
+{ disk0UUID
+, tank0Name ? "tank0"
+, nixDataset ? "${tank0Name}/nix"
+, ...
 }: {
   disko.devices = {
     disk = {

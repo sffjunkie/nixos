@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.keyboard.evdevremapkeys;
 
   udev_rule = pkgs.writeTextFile {
@@ -15,7 +15,8 @@
   };
 
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.keyboard.evdevremapkeys = {
     enable = mkEnableOption "evdevremapkeys udev rule";
   };

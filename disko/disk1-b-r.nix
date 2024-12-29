@@ -1,7 +1,7 @@
 # 1 disk
 # - boot ESP vfat
 # - root ext4
-{disk0, ...}: {
+{ disk0, ... }: {
   disko.devices = {
     disk = {
       disk1 = {

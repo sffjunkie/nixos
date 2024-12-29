@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.role.podcaster;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.role.podcaster = {
     enable = mkEnableOption "podcaster role";
   };

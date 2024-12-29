@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.cli.atuin;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.cli.atuin = {
     enable = mkEnableOption "atuin";
   };

@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   mkHome = p: "/home/sdk/${p}";
-in {
+in
+{
   config = {
     sops.secrets."restic/s3_access_key" = {
       owner = config.users.users.${config.services.restic.backups.sdk_nas.user}.name;

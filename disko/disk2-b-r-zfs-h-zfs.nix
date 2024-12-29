@@ -1,8 +1,7 @@
-{
-  disk0UUID,
-  disk1UUID,
-  tank0Name ? "tank0",
-  ...
+{ disk0UUID
+, disk1UUID
+, tank0Name ? "tank0"
+, ...
 }: {
   disko.devices = {
     disk = {

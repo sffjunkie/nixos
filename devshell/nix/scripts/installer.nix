@@ -1,9 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   script = pkgs.writeScriptBin "nixos-installer" ''
     #!${lib.getExe pkgs.bash}
     VALID_ARGS=$(getopt -o sv --long show-trace,verbose -- "''$@")
@@ -63,4 +63,4 @@
     esac
   '';
 in
-  script
+script

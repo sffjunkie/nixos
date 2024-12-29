@@ -1,11 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   wanDev = lib.network.netdevice config "pinky" "wan";
-in {
+in
+{
   config = {
     services.pppd = {
       enable = true;

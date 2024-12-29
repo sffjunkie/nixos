@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.wayland.lockscreen.swaylock;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.wayland.lockscreen.swaylock = {
     enable = mkEnableOption "swaylock";
   };

@@ -1,10 +1,10 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, inputs
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.theme.stylix;
 
   nerdfonts = pkgs.nerdfonts.override {
@@ -14,7 +14,8 @@
   };
 
   inherit (lib) mkDefault mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.theme.stylix = {
     enable = mkEnableOption "stylix";
   };

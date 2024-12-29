@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.gimp;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.gimp = {
     enable = mkEnableOption "gimp";
   };

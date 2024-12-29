@@ -1,26 +1,16 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     sops-nix.url = "github:Mic92/sops-nix";
 
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixvim = {
-      url = "github:nix-community/nixvim";
+      url = "github:nix-community/nixvim/nixos-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -49,214 +39,220 @@
     bash-prompt = ''\n\[\033[1;34m\][\[\e]0;\u@\h: \w\a\]\u@\h:\w]\\$\[\033[0m\] '';
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    attic,
-    deploy-rs,
-    home-manager,
-    nixos-hardware,
-    nix-index,
-    nix-index-database,
-    nixvim,
-    sops-nix,
-    stylix,
-    ...
-  } @ inputs: let
-    lib = nixpkgs.lib.extend (import ./lib {inherit lib inputs;});
+  outputs =
+    { self
+    , nixpkgs
+    , home-manager
+    , nixos-hardware
+    , nix-index
+    , nix-index-database
+    , nixvim
+    , sops-nix
+    , stylix
+    , ...
+    } @ inputs:
+    let
+      lib = nixpkgs.lib.extend (import ./lib { inherit lib inputs; });
 
-    forAllSystems = nixpkgs.lib.genAttrs [
-      "aarch64-linux"
-      "x86_64-darwin"
-      "x86_64-linux"
-    ];
+      forAllSystems = nixpkgs.lib.genAttrs [
+        "aarch64-linux"
+        "x86_64-darwin"
+        "x86_64-linux"
+      ];
 
-    machineCommonModules = [
-      sops-nix.nixosModules.sops
-      stylix.nixosModules.stylix
-    ];
+      machineCommonModules = [
+        sops-nix.nixosModules.sops
+        stylix.nixosModules.stylix
+      ];
 
-    hmCommonModules = [
-      home-manager.nixosModules.default
-      {
-        config = {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.extraSpecialArgs = {
-            inherit inputs;
+      hmCommonModules = [
+        home-manager.nixosModules.default
+        {
+          config = {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+            };
+            home-manager.sharedModules = [
+              sops-nix.homeManagerModules.sops
+              nixvim.homeManagerModules.nixvim
+            ];
           };
-          home-manager.sharedModules = [
-            sops-nix.homeManagerModules.sops
-            nixvim.homeManagerModules.nixvim
-          ];
-        };
-      }
-    ];
-  in {
-    overlays.default = import ./configuration/overlay;
+        }
+      ];
+    in
+    {
+      overlays.default = import ./configuration/overlay;
 
-    nixosConfigurations = {
-      # Security
-      pinky = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit lib;
+      nixosConfigurations = {
+        # Security
+        pinky = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit lib;
+          };
+
+          modules =
+            [
+              ./configuration/machine/pinky
+              ./configuration/user/sysadmin/machine
+              {
+                config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+              }
+            ]
+            ++ machineCommonModules
+            ++ hmCommonModules;
         };
 
-        modules =
-          [
-            ./configuration/machine/pinky
-            ./configuration/user/sysadmin/machine
-            {
-              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-            }
-          ]
-          ++ machineCommonModules
-          ++ hmCommonModules;
+        # Services
+        thebrain = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit lib;
+          };
+
+          modules =
+            [
+              ./configuration/machine/thebrain
+              ./configuration/user/sysadmin/machine
+              {
+                config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+              }
+            ]
+            ++ machineCommonModules
+            ++ hmCommonModules;
+        };
+
+        # Workstation
+        furrball = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit lib inputs;
+          };
+
+          modules =
+            [
+              ./configuration/machine/furrball
+              ./configuration/user/sdk/machine
+              ./configuration/user/sysadmin/machine
+              {
+                config.home-manager.users.sdk = import ./configuration/user/sdk/home;
+                config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+              }
+
+              nixos-hardware.nixosModules.common-pc
+              nixos-hardware.nixosModules.common-pc-ssd
+
+              nix-index-database.nixosModules.nix-index
+            ]
+            ++ machineCommonModules
+            ++ hmCommonModules;
+        };
+
+        # Storage
+        babs = nixpkgs.lib.nixosSystem {
+          specialArgs = {
+            inherit lib;
+          };
+
+          modules =
+            [
+              ./configuration/machine/babs
+              ./configuration/user/sysadmin/machine
+
+              {
+                config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+              }
+
+              nixos-hardware.nixosModules.common-pc
+              nixos-hardware.nixosModules.common-pc-ssd
+            ]
+            ++ machineCommonModules
+            ++ hmCommonModules;
+        };
+
+        # Laptop
+        buster = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit lib;
+          };
+
+          modules =
+            [
+              ./configuration/machine/buster
+              ./configuration/user/sdk/machine
+              ./configuration/user/sysadmin/machine
+              {
+                config.home-manager.users.sdk =
+                  import ./configuration/user/sdk/home;
+                # TODO: Fix sdk_buster
+                # // (import ./configuration/user/sdk_buster/home);
+                config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
+              }
+
+              nixos-hardware.nixosModules.microsoft-surface-pro-intel
+            ]
+            ++ machineCommonModules
+            ++ hmCommonModules;
+        };
+
+        # Installer ISO
+        installer = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit lib;
+          };
+          modules =
+            [
+              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+              ./installer/looniversity-minimal.nix
+              {
+                config.home-manager.users.nixos = import ./configuration/user/nixos/home;
+              }
+              sops-nix.nixosModules.sops
+            ]
+            ++ hmCommonModules;
+        };
       };
 
-      # Services
-      thebrain = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit lib;
+      colmena = {
+        meta = {
+          description = "Looniversity";
+          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
         };
 
-        modules =
-          [
-            ./configuration/machine/thebrain
-            ./configuration/user/sysadmin/machine
-            {
-              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-            }
-          ]
-          ++ machineCommonModules
-          ++ hmCommonModules;
+        babs = {
+          deployment = {
+            tags = [ "infra" ];
+            targetHost = "babs.looniversity.net";
+            targetUser = "sysadmin";
+          };
+        };
       };
 
-      # Workstation
-      furrball = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit lib inputs;
-        };
+      # Generic development shells
+      # The default 'nix' shell includes scripts to build nixos systems
+      # using nix-ouptut-monitor
+      devShells = forAllSystems (system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        {
+          default = import ./devshell/nix { inherit pkgs; };
+          go = import ./devshell/go { inherit pkgs; };
+          python = import ./devshell/python { inherit pkgs; };
+          rust = import ./devshell/rust { inherit pkgs; };
+          net = import ./devshell/net { inherit pkgs; };
+        });
 
-        modules =
-          [
-            ./configuration/machine/furrball
-            ./configuration/user/sdk/machine
-            ./configuration/user/sysadmin/machine
-            {
-              config.home-manager.users.sdk = import ./configuration/user/sdk/home;
-              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-            }
-
-            nixos-hardware.nixosModules.common-pc
-            nixos-hardware.nixosModules.common-pc-ssd
-
-            nix-index-database.nixosModules.nix-index
-          ]
-          ++ machineCommonModules
-          ++ hmCommonModules;
-      };
-
-      # Storage
-      babs = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit lib;
-        };
-
-        modules =
-          [
-            ./configuration/machine/babs
-            ./configuration/user/sysadmin/machine
-
-            attic.nixosModules.atticd
-            {
-              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-            }
-
-            nixos-hardware.nixosModules.common-pc
-            nixos-hardware.nixosModules.common-pc-ssd
-          ]
-          ++ machineCommonModules
-          ++ hmCommonModules;
-      };
-
-      # Laptop
-      buster = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit lib;
-        };
-
-        modules =
-          [
-            ./configuration/machine/buster
-            ./configuration/user/sdk/machine
-            ./configuration/user/sysadmin/machine
-            {
-              config.home-manager.users.sdk =
-                import ./configuration/user/sdk/home;
-              # TODO: Fix sdk_buster
-              # // (import ./configuration/user/sdk_buster/home);
-              config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
-            }
-
-            nixos-hardware.nixosModules.microsoft-surface-pro-intel
-          ]
-          ++ machineCommonModules
-          ++ hmCommonModules;
-      };
-
-      # Installer ISO
-      installer = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit lib;
-        };
-        modules =
-          [
-            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-            ./installer/looniversity-minimal.nix
-            {
-              config.home-manager.users.nixos = import ./configuration/user/nixos/home;
-            }
-            sops-nix.nixosModules.sops
-          ]
-          ++ hmCommonModules;
+      # The nix devShell above adds a nix-test function which runs the tests
+      # under the `tests` attribute
+      tests = lib.test.run {
+        dir = ./test;
+        inherit lib; # Needed by test functions
+        # Optional attrs
+        # include = ".*_test\.nix";
+        # exclude = "";
+        # quiet = false;
       };
     };
-
-    deploy = lib.deploy.mkDeploy {
-      inherit (inputs) self;
-      targets = ["babs"];
-    };
-
-    checks =
-      builtins.mapAttrs
-      (system: deployLib: deployLib.deployChecks self.deploy)
-      deploy-rs.lib;
-
-    # Generic development shells
-    # The default 'nix' shell includes scripts to build nixos systems
-    # using nix-ouptut-monitor
-    devShells = forAllSystems (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in {
-      default = import ./devshell/nix {inherit pkgs;};
-      go = import ./devshell/go {inherit pkgs;};
-      python = import ./devshell/python {inherit pkgs;};
-      rust = import ./devshell/rust {inherit pkgs;};
-      net = import ./devshell/net {inherit pkgs;};
-    });
-
-    # The nix devShell above adds a nix-test function which runs the tests
-    # under the `tests` attribute
-    tests = lib.test.run {
-      dir = ./test;
-      inherit lib; # Needed by test functions
-      # Optional attrs
-      # include = ".*_test\.nix";
-      # exclude = "";
-      # quiet = false;
-    };
-  };
 }

@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.gui.keepassxc;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.gui.keepassxc = {
     enable = mkEnableOption "keepassxc";
   };

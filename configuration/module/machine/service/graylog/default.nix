@@ -1,11 +1,11 @@
 # Copies from nixpkgs but uses environment variable to set config
-{
-  config,
-  lib,
-  pkgs,
-  sops,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, sops
+, ...
+}:
+let
   cfg = config.looniversity.service.graylog;
 
   mongodb_host = lib.network.serviceHandlerHostName config "mongodb";
@@ -28,7 +28,8 @@
   };
 
   inherit (lib) mkEnableOption mkIf mkOption types;
-in {
+in
+{
   options.looniversity.service.graylog = {
     enable = mkEnableOption "graylog";
 
@@ -90,7 +91,7 @@ in {
 
     plugins = mkOption {
       description = lib.mdDoc "Extra graylog plugins";
-      default = [];
+      default = [ ];
       type = types.listOf types.package;
     };
   };
@@ -125,7 +126,7 @@ in {
         description = "Graylog server daemon user";
       };
     };
-    users.groups = mkIf (cfg.user == "graylog") {graylog = {};};
+    users.groups = mkIf (cfg.user == "graylog") { graylog = { }; };
 
     systemd.tmpfiles.rules = [
       "d '${cfg.messageJournalDir}' - ${cfg.user} - - -"
@@ -133,11 +134,11 @@ in {
 
     systemd.services.graylog = {
       description = "Graylog Server";
-      wantedBy = ["multi-user.target"];
+      wantedBy = [ "multi-user.target" ];
       environment = {
         GRAYLOG_CONF = "${confFile}";
       };
-      path = [pkgs.which pkgs.procps];
+      path = [ pkgs.which pkgs.procps ];
       preStart = ''
         rm -rf /var/lib/graylog/plugins || true
         mkdir -p /var/lib/graylog/plugins -m 755

@@ -1,18 +1,18 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.script.wake;
 
   hostToMac =
     map
-    (host: {
-      name = host.name;
-      mac = lib.attrByPath ["netdevice" "lan" "mac"] "" host.value;
-    })
-    (lib.attrsToList config.looniversity.network.hosts);
+      (host: {
+        name = host.name;
+        mac = lib.attrByPath [ "netdevice" "lan" "mac" ] "" host.value;
+      })
+      (lib.attrsToList config.looniversity.network.hosts);
 
   hostWithMac = builtins.filter (item: builtins.elem ":" (lib.stringToCharacters item.mac)) hostToMac;
 
@@ -39,7 +39,8 @@
         ;;
     esac
   '';
-in {
+in
+{
   options.looniversity.script.wake = {
     enable = lib.mkEnableOption "wake script";
   };

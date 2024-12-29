@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.media.pipewire;
   inherit (lib) mkEnableOption mkIf;
-in {
+in
+{
   options.looniversity.media.pipewire = {
     enable = mkEnableOption "pipewire";
   };

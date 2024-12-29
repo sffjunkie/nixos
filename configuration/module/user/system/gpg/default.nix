@@ -1,12 +1,13 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.system.gpg;
   inherit (lib) mkDefault mkEnableOption mkIf mkOption;
-in {
+in
+{
   options.looniversity.system.gpg.enable = mkEnableOption "gpg";
 
   config = mkIf cfg.enable {

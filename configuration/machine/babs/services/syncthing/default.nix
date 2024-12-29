@@ -1,6 +1,6 @@
 {
   config = {
-    networking.firewall.allowedTCPPorts = [8384];
+    networking.firewall.allowedTCPPorts = [ 8384 ];
 
     services.syncthing = {
       enable = true;
@@ -16,15 +16,15 @@
         devices = {
           babs = {
             id = "OZVWWSR-TOBJZPP-S6YIHEN-HN3M3Z7-MF4DVVV-O5QBKDB-6KQ73XF-V22RXAW";
-            addresses = ["dynamic"];
+            addresses = [ "dynamic" ];
           };
           furrball = {
             id = "L43XHU2-5TRAIBG-T7JFZXO-4YI6M6Q-3GQJWHE-XR4ZA76-IG35CYM-RTF2GQB";
-            addresses = ["dynamic"];
+            addresses = [ "dynamic" ];
           };
           buster = {
             id = "YR6HWSW-6BHNGWN-SGXFCGX-Y5GLXYQ-U7XTJOY-G45VSIN-CHC4IT5-2GST4A5";
-            addresses = ["dynamic"];
+            addresses = [ "dynamic" ];
           };
         };
 
