@@ -15,7 +15,7 @@ in {
       virtualisation = {
         quickemu.enable = true;
         system.enable = true;
-        vagrant.enable = true;
+        vagrant.enable = 3 true;
       };
 
       # TODO: Fix NAS
