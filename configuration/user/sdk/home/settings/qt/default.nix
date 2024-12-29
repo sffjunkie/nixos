@@ -15,7 +15,7 @@ in {
     qt = {
       enable = true;
       platformTheme = {
-        name = "adwaita";
+        name = "qt5ct";
       };
       style.name = "adwaita";
     };
