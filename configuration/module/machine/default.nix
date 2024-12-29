@@ -8,6 +8,7 @@
     ./game
     ./home-automation
     ./media
+    ./mount
     ./network
     ./script
     ./service
