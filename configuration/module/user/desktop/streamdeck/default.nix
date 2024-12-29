@@ -16,6 +16,8 @@ in {
       pkgs.streamdeck-ui
     ];
 
+    services.status-notifier-watcher.enable = true;
+
     systemd.user.services.streamdeck = {
       Install.WantedBy = ["default.target"];
       Unit.Description = "A Linux compatible UI for the Elgato Stream Deck.";
