@@ -64,6 +64,8 @@ in {
       XDG_CURRENT_DESKTOP = "qtile";
       SDL_VIDEODRIVER = "wayland";
       QT_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
+      QT_SCALE_FACTOR = "1.25";
       QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
       _JAVA_AWT_WM_NONREPARENTING = "1";
     };
