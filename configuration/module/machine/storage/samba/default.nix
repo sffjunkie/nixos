@@ -34,21 +34,24 @@ in {
   config = mkIf cfg.enable {
     services.samba = {
       enable = true;
-      enableNmbd = false;
-      enableWinbindd = false;
+      nmbd.enable = false;
+      winbindd.enable = false;
       openFirewall = true;
-      securityType = "user";
-      extraConfig = ''
-        client max protocol = SMB3
-        client min protocol = SMB2
-        guest account = nobody
-        hosts allow = 10.44. 127.0.0.1 ::1
-        hosts deny = 0.0.0.0/0
-        map to guest = bad user
-        server string = samba
-        workgroup = LOONIVERSITY
-      '';
-      shares = config.looniversity.storage.samba.shares;
+      settings =
+        {
+          global = {
+            security = "user";
+            "client max protocol" = "SMB3";
+            "client min protocol" = "SMB2";
+            "guest account" = "nobody";
+            "hosts allow" = "10.44. 127.0.0.1 ::1";
+            "hosts deny" = "0.0.0.0/0";
+            "map to guest" = "bad user";
+            "server string" = "samba";
+            workgroup = "LOONIVERSITY";
+          };
+        }
+        // config.looniversity.storage.samba.shares;
     };
 
     services.samba-wsdd.enable = true;
