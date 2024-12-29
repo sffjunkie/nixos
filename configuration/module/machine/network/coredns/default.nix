@@ -66,9 +66,11 @@ in {
       mkdir -p ${dynamicZoneDataDir}
     '';
 
-    networking.firewall.interfaces.${lanDev} = {
-      allowedTCPPorts = [dnsPort];
-      allowedUDPPorts = [dnsPort];
+    networking.firewall.interfaces = {
+      ${lanDev} = {
+        allowedTCPPorts = [dnsPort];
+        allowedUDPPorts = [dnsPort];
+      };
     };
   };
 }
