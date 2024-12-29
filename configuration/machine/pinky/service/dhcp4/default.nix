@@ -13,7 +13,7 @@
 
         vlanNetwork =
           lib.ipv4.constructIpv4Address
-          config.looniversity.network.network
+          config.looniversity.network.networkAddress
           "${toString vlanInfo.id}.0";
 
         vlanPoolStart =
@@ -86,7 +86,7 @@ in {
               {
                 id = 1;
                 subnet = lib.concatStringsSep "/" [
-                  "${config.looniversity.network.network}"
+                  "${config.looniversity.network.networkAddress}"
                   "${toString config.looniversity.network.prefixLength}"
                 ];
                 pools = [
