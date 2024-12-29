@@ -14,11 +14,11 @@ in {
   config = mkIf cfg.enable {
     programs.git = {
       enable = true;
+      package = pkgs.gitFull;
       userName = "Simon Kennedy";
       userEmail = "sffjunkie+code@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
-
         credential.helper = "${
           pkgs.git.override {withLibsecret = true;}
         }/bin/git-credential-libsecret";
