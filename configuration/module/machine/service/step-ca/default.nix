@@ -105,7 +105,9 @@ in {
     };
 
     networking.firewall.interfaces = {
-      ${lanDev}.allowedTCPPorts = [config.services.step-ca.port];
+      ${lanDev} = {
+        allowedTCPPorts = [config.services.step-ca.port];
+      };
     };
 
     environment.systemPackages = [

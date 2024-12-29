@@ -46,6 +46,10 @@ in {
       environmentFile = config.sops.templates."lldap_env_file".path;
     };
 
-    networking.firewall.interfaces.${lanDev}.allowedTCPPorts = [config.services.lldap.settings.ldap_port];
+    networking.firewall.interfaces = {
+      ${lanDev} = {
+        allowedTCPPorts = [config.services.lldap.settings.ldap_port];
+      };
+    };
   };
 }
