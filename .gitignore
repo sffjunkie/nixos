@@ -11,3 +11,4 @@ installer/iso
 installer/vm
 .vscode
 .tox
+.decrypted~*
