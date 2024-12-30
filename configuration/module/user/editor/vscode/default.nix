@@ -12,6 +12,7 @@ let
     arcticicestudio.nord-visual-studio-code
     bbenoist.nix
     bierner.markdown-mermaid
+    brettm12345.nixfmt-vscode
     davidanson.vscode-markdownlint
     editorconfig.editorconfig
     donjayamanne.githistory
@@ -20,7 +21,6 @@ let
     golang.go
     gruntfuggly.todo-tree
     humao.rest-client
-    kamadorueda.alejandra
     ms-python.python
     ms-python.vscode-pylance
     ms-vscode.makefile-tools
