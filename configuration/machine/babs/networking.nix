@@ -1,11 +1,10 @@
-{ config
-, lib
-, ...
-}:
-let
-  lanDev = lib.network.netdevice config "babs" "lan";
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  lanDev = lib.network.netdevice config "babs" "lan";
+in {
   config = {
     networking = {
       hostId = "fafececd";
