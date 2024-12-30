@@ -8,6 +8,8 @@ in {
   config = {
     networking = {
       hostId = "fafececd";
+      hostName = "babs";
+      domain = "looniversity.net";
       useDHCP = lib.mkDefault false;
     };
 
