@@ -14,7 +14,7 @@ pkgs.mkShell {
       pkgs.nix-template
       pkgs.nix-tree
       pkgs.nix-update
-      pkgs.nixpkgs-fmt
+      pkgs.nixfmt-rfc-style
       pkgs.nixpkgs-review
       pkgs.node2nix
       pkgs.nvd
