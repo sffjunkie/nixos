@@ -4,6 +4,7 @@
     ./desktop
     ./device
     ./doc
+    ./fs
     ./game
     ./home-automation
     ./media
