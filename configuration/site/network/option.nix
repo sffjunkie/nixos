@@ -1,7 +1,8 @@
-{ config
-, lib
-, options
-, ...
+{
+  config,
+  lib,
+  options,
+  ...
 }:
 let
   inherit (lib) mkOption types;
@@ -24,32 +25,40 @@ let
         description = "IPv4 address to assign to the interface";
       };
       ipv4method = mkOption {
-        type = types.enum [ "static" "dhcpstatic" "dhcp" "pppoe" ];
+        type = types.enum [
+          "static"
+          "dhcpstatic"
+          "dhcp"
+          "pppoe"
+        ];
         default = "";
         description = "The method to be used to obtain an IP address";
       };
     };
   };
 
-  host = types.submodule ({ name, ... }: {
-    options = {
-      name = mkOption {
-        type = types.str;
-        default = name;
-        description = "The name to assign to the host";
+  host = types.submodule (
+    { name, ... }:
+    {
+      options = {
+        name = mkOption {
+          type = types.str;
+          default = name;
+          description = "The name to assign to the host";
+        };
+        description = mkOption {
+          type = types.str;
+          default = "";
+          description = "A description of the host";
+        };
+        netdevice = mkOption {
+          type = types.attrsOf netdevice;
+          description = "Named network devices. Normally at least a 'lan' device should be defined";
+          default = { };
+        };
       };
-      description = mkOption {
-        type = types.str;
-        default = "";
-        description = "A description of the host";
-      };
-      netdevice = mkOption {
-        type = types.attrsOf netdevice;
-        description = "Named network devices. Normally at least a 'lan' device should be defined";
-        default = { };
-      };
-    };
-  });
+    }
+  );
 
   vlan = types.submodule {
     options = {
@@ -85,34 +94,37 @@ let
     };
   };
 
-  service = types.submodule ({ name }: {
-    options = {
-      hostName = mkOption {
-        type = types.str;
-        default = name;
-        description = "The host name to assign to the service";
+  service = types.submodule (
+    { name }:
+    {
+      options = {
+        hostName = mkOption {
+          type = types.str;
+          default = name;
+          description = "The host name to assign to the service";
+        };
+        domainName = mkOption {
+          type = types.str;
+          default = "service.${config.looniversity.network.domainName}";
+          description = "The domain name to assign to the service";
+        };
+        addToDns = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Set to true to add this service to DNS";
+        };
+        addToProxy = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Set to true to add this service to the reverse proxy";
+        };
+        handlerName = mkOption {
+          type = types.str;
+          description = "The name of the service handler for this service";
+        };
       };
-      domainName = mkOption {
-        type = types.str;
-        default = "service.${config.looniversity.network.domainName}";
-        description = "The domain name to assign to the service";
-      };
-      addToDns = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Set to true to add this service to DNS";
-      };
-      addToProxy = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Set to true to add this service to the reverse proxy";
-      };
-      handlerName = mkOption {
-        type = types.str;
-        description = "The name of the service handler for this service";
-      };
-    };
-  });
+    }
+  );
 
   serviceHandler = types.submodule {
     options = {
