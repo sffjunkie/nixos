@@ -185,6 +185,12 @@ in
       default = [ ];
     };
 
+    workgroup = mkOption {
+      type = types.str;
+      default = "";
+      description = "Samba workgroup";
+    };
+
     hosts = mkOption {
       type = types.attrsOf host;
       default = { };

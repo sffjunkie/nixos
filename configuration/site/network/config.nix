@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   config.looniversity.network = {
     networkAddress = "10.44.0.0";
     prefixLength = 21;
@@ -9,6 +10,7 @@
       "8.8.8.8"
       "1.1.1.1"
     ];
+    workgroup = "LOONIVERSITY";
 
     hosts = {
       pinky = {
