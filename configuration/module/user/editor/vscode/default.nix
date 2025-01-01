@@ -128,6 +128,7 @@ in {
         };
         "[nix]" = {
           "editor.tabSize" = 2;
+          "editor.defaultFormatter" = "brettm12345.nixfmt-vscode";
         };
         "[python]" = {
           "editor.defaultFormatter" = "charliermarsh.ruff";
