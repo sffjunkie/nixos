@@ -41,7 +41,7 @@ in
       settings =
         {
           global = {
-            security = "user";
+            "security" = "user";
             "client max protocol" = "SMB3";
             "client min protocol" = "SMB2";
             "guest account" = "nobody";
@@ -49,7 +49,7 @@ in
             "hosts deny" = "0.0.0.0/0";
             "map to guest" = "bad user";
             "server string" = "samba";
-            workgroup = "LOONIVERSITY";
+            "workgroup" = "LOONIVERSITY";
           };
         }
         // config.looniversity.storage.samba.shares;
