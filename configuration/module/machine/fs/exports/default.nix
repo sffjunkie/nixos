@@ -5,7 +5,10 @@
   ...
 }:
 let
+  inherit (lib) mkIf mkOption types;
+
   cfg = config.looniversity.fs.nfs;
+
   nfsExport = types.submodule {
     options = {
       path = mkOption {
@@ -28,9 +31,14 @@ let
           Export options
         '';
       };
+      description = mkOption {
+        type = types.str;
+        description = lib.mdDoc ''
+          Description
+        '';
+      };
     };
   };
-  inherit (lib) mkIf mkOption types;
 in
 {
   options.looniversity.fs.nfs = {
@@ -57,17 +65,17 @@ in
     };
   };
 
-  config =
-    mkIf config.looniversity.fs.nfs.exports != [ ] {
-      services.nfs.server = {
-        exports = lib.concatMapStringsSep "\n" (
-          share:
-          let
-            clients = if share.clients != "" then share.clients else cfg.clients;
-            opts = if share.opts != [ ] then share.opts else cfg.opts;
-          in
-          "${share} ${clients}(${opts})"
-        ) config.looniversity.fs.nfs.exports;
-      };
+  config = mkIf (cfg.exports != [ ]) {
+    services.nfs.server = {
+      exports = lib.concatMapStringsSep "\n" (
+        share:
+        let
+          clients = if share.clients != "" then share.clients else cfg.clients;
+          opts = if share.opts != [ ] then share.opts else cfg.opts;
+          comment = if share.description != "" then "\t\t# ${share.description}" else "";
+        in
+        "${share.path} ${clients}(${lib.concatStringsSep "," opts})${comment}"
+      ) cfg.exports;
     };
+  };
 }

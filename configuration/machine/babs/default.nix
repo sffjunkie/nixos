@@ -1,9 +1,11 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./backup.nix
     ./boot.nix
@@ -23,23 +25,47 @@
         net-tools.enable = true;
         sshd.enable = true;
       };
+
+      fs = {
+        nfs = {
+          exports = [
+            {
+              path = "/tank0/music";
+              description = "Music";
+            }
+            {
+              path = "/tank1/private";
+              description = "Private";
+            }
+          ];
+          clients = "${toString config.looniversity.network.networkAddress}/${toString config.looniversity.network.prefixLength}";
+          opts = [
+            "insecure"
+            "no_subtree_check"
+            "rw"
+            "sync"
+          ];
+        };
+        cifs = {
+          shares = [
+            {
+              name = "music";
+              path = "/tank0/music";
+              description = "Music";
+            }
+          ];
+          opts = {
+            "read only" = "yes";
+            "browseable" = "yes";
+            "guest ok" = "yes";
+          };
+        };
+      };
+
       storage = {
         minio = {
           enable = true;
           dataDir = [ "/tank0/minio/data" ];
-        };
-        nfs.enable = true;
-        samba = {
-          enable = true;
-          shares = {
-            music = {
-              path = "/tank0/music";
-              "read only" = true;
-              browseable = "yes";
-              "guest ok" = "yes";
-              comment = "Music";
-            };
-          };
         };
       };
 
