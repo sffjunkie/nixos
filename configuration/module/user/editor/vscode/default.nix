@@ -1,10 +1,10 @@
-{
-  config,
-  inputs,
-  lib,
-  pkgs,
-  ...
-}: let
+{ config
+, inputs
+, lib
+, pkgs
+, ...
+}:
+let
   cfg = config.looniversity.editor.vscode;
   inherit (lib) mkDefault mkEnableOption mkIf;
 
@@ -52,7 +52,8 @@
     techer.open-in-browser
     tomphilbin.gruvbox-themes
   ];
-in {
+in
+{
   options.looniversity.editor.vscode = {
     enable = mkEnableOption "vscode";
   };
