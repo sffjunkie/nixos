@@ -2,9 +2,11 @@
   config,
   lib,
   ...
-}: let
+}:
+let
   lanDev = lib.network.netdevice config "babs" "lan";
-in {
+in
+{
   config = {
     networking = {
       hostId = "fafececd";
