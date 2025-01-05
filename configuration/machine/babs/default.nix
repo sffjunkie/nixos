@@ -30,8 +30,16 @@
         nfs = {
           exports = [
             {
+              path = "/tank0/backup";
+              description = "Backup";
+            }
+            {
               path = "/tank0/music";
               description = "Music";
+            }
+            {
+              path = "/tank1/movies";
+              description = "Movies";
             }
             {
               path = "/tank1/private";
@@ -52,6 +60,11 @@
               name = "music";
               path = "/tank0/music";
               description = "Music";
+            }
+            {
+              name = "private";
+              path = "/tank1/private";
+              description = "Private";
             }
           ];
           opts = {
