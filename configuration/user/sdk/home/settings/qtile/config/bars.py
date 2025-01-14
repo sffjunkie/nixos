@@ -11,7 +11,8 @@ from qwidgets.net_min import NetMin
 from qwidgets.icon import MDIcon
 from qwidgets.line_sep import LineSeparator
 from qwidgets.user_menu import UserMenuWidget
-from qwidgets.user_host import UserHostWidget
+from qwidgets.user_name import UserNameWidget
+from qwidgets.host_name import HostNameWidget
 from qwidgets.logo_menu import LogoMenuWidget
 from theme.utils import opacity_to_str
 from theme._types import Theme
@@ -43,7 +44,7 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
     bar_widgets = [
         # region LHS
         UserMenuWidget(theme, width=bar_height),
-        UserHostWidget(theme),
+        UserNameWidget(theme),
         LineSeparator(theme, width=bar_height),
         widget.GroupBox(
             margin_y=3,
@@ -162,6 +163,7 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # endregion
+        HostNameWidget(theme),
         LogoMenuWidget(
             theme,
             width=bar_height,

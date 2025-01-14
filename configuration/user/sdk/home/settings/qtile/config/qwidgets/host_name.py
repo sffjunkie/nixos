@@ -1,4 +1,3 @@
-import os
 from socket import gethostname
 
 from qtile_extras import widget
@@ -7,9 +6,8 @@ from theme._types import Theme
 from theme.utils import opacity_to_str
 
 
-class UserHostWidget(widget.TextBox):
+class UserNameWidget(widget.TextBox):
     def __init__(self, theme: Theme, **config):
-        user = os.environ["USER"]
         hostname = gethostname()
 
         font_family = theme["font"]["text"]["family"]
@@ -17,7 +15,7 @@ class UserHostWidget(widget.TextBox):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
-            text=f"{user}@{hostname}",
+            text=hostname,
             font=font_family,
             fontsize=font_size,
             foreground=color_scheme["panel_fg"],
