@@ -1,6 +1,6 @@
 from libqtile import layout
 from libqtile.config import Match, Rule
-from theme._types import Theme
+from theme._types import ThemeDefinition
 
 wmclass_float = [
     "com.github.wwmm.easyeffects",
@@ -20,7 +20,7 @@ def float_rules() -> list[Rule]:
     ] + layout.Floating.default_float_rules
 
 
-def build_layout(theme: Theme) -> layout.Floating:
+def build_layout(theme: ThemeDefinition) -> layout.Floating:
     color_scheme = theme["named_colors"]
     return layout.Floating(
         float_rules=float_rules(),

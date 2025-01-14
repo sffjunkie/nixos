@@ -3,15 +3,15 @@ from pathlib import Path
 
 import yaml
 
-from theme._types import Base16Colors, Theme, NamedColors
-from theme.base import (
+from theme.defs import Base16ColorDefinitions, ThemeDefinition, NamedColorDefinitions
+from theme.default import (
     BASE16_DEFAULT_COLOR_SCHEME,
     DEFAULT_THEME,
 )
-from theme.utils import is_base16, is_color
+from .utils import is_base16, is_color
 
 
-def base16_to_named_colors(base16: Base16Colors) -> NamedColors:
+def base16_to_named_colors(base16: Base16ColorDefinitions) -> NamedColorDefinitions:
     return {
         "window_border": base16["base06"],
         "panel_fg": base16["base04"],
@@ -36,10 +36,10 @@ def base16_to_named_colors(base16: Base16Colors) -> NamedColors:
     }
 
 
-def load_theme(filepath: Path) -> Theme:
+def load_theme(filepath: Path) -> ThemeDefinition:
     theme_yaml = _load_theme_yaml(filepath)
 
-    base16_scheme: Base16Colors = theme_yaml.get("base16_scheme", None)
+    base16_scheme: Base16ColorDefinitions = theme_yaml.get("base16_scheme", None)
     # if base16_scheme is None and "base16_scheme_name" in theme_yaml:
     #     base16_scheme = _load_color_scheme()
     if base16_scheme is None:
@@ -68,7 +68,7 @@ def load_theme(filepath: Path) -> Theme:
     tc = _deref_colors(layout, base16_scheme, named_colors)
     layout.update(tc)
 
-    theme = Theme(
+    theme = ThemeDefinition(
         base16_colors=base16_scheme,
         named_colors=named_colors,
         font=theme_yaml.get("font", DEFAULT_THEME["font"]),

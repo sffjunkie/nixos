@@ -1,11 +1,11 @@
 from qtile_extras import widget
 
-from theme._types import Theme
+from theme._types import ThemeDefinition
 from theme.utils import opacity_to_str
 
 
 class LineSeparator(widget.Sep):
-    def __init__(self, theme: Theme, **config):
+    def __init__(self, theme: ThemeDefinition, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(

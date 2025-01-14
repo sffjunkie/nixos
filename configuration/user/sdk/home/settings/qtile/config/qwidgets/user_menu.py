@@ -1,16 +1,21 @@
-from theme._types import Theme
+# from libqtile.lazy import lazy
+
+from qtile_extras import widget
+
+from theme._types import ThemeDefinition
 from theme.utils import opacity_to_str
-from qwidgets.icon import MDIcon
 
 
-class UserMenuWidget(MDIcon):
-    def __init__(self, theme: Theme, **config):
+class UserMenuWidget(widget.TextBox):
+    def __init__(self, theme: ThemeDefinition, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
         super().__init__(
-            name="user",
-            font=theme["font"]["icon"]["family"],
-            fontsize=theme["font"]["icon"]["size"],
-            background=f"{color_scheme['panel_fg']}{opacity_str}",
+            text=chr(0xF0004),
+            font=theme["font"]["logo"]["family"],
+            fontsize=theme["font"]["logo"]["size"],
+            padding=8,
+            background=f"{color_scheme['powerline_bg'][-1]}{opacity_str}",
+            # mouse_callbacks={"Button1": lazy.spawn("system-menu")},
             **config,
         )

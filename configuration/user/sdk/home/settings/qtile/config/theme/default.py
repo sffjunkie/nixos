@@ -1,4 +1,5 @@
-from theme._types import Base16Colors, Properties
+from .defs.theme import PropertyDefinitions
+from .defs.color import Base16ColorDefinitions, NamedColorDefinitions
 
 DEFAULT_FONT = "Hack Nerd Font Mono"
 DEFAULT_ICON_FONT = "Material Design Icons"
@@ -7,7 +8,7 @@ DEFAULT_LOGO_FONT = "Material Design Icons"
 DEFAULT_FONT_SIZE = 12
 DEFAULT_BAR_HEIGHT = 22
 
-BASE16_DEFAULT_COLOR_SCHEME: Base16Colors = {
+BASE16_DEFAULT_COLOR_SCHEME: Base16ColorDefinitions = {
     "base00": "f9f5d7",
     "base01": "ebdbb2",
     "base02": "d5c4a1",
@@ -26,9 +27,9 @@ BASE16_DEFAULT_COLOR_SCHEME: Base16Colors = {
     "base0F": "d65d0e",
 }
 
-DEFAULT_NAMED_COLORS = {
+DEFAULT_NAMED_COLORS: NamedColorDefinitions = {
     "window_border": BASE16_DEFAULT_COLOR_SCHEME["base06"],
-    "panel_fg": BASE16_DEFAULT_COLOR_SCHEME["base06"],
+    "panel_fg": BASE16_DEFAULT_COLOR_SCHEME["base04"],
     "panel_bg": BASE16_DEFAULT_COLOR_SCHEME["base01"],
     "group_current_fg": BASE16_DEFAULT_COLOR_SCHEME["base05"],
     "group_current_bg": BASE16_DEFAULT_COLOR_SCHEME["base03"],
@@ -50,21 +51,21 @@ DEFAULT_NAMED_COLORS = {
 }
 
 
-DEFAULT_EXTENSION_PROPS: Properties = {
+DEFAULT_EXTENSION_PROPS: PropertyDefinitions = {
     "font": DEFAULT_FONT,
     "fontsize": DEFAULT_FONT_SIZE,
     "foreground": BASE16_DEFAULT_COLOR_SCHEME["base04"],
     "background": BASE16_DEFAULT_COLOR_SCHEME["base00"],
 }
 
-DEFAULT_LAYOUT_PROPS: Properties = {
+DEFAULT_LAYOUT_PROPS: PropertyDefinitions = {
     "margin": 3,
     "border_width": 3,
     "border_focus": "d5c4a1",
     "border_normal": "282828",
 }
 
-DEFAULT_WIDGET_PROPS: Properties = {
+DEFAULT_WIDGET_PROPS: PropertyDefinitions = {
     "font": DEFAULT_FONT,
     "fontsize": DEFAULT_FONT_SIZE,
     "margin": 0,

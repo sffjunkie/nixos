@@ -2,14 +2,13 @@ import os
 
 from qtile_extras import widget
 
-from theme._types import Theme
+from theme._types import ThemeDefinition
 from theme.utils import opacity_to_str
 
 
 class UserNameWidget(widget.TextBox):
-    def __init__(self, theme: Theme, **config):
+    def __init__(self, theme: ThemeDefinition, **config):
         user = os.environ["USER"]
-
         font_family = theme["font"]["text"]["family"]
         font_size = theme["font"]["text"]["size"]
         color_scheme = theme["named_colors"]
