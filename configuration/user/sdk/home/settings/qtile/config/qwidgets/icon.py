@@ -6,6 +6,7 @@ MDICONS = {
     "clock": chr(983376),
     "cpu_temp": chr(984335),
     "cpu_usage": chr(986848),
+    "desk": chr(0xF1239),
     "memory": chr(983899),
     "music": chr(984922),
     "net_down": chr(985999),
