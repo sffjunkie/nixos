@@ -6,7 +6,7 @@ from theme._types import Theme
 from theme.utils import opacity_to_str
 
 
-class LogoMenuWidget(widget.TextBox):
+class SystemMenuWidget(widget.TextBox):
     def __init__(self, theme: Theme, **config):
         color_scheme = theme["named_colors"]
         opacity_str = opacity_to_str(theme["bar"]["opacity"])
