@@ -13,7 +13,7 @@ from qwidgets.line_sep import LineSeparator
 from qwidgets.user_menu import UserMenuWidget
 from qwidgets.user_name import UserNameWidget
 from qwidgets.host_name import HostNameWidget
-from qwidgets.logo_menu import LogoMenuWidget
+from qwidgets.system_menu import SystemMenuWidget
 from theme.utils import opacity_to_str
 from theme._types import Theme
 
@@ -163,8 +163,8 @@ def build_top_bar(settings: dict, theme: Theme) -> bar.Bar | None:
             background=f"{color_scheme['powerline_bg'][0]}{opacity_str}",
         ),
         # endregion
-        HostNameWidget(theme),
-        LogoMenuWidget(
+        # HostNameWidget(theme),
+        SystemMenuWidget(
             theme,
             width=bar_height,
         ),
