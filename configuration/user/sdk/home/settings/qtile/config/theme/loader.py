@@ -3,7 +3,8 @@ from pathlib import Path
 
 import yaml
 
-from theme.defs import Base16ColorDefinitions, ThemeDefinition, NamedColorDefinitions
+from theme.defs.color import Base16ColorDefinitions, NamedColorDefinitions
+from theme.defs.theme import ThemeDefinition
 from theme.default import (
     BASE16_DEFAULT_COLOR_SCHEME,
     DEFAULT_THEME,

@@ -1,12 +1,12 @@
 from qtile_extras import widget  # type: ignore
 
 from theme.defs.theme import ThemeDefinition
+from qbar.bar import Bar
 from qbar.position import GroupPosition
 from qbar.widget_group import WidgetGroup
-from qbar.bar import Bar
 
 
-class LineSeparator(WidgetGroup):
+class CurrentLayout(WidgetGroup):
     def __init__(
         self,
         bar: Bar,
@@ -17,21 +17,21 @@ class LineSeparator(WidgetGroup):
         super.__init__(bar, position, theme, config)
 
     def widgets(self) -> list[widget.base._Widget]:
-        separator_props = {
-            "size_percent": 50,
-            "linewidth": 1,
+        current_layout_props = {
             "padding": 12,
+            "font": self.text_font_family,
+            "fontsize": self.text_font_size,
             "foreground": self.color_scheme["panel_fg"],
             "background": f"{self.color_scheme['panel_bg']}{self.opacity_str}",
         }
 
         if self.config is not None:
             props = self._merge_parameters(
-                separator_props,
+                current_layout_props,
                 self.config,
             )
         else:
-            props = separator_props
-        separator = widget.Sep(**props)
+            props = current_layout_props
+        current_layout = widget.CurrentLayout(**props)
 
-        return [separator]
+        return [current_layout]

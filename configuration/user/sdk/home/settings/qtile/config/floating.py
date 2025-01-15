@@ -1,6 +1,6 @@
 from libqtile import layout
 from libqtile.config import Match, Rule
-from theme._types import ThemeDefinition
+from theme.defs.theme import ThemeDefinition
 
 wmclass_float = [
     "com.github.wwmm.easyeffects",

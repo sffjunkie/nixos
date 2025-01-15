@@ -7,247 +7,134 @@ from qtile_extras.widget.decorations import PowerLineDecoration
 from libqtile.bar import Bar as QtileBar
 
 from qbar.bar import Bar
-from qbar.location import BarLocation
-from qwidgets.net_min import NetMin
+from qbar.position import BarPosition, GroupPosition
 from qwidgets.icon import MDIcon
 from qwidgets.line_sep import LineSeparator
-from qwidgets.user_menu import UserMenuWidget
-from qwidgets.user_name import UserNameWidget
-from qwidgets.system_menu import SystemMenuWidget
-from theme.utils import opacity_to_str
+from qwidgets.user_menu import UserMenu
+from qwidgets.system_menu import SystemMenu
+from qwidgets.date_time import DateTime
+from qwidgets.volume import Volume
+from qwidgets.group_box import GroupBox
+from qwidgets.current_layout import CurrentLayout
+from qwidgets.weather import Weather
+from qwidgets.window_name import WindowName
+from qwidgets.network_status import NetworkStatus
+from qwidgets.memory_status import MemoryStatus
+from qwidgets.cpu_usage_status import CPUUsageStatus
+from qwidgets.cpu_temp_status import CPUTempStatus
+from qwidgets.spacer import Spacer
+from qwidgets.music import MusicStatus
 from theme.defs import ThemeDefinition
-
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
 def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
-    if BarLocation.TOP not in theme["bars"]:
+    if BarPosition.TOP not in theme["bars"]:
         return None
 
-    bar = Bar(BarLocation.TOP, theme)
+    bar = Bar(BarPosition.TOP, theme)
 
-    widgets = [
-        # region LHS
-        UserMenuWidget(theme, width=bar.height),
-        LineSeparator(theme, width=bar.height),
-        widget.GroupBox(
-            margin_y=3,
-            padding_y=4,
-            margin_x=6,
-            padding_x=6,
-            borderwidth=0,
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            foreground=bar.color_scheme["panel_fg"],
-            background=f"{bar.color_scheme['panel_bg']}{bar.opacity_str}",
-            active=bar.color_scheme["group_active_fg"],
-            inactive=bar.color_scheme["group_inactive_fg"],
-            rounded=True,
-            highlight_method="block",
-            this_current_screen_border=bar.color_scheme["group_current_bg"],
-            this_screen_border=bar.color_scheme["group_current_bg"],
-            use_mouse_wheel=False,
-            # other_current_screen_border=theme_colors["panel_bg"],
-            # other_screen_border=theme_colors["panel_bg"],
-        ),
-        LineSeparator(theme, width=bar.height),
-        widget.CurrentLayout(
-            padding=12,
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            foreground=bar.color_scheme["panel_fg"],
-            background=f"{bar.color_scheme['panel_bg']}{bar.opacity_str}",
-        ),
-        widget.Spacer(
-            background=f"{bar.color_scheme['panel_bg']}{bar.opacity_str}",
-        ),
-        widget.WindowName(
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            foreground=bar.color_scheme["panel_fg"],
-            background=f"{bar.color_scheme['panel_bg']}{bar.opacity_str}",
-        ),
-        widget.Spacer(
-            background=f"{bar.color_scheme['panel_bg']}{bar.opacity_str}",
-            **bar.powerline_right,
-        ),
-        # endregion
-        # region RHS
-        widget.OpenWeather(
-            app_key=os.environ.get("OWM_API_KEY", ""),
-            coordinates={
-                "latitude": os.environ.get("USER_LOCATION_LATITUDE", "51.5"),
-                "longitude": os.environ.get("USER_LOCATION_LONGITUDE", "-0.15"),
-            },
-            format="{main_temp}/{main_feels_like}°{units_temperature} {icon}",
-            padding=12,
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][3]}{bar.opacity_str}",
-            **bar.powerline_right,
-        ),
-        widget.PulseVolume(
-            volume_up_command=settings["volume"]["up"],
-            volume_down_command=settings["volume"]["down"],
-            mute_command=settings["volume"]["toggle"],
-            volume_app=settings["volume"]["app"],
-            menu_font=bar.text_font_family,
-            menu_fontsize=int(bar.text_font_size * 0.8),
-            menu_width=500,
-            menu_offset_x=-250,
-            padding=12,
-            # iconfont = "Material Design Icons",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][2]}{bar.opacity_str}",
-        ),
-        MDIcon(
-            name="volume",
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][2]}{bar.opacity_str}",
-            **bar.powerline_right,
-        ),
-        widget.Sep(
-            linewidth=0,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-            padding=12,
-        ),
-        widget.Clock(
-            format="%a %Y-%m-%d",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-        ),
-        # calendar symbol
-        MDIcon(
-            name="calendar",
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-            width=bar.height,
-        ),
-        widget.Sep(
-            padding=6,
-            linewidth=0,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-        ),
-        widget.Clock(
-            format="%H:%M",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-        ),
-        # clock symbol
-        MDIcon(
-            name="clock",
-            width=bar.height,
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
-        ),
-        # endregion
-        # HostNameWidget(theme),
-        SystemMenuWidget(
-            theme,
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            width=bar.height,
-        ),
+    user_menu_opts = {
+        "background": f"{theme.color_scheme['powerline_bg'][-1]}{bar.opacity_str}"
+    }
+    weather_opts = {
+        "background": f"{theme.color_scheme['powerline_bg'][0]}{bar.opacity_str}",
+        "app_key": os.environ.get("OWM_API_KEY", ""),
+        "coordinates": {
+            "latitude": os.environ.get("USER_LOCATION_LATITUDE", "51.5"),
+            "longitude": os.environ.get("USER_LOCATION_LONGITUDE", "-0.15"),
+        },
+        "format": "{main_temp}/{main_feels_like}°{units_temperature} {icon}",
+    }
+    volume_opts = {
+        "background": f"{theme.color_scheme['powerline_bg'][1]}{bar.opacity_str}",
+        "volume_up_command": settings.config["volume"]["up"],
+        "volume_down_command": settings.config["volume"]["down"],
+        "mute_command": settings.config["volume"]["toggle"],
+        "volume_app": settings.config["volume"]["app"],
+    }
+    date_time_opts = {
+        "background": f"{theme.color_scheme['powerline_bg'][2]}{bar.opacity_str}",
+    }
+    system_menu_opts = {
+        "background": f"{theme.color_scheme['powerline_bg'][-1]}{bar.opacity_str}"
+    }
+
+    start = [
+        UserMenu(bar, theme, user_menu_opts),
+        LineSeparator(bar, theme),
+        GroupBox(bar, theme),
+        LineSeparator(bar, theme),
+        CurrentLayout(bar, theme),
     ]
+
+    middle = [
+        WindowName(bar, theme),
+    ]
+
+    end = [
+        Weather(bar, theme, weather_opts),
+        Volume(bar, theme, volume_opts),
+        DateTime(bar, theme, date_time_opts),
+        SystemMenu(bar, theme, system_menu_opts),
+    ]
+
+    widgets = []
+    for idx, group in enumerate(start):
+        if idx != 0 and bar.powerline is not None and bar.powerline_start:
+            group.decorations.append(bar.powerline[0])
+        widgets.extend(group.widgets())
+
+    for idx, group in enumerate(middle):
+        widgets.extend(group.widgets())
+
+    for idx, group in enumerate(end):
+        if idx != len(end) - 1 and bar.powerline is not None and bar.powerline_end:
+            group.decorations.append(bar.powerline[1])
+        widgets.extend(group.widgets())
 
     return bar.build(widgets)
 
 
 def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
-    if BarLocation.BOTTOM not in theme["bars"]:
+    if BarPosition.BOTTOM not in theme["bars"]:
         return None
 
-    bar = Bar(BarLocation.TOP, theme)
+    bar = Bar(BarPosition.BOTTOM, theme)
+
+    network_status_opts = {
+        "interface": NET_INTERFACE,
+        "background": f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
+    }
+    memory_status_opts = {
+        "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
+        "background": f"{bar.color_scheme['powerline_bg'][5]}{bar.opacity_str}",
+    }
+    cpu_usage_opts = {
+        "background": f"{bar.color_scheme['powerline_bg'][6]}{bar.opacity_str}",
+    }
+    cpu_temp_opts = {
+        "background": f"{bar.color_scheme['powerline_bg'][7]}{bar.opacity_str}",
+    }
+    music_status_opts = {
+        "status_format": "{play_status} {title} | {artist} | {album}",
+        "idle_format": "Play queue empty",
+    }
+
+    widgets = []
+    for group in [
+        NetworkStatus(bar, GroupPosition.START, theme, network_status_opts),
+        MemoryStatus(bar, GroupPosition.START, theme, memory_status_opts),
+        CPUUsageStatus(bar, GroupPosition.START, theme, cpu_usage_opts),
+        CPUTempStatus(bar, GroupPosition.START, theme, cpu_temp_opts),
+        Spacer(bar, GroupPosition.START, theme),
+        MusicStatus(bar, GroupPosition.START, theme, music_status_opts),
+    ]:
+        widgets.extend(group.widgets())
 
     bar_widgets = [
-        # region LHS
-        # region Net
-        MDIcon(
-            name="net_up",
-            width=bar.height,
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
-        ),
-        NetMin(
-            interface=NET_INTERFACE,
-            format="{up} ",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
-        ),
-        MDIcon(
-            name="net_down",
-            width=bar.height,
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
-        ),
-        NetMin(
-            interface=NET_INTERFACE,
-            format="{down}",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
-        ),
-        widget.Sep(
-            padding=12,
-            linewidth=0,
-            background=f"{bar.color_scheme['powerline_bg'][4]}{bar.opacity_str}",
-            **bar.powerline_left,
-        ),
-        # endregion
-        # region Memory
-        MDIcon(
-            name="memory",
-            width=bar.height,
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][5]}{bar.opacity_str}",
-        ),
-        widget.Memory(
-            format="{MemUsed:6.0f}M/{MemTotal:.0f}M",
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][5]}{bar.opacity_str}",
-        ),
-        widget.Sep(
-            padding=12,
-            linewidth=0,
-            background=f"{bar.color_scheme['powerline_bg'][5]}{bar.opacity_str}",
-            **bar.powerline_left,
-        ),
-        # endregion
-        # region CPU
-        MDIcon(
-            name="cpu_usage",
-            width=bar.height,
-            font=bar.icon_font_family,
-            fontsize=bar.icon_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][6]}{bar.opacity_str}",
-        ),
-        widget.CPU(
-            format="{load_percent:4.1f}%",
-            update_interval=5,
-            font=bar.text_font_family,
-            fontsize=bar.text_font_size,
-            background=f"{bar.color_scheme['powerline_bg'][6]}{bar.opacity_str}",
-        ),
-        widget.Sep(
-            padding=12,
-            linewidth=0,
-            background=f"{bar.color_scheme['powerline_bg'][6]}{bar.opacity_str}",
-            **bar.powerline_left,
-        ),
-        # endregion
         # region Temps
         MDIcon(
             name="cpu_temp",

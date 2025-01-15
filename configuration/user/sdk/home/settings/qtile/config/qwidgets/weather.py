@@ -1,12 +1,12 @@
 from qtile_extras import widget  # type: ignore
 
 from theme.defs.theme import ThemeDefinition
+from qbar.bar import Bar
 from qbar.position import GroupPosition
 from qbar.widget_group import WidgetGroup
-from qbar.bar import Bar
 
 
-class LineSeparator(WidgetGroup):
+class Weather(WidgetGroup):
     def __init__(
         self,
         bar: Bar,
@@ -14,24 +14,23 @@ class LineSeparator(WidgetGroup):
         theme: ThemeDefinition,
         config: dict | None = None,
     ):
-        super.__init__(bar, position, theme, config)
+        super.__init__(bar.position, position, theme, config)
 
     def widgets(self) -> list[widget.base._Widget]:
-        separator_props = {
-            "size_percent": 50,
-            "linewidth": 1,
+        weather_props = {
             "padding": 12,
-            "foreground": self.color_scheme["panel_fg"],
-            "background": f"{self.color_scheme['panel_bg']}{self.opacity_str}",
+            "font": self.text_font_family,
+            "fontsize": self.text_font_size,
+            "background": f"{self.color_scheme['powerline_bg'][3]}{self.opacity_str}",
         }
 
         if self.config is not None:
             props = self._merge_parameters(
-                separator_props,
+                weather_props,
                 self.config,
             )
         else:
-            props = separator_props
-        separator = widget.Sep(**props)
+            props = weather_props
+        weather = widget.OpenWeather(**props)
 
-        return [separator]
+        return [weather]
