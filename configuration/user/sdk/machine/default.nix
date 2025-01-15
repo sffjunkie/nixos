@@ -30,9 +30,5 @@
     };
 
     services.openssh.settings.AllowUsers = [ "sdk" ];
-
-    environment.variables = {
-      "SOPS_AGE_KEY_FILE" = "$HOME/secrets/sops/age/keys.txt";
-    };
   };
 }
