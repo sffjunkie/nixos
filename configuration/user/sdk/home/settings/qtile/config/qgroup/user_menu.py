@@ -3,23 +3,23 @@ from libqtile.lazy import lazy  # type: ignore
 from qtile_extras import widget  # type: ignore
 
 from theme.defs.theme import ThemeDefinition
-from qbar.position import GroupPosition
-from qbar.widget_group import WidgetGroup
-from qbar.bar import Bar
+from qgroup.widget_group import WidgetGroup
 
 
 class UserMenu(WidgetGroup):
     def __init__(
         self,
-        bar: Bar,
-        position: GroupPosition,
-        theme: ThemeDefinition,
-        config: dict | None = None,
+        settings: dict | None = None,
+        theme: ThemeDefinition | None = None,
+        props: dict | None = None,
     ):
-        super.__init__(bar, position, theme, config)
+        super().__init__(settings, theme)
+        self.props = props
 
-    def widgets(self) -> list[widget.base._Widget]:
-        background = f"{self.color_scheme['powerline_bg'][-1]}{self.opacity_str()}"
+    def widgets(self) -> list[widget]:
+        background = (
+            f"{self.theme['named_colors']['powerline_bg'][-1]}{self.opacity_str()}"
+        )
 
         icon_props = {
             "text": self.theme["logo"],
@@ -29,11 +29,8 @@ class UserMenu(WidgetGroup):
             "background": background,
             "mouse_callbacks": {"Button1": lazy.spawn("user-menu")},
         }
-        if self.config is not None:
-            props = self._merge_parameters(
-                icon_props,
-                self.config,
-            )
+        if self.props is not None:
+            props = self._merge_parameters(icon_props, self.props)
         else:
             props = icon_props
         icon = widget.Textbox(**props)
@@ -46,11 +43,8 @@ class UserMenu(WidgetGroup):
             "background": background,
             "mouse_callbacks": {"Button1": lazy.spawn("user-menu")},
         }
-        if self.config is not None:
-            props = self._merge_parameters(
-                username_props,
-                self.config,
-            )
+        if self.props is not None:
+            props = self._merge_parameters(username_props, self.props)
         else:
             props = username_props
         username = widget.Textbox(**props)

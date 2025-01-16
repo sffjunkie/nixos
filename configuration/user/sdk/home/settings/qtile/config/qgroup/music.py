@@ -1,31 +1,34 @@
-from qbar.bar import Bar
-from qbar.position import GroupPosition
 from qtile_extras import widget  # type: ignore
-from qbar.widget_group import WidgetGroup
+from qgroup.widget_group import WidgetGroup
 from theme.defs.theme import ThemeDefinition
+from qwidget.icon import MDIcon
 
 
 class MusicStatus(WidgetGroup):
     def __init__(
         self,
-        bar: Bar,
-        position: GroupPosition,
-        props: dict | None = None,
+        settings: dict | None = None,
         theme: ThemeDefinition | None = None,
-    ) -> None:
-        super.__init__(bar, position, theme, props)
+        props: dict | None = None,
+    ):
+        super().__init__(settings, theme)
+        self.props = props
 
-    def widgets(self) -> list[widget.base._Widget]:
+    def widgets(self) -> list[widget]:
         mpd2_props = {
             "font": self.bar.text_font_family,
             "fontsize": self.bar.text_font_size,
         }
-        mpd2 = widget.Mpd2(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 mpd2_props,
                 self.props,
             )
-        )
+        else:
+            props = mpd2_props
+
+        mpd2 = widget.Mpd2(**props)
 
         music_icon_props = {
             "name": "music",
@@ -33,14 +36,15 @@ class MusicStatus(WidgetGroup):
             "fontsize": self.icon_font_size,
             "padding": 8,
         }
-        music_icon = widget.Textbox(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 music_icon_props,
                 self.props,
             )
-        )
-
-        if self.position == GroupPosition.START:
-            return [music_icon, mpd2]
         else:
-            return [mpd2, music_icon]
+            props = music_icon_props
+
+        music_icon = MDIcon(**props)
+
+        return [music_icon, mpd2]

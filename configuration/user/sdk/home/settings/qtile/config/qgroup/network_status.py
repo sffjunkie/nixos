@@ -1,35 +1,36 @@
-from socket import gethostname
-
-from libqtile.lazy import lazy  # type: ignore
-from qbar.bar import Bar
-from qbar.position import GroupPosition
 from qtile_extras import widget  # type: ignore
-from qbar.widget_group import WidgetGroup
+from qgroup.widget_group import WidgetGroup
 from theme.defs.theme import ThemeDefinition
+from qwidget.icon import MDIcon
+from qwidget.net_min import NetMin
 
 
 class NetworkStatus(WidgetGroup):
     def __init__(
         self,
-        bar: Bar,
-        position: GroupPosition,
-        props: dict | None = None,
+        settings: dict | None = None,
         theme: ThemeDefinition | None = None,
-    ) -> None:
-        super.__init__(bar, position, theme, props)
+        props: dict | None = None,
+    ):
+        super().__init__(settings, theme)
+        self.props = props
 
-    def widgets(self) -> list[widget.base._Widget]:
+    def widgets(self) -> list[widget]:
         up_props = {
             "format": "{up} ",
             "font": self.bar.text_font_family,
             "fontsize": self.bar.text_font_size,
         }
-        up = widget.Textbox(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 up_props,
                 self.props,
             )
-        )
+        else:
+            props = up_props
+
+        up = NetMin(**props)
 
         up_icon_props = {
             "name": "net_up",
@@ -37,24 +38,32 @@ class NetworkStatus(WidgetGroup):
             "fontsize": self.icon_font_size,
             "padding": 8,
         }
-        up_icon = widget.Textbox(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 up_icon_props,
                 self.props,
             )
-        )
+        else:
+            props = up_icon_props
+
+        up_icon = widget.MDIIcon(props)
 
         down_props = {
             "format": "{up} ",
             "font": self.bar.text_font_family,
             "fontsize": self.bar.text_font_size,
         }
-        down = widget.Textbox(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 down_props,
                 self.props,
             )
-        )
+        else:
+            props = down_props
+
+        down = NetMin(**props)
 
         down_icon_props = {
             "name": "net_down",
@@ -62,11 +71,15 @@ class NetworkStatus(WidgetGroup):
             "fontsize": self.icon_font_size,
             "padding": 8,
         }
-        down_icon = widget.Textbox(
-            **self._merge_parameters(
+
+        if self.props is not None:
+            props = self._merge_parameters(
                 down_icon_props,
                 self.props,
             )
-        )
+        else:
+            props = down_icon_props
+
+        down_icon = MDIcon(**props)
 
         return [up_icon, up, down_icon, down]

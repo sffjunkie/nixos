@@ -1,22 +1,20 @@
 from qtile_extras import widget  # type: ignore
 
 from theme.defs.theme import ThemeDefinition
-from qbar.bar import Bar
-from qbar.position import GroupPosition
-from qbar.widget_group import WidgetGroup
+from qgroup.widget_group import WidgetGroup
 
 
 class GroupBox(WidgetGroup):
     def __init__(
         self,
-        bar: Bar,
-        position: GroupPosition,
-        theme: ThemeDefinition,
-        config: dict | None = None,
+        settings: dict | None = None,
+        theme: ThemeDefinition | None = None,
+        props: dict | None = None,
     ):
-        super.__init__(bar, position, theme, config)
+        super().__init__(settings, theme)
+        self.props = props
 
-    def widgets(self) -> list[widget.base._Widget]:
+    def widgets(self) -> list[widget]:
         group_box_props = {
             "margin_y": 3,
             "padding_y": 4,
@@ -25,14 +23,16 @@ class GroupBox(WidgetGroup):
             "borderwidth": 0,
             "font": self.text_font_family,
             "fontsize": self.text_font_size,
-            "foreground": self.color_scheme["panel_fg"],
-            "background": f"{self.color_scheme['panel_bg']}{self.opacity_str}",
-            "active": self.color_scheme["group_active_fg"],
-            "inactive": self.color_scheme["group_inactive_fg"],
+            "foreground": self.theme["named_colors"]["panel_fg"],
+            "background": f"{self.theme['named_colors']['panel_bg']}{self.opacity_str}",
+            "active": self.theme["named_colors"]["group_active_fg"],
+            "inactive": self.theme["named_colors"]["group_inactive_fg"],
             "rounded": True,
             "highlight_method": "block",
-            "this_current_screen_border": self.color_scheme["group_current_bg"],
-            "this_screen_border": self.color_scheme["group_current_bg"],
+            "this_current_screen_border": self.theme["named_colors"][
+                "group_current_bg"
+            ],
+            "this_screen_border": self.theme["named_colors"]["group_current_bg"],
             "use_mouse_wheel": False,
             # other_current_screen_border=theme_colors["panel_bg"],
             # other_screen_border=theme_colors["panel_bg"],
@@ -41,10 +41,11 @@ class GroupBox(WidgetGroup):
         if self.config is not None:
             props = self._merge_parameters(
                 group_box_props,
-                self.config,
+                self.props,
             )
         else:
             props = group_box_props
+
         group_box = widget.GroupBox(**props)
 
         return [group_box]

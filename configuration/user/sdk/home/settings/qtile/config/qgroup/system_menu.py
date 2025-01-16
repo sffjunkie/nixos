@@ -3,23 +3,21 @@ from socket import gethostname
 from libqtile.lazy import lazy  # type: ignore
 from qtile_extras import widget  # type: ignore
 
-from qbar.bar import Bar
-from qbar.position import GroupPosition
-from qbar.widget_group import WidgetGroup
+from qgroup.widget_group import WidgetGroup
 from theme.defs.theme import ThemeDefinition
 
 
 class SystemMenu(WidgetGroup):
     def __init__(
         self,
-        bar: Bar,
-        position: GroupPosition,
-        props: dict | None = None,
+        settings: dict | None = None,
         theme: ThemeDefinition | None = None,
-    ) -> None:
-        super.__init__(bar, position, theme, props)
+        props: dict | None = None,
+    ):
+        super().__init__(settings, theme)
+        self.props = props
 
-    def widgets(self) -> list[widget.base._Widget]:
+    def widgets(self) -> list[widget]:
         hostname_props = {
             "text": gethostname(),
             "font": self.text_font_family,

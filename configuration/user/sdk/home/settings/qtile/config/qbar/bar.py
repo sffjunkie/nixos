@@ -2,8 +2,8 @@ from qtile_extras import widget  # type: ignore
 from qtile_extras.widget.decorations import PowerLineDecoration  # type: ignore
 from libqtile.bar import Bar as QtileBar  # type: ignore
 
-from qbar.position import BarPosition, GroupPosition
-from theme.defs import ThemeDefinition
+from qbar.position import BarPosition
+from theme.defs.theme import ThemeDefinition
 from theme.utils import opacity_to_str
 
 
@@ -24,7 +24,7 @@ class Bar:
     def theme(self, value):
         self._theme = value
 
-        self.color_scheme = self._theme["named_colors"]
+        self.theme["named_colors"] = self._theme["named_colors"]
         self.height = self._theme["bar"][self.position]["height"]
         self.margin = self._theme["bar"][self.position]["margin"]
 
@@ -41,10 +41,10 @@ class Bar:
                 PowerLineDecoration(path=self._theme["powerline_separator"][1]),
             ]
 
-    def build(self, widgets: list[widget.base._Widget]) -> QtileBar:
+    def build(self, widgets: list[widget]) -> QtileBar:
         return QtileBar(
             widgets,
             size=self.height,
             margin=self.margin,
-            background=f"{self.color_scheme['panel_bg']}{self.opacity_str}",
+            background=f"{self.theme['named_colors']['panel_bg']}{self.opacity_str}",
         )

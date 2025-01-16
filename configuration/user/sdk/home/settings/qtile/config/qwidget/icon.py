@@ -17,6 +17,8 @@ MDICONS = {
 
 
 class MDIcon(widget.TextBox):
+    """Material Design Icon"""
+
     def __init__(self, name, **config):
         super().__init__(
             text=MDICONS[name],
