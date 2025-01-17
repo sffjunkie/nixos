@@ -12,6 +12,7 @@
     ./obsidian
     ./picard
     ./rofi
+    ./seahorse
     ./thunderbird
     ./wofi
     ./zathura
