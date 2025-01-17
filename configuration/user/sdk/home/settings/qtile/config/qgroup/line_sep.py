@@ -1,36 +1,37 @@
 from qtile_extras import widget  # type: ignore
 
-from theme.defs.theme import ThemeDefinition
 from qgroup.widget_group import WidgetGroup
+from qgroup.context import GroupContext
 
 
 class LineSeparator(WidgetGroup):
     def __init__(
         self,
-        settings: dict | None = None,
-        theme: ThemeDefinition | None = None,
-        props: dict | None = None,
+        context: GroupContext,
     ):
-        super().__init__(settings, theme)
-        self.props = props
+        self.position = context.position
+        super().__init__(context)
 
     def widgets(self) -> list[widget]:
+        background_color = self.context.props.get(
+            "background", self.context.bar.background_color
+        )
+        background = f"{background_color}{self.context.bar.opacity_str}"
+
         separator_props = {
             "size_percent": 50,
             "linewidth": 1,
             "padding": 12,
-            "foreground": self.theme["named_colors"]["panel_fg"],
-            "background": f"{self.theme['named_colors']['panel_bg']}{self.opacity_str}",
+            "foreground": self.context.theme["named_colors"]["panel_fg"],
+            "background": background,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                separator_props,
-                self.props,
-            )
-        else:
-            props = separator_props
+        props = self.context.merge_parameters(
+            separator_props,
+            self.context.props.get("separator", {}),
+        )
 
         separator = widget.Sep(**props)
 
-        return [separator]
+        widgets = [separator]
+        return widgets

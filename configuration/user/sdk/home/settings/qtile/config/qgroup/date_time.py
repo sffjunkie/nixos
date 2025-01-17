@@ -2,107 +2,95 @@ from qtile_extras import widget  # type: ignore
 
 from qwidget.icon import MDIcon
 from qgroup.widget_group import WidgetGroup
-from theme.defs.theme import ThemeDefinition
+from qgroup.context import GroupContext
 
 
 class DateTime(WidgetGroup):
     def __init__(
         self,
-        settings: dict | None = None,
-        theme: ThemeDefinition | None = None,
-        props: dict | None = None,
+        context: GroupContext,
     ):
-        super().__init__(settings, theme)
-        self.props = props
+        self.position = context.position
+        super().__init__(context)
 
     def widgets(self, **config) -> list[widget]:
-        bar_height = config["bar_height"] or self.theme["bar"]["top"]["height"]
-        color_scheme = self.theme["named_colors"]
+        background_color = self.context.props.get(
+            "background", self.context.bar.background_color
+        )
+        background = f"{background_color}{self.context.bar.opacity_str}"
+
+        bar_height = self.context.bar.height
 
         date_text_props = {
             "format": "%a %Y-%m-%d",
-            "font": self.text_font_family(config),
-            "fontsize": self.text_font_size(config),
-            "background": f"{color_scheme['powerline_bg'][0]}{self.opacity_str}",
+            "font": self.context.text_font_family,
+            "fontsize": self.context.text_font_size,
+            "background": background,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                date_text_props,
-                self.props,
-            )
-        else:
-            props = date_text_props
+        props = self.context.merge_parameters(
+            date_text_props,
+            self.context.props.get("date", {}),
+        )
 
         date_text = widget.Textbox(**props)
 
         date_icon_props = {
             "name": "calendar",
-            "font": self.icon_font_family(config),
-            "fontsize": self.icon_font_size(config),
-            "background": f"{color_scheme['powerline_bg'][0]}{self.opacity_str}",
+            "font": self.context.icon_font_family,
+            "fontsize": self.context.icon_font_size,
+            "background": background,
             "width": bar_height,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                date_icon_props,
-                self.props,
-            )
-        else:
-            props = date_icon_props
+        props = self.context.merge_parameters(
+            date_icon_props,
+            self.context.props.get("icon", {}),
+        )
 
         date_icon = MDIcon(**props)
 
         separator_props = {
             "padding": 6,
             "linewidth": 0,
-            "background": f"{color_scheme['powerline_bg'][0]}{self.opacity_str}",
+            "background": background,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                separator_props,
-                self.props,
-            )
-        else:
-            props = separator_props
+        props = self.context.merge_parameters(
+            separator_props,
+            self.context.props.get("separator", {}),
+        )
 
         separator = widget.Sep(**props)
 
         time_text_props = {
             "format": "%a %Y-%m-%d",
-            "font": self.text_font_family(config),
-            "fontsize": self.text_font_size(config),
-            "background": f"{color_scheme['powerline_bg'][0]}{self.opacity_str}",
+            "font": self.context.text_font_family,
+            "fontsize": self.context.text_font_size,
+            "background": background,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                time_text_props,
-                self.props,
-            )
-        else:
-            props = time_text_props
+        props = self.context.merge_parameters(
+            time_text_props,
+            self.context.props.get("time", {}),
+        )
 
         time_text = widget.Textbox(**props)
 
         time_icon_props = {
             "name": "calendar",
-            "font": self.icon_font_family(config),
-            "fontsize": self.icon_font_size(config),
-            "background": f"{color_scheme['powerline_bg'][0]}{self.opacity_str}",
+            "font": self.context.icon_font_family,
+            "fontsize": self.context.icon_font_size,
+            "background": background,
             "width": bar_height,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                time_icon_props,
-                self.props,
-            )
-        else:
-            props = time_icon_props
+        props = self.context.merge_parameters(
+            time_icon_props,
+            self.context.props.get("icon", {}),
+        )
 
         time_icon = MDIcon(**props)
 
-        return [date_text, date_icon, separator, time_text, time_icon]
+        widgets = [date_text, date_icon, separator, time_text, time_icon]
+        return widgets

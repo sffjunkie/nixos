@@ -74,6 +74,24 @@ DEFAULT_WIDGET_PROPS: PropertyDefinitions = {
     "background": BASE16_DEFAULT_COLOR_SCHEME["base07"],
 }
 
+DEFAULT_BAR_PROPS = {
+    "opacity": 1.0,
+    "top": {
+        "height": DEFAULT_BAR_HEIGHT,
+        "margin": (8, 8, 0, 8),
+        "powerline_start": False,
+        "powerline_middle": False,
+        "powerline_end": False,
+    },
+    "bottom": {
+        "height": DEFAULT_BAR_HEIGHT,
+        "margin": (0, 8, 8, 8),
+        "powerline_start": False,
+        "powerline_middle": False,
+        "powerline_end": False,
+    },
+}
+
 DEFAULT_THEME: dict = {
     "base16_colors": BASE16_DEFAULT_COLOR_SCHEME,
     "named_colors": DEFAULT_NAMED_COLORS,
@@ -96,17 +114,7 @@ DEFAULT_THEME: dict = {
         },
     },
     "logo": "\uf313",
-    "bar": {
-        "opacity": 1.0,
-        "top": {
-            "height": DEFAULT_BAR_HEIGHT,
-            "margin": (8, 8, 0, 8),
-        },
-        "bottom": {
-            "height": DEFAULT_BAR_HEIGHT,
-            "margin": (0, 8, 8, 8),
-        },
-    },
+    "bar": DEFAULT_BAR_PROPS,
     "extension": DEFAULT_EXTENSION_PROPS,
     "layout": DEFAULT_LAYOUT_PROPS,
     "widget": DEFAULT_WIDGET_PROPS,

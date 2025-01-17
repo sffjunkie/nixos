@@ -1,36 +1,37 @@
 from qtile_extras import widget  # type: ignore
 
-from theme.defs.theme import ThemeDefinition
 from qgroup.widget_group import WidgetGroup
+from qgroup.context import GroupContext
 
 
 class CurrentLayout(WidgetGroup):
     def __init__(
         self,
-        settings: dict | None = None,
-        theme: ThemeDefinition | None = None,
-        props: dict | None = None,
+        context: GroupContext,
     ):
-        super().__init__(settings, theme)
-        self.props = props
+        self.position = context.position
+        super().__init__(context)
 
     def widgets(self) -> list[widget]:
+        background_color = self.context.props.get(
+            "background", self.context.bar.background_color
+        )
+        background = f"{background_color}{self.context.bar.opacity_str}"
+
         current_layout_props = {
             "padding": 12,
-            "font": self.text_font_family,
-            "fontsize": self.text_font_size,
+            "font": self.context.text_font_family,
+            "fontsize": self.context.text_font_size,
             "foreground": self.theme["named_colors"]["panel_fg"],
-            "background": f"{self.theme['named_colors']['panel_bg']}{self.opacity_str}",
+            "background": background,
         }
 
-        if self.config is not None:
-            props = self._merge_parameters(
-                current_layout_props,
-                self.props,
-            )
-        else:
-            props = current_layout_props
+        props = self.context.merge_parameters(
+            current_layout_props,
+            self.context.props.get("layout", {}),
+        )
 
         current_layout = widget.CurrentLayout(**props)
 
-        return [current_layout]
+        widgets = [current_layout]
+        return widgets

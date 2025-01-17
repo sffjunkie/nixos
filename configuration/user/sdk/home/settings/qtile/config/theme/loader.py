@@ -55,6 +55,10 @@ def load_theme(filepath: Path) -> ThemeDefinition:
     tc = _deref_colors(widget, base16_scheme, named_colors)
     widget.update(tc)
 
+    bar = DEFAULT_THEME["bar"].copy()
+    if "bar" in theme_yaml:
+        bar.update(theme_yaml["bar"])
+
     extension = DEFAULT_THEME["extension"].copy()
     if "extension" in theme_yaml:
         extension.update(theme_yaml["extension"])
@@ -78,6 +82,9 @@ def load_theme(filepath: Path) -> ThemeDefinition:
         widget=widget,
         extension=extension,
         layout=layout,
+        powerline_start=theme_yaml.get("powerline_start", False),
+        powerline_middle=theme_yaml.get("powerline_middle", False),
+        powerline_end=theme_yaml.get("powerline_end", False),
         powerline_separator=theme_yaml.get(
             "powerline_separator",
             DEFAULT_THEME["powerline_separator"],

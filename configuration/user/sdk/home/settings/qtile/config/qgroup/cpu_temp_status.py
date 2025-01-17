@@ -1,51 +1,52 @@
 from qtile_extras import widget  # type: ignore
 
 from qgroup.widget_group import WidgetGroup
-from theme.defs.theme import ThemeDefinition
+from qgroup.context import GroupContext
+from qwidget.icon import MDIcon
 
 
 class CPUTempStatus(WidgetGroup):
     def __init__(
         self,
-        settings: dict | None = None,
-        theme: ThemeDefinition | None = None,
-        props: dict | None = None,
+        context: GroupContext,
     ):
-        super().__init__(settings, theme)
-        self.props = props
+        self.position = context.position
+        super().__init__(context)
 
     def widgets(self) -> list[widget]:
+        background_color = self.context.props.get(
+            "background", self.context.bar.background_color
+        )
+        background = f"{background_color}{self.context.bar.opacity_str}"
+
         temp_props = {
             "format": "{up} ",
-            "font": self.bar.text_font_family,
-            "fontsize": self.bar.text_font_size,
+            "font": self.context.text_font_family,
+            "fontsize": self.context.text_font_size,
+            "background": background,
         }
 
-        if self.props is not None:
-            props = self._merge_parameters(
-                temp_props,
-                self.props,
-            )
-        else:
-            props = temp_props
+        props = self.context.merge_parameters(
+            temp_props,
+            self.context.props.get("temperature", {}),
+        )
 
         temp = widget.Textbox(**props)
 
         temp_icon_props = {
             "name": "cpu_temp",
-            "font": self.icon_font_family,
-            "fontsize": self.icon_font_size,
+            "font": self.context.icon_font_family,
+            "fontsize": self.context.icon_font_size,
             "padding": 8,
+            "background": background,
         }
 
-        if self.props is not None:
-            props = self._merge_parameters(
-                temp_icon_props,
-                self.props,
-            )
-        else:
-            props = temp_icon_props
+        props = self.context.merge_parameters(
+            temp_icon_props,
+            self.context.props.get("icon", {}),
+        )
 
-        temp_icon = widget.Textbox(**props)
+        temp_icon = MDIcon(**props)
 
-        return [temp_icon, temp]
+        widgets = [temp_icon, temp]
+        return widgets

@@ -15,6 +15,9 @@ class ThemeDefinition(TypedDict):
     layout: PropertyDefinitions
     logo: str
     named_colors: NamedColorDefinitions
+    powerline_start: bool
+    powerline_middle: bool
+    powerline_end: bool
     powerline_color_repeat: PropertyDefinitions
     powerline_separator: list[str]
     widget: PropertyDefinitions

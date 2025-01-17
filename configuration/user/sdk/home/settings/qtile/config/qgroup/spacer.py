@@ -1,25 +1,32 @@
 from qtile_extras import widget  # type: ignore
 from qgroup.widget_group import WidgetGroup
-from theme.defs.theme import ThemeDefinition
+from qgroup.context import GroupContext
 
 
 class Spacer(WidgetGroup):
     def __init__(
         self,
-        settings: dict | None = None,
-        theme: ThemeDefinition | None = None,
-        props: dict | None = None,
+        context: GroupContext,
     ):
-        super().__init__(settings, theme)
-        self.props = props
+        self.position = context.position
+        super().__init__(context)
 
     def widgets(self) -> list[widget]:
-        spacer_props = {}
-        spacer = widget.Spacer(
-            **self._merge_parameters(
-                spacer_props,
-                self.props,
-            )
+        background_color = self.context.props.get(
+            "background", self.context.bar.background_color
+        )
+        background = f"{background_color}{self.context.bar.opacity_str}"
+
+        spacer_props = {
+            "background": background,
+        }
+
+        props = self.context.merge_parameters(
+            spacer_props,
+            self.context.props.get("layout", {}),
         )
 
-        return [spacer]
+        spacer = widget.Spacer(**props)
+
+        widgets = [spacer]
+        return widgets
