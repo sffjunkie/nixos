@@ -35,17 +35,14 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets."sdk/location/latitude" = {
-      neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
     sops.secrets."sdk/location/longitude" = {
-      neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
     sops.secrets."sdk/api_key/owm" = {
-      neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
