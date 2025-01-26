@@ -36,23 +36,30 @@ let
     twxs.cmake
     yzhang.markdown-all-in-one
     zxh404.vscode-proto3
+
+    esbenp.prettier-vscode
+    dbaeumer.vscode-eslint
+    github.vscode-pull-request-github
   ];
 
-  marketplaceExtensionsList = with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
-    catppuccin.catppuccin-vsc
-    charliermarsh.ruff
-    dlasagno.rasi
-    executablebookproject.myst-highlight
-    github.remotehub
-    lencerf.beancount
-    ms-vscode.cpptools-extension-pack
-    ramyaraoa.show-offset
-    rust-lang.rust-analyzer
-    shipitsmarter.sops-edit
-    skellock.just
-    techer.open-in-browser
-    tomphilbin.gruvbox-themes
-  ];
+  marketplaceExtensionsList =
+    with inputs.nix-vscode-extensions.extensions.${pkgs.system}.vscode-marketplace; [
+      catppuccin.catppuccin-vsc
+      charliermarsh.ruff
+      dlasagno.rasi
+      executablebookproject.myst-highlight
+      github.remotehub
+      kennylong.kubernetes-yaml-formatter
+      lencerf.beancount
+      ms-vscode.cpptools-extension-pack
+      ramyaraoa.show-offset
+      rust-lang.rust-analyzer
+      shipitsmarter.sops-edit
+      skellock.just
+      techer.open-in-browser
+      tomphilbin.gruvbox-themes
+      runem.lit-plugin
+    ];
 in
 {
   options.looniversity.editor.vscode = {
