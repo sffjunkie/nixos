@@ -72,6 +72,7 @@ in
         nord.enable = true;
         papirus.enable = true;
         stylix.enable = true;
+        base16-schemes.enable = true;
       };
     };
 
