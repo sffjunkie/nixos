@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.theme.base16-schemes;
@@ -16,5 +17,9 @@ in
     environment.systemPackages = [
       pkgs.base16-schemes
     ];
+
+    environment.variables = {
+      "BASE16_SCHEME_DIR" = "${pkgs.base16-schemes}/share/themes";
+    };
   };
 }
