@@ -73,6 +73,10 @@ in
       pkgs.python311Packages.qtile
     ];
 
+    environment.shellAliases = {
+      qtile_reload = "qtile cmd-obj -o cmd -f reload_config";
+    };
+
     systemd.user.targets.qtile-session = {
       description = "Qtile compositor session";
       documentation = [ "man:systemd.special(7)" ];
