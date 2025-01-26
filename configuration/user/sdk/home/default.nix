@@ -131,6 +131,7 @@ in
         picard = enabled;
         qutebrowser = enabled;
         rofi = enabled;
+        seahorse = enabled;
         streamdeck = enabled;
         thunderbird = enabled;
         wofi = enabled;
