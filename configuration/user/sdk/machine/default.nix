@@ -1,7 +1,9 @@
-{ config
-, pkgs
-, ...
-}: {
+{
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./backup/local.nix
     ./backup/nas.nix
@@ -19,7 +21,13 @@
       isNormalUser = true;
       uid = 1001;
       description = "me";
-      extraGroups = [ "networkmanager" "wheel" "docker" "podman" "libvirtd" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "podman"
+        "libvirtd"
+      ];
       shell = pkgs.zsh;
       openssh = {
         authorizedKeys.keys = [

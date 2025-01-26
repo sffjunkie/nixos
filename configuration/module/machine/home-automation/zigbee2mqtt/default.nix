@@ -1,7 +1,8 @@
-{ config
-, lib
-, sops
-, ...
+{
+  config,
+  lib,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.home-automation.zigbee2mqtt;

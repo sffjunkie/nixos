@@ -1,9 +1,10 @@
-{ config
-, inputs
-, lib
-, osConfig
-, pkgs
-, ...
+{
+  config,
+  inputs,
+  lib,
+  osConfig,
+  pkgs,
+  ...
 }:
 let
   inherit (lib) disabled enabled;
@@ -59,16 +60,14 @@ in
         bat = enabled;
         beancount = enabled;
         bottom = enabled;
-        cava =
-          enabled
-          // {
-            settings = {
-              input = {
-                method = "pipewire";
-                source = "auto";
-              };
+        cava = enabled // {
+          settings = {
+            input = {
+              method = "pipewire";
+              source = "auto";
             };
           };
+        };
         dircolors = enabled;
         exiftool = enabled;
         fd = enabled;
@@ -153,11 +152,9 @@ in
       };
 
       music = {
-        mpd =
-          enabled
-          // {
-            uid = osConfig.users.users.sdk.uid;
-          };
+        mpd = enabled // {
+          uid = osConfig.users.users.sdk.uid;
+        };
         musicctl = enabled;
         ncmpcpp = enabled;
         notify = enabled;
