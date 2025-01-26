@@ -1,5 +1,5 @@
-from libqtile.lazy import lazy
-from libqtile.config import Key, ScratchPad, DropDown
+from libqtile.lazy import lazy  # type: ignore
+from libqtile.config import Key, ScratchPad, DropDown  # type: ignore
 from terminal import terminal_run_command
 from anchor import anchor_window, WindowLocation
 from keys import Super, Alt

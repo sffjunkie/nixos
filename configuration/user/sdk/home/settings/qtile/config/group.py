@@ -1,7 +1,7 @@
 import re
-from libqtile.config import Match, Rule
-from libqtile.lazy import lazy
-from libqtile.config import Key, Group
+from libqtile.config import Match, Rule  # type: ignore
+from libqtile.lazy import lazy  # type: ignore
+from libqtile.config import Key, Group  # type: ignore
 
 group_config = {
     "WWW": {"layout": "monadtall"},

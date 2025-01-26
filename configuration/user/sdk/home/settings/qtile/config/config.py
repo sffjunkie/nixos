@@ -3,11 +3,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-from libqtile import __path__ as libqtile_path
-from libqtile import hook, layout
-from libqtile.backend.wayland import InputConfig
-from libqtile.config import Screen
-from libqtile.log_utils import logger
+from libqtile import __path__ as libqtile_path  # type: ignore
+from libqtile import hook, layout  # type: ignore
+from libqtile.backend.wayland import InputConfig  # type: ignore
+from libqtile.config import Screen  # type: ignore
+from libqtile.log_utils import logger  # type: ignore
 
 import bars
 import floating
@@ -30,16 +30,14 @@ logger.warning(f"libqtile path: {libqtile_path}")
 secrets = load_secrets()
 settings = load_settings()
 
-fwd = Path(__file__).parent
-theme_path = fwd / "theme.yaml"
-theme = load_theme(theme_path.absolute())
-logger.warning(f"theme path: {theme_path}")
+theme = load_theme()
 
-top_bar, bottom_bar = bars.build_bars(settings=settings, theme=theme)
+bar_defs = bars.build_bars(settings=settings, theme=theme)
 screens = [
     Screen(
-        top=top_bar,
-        bottom=bottom_bar,
+        **bar_defs,
+        #        top=top_bar,
+        #        bottom=bottom_bar,
         wallpaper=wallpaper.get_wallpaper(),
         wallpaper_mode="fill",
     ),

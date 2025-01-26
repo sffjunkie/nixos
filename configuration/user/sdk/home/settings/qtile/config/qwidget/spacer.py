@@ -1,9 +1,10 @@
+from libqtile.widget import base  # type: ignore
 from qtile_extras import widget  # type: ignore
-from qgroup.widget_group import WidgetGroup
+from qmodule.base import WidgetModule
 from theme.defs.theme import ThemeDefinition
 
 
-class Spacer(WidgetGroup):
+class Spacer(WidgetModule):
     def __init__(
         self,
         settings: dict | None = None,
@@ -13,7 +14,7 @@ class Spacer(WidgetGroup):
         super().__init__(settings, theme)
         self.props = props
 
-    def widgets(self) -> list[widget]:
+    def widgets(self, group_id: int = -1) -> list[base._Widget]:
         spacer_props = {}
         spacer = widget.Spacer(
             **self._merge_parameters(

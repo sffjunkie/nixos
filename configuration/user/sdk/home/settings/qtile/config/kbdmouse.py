@@ -2,10 +2,10 @@
 
 from os import environ
 
-from keys import Alt, Ctrl, Hyper, Shift, Super
-from libqtile.config import Click, Drag, Key
+from libqtile.config import Click, Drag, Key  # type: ignore
+from libqtile.lazy import lazy  # type: ignore
 
-from libqtile.lazy import lazy
+from keys import Alt, Ctrl, Shift, Super
 from window import float_to_front
 
 

@@ -8,6 +8,7 @@ PropertyDefinitions = dict[str, str | int]
 
 
 class ThemeDefinition(TypedDict):
+    path: str | None
     bars: BarDefinitions
     base16_colors: Base16ColorDefinitions
     extension: PropertyDefinitions

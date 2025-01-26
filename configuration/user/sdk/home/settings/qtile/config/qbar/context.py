@@ -13,12 +13,27 @@ class BarPosition(StrEnum):
 
 
 class BarContext:
+    height: int
+    margin: tuple[int, int, int, int]
+    powerline_start: list[PowerLineDecoration]
+    powerline_end: list[PowerLineDecoration]
+
+    text_font_family: str
+    text_font_size: int
+    icon_font_family: str
+    icon_font_size: int
+    logo_font_family: str
+    logo_font_size: int
+
+    background: str
+    opacity: float
+
     def __init__(
         self,
         position: BarPosition,
         settings: dict,
         theme: ThemeDefinition,
-        props: dict | None = None,
+        props: dict = {},
     ):
         self.position = position
         self.settings = settings
@@ -42,7 +57,10 @@ class BarContext:
         self.logo_font_size = props.get("logo_font_size", theme["font"]["logo"]["size"])
 
         self.background = props.get(
-            "background", theme["bar"][self.position]["background"]
+            "background",
+            theme["bar"][self.position].get(
+                "background", theme["named_colors"]["panel_bg"]
+            ),
         )
         self.opacity = props.get(
             "opacity", theme["bar"][self.position].get("opacity", 1.0)
@@ -50,17 +68,18 @@ class BarContext:
         self.opacity_str = opacity_to_str(self.opacity)
         self.background_color = f"{self.background}{self.opacity_str}"
 
-        self.powerline_start = theme["bar"][self.position].get("powerline_start", False)
-        self.powerline_middle = theme["bar"][self.position].get(
-            "powerline_middle", False
-        )
-        self.powerline_end = theme["bar"][self.position].get("powerline_end", False)
+        powerline = theme["bar"][self.position].get("powerline", None)
+        if powerline is not None:
+            start = powerline.get("start", None)
+            if start is not None:
+                self.powerline_start = [PowerLineDecoration(path=start)]
+                self.powerline_start = []
 
-        self.powerline = None
-        if "powerline_separator" in theme:
-            self.powerline = [
-                PowerLineDecoration(path=theme["powerline_separator"][0]),
-                PowerLineDecoration(path=theme["powerline_separator"][1]),
-            ]
+            if (end := powerline.get("end", None)) is not None:
+                self.powerline_end = [PowerLineDecoration(path=end)]
+            else:
+                self.powerline_end = []
 
-        self.powerline_bg = theme["named_colors"]["powerline_bg"]
+        else:
+            self.powerline_start = []
+            self.powerline_end = []

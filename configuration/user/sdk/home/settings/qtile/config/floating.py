@@ -1,5 +1,5 @@
-from libqtile import layout
-from libqtile.config import Match, Rule
+from libqtile import layout  # type: ignore
+from libqtile.config import Match, Rule  # type: ignore
 from theme.defs.theme import ThemeDefinition
 
 wmclass_float = [

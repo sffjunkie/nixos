@@ -1,14 +1,14 @@
 from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import Sep  # type: ignore
 
-from qgroup.widget_group import WidgetGroup
-from qgroup.context import GroupContext
+from qmodule.base import WidgetModule
+from qmodule.context import ModuleContext
 
 
-class Separator(WidgetGroup):
+class LineSeparator(WidgetModule):
     def __init__(
         self,
-        context: GroupContext,
+        context: ModuleContext,
     ):
         self.context = context
 
@@ -19,7 +19,10 @@ class Separator(WidgetGroup):
         background = f"{background_color}00"
 
         separator_props = {
+            "size_percent": 50,
+            "linewidth": 1,
             "padding": 12,
+            "foreground": self.context.theme["named_colors"]["panel_fg"],
             "background": background,
         }
 

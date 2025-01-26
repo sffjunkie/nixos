@@ -1,125 +1,117 @@
 """Bars for Qtile"""
 
 import os
-from libqtile.log_utils import logger
 
-from qtile_extras import widget
-from qtile_extras.widget.decorations import PowerLineDecoration
-from libqtile.bar import Bar as QtileBar
+# from libqtile.log_utils import logger  # type: ignore
+from libqtile.bar import Bar as QBar  # type: ignore
+from qtile_extras.widget import Spacer as QSpacer  # type: ignore
 
 from qbar.context import BarContext
 
-from qgroup.context import GroupPosition, GroupContext
-from qgroup.cpu_temp_status import CPUTempStatus
-from qgroup.cpu_usage_status import CPUUsageStatus
-from qgroup.current_layout import CurrentLayout
-from qgroup.date_time import DateTime
-from qgroup.group_box import GroupBox
-from qgroup.line_sep import LineSeparator
-from qgroup.memory_status import MemoryStatus
-from qgroup.music import MusicStatus
-from qgroup.network_status import NetworkStatus
-from qgroup.spacer import Spacer
-from qgroup.system_menu import SystemMenu
-from qgroup.user_menu import UserMenu
-from qgroup.volume import Volume
-from qgroup.weather import Weather
-from qgroup.window_name import WindowName
+from qmodule.context import ModuleContext
+from qmodule.cpu_temp_status import CPUTempStatus
+from qmodule.cpu_usage_status import CPUUsageStatus
+from qmodule.current_layout import CurrentLayout
+from qmodule.date_time import DateTime
+from qmodule.group_box import GroupBox
+from qmodule.memory_status import MemoryStatus
+from qmodule.music import MusicStatus
+from qmodule.network_status import NetworkStatus
+from qmodule.separator import Separator
+from qmodule.system_menu import SystemMenu
+from qmodule.user_menu import UserMenu
+from qmodule.volume_status import VolumeStatus
+from qmodule.weather import Weather
+from qmodule.window_name import WindowName
 
+from qmodule.base import WidgetModule
 from theme.defs.theme import ThemeDefinition
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
-def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
+def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     colors = theme["named_colors"]
     bar_context = BarContext("top", settings, theme)
 
-    powerline = None
-    if "powerline_separator" in theme:
-        powerline = [
-            PowerLineDecoration(path=theme["powerline_separator"][0]),
-            PowerLineDecoration(path=theme["powerline_separator"][1]),
-        ]
-
     widgets = []
 
-    # region start
-    user_menu_context = GroupContext(
-        GroupPosition.START,
-        bar_context,
-        settings,
-        theme,
-        props={"background": colors["powerline_bg"][-1]},
+    separator = Separator(
+        ModuleContext(
+            bar_context,
+            settings,
+            theme,
+        )
     )
 
-    start = [
-        UserMenu(user_menu_context),
-        LineSeparator(
-            GroupContext(
-                GroupPosition.START,
+    # region start
+    start: list[WidgetModule] = [
+        UserMenu(
+            ModuleContext(
                 bar_context,
                 settings,
                 theme,
-                props={"background": colors["panel_bg"]},
+                props={
+                    "background": colors["powerline_bg"][-1],
+                },
             )
         ),
         GroupBox(
-            GroupContext(
-                GroupPosition.START,
+            ModuleContext(
                 bar_context,
                 settings,
                 theme,
-                props={"background": colors["panel_bg"]},
-            )
-        ),
-        LineSeparator(
-            GroupContext(
-                GroupPosition.START,
-                bar_context,
-                settings,
-                theme,
-                props={"background": colors["panel_bg"]},
+                props={
+                    "background": colors["panel_bg"],
+                },
             )
         ),
         CurrentLayout(
-            GroupContext(
-                GroupPosition.START,
+            ModuleContext(
                 bar_context,
                 settings,
                 theme,
-                props={"background": colors["panel_bg"]},
+                props={
+                    "background": colors["panel_bg"],
+                },
             )
         ),
     ]
 
     for idx, group in enumerate(start):
-        if idx != 0 and powerline is not None:
-            group.decorations.append(powerline[0])
-        widgets.extend(group.widgets())
+        if idx != 0:
+            widgets.extend(separator.widgets())
+
+        widgets.extend(group.widgets(group_id=idx))
     # endregion
 
     # region middle
-    middle = [
+    middle: list[WidgetModule] = [
         WindowName(
-            GroupContext(
-                GroupPosition.MIDDLE,
+            ModuleContext(
                 bar_context,
                 settings,
                 theme,
-                props={"background": colors["panel_bg"]},
+                props={
+                    "group": 4,
+                    "background": colors["panel_bg"],
+                },
             )
         ),
     ]
 
-    for idx, group in enumerate(middle):
-        widgets.extend(group.widgets())
+    if middle == []:
+        widgets.append(QSpacer())
+    else:
+        widgets.extend(separator.widgets())
+        for idx, group in enumerate(middle, start=idx + 1):
+            widgets.extend(group.widgets(group_id=idx))
+        widgets.extend(separator.widgets())
     # endregion
 
     # region end
-    weather_context = GroupContext(
-        GroupPosition.END,
+    weather_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -136,8 +128,7 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
         },
     )
 
-    volume_context = GroupContext(
-        GroupPosition.END,
+    volume_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -152,8 +143,7 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
         },
     )
 
-    date_time_context = GroupContext(
-        GroupPosition.END,
+    date_time_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -162,28 +152,31 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
         },
     )
 
-    system_menu_context = GroupContext(
-        GroupPosition.END,
+    system_menu_context = ModuleContext(
         bar_context,
         settings,
         theme,
-        props={"background": colors["powerline_bg"][-1]},
+        props={
+            "background": colors["powerline_bg"][-1],
+        },
     )
 
-    end = [
+    end: list[WidgetModule] = [
         Weather(weather_context),
-        Volume(volume_context),
+        VolumeStatus(volume_context),
         DateTime(date_time_context),
         SystemMenu(system_menu_context),
     ]
 
+    group_id = idx + 1
     for idx, group in enumerate(end):
-        if idx != len(end) - 1 and powerline is not None:
-            group.decorations.append(powerline[1])
-        widgets.extend(group.widgets())
+        widgets.extend(group.widgets(group_id=group_id + idx))
+        if idx != len(end) - 1:
+            widgets.extend(separator.widgets())
+
     # endregion
 
-    return QtileBar(
+    return QBar(
         widgets,
         size=bar_context.height,
         margin=bar_context.margin,
@@ -191,22 +184,22 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
     )
 
 
-def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
+def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     colors = theme["named_colors"]
     bar_context = BarContext("bottom", settings, theme)
 
     widgets = []
 
-    powerline = None
-    if "powerline_separator" in theme:
-        powerline = [
-            PowerLineDecoration(path=theme["powerline_separator"][0]),
-            PowerLineDecoration(path=theme["powerline_separator"][1]),
-        ]
+    separator = Separator(
+        ModuleContext(
+            bar_context,
+            settings,
+            theme,
+        )
+    )
 
     # region start
-    network_status_context = GroupContext(
-        GroupPosition.START,
+    network_status_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -214,11 +207,10 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
             "network": {
                 "interface": NET_INTERFACE,
             },
-            "background": f"{colors['powerline_bg'][4]}{bar_context.opacity_str}",
+            "background": f"{colors['powerline_bg'][4]}",
         },
     )
-    memory_status_context = GroupContext(
-        GroupPosition.START,
+    memory_status_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -226,29 +218,27 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             },
-            "background": f"{colors['powerline_bg'][5]}{bar_context.opacity_str}",
+            "background": f"{colors['powerline_bg'][5]}",
         },
     )
-    cpu_usage_context = GroupContext(
-        GroupPosition.START,
+    cpu_usage_context = ModuleContext(
         bar_context,
         settings,
         theme,
         props={
-            "background": f"{colors['powerline_bg'][6]}{bar_context.opacity_str}",
+            "background": f"{colors['powerline_bg'][6]}",
         },
     )
-    cpu_temp_context = GroupContext(
-        GroupPosition.START,
+    cpu_temp_context = ModuleContext(
         bar_context,
         settings,
         theme,
         props={
-            "background": f"{colors['powerline_bg'][7]}{bar_context.opacity_str}",
+            "background": f"{colors['powerline_bg'][7]}",
         },
     )
 
-    start = [
+    start: list[WidgetModule] = [
         NetworkStatus(network_status_context),
         MemoryStatus(memory_status_context),
         CPUUsageStatus(cpu_usage_context),
@@ -256,31 +246,26 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
     ]
 
     for idx, group in enumerate(start):
-        if idx != 0 and powerline is not None:
-            group.decorations.append(powerline[0])
-        widgets.extend(group.widgets())
+        if idx != 0:
+            widgets.extend(separator.widgets())
+
+        widgets.extend(group.widgets(group_id=idx))
     # endregion
 
     # region middle
-    middle = [
-        Spacer(
-            GroupContext(
-                GroupPosition.MIDDLE,
-                bar_context,
-                settings,
-                theme,
-                props={"background": colors["panel_bg"]},
-            )
-        ),
-    ]
+    middle: list[WidgetModule] = []
 
-    for idx, group in enumerate(middle):
-        widgets.extend(group.widgets())
+    if middle == []:
+        widgets.append(QSpacer(background="#FFFFFF00"))
+    else:
+        widgets.extend(separator.widgets())
+        for idx, group in enumerate(middle, start=idx + 1):
+            widgets.extend(group.widgets(group_id=idx))
+        widgets.extend(separator.widgets())
     # endregion
 
-    # region
-    music_status_context = GroupContext(
-        GroupPosition.START,
+    # region end
+    music_status_context = ModuleContext(
         bar_context,
         settings,
         theme,
@@ -288,21 +273,23 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
             "music": {
                 "status_format": "{play_status} {title} | {artist} | {album}",
                 "idle_format": "Play queue empty",
-            }
+            },
+            "background": f"{colors['powerline_bg'][-1]}",
         },
     )
 
-    end = [
+    end: list[WidgetModule] = [
         MusicStatus(music_status_context),
     ]
 
+    group_id = idx + 1
     for idx, group in enumerate(end):
-        if idx != len(end) - 1 and powerline is not None:
-            group.decorations.append(powerline[1])
-        widgets.extend(group.widgets())
+        widgets.extend(group.widgets(group_id=group_id + idx))
+        if idx != len(end) - 1:
+            widgets.extend(separator.widgets())
     # endregion
 
-    return QtileBar(
+    return QBar(
         widgets,
         size=bar_context.height,
         margin=bar_context.margin,
@@ -310,12 +297,8 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QtileBar | None:
     )
 
 
-def build_bars(settings: dict, theme: ThemeDefinition) -> list[QtileBar]:
-    bars = []
-    top = build_top_bar(settings, theme)
-    if top is not None:
-        bars.append(top)
-    bottom = build_bottom_bar(settings, theme)
-    if bottom is not None:
-        bars.append(bottom)
+def build_bars(settings: dict, theme: ThemeDefinition) -> dict[str, QBar]:
+    bars = {}
+    bars["top"] = build_top_bar(settings, theme)
+    bars["bottom"] = build_bottom_bar(settings, theme)
     return bars

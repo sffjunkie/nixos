@@ -1,4 +1,4 @@
-from .defs.theme import PropertyDefinitions
+from .defs.theme import PropertyDefinitions, ThemeDefinition
 from .defs.color import Base16ColorDefinitions, NamedColorDefinitions
 
 DEFAULT_FONT = "Hack Nerd Font Mono"
@@ -75,24 +75,27 @@ DEFAULT_WIDGET_PROPS: PropertyDefinitions = {
 }
 
 DEFAULT_BAR_PROPS = {
-    "opacity": 1.0,
     "top": {
+        "opacity": 1.0,
         "height": DEFAULT_BAR_HEIGHT,
         "margin": (8, 8, 0, 8),
-        "powerline_start": False,
-        "powerline_middle": False,
-        "powerline_end": False,
+        "powerline": {
+            "right": "back_slash",
+        },
     },
     "bottom": {
+        "opacity": 1.0,
         "height": DEFAULT_BAR_HEIGHT,
         "margin": (0, 8, 8, 8),
-        "powerline_start": False,
-        "powerline_middle": False,
-        "powerline_end": False,
+        "powerline": {
+            "left": "forward_slash",
+            "right": "back_slash",
+        },
     },
 }
 
-DEFAULT_THEME: dict = {
+DEFAULT_THEME: ThemeDefinition = {
+    "path": None,
     "base16_colors": BASE16_DEFAULT_COLOR_SCHEME,
     "named_colors": DEFAULT_NAMED_COLORS,
     "font": {
@@ -118,7 +121,10 @@ DEFAULT_THEME: dict = {
     "extension": DEFAULT_EXTENSION_PROPS,
     "layout": DEFAULT_LAYOUT_PROPS,
     "widget": DEFAULT_WIDGET_PROPS,
-    "powerline_separator": ["forward_slash", "back_slash"],
+    # "powerline_separator": {
+    #     "left": "forward_slash",
+    #     "right": "back_slash",
+    # },  # qtile_extras
     "powerline_color_repeat": {
         "function": "cycle",
         "indices": [0, 3],

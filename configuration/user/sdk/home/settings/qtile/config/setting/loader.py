@@ -1,6 +1,6 @@
 from pathlib import Path
 
-import yaml
+import yaml  # type: ignore
 
 DEFAULT_SETTINGS = {
     "mod": "mod4",

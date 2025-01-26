@@ -23,9 +23,9 @@
 from math import log
 from typing import Tuple
 
-from libqtile.log_utils import logger
-from libqtile.widget import base
-from qtile_extras import widget
+from libqtile.log_utils import logger  # type: ignore
+from libqtile.widget import base  # type: ignore
+from qtile_extras import widget  # type: ignore
 
 
 class NetMin(widget.Net):

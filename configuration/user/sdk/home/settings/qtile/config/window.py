@@ -1,4 +1,4 @@
-from libqtile.lazy import lazy
+from libqtile.lazy import lazy  # type: ignore
 
 
 @lazy.function
