@@ -26,6 +26,7 @@
     ./pulsemixer
     ./ranger
     ./ripgrep
+    ./slurm
     ./starship
     ./youtube-dl
     ./yq
