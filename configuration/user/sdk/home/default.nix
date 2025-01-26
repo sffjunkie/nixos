@@ -88,6 +88,7 @@ in
         pulsemixer = enabled;
         ranger = enabled;
         ripgrep = enabled;
+        slurm = enabled;
         starship = enabled;
         youtubeDl = enabled;
         yq = enabled;
