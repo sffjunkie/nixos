@@ -45,6 +45,10 @@
               path = "/tank1/private";
               description = "Private";
             }
+            {
+              path = "/tank1/tv_shows";
+              description = "TV Shows";
+            }
           ];
           clients = "${toString config.looniversity.network.networkAddress}/${toString config.looniversity.network.prefixLength}";
           opts = [
