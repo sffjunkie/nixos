@@ -203,6 +203,10 @@ in
         user-dirs = enabled;
       };
 
+      theme = {
+        desktop = enabled;
+      };
+
       wayland = {
         clipboard.cliphist = enabled;
         display = {
