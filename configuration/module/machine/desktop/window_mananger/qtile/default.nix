@@ -7,12 +7,6 @@
 let
   cfg = config.looniversity.desktop.window_manager.qtile;
 
-  # Env vars needed by my qtile config
-  qtile-env-vars = [
-    "TERMINAL"
-    "BROWSER"
-  ];
-
   startScript = pkgs.writeScript "startqtile" ''
     #! ${pkgs.bash}/bin/bash
 
@@ -20,43 +14,47 @@ let
     export XDG_DATA_DIRS=/run/current-system/sw/share/gsettings-schemas:$XDG_DATA_DIRS
     systemctl --user unset-environment DISPLAY WAYLAND_DISPLAY
 
-    ${pkgs.zsh}/bin/zsh --login -c "systemctl --user import-environment PATH XDG_DATA_DIRS ${toString qtile-env-vars}"
+    ${pkgs.zsh}/bin/zsh --login -c "systemctl --user import-environment PATH XDG_DATA_DIRS ${toString cfg.extraEnvVars}"
 
     # then start the service
     exec systemctl --user --wait start qtile.service
   '';
 
-  inherit (lib) mkEnableOption mkIf mkOption;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.desktop.window_manager.qtile = {
     enable = mkEnableOption "qtile";
+    extraPythonPackages = mkOption {
+      type = types.functionTo (types.listOf types.package);
+      description = ''
+        A function that returns a list of packages from a package set
+        to be added to the default packages required by qtile.
+      '';
+    };
+    extraEnvVars = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        Extra environment variables needed by the qtile config.
+      '';
+    };
+    environmentFile = mkOption {
+      type = types.nullOr types.path;
+      default = null;
+      description = ''
+        A systemd environment file to pass environment variables
+        needed by the qtile config.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
-    sops.secrets."sdk/location/latitude" = {
-      sopsFile = config.sopsFiles.user;
-    };
-
-    sops.secrets."sdk/location/longitude" = {
-      sopsFile = config.sopsFiles.user;
-    };
-
-    sops.secrets."sdk/api_key/owm" = {
-      sopsFile = config.sopsFiles.user;
-    };
-
-    sops.templates."sdk_location" = {
-      content = ''
-        USER_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
-        USER_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
-        OWM_API_KEY=${config.sops.placeholder."sdk/api_key/owm"}
-      '';
-      owner = config.users.users.sdk.name;
-    };
-
-    looniversity.desktop.greeter.tuigreet.script = "${startScript}";
-
     environment.sessionVariables = {
       MOZ_ENABLE_WAYLAND = "1";
       XDG_SESSION_TYPE = "wayland";
@@ -73,9 +71,7 @@ in
       pkgs.python311Packages.qtile
     ];
 
-    environment.shellAliases = {
-      qtile_reload = "qtile cmd-obj -o cmd -f reload_config";
-    };
+    looniversity.desktop.greeter.tuigreet.script = "${startScript}";
 
     systemd.user.targets.qtile-session = {
       description = "Qtile compositor session";
@@ -87,21 +83,14 @@ in
 
     systemd.user.services.qtile =
       let
-        pyEnv = pkgs.python3.withPackages (_p: [
-          pkgs.python3.pkgs.qtile
-          pkgs.python3.pkgs.iwlib
-
-          # Extra widgets
-          pkgs.python3.pkgs.qtile-extras
-
-          # Packages required by widgets
-          pkgs.python3.pkgs.dbus-next # Bluetooth
-          pkgs.python3.pkgs.psutil # CPU
-          pkgs.python3.pkgs.pulsectl-asyncio # PulseVolume
-
-          # Packages required by config
-          pkgs.python3.pkgs.pyyaml
-        ]);
+        pyEnv = pkgs.python3.withPackages (
+          ps:
+          [
+            ps.qtile
+            ps.iwlib
+          ]
+          ++ (cfg.extraPythonPackages ps)
+        );
       in
       {
         description = "Qtile - Wayland window manager";
@@ -122,7 +111,7 @@ in
           RestartSec = 1;
           TimeoutStopSec = 10;
 
-          EnvironmentFile = config.sops.templates."sdk_location".path;
+          EnvironmentFile = (mkIf (cfg.environmentFile != null) cfg.environmentFile);
         };
       };
   };

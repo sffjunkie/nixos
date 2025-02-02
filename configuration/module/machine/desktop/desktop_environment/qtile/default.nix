@@ -1,10 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.desktop.environment.qtile;
+
   inherit (lib) mkEnableOption mkIf;
 in
 {
@@ -13,16 +15,81 @@ in
   };
 
   config = mkIf cfg.enable {
+    sops.secrets."sdk/location/latitude" = {
+      sopsFile = config.sopsFiles.user;
+    };
+
+    sops.secrets."sdk/location/longitude" = {
+      sopsFile = config.sopsFiles.user;
+    };
+
+    sops.secrets."sdk/api_key/owm" = {
+      sopsFile = config.sopsFiles.user;
+    };
+
+    sops.templates."sdk_location" = {
+      content = ''
+        USER_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
+        USER_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
+        OWM_API_KEY=${config.sops.placeholder."sdk/api_key/owm"}
+      '';
+      owner = config.users.users.sdk.name;
+    };
+
+    environment.shellAliases = {
+      qtile_reload = "qtile cmd-obj -o cmd -f reload_config";
+    };
+
+    environment.systemPackages = [
+      pkgs.gsettings-desktop-schemas
+    ];
+
     looniversity = {
       desktop = {
-        display_manager.greetd.enable = true;
-        greeter.tuigreet.enable = true;
-        window_manager.qtile.enable = true;
+        display_manager.greetd = {
+          enable = true;
+        };
+        greeter.tuigreet = {
+          enable = true;
+        };
+        window_manager.qtile = {
+          enable = true;
+          extraEnvVars = [
+            "TERMINAL"
+            "BROWSER"
+          ];
+          extraPythonPackages = (
+            ps: [
+              # Extra widgets
+              ps.qtile-extras
+
+              # Packages required by widgets
+              ps.dbus-next # Bluetooth
+              ps.psutil # CPU
+              ps.pulsectl-asyncio # PulseVolume
+
+              # Packages required by config
+              ps.pyyaml
+            ]
+          );
+          environmentFile = config.sops.templates."sdk_location".path;
+        };
+      };
+
+      script = {
+        system-menu.enable = true;
+        rofi-clip.enable = true;
+        rofi-launcher.enable = true;
       };
 
       wayland = {
         lockscreen.swaylock.enable = true;
       };
+    };
+
+    programs = {
+      dconf.enable = true;
+      xwayland.enable = true;
     };
 
     security.polkit.enable = true;
@@ -32,14 +99,5 @@ in
       configPackages = [ pkgs.xdg-desktop-portal-wlr ];
     };
     xdg.portal.wlr.enable = true;
-
-    environment.systemPackages = [
-      pkgs.gsettings-desktop-schemas
-    ];
-
-    programs = {
-      dconf.enable = true;
-      xwayland.enable = true;
-    };
   };
 }
