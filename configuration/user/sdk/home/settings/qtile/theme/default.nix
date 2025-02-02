@@ -1,19 +1,12 @@
 {
   config,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
-let
-  cfg = config.looniversity.settings.theme.desktop;
-  inherit (lib) mkEnableOption mkIf;
-in
 {
-  options.looniversity.settings.theme.desktop = {
-    enable = mkEnableOption "desktop theme";
-  };
-
-  config = mkIf cfg.enable {
+  config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {
     xdg.configFile."desktop/theme.yaml".text = ''
       ---
       logo: "" # Nixos logo
