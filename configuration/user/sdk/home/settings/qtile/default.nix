@@ -9,6 +9,10 @@ let
   inherit (lib) mkEnableOption mkIf mkOption types;
 in
 {
+  imports = [
+    ./theme
+  ];
+
   options.looniversity.settings.qtile = {
     enable = mkEnableOption "qtile settings";
   };

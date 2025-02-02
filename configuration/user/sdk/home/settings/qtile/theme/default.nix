@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  osConfig,
   ...
 }:
 let
@@ -27,10 +26,10 @@ in
           family: "Material Design Icons"
           size: 22
         weather:
-          family: "Weather Icons"
+          family: "Hack Nerd Font"
           size: 22
         logo:
-          family: "font-logos"
+          family: "Hack Nerd Font"
           size: 22
 
       bar:
@@ -68,8 +67,8 @@ in
       #   base0D: "8aadf4" # blue
       #   base0E: "c6a0f6" # mauve
       #   base0F: "f0c6c6" # flamingo
-      # base16_scheme_name: catppuccin-macchiato
-      # base16_scheme_dir: ${pkgs.base16-schemes}/share/themes
+      base16_scheme_name: nord
+      base16_scheme_dir: ${pkgs.base16-schemes}/share/themes
 
       layout:
         margin: 9
