@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./desktop
-    ./nord
-    ./papirus
-  ];
-}

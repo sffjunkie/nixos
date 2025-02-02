@@ -3,6 +3,5 @@
     ./gnome
     ./qt
     ./qtile
-    ./theme
   ];
 }
