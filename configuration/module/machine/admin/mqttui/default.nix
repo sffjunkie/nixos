@@ -23,7 +23,7 @@ in
     ];
 
     environment.shellAliases = {
-      mqttui = "mqttui --broker \"mqtt://${mqttHost}";
+      mqttui = "mqttui --broker \"mqtt://${mqttHost}\"";
     };
   };
 }
