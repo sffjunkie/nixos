@@ -1,8 +1,9 @@
-{ config
-, inputs
-, lib
-, pkgs
-, ...
+{
+  config,
+  inputs,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.theme.stylix;
@@ -22,12 +23,12 @@ in
 
   config = mkIf cfg.enable {
     stylix = {
-      cursor = {
-        package = pkgs.nordzy-cursor-theme;
-        name = "Nordzy-cursors";
-      };
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
 
-      image = ./nix-wallpaper-stripes-logo.png;
+      cursor = {
+        name = "Nordzy-cursors";
+        package = pkgs.nordzy-cursor-theme;
+      };
 
       fonts = {
         monospace = {
@@ -40,6 +41,7 @@ in
           terminal = 13;
         };
       };
+
       polarity = "dark";
     };
   };

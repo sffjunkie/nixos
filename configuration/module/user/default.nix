@@ -16,6 +16,7 @@
     ./storage
     ./system
     ./terminal
+    ./theme
     ./wayland
   ];
 }
