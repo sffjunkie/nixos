@@ -24,11 +24,5 @@ in
         recursive = true;
       };
     };
-
-    looniversity.script = {
-      system-menu.enable = true;
-      rofi-clip.enable = true;
-      rofi-launcher.enable = true;
-    };
   };
 }
