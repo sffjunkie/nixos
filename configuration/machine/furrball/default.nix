@@ -4,6 +4,8 @@
   ...
 }:
 let
+  useStylix = false;
+
   inherit (lib) enabled;
 in
 {
@@ -70,10 +72,9 @@ in
       };
 
       theme = {
-        nord.enable = true;
-        papirus.enable = true;
-        stylix.enable = true;
-        base16-schemes.enable = true;
+        nord.enable = !useStylix;
+        papirus.enable = !useStylix;
+        stylix.enable = useStylix;
       };
     };
 

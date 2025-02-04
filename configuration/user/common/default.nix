@@ -2,6 +2,8 @@
   imports = [
     ../../module/user
     ../../role/user
-    ../../site
+    ../../option/site
+    ../../option/user
+    ../../../settintgs/ui
   ];
 }
