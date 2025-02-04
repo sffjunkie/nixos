@@ -6,6 +6,7 @@
     ./desktop
     ./development
     ./editor
+    ./game
     ./gfx
     ./gui
     ./media
