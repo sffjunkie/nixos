@@ -17,6 +17,7 @@ in
     looniversity = {
       admin = {
         mqtt.enable = true;
+        mqttx.enable = true;
         mongodb.enable = true;
       };
 
