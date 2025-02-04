@@ -39,7 +39,7 @@ in
 
     stylix = {
       image = ./desktop/paint_explosion.jpg;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-frappe.yaml";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
       targets.vscode.enable = false;
     };
 
