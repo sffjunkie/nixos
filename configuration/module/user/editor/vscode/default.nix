@@ -128,7 +128,7 @@ in
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = mkDefault 2;
 
-        "workbench.colorTheme" = "Catppuccin Macchiato";
+        "workbench.colorTheme" = "Nord";
         "workbench.panel.defaultLocation" = "right";
         "workbench.startupEditor" = "readme";
 
