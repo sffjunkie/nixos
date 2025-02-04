@@ -38,7 +38,6 @@ in
     };
 
     stylix = {
-      image = ./desktop/paint_explosion.jpg;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
       targets.vscode.enable = false;
     };
@@ -171,7 +170,6 @@ in
       settings = {
         gnome = enabled;
         qt = enabled;
-        qtile = enabled;
       };
 
       service = {
@@ -201,10 +199,6 @@ in
         polkit-agent = enabled;
         pywal = enabled;
         user-dirs = enabled;
-      };
-
-      theme = {
-        desktop = enabled;
       };
 
       wayland = {
