@@ -1,5 +1,6 @@
 {
   imports = [
+    ./qtile
     ./stylix
   ];
 }
