@@ -11,7 +11,7 @@ let
 
   vscodeExtensions = with pkgs.vscode-extensions; [
     arcticicestudio.nord-visual-studio-code
-    bbenoist.nix
+    jnoortheen.nix-ide
     bierner.markdown-mermaid
     brettm12345.nixfmt-vscode
     davidanson.vscode-markdownlint
