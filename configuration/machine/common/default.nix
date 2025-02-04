@@ -10,9 +10,8 @@
 
     ../../module/machine
     ../../role/machine
-    ../../option/site
-    ../../option/user
-    ../../../settintgs/site
+    ../../option
+    ../../../setting
   ];
 
   config = {
