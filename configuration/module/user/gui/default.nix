@@ -2,6 +2,7 @@
   imports = [
     ./discord
     ./fava
+    ./fuzzel
     ./gittyup
     ./gnome-apps
     ./gns3
