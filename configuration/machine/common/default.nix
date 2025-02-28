@@ -19,6 +19,8 @@
       defaultSopsFormat = "yaml";
     };
 
+    services.dbus.implementation = "broker";
+
     environment.shellAliases = {
       df = "df -h";
       dfs = "df -ha | (read -r; printf \"%s\\n\" \"\$REPLY\"; sort)";
