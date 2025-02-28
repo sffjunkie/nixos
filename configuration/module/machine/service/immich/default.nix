@@ -14,9 +14,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.immich
-      pkgs.immich-go
-    ];
+    services.immich = {
+      enable = true;
+      port = 2283;
+    };
+    # home.packages = [
+    #   pkgs.immich-go
+    # ];
   };
 }
