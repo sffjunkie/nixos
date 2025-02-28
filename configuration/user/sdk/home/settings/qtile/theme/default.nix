@@ -50,7 +50,7 @@
           opacity = 0.8;
         };
       };
-      base16_scheme_name = "nord";
+      base16_scheme_name = "catppuccin-macchiato";
       base16_scheme_dir = "${pkgs.base16-schemes}/share/themes";
     };
   };
