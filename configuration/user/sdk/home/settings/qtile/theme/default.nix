@@ -28,6 +28,7 @@
           size = 22;
         };
       };
+
       bars = {
         top = {
           height = 40;
@@ -50,8 +51,10 @@
           opacity = 0.8;
         };
       };
+
       base16_scheme_name = "catppuccin-macchiato";
       base16_scheme_dir = "${pkgs.base16-schemes}/share/themes";
+
       foreground_dark = "base00";
       foreground_light = "base04";
     };
