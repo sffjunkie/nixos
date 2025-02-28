@@ -28,7 +28,7 @@ in
       sopsFile = config.sopsFiles.service;
     };
 
-    services.gitea = {
+    services.forgejo = {
       enable = true;
       appName = "Looniversity forgejo server";
 
@@ -39,7 +39,7 @@ in
         passwordFile = config.sops.secrets."forgejo/db_password".path;
       };
 
-      setings = {
+      settings = {
         server = {
           DOMAIN = git_hostname;
           HTTP_PORT = http_port;
@@ -49,6 +49,6 @@ in
       };
     };
 
-    config.looniversity.service.postgresql.databases = "forgejo";
+    looniversity.service.postgresql.databases = "forgejo";
   };
 }

@@ -4,6 +4,7 @@
     ./autoupgrade
     ./elasticsearch
     ./fail2ban
+    ./forgejo
     ./graylog
     ./homepage-dashboard
     ./immich
