@@ -18,7 +18,6 @@ in
       pkgs.nerd-fonts.jetbrains-mono
       pkgs.nerd-fonts.noto
       pkgs.material-design-icons
-      pkgs.noto-fonts
       pkgs.roboto
     ];
   };
