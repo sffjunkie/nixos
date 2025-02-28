@@ -14,17 +14,12 @@ in
 
   config = mkIf cfg.enable {
     fonts.packages = [
-      pkgs.font-awesome
+      pkgs.nerd-fonts.hack
+      pkgs.nerd-fonts.jetbrains-mono
+      pkgs.nerd-fonts.noto
       pkgs.material-design-icons
       pkgs.noto-fonts
       pkgs.roboto
-      pkgs.weather-icons
-      (pkgs.nerdfonts.override {
-        fonts = [
-          "Hack"
-          "DroidSansMono"
-        ];
-      })
     ];
   };
 }
