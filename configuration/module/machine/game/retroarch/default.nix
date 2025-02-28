@@ -14,13 +14,12 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      (pkgs.retroarch.override {
-        cores = with pkgs.libretro; [
+      (pkgs.retroarch.withCores (
+        cores: with cores; [
           fuse
           mame2003-plus
-          # mupen64plus
-        ];
-      })
+        ]
+      ))
     ];
   };
 }
