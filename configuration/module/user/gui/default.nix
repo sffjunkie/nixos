@@ -7,6 +7,7 @@
     ./gnome-apps
     ./gns3
     ./gramps
+    ./immich
     ./keepassxc
     ./libreoffice
     ./mpv
