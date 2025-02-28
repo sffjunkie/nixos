@@ -25,6 +25,7 @@ in
     stylix = {
       enable = true;
       image = ./dark_swirl.png;
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
 
       cursor = {
         name = "Nordzy-cursors";
