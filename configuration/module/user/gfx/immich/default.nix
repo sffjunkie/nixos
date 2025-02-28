@@ -16,7 +16,6 @@ in
   config = mkIf cfg.enable {
     home.packages = [
       pkgs.immich
-      pkgs.immich-cli
       pkgs.immich-go
     ];
   };
