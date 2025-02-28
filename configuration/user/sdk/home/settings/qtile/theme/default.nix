@@ -34,7 +34,7 @@
           margin = [
             8
             8
-            0
+            4
             8
           ];
           opacity = 0.8;
@@ -42,7 +42,7 @@
         bottom = {
           height = 40;
           margin = [
-            0
+            4
             8
             8
             8
