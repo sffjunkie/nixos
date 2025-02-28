@@ -23,7 +23,8 @@ in
 
   config = mkIf cfg.enable {
     stylix = {
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/nord.yaml";
+      enable = true;
+      image = ./dark_swirl.png;
 
       cursor = {
         name = "Nordzy-cursors";
