@@ -104,6 +104,7 @@ in
         "files.insertFinalNewline" = true;
         "files.exclude" = {
           "**/.tox" = true;
+          ".devenv" = true;
           ".direnv" = true;
         };
 
@@ -116,6 +117,7 @@ in
         "python.analysis.diagnosticMode" = "workspace";
         "python.analysis.exclude" = [
           "**/result"
+          "**/.devenv"
           "**/.direnv"
         ];
 
