@@ -34,8 +34,8 @@ in
 
       fonts = {
         monospace = {
-          name = "Hack Nerd Font Mono";
-          package = nerdfonts;
+          name = "JetBrainsMono Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
         };
 
         sizes = {
