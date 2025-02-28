@@ -112,6 +112,10 @@ in
         treefmt = enabled;
       };
 
+      game = {
+        openmw = enabled;
+      };
+
       gui = {
         fava = enabled;
         firefox = enabled;
