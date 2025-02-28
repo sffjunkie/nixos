@@ -96,7 +96,8 @@ in
       };
 
       desktop = {
-        dunst = enabled;
+        dunst = disabled;
+        mako = enabled;
         wallpaper = enabled;
       };
 
