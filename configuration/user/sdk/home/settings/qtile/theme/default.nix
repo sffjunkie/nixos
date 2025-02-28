@@ -12,7 +12,7 @@
 
       font = {
         text = {
-          family = "Hack Nerd Font";
+          family = "JetBrainsMono Nerd Font";
           size = 16;
         };
         icon = {
