@@ -96,7 +96,10 @@ in
 
     xdg.portal = {
       enable = true;
-      configPackages = [ pkgs.xdg-desktop-portal-wlr ];
+      configPackages = [
+        pkgs.xdg-desktop-portal-wlr
+        pkgs.xdg-desktop-portal-gtk
+      ];
       wlr.enable = true;
     };
   };
