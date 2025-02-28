@@ -17,7 +17,7 @@ in
     programs.obs-studio = {
       enable = true;
       plugins = [
-        obs-plugins.droidcam-obs
+        # obs-plugins.droidcam-obs # BUG: build failure
         obs-plugins.wlrobs
       ];
     };
