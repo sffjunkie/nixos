@@ -16,7 +16,7 @@ in
     programs.fzf = {
       enable = true;
       enableZshIntegration = true;
-      colors = {
+      colors = mkIf (!config.stylix.targets.fzf.enable) {
         fg = "#D8DEE9";
         bg = "#2E3440";
         hl = "#A3BE8C";
