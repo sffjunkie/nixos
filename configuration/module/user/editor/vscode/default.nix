@@ -79,8 +79,10 @@ in
 
         "diffEditor.ignoreTrimWhitespace" = false;
 
-        "editor.fontFamily" = "'Hack Nerd Font', 'DejaVu Sans Mono', monospace";
-        "editor.fontSize" = 12;
+        "editor.fontFamily" = mkIf (
+          !config.stylix.targets.vscode.enable
+        ) "'JetBrainsMono Nerd Font', 'DejaVu Sans Mono', monospace";
+        "editor.fontSize" = mkIf (!config.stylix.targets.vscode.enable) 12;
         "editor.tokenColorCustomizations" = {
           "[Nord]" = {
             "comments" = "#94b9a6";
@@ -111,8 +113,10 @@ in
         "git.confirmSync" = false;
         "git.openRepositoryInParentFolders" = "never";
 
-        "markdown.preview.fontSize" = 12;
-        "markdown.preview.fontFamily" = "'Hack Nerd Font', 'DejaVu Sans Mono', monospace";
+        "markdown.preview.fontSize" = mkIf (!config.stylix.targets.vscode.enable) 12;
+        "markdown.preview.fontFamily" = mkIf (
+          !config.stylix.targets.vscode.enable
+        ) "'JetBrainsMono Nerd Font', 'DejaVu Sans Mono', monospace";
 
         "python.analysis.diagnosticMode" = "workspace";
         "python.analysis.exclude" = [
@@ -122,7 +126,7 @@ in
         ];
 
         "terminal.integrated.scrollback" = 5000;
-        "terminal.integrated.fontSize" = 12;
+        "terminal.integrated.fontSize" = mkIf (!config.stylix.targets.vscode.enable) 12;
         "terminal.integrated.defaultProfile.linux" = "bash";
 
         "update.mode" = "manual";
@@ -130,7 +134,7 @@ in
         "window.titleBarStyle" = "custom";
         "window.zoomLevel" = mkDefault 2;
 
-        "workbench.colorTheme" = "Nord";
+        "workbench.colorTheme" = mkIf (!config.stylix.targets.vscode.enable) "Catppuccin Macchiato";
         "workbench.panel.defaultLocation" = "right";
         "workbench.startupEditor" = "readme";
 
