@@ -144,6 +144,9 @@ in
         "[python]" = {
           "editor.defaultFormatter" = "charliermarsh.ruff";
         };
+        "[jsonc]" = {
+          "editor.defaultFormatter" = "vscode.json-language-features";
+        };
 
         "evenBetterToml.formatter.arrayTrailingComma" = true;
         "evenBetterToml.formatter.arrayAutoExpand" = true;
