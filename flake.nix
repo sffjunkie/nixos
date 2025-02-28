@@ -40,17 +40,18 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , nixos-hardware
-    , nix-index
-    , nix-index-database
-    , nixvim
-    , sops-nix
-    , stylix
-    , ...
-    } @ inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      nixos-hardware,
+      nix-index,
+      nix-index-database,
+      nixvim,
+      sops-nix,
+      stylix,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib.extend (import ./lib { inherit lib inputs; });
 
@@ -182,8 +183,7 @@
               ./configuration/user/sdk/machine
               ./configuration/user/sysadmin/machine
               {
-                config.home-manager.users.sdk =
-                  import ./configuration/user/sdk/home;
+                config.home-manager.users.sdk = import ./configuration/user/sdk/home;
                 # TODO: Fix sdk_buster
                 # // (import ./configuration/user/sdk_buster/home);
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
@@ -201,16 +201,14 @@
           specialArgs = {
             inherit lib;
           };
-          modules =
-            [
-              "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
-              ./installer/looniversity-minimal.nix
-              {
-                config.home-manager.users.nixos = import ./configuration/user/nixos/home;
-              }
-              sops-nix.nixosModules.sops
-            ]
-            ++ hmCommonModules;
+          modules = [
+            "${nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
+            ./installer/looniversity-minimal.nix
+            {
+              config.home-manager.users.nixos = import ./configuration/user/nixos/home;
+            }
+            sops-nix.nixosModules.sops
+          ] ++ hmCommonModules;
         };
       };
 
@@ -232,7 +230,8 @@
       # Generic development shells
       # The default 'nix' shell includes scripts to build nixos systems
       # using nix-ouptut-monitor
-      devShells = forAllSystems (system:
+      devShells = forAllSystems (
+        system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
         in
@@ -242,7 +241,8 @@
           python = import ./devshell/python { inherit pkgs; };
           rust = import ./devshell/rust { inherit pkgs; };
           net = import ./devshell/net { inherit pkgs; };
-        });
+        }
+      );
 
       # The nix devShell above adds a nix-test function which runs the tests
       # under the `tests` attribute
