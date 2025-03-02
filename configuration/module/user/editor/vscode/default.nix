@@ -18,6 +18,7 @@ let
     editorconfig.editorconfig
     donjayamanne.githistory
     dotjoshjohnson.xml
+    fill-labs.dependi
     github.vscode-github-actions
     golang.go
     gruntfuggly.todo-tree
@@ -28,7 +29,6 @@ let
     ms-vscode-remote.remote-containers
     oderwat.indent-rainbow
     pkief.material-icon-theme
-    serayuzgur.crates
     shd101wyy.markdown-preview-enhanced
     stkb.rewrap
     tamasfe.even-better-toml
