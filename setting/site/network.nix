@@ -381,6 +381,11 @@
         port = 9000;
       };
 
+      postgresql = {
+        host = "thebrain";
+        port = 5432;
+      };
+
       prometheus = {
         # host = "thebrain";
         host = "127.0.0.1";
