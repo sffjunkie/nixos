@@ -17,6 +17,12 @@ in
     services.mako = {
       enable = true;
       anchor = "top-right";
+      extraConfig = ''
+        width=384
+        max-icon-size=128
+        outer-margin=45,5
+      '';
+    };
 
     systemd.user.services.mako = {
       Install.WantedBy = [ "graphical-session.target" ];
