@@ -48,8 +48,7 @@ in
       type = types.nullOr types.path;
       default = null;
       description = ''
-        A systemd environment file to pass environment variables
-        needed by the qtile config.
+        A systemd environment file to pass secrets needed by the qtile config.
       '';
     };
   };
