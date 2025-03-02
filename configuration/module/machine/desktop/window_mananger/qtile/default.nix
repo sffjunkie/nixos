@@ -67,10 +67,6 @@ in
       _JAVA_AWT_WM_NONREPARENTING = "1";
     };
 
-    environment.systemPackages = [
-      pkgs.python311Packages.qtile
-    ];
-
     looniversity.desktop.greeter.tuigreet.script = "${startScript}";
 
     systemd.user.targets.qtile-session = {
