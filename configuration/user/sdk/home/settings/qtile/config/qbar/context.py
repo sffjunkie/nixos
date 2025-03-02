@@ -1,6 +1,6 @@
 from qtile_extras.widget.decorations import PowerLineDecoration  # type: ignore
 
-from theme.defs.theme import ThemeDefinition
+from theme.typedefs.theme import ThemeDefinition
 from theme.utils import opacity_to_str
 from enum import StrEnum
 
@@ -40,8 +40,8 @@ class BarContext:
         self.theme = theme
         self.props = props
 
-        self.height = props.get("height", theme["bar"][self.position]["height"])
-        self.margin = props.get("margin", theme["bar"][self.position]["margin"])
+        self.height = props.get("height", theme["bars"][self.position]["height"])
+        self.margin = props.get("margin", theme["bars"][self.position]["margin"])
 
         self.text_font_family = props.get(
             "text_font_family", theme["font"]["text"]["family"]
@@ -58,17 +58,17 @@ class BarContext:
 
         self.background = props.get(
             "background",
-            theme["bar"][self.position].get(
+            theme["bars"][self.position].get(
                 "background", theme["named_colors"]["panel_bg"]
             ),
         )
         self.opacity = props.get(
-            "opacity", theme["bar"][self.position].get("opacity", 1.0)
+            "opacity", theme["bars"][self.position].get("opacity", 1.0)
         )
         self.opacity_str = opacity_to_str(self.opacity)
         self.background_color = f"{self.background}{self.opacity_str}"
 
-        powerline = theme["bar"][self.position].get("powerline", None)
+        powerline = theme["bars"][self.position].get("powerline", None)
         if powerline is not None:
             start = powerline.get("start", None)
             if start is not None:

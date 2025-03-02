@@ -4,12 +4,9 @@ from pathlib import Path
 import yaml  # type: ignore
 from libqtile.log_utils import logger  # type: ignore
 
-from theme.defs.color import Base16ColorDefinitions, NamedColorDefinitions
-from theme.defs.theme import ThemeDefinition
-from theme.default import (
-    BASE16_DEFAULT_COLOR_SCHEME,
-    DEFAULT_THEME,
-)
+from theme.typedefs.color import Base16ColorDefinitions, NamedColorDefinitions
+from theme.typedefs.theme import ThemeDefinition
+from theme.default import BASE16_DEFAULT_COLOR_SCHEME
 from .utils import is_base16, is_color
 
 
@@ -38,10 +35,12 @@ def base16_to_named_colors(base16: Base16ColorDefinitions) -> NamedColorDefiniti
     }
 
 
-def _theme_path(filepath: Path | None = None) -> str:
-    if filepath is None or not filepath.is_absolute():
+def _theme_path(filepath: Path | None = None) -> Path | None:
+    if filepath is not None and filepath.is_absolute():
+        theme_path = filepath
+    else:
         if filepath is None:
-            filepath = "theme.yaml"
+            filepath = Path("theme.yaml")
 
         xdg_config = Path(
             os.environ.get(
@@ -50,58 +49,67 @@ def _theme_path(filepath: Path | None = None) -> str:
             )
         )
         theme_path = xdg_config / "desktop" / filepath
-    else:
-        theme_path = filepath
+
+    if not theme_path.exists():
+        logger.warning(f"No theme found in {theme_path}")
+        theme_path = None
 
     return theme_path
 
 
 def _theme_yaml(filepath: Path | None = None) -> dict | None:
-    theme_path = _theme_path(filepath)
-    logger.warning(theme_path)
-
     theme = None
-    if _theme_path(filepath).exists():
-        with open(theme_path, "r") as fp:
-            theme = yaml.load(fp, yaml.SafeLoader)
+    if filepath is not None:
+        try:
+            with open(filepath, "r") as fp:
+                theme = yaml.load(fp, yaml.SafeLoader)
+        except (IOError, yaml.YAMLError):
+            theme = None
 
     return theme
 
 
 def load_theme(filepath: Path | None = None) -> ThemeDefinition:
-    theme_yaml = _theme_yaml(filepath)
-    if theme_yaml is None:
-        return DEFAULT_THEME
+    theme_path = _theme_path(filepath)
+    logger.info(f"Loading theme from {theme_path}")
+    theme_yaml = _theme_yaml(theme_path) or {}
 
-    base16_scheme: Base16ColorDefinitions = theme_yaml.get("base16_scheme_colors", None)
+    default_theme_path = _theme_path(Path("default_theme.yaml"))
+    default_theme_yaml = _theme_yaml(default_theme_path) or {}
+
+    base16_scheme: Base16ColorDefinitions = theme_yaml.get(
+        "base16_scheme_colors",
+        None,
+    )
     if base16_scheme is None and "base16_scheme_name" in theme_yaml:
         scheme_name = theme_yaml["base16_scheme_name"]
-        base16_scheme = _load_color_scheme(scheme_name)
+        scheme_dir = theme_yaml["base16_scheme_dir"]
+        base16_scheme = _load_color_scheme(scheme_name, scheme_dir)
 
     if base16_scheme is None:
         base16_scheme = BASE16_DEFAULT_COLOR_SCHEME
 
     named_colors = base16_to_named_colors(base16_scheme)
 
-    widget = DEFAULT_THEME["widget"].copy()
+    widget = default_theme_yaml["widget"].copy()
     if "widget" in theme_yaml:
         widget.update(theme_yaml["widget"])
 
     tc = _deref_colors(widget, base16_scheme, named_colors)
     widget.update(tc)
 
-    bar = DEFAULT_THEME["bar"].copy()
-    if "bar" in theme_yaml:
-        bar.update(theme_yaml["bar"])
+    bars = default_theme_yaml["bars"].copy()
+    if "bars" in theme_yaml:
+        bars.update(theme_yaml["bars"])
 
-    extension = DEFAULT_THEME["extension"].copy()
+    extension = default_theme_yaml["extension"].copy()
     if "extension" in theme_yaml:
         extension.update(theme_yaml["extension"])
 
     tc = _deref_colors(extension, base16_scheme, named_colors)
     extension.update(tc)
 
-    layout = DEFAULT_THEME["layout"].copy()
+    layout = default_theme_yaml["layout"].copy()
     if "layout" in theme_yaml:
         layout.update(theme_yaml["layout"])
 
@@ -109,22 +117,15 @@ def load_theme(filepath: Path | None = None) -> ThemeDefinition:
     layout.update(tc)
 
     theme_def = ThemeDefinition(
+        path=filepath,
+        bars=bars,
         base16_colors=base16_scheme,
-        named_colors=named_colors,
-        font=theme_yaml.get("font", DEFAULT_THEME["font"]),
-        logo=theme_yaml.get("logo", DEFAULT_THEME["logo"]),
-        bar=theme_yaml.get("bar", DEFAULT_THEME["bar"]),
-        widget=widget,
         extension=extension,
+        font=theme_yaml.get("font", default_theme_yaml["font"]),
         layout=layout,
-        # powerline_separator=theme_yaml.get(
-        #     "powerline_separator",
-        #     DEFAULT_THEME["powerline_separator"],
-        # ),
-        powerline_color_repeat=theme_yaml.get(
-            "powerline_color_repeat",
-            DEFAULT_THEME["powerline_color_repeat"],
-        ),
+        logo=theme_yaml.get("logo", default_theme_yaml["logo"]),
+        named_colors=named_colors,
+        widget=widget,
     )
 
     return theme_def
@@ -150,7 +151,8 @@ def _load_color_scheme(
         if file_path.name.endswith(scheme_path.name):
             with open(file_path, "r") as fp:
                 colors = yaml.load(fp, Loader=yaml.SafeLoader)
-                return colors
+                return colors["palette"]
+
     return BASE16_DEFAULT_COLOR_SCHEME
 
 

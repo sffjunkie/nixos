@@ -35,6 +35,7 @@ class SystemMenu(WidgetModule):
 
         hostname_props = {
             "text": gethostname(),
+            # "fmt": "<b>{}</b>",
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
             "padding": 8,

@@ -47,10 +47,10 @@ groups = group.build_groups(settings) + scratchpad.build_scratchpads(settings)
 
 keys = (
     kbdmouse.build_keys(settings)
-    + group.build_keys(settings)
+    + group.build_group_keys(settings)
     + scratchpad.build_keys(settings)
 )
-mouse = kbdmouse.bind_mouse_buttons(settings)
+mouse = kbdmouse.build_mouse_buttons(settings)
 
 floating_layout = floating.build_layout(theme=theme)
 layouts = [
@@ -77,6 +77,8 @@ wl_input_rules = {
     "1133:45082:MX Anywhere 2S Mouse": InputConfig(natural_scroll=True),
     "1386:828:Wacom Intuos PT S 2 Finger": InputConfig(tap=True),
 }
+
+wl_xcursor_size = 32
 
 
 def systemd_run(command: list[str]) -> list[str]:

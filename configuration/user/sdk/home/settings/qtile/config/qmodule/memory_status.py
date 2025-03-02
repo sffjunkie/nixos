@@ -33,7 +33,7 @@ class MemoryStatus(WidgetModule):
                 )
             ]
 
-        htop = terminal_run_command(terminal_from_env(), ["htop"])
+        system_status = terminal_run_command(terminal_from_env(), ["htop"])
 
         memory_props = {
             "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
@@ -42,7 +42,7 @@ class MemoryStatus(WidgetModule):
             "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
-                "Button1": lazy.spawn(htop),
+                "Button1": lazy.spawn(system_status),
             },
         }
 
@@ -63,7 +63,7 @@ class MemoryStatus(WidgetModule):
             "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
-                "Button1": lazy.spawn(htop),
+                "Button1": lazy.spawn(system_status),
             },
         }
 

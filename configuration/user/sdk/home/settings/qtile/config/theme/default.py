@@ -1,5 +1,5 @@
-from .defs.theme import PropertyDefinitions, ThemeDefinition
-from .defs.color import Base16ColorDefinitions, NamedColorDefinitions
+from .typedefs.theme import PropertyDefinitions, ThemeDefinition
+from .typedefs.color import Base16ColorDefinitions, NamedColorDefinitions
 
 DEFAULT_FONT = "Hack Nerd Font Mono"
 DEFAULT_ICON_FONT = "Material Design Icons"
@@ -48,8 +48,9 @@ DEFAULT_NAMED_COLORS: NamedColorDefinitions = {
         BASE16_DEFAULT_COLOR_SCHEME["base0E"],
         BASE16_DEFAULT_COLOR_SCHEME["base0F"],
     ],
+    "foreground_light": BASE16_DEFAULT_COLOR_SCHEME["base04"],
+    "foreground_dark": BASE16_DEFAULT_COLOR_SCHEME["base00"],
 }
-
 
 DEFAULT_EXTENSION_PROPS: PropertyDefinitions = {
     "font": DEFAULT_FONT,
@@ -79,18 +80,11 @@ DEFAULT_BAR_PROPS = {
         "opacity": 1.0,
         "height": DEFAULT_BAR_HEIGHT,
         "margin": (8, 8, 0, 8),
-        "powerline": {
-            "right": "back_slash",
-        },
     },
     "bottom": {
         "opacity": 1.0,
         "height": DEFAULT_BAR_HEIGHT,
         "margin": (0, 8, 8, 8),
-        "powerline": {
-            "left": "forward_slash",
-            "right": "back_slash",
-        },
     },
 }
 
@@ -117,16 +111,8 @@ DEFAULT_THEME: ThemeDefinition = {
         },
     },
     "logo": "\uf313",
-    "bar": DEFAULT_BAR_PROPS,
+    "bars": DEFAULT_BAR_PROPS,
     "extension": DEFAULT_EXTENSION_PROPS,
     "layout": DEFAULT_LAYOUT_PROPS,
     "widget": DEFAULT_WIDGET_PROPS,
-    # "powerline_separator": {
-    #     "left": "forward_slash",
-    #     "right": "back_slash",
-    # },  # qtile_extras
-    "powerline_color_repeat": {
-        "function": "cycle",
-        "indices": [0, 3],
-    },
 }

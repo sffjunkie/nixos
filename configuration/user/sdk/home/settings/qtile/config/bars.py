@@ -6,7 +6,7 @@ import os
 from libqtile.bar import Bar as QBar  # type: ignore
 from qtile_extras.widget import Spacer as QSpacer  # type: ignore
 
-from qbar.context import BarContext
+from qbar.context import BarContext, BarPosition
 
 from qmodule.context import ModuleContext
 from qmodule.cpu_temp_status import CPUTempStatus
@@ -25,7 +25,7 @@ from qmodule.weather import Weather
 from qmodule.window_name import WindowName
 
 from qmodule.base import WidgetModule
-from theme.defs.theme import ThemeDefinition
+from theme.typedefs.theme import ThemeDefinition
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
@@ -33,7 +33,7 @@ TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     colors = theme["named_colors"]
-    bar_context = BarContext("top", settings, theme)
+    bar_context = BarContext(BarPosition.TOP, settings, theme)
 
     widgets = []
 
@@ -102,7 +102,7 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     ]
 
     if middle == []:
-        widgets.append(QSpacer())
+        widgets.append(QSpacer(background="#00000000"))
     else:
         widgets.extend(separator.widgets())
         for idx, group in enumerate(middle, start=idx + 1):
@@ -180,13 +180,13 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         widgets,
         size=bar_context.height,
         margin=bar_context.margin,
-        background=f"{colors['panel_bg']}{bar_context.opacity_str}",
+        # background="#00000088",
     )
 
 
 def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     colors = theme["named_colors"]
-    bar_context = BarContext("bottom", settings, theme)
+    bar_context = BarContext(BarPosition.BOTTOM, settings, theme)
 
     widgets = []
 
@@ -256,7 +256,7 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     middle: list[WidgetModule] = []
 
     if middle == []:
-        widgets.append(QSpacer(background="#FFFFFF00"))
+        widgets.append(QSpacer(background="#00000000"))
     else:
         widgets.extend(separator.widgets())
         for idx, group in enumerate(middle, start=idx + 1):
@@ -293,7 +293,7 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         widgets,
         size=bar_context.height,
         margin=bar_context.margin,
-        background=f"{colors['panel_bg']}{bar_context.opacity_str}",
+        # background="#00000088",
     )
 
 

@@ -3,6 +3,8 @@ from libqtile.config import Match, Rule  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.config import Key, Group  # type: ignore
 
+from keys import Alt, Ctrl, Shift, Super
+
 group_config = {
     "WWW": {"layout": "monadtall"},
     "BRAIN": {"layout": "max"},
@@ -57,13 +59,13 @@ def build_groups(settings: dict) -> list[Group]:
     return groups
 
 
-def build_keys(settings: dict) -> list[Key]:
+def build_group_keys(settings: dict) -> list[Key]:
     keys = []
     for idx, _ in enumerate(group_config.keys(), 1):
         name = str(idx)
         keys.append(
             Key(
-                [settings["mod"]],
+                [Super],
                 str(idx),
                 lazy.group[name].toscreen(toggle=True),
                 desc=f"Switch to group {name}",
@@ -71,7 +73,7 @@ def build_keys(settings: dict) -> list[Key]:
         )
         keys.append(
             Key(
-                [settings["mod"], "shift"],
+                [Super, Shift],
                 str(idx),
                 lazy.window.togroup(name),
                 desc=f"Send current window to group {name}",
