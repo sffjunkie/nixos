@@ -70,29 +70,27 @@
           };
         };
       };
-      # mary = {
-      #   description = "Music Server";
-      #   netdevice = {
-      #     lan = {
-      #       device = "enp5s0";
-      #       mac = "TBC";
-      #       ipv4 = "10.44.0.4";
-      #       ipv4method = "dhcpstatic";
-      #     };
-      #   };
-      # };
-      # calamity = {
-      #   description = "Backup Server";
-      #   netdevice = {
-      #     lan = {
-      #       device = "enp5s0";
-      #       mac = "TBC";
-      #       ipv4 = "10.44.0.5";
-      #       ipv4method = "dhcpstatic";
-      #     };
-      #   };
-      # };
-
+      mary = {
+        description = "Music Server";
+        netdevice = {
+          lan = {
+            device = "enp5s0";
+            mac = "TBC";
+            ipv4 = "10.44.0.4";
+            ipv4method = "dhcpstatic";
+          };
+        };
+      };
+      calamity = {
+        description = "Backup Server";
+        netdevice = {
+          lan = {
+            device = "enp5s0";
+            mac = "TBC";
+            ipv4 = "10.44.0.5";
+            ipv4method = "dhcpstatic";
+          };
+        };
       sw1 = {
         description = "Node0 Switch";
         netdevice = {
