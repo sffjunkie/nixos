@@ -13,6 +13,7 @@
     workgroup = "LOONIVERSITY";
 
     hosts = {
+      # region Machines
       pinky = {
         description = "Admissions";
         netdevice = {
@@ -91,6 +92,10 @@
             ipv4method = "dhcpstatic";
           };
         };
+      };
+      # endregion
+
+      # region Switches
       sw1 = {
         description = "Node0 Switch";
         netdevice = {
@@ -101,8 +106,9 @@
           };
         };
       };
+      # endregion
 
-      # Wifi access points
+      # region Wifi access points
       wa1 = {
         description = "Downstairs WAP";
         netdevice = {
@@ -133,8 +139,9 @@
           };
         };
       };
+      # endregion
 
-      # IoT
+      # region IoT
       philips-hue = {
         description = "Philips Hue";
         netdevice = {
@@ -145,8 +152,9 @@
           };
         };
       };
+      # endregion
 
-      # Media devices
+      # region Media devices
       gh-bedroom = {
         netdevice = {
           lan = {
@@ -249,6 +257,7 @@
           };
         };
       };
+      # endregion
     };
 
     vlans = {
