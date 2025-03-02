@@ -45,7 +45,11 @@ in
           adapter = "zstack";
         };
         frontend = {
+          enabled = true;
           port = 8080;
+        };
+        home_assistant = {
+          enabled = true;
         };
         advanced = {
           homeassistant_legacy_entity_attributes = false;
