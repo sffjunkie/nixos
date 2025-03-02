@@ -1,33 +1,33 @@
 {
   config,
   lib,
+  osConfig,
   pkgs,
   ...
 }:
-let
-  cfg = config.looniversity.settings.qtile;
-
-  inherit (lib)
-    mkEnableOption
-    mkIf
-    mkOption
-    types
-    ;
-in
 {
   imports = [
+    ./group
     ./theme
   ];
 
-  options.looniversity.settings.qtile = {
-    enable = mkEnableOption "qtile settings";
-  };
-
-  config = mkIf (cfg.enable) {
+  config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {
     xdg.configFile = {
       "qtile" = {
         source = ./config;
         recursive = true;
+      };
+    };
+
+    looniversity = {
+      gui = {
+        fuzzel.enable = true;
+      };
+
+      script = {
+        system-menu.enable = true;
+        rofi-clip.enable = true;
+        rofi-launcher.enable = true;
       };
     };
   };
