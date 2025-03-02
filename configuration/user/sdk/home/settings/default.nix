@@ -1,7 +1,6 @@
 {
   imports = [
     ./gnome
-    ./qt
     ./qtile
   ];
 }
