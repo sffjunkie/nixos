@@ -62,6 +62,10 @@ in
 
       script.wake.enable = true;
 
+      service = {
+        immich = enabled;
+      };
+
       shell.zsh.enable = true;
 
       storage.udisks2.enable = true;
