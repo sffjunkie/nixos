@@ -42,6 +42,7 @@ in
         };
         serial = {
           port = "/dev/ttyUSB0";
+          adapter = "zstack";
         };
         frontend = {
           port = 8080;
