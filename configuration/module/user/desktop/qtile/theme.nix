@@ -96,7 +96,7 @@ let
   };
 in
 {
-  config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {
+  config = {
     xdg.configFile."desktop/default_theme.yaml".text = lib.generators.toYAML { } {
       path = null;
       logo = ""; # Nixos logo
@@ -129,6 +129,9 @@ in
           opacity = defaultBarOpacity;
         };
       };
+
+      foreground_dark = defaultBase16Colors.base00;
+      foreground_light = defaultBase16Colors.base04;
 
       base16_scheme_colors = defaultBase16Colors;
       named_colors = defaultNamedColors;
