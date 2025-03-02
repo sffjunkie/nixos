@@ -113,7 +113,7 @@ in
           margin = [
             8
             8
-            0
+            4
             8
           ];
           opacity = defaultBarOpacity;
@@ -121,7 +121,7 @@ in
         bottom = {
           height = defaultBarHeight;
           margin = [
-            0
+            4
             8
             8
             8
