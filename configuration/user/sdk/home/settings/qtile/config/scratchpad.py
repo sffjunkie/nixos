@@ -2,10 +2,11 @@ from libqtile.lazy import lazy  # type: ignore
 from libqtile.config import Key, ScratchPad, DropDown  # type: ignore
 from terminal import terminal_run_command
 from anchor import anchor_window, WindowLocation
-from keys import Super, Alt
+
+from settings.defs import Settings
 
 
-def build_scratchpads(settings: dict) -> list[ScratchPad]:
+def build_scratchpads(settings: Settings) -> list[ScratchPad]:
     ncmpcpp_dimension = anchor_window(
         location=WindowLocation.TopCenter,
         width=0.5,
@@ -53,7 +54,9 @@ def build_scratchpads(settings: dict) -> list[ScratchPad]:
     ]
 
 
-def build_keys(settings: dict) -> list[Key]:
+def build_keys(settings: Settings) -> list[Key]:
+    Super = settings.keys.Super
+    Alt = settings.keys.Alt
     return [
         Key(
             [Super, Alt],

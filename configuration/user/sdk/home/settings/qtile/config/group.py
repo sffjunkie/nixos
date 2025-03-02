@@ -3,7 +3,8 @@ from libqtile.config import Match, Rule  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.config import Key, Group  # type: ignore
 
-from keys import Alt, Ctrl, Shift, Super
+from settings.defs import Settings
+
 
 group_config = {
     "WWW": {"layout": "monadtall"},
@@ -44,7 +45,7 @@ def decoration(group_idx: int) -> str:
         return ""
 
 
-def build_groups(settings: dict) -> list[Group]:
+def build_groups(settings: Settings) -> list[Group]:
     groups = []
     for idx, (name, kwargs) in enumerate(group_config.items(), 1):
         matches = build_match(name)
@@ -59,7 +60,9 @@ def build_groups(settings: dict) -> list[Group]:
     return groups
 
 
-def build_group_keys(settings: dict) -> list[Key]:
+def build_group_keys(settings: Settings) -> list[Key]:
+    Super = settings.keys.Super
+    Shift = settings.keys.Shift
     keys = []
     for idx, _ in enumerate(group_config.keys(), 1):
         name = str(idx)
