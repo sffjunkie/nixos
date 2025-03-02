@@ -174,7 +174,6 @@ in
 
       settings = {
         gnome = enabled;
-        qt = enabled;
       };
 
       service = {
