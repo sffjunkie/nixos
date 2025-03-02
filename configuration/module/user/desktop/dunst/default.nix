@@ -19,7 +19,7 @@ in
       waylandDisplay = "wayland-0";
       settings = {
         global = {
-          font = "Hack Nerd Font 13";
+          font = mkIf (!config.stylix.targets.dunst.enable) "Hack Nerd Font 13";
           width = 500;
           height = 300;
           origin = "top-right";
