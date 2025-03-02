@@ -17,6 +17,24 @@ in
     services.mako = {
       enable = true;
       anchor = "top-right";
+
+    systemd.user.services.mako = {
+      Install.WantedBy = [ "graphical-session.target" ];
+
+      Unit = {
+        Description = "Lightweight Wayland notification daemon.";
+        Documentation = "man:mako(1)";
+        PartOf = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.Notifications";
+        # ExecCondition = "${lib.getExe pkgs.bash} -c '[ -n \"$WAYLAND_DISPLAY\" ]'";
+        ExecStart = "${lib.getExe pkgs.mako}";
+        ExecReload = "${pkgs.mako}/bin/makoctl reload";
+      };
     };
   };
 }
