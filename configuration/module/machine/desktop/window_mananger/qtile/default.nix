@@ -8,7 +8,7 @@ let
   cfg = config.looniversity.desktop.window_manager.qtile;
 
   startScript = pkgs.writeScript "startqtile" ''
-    #! ${pkgs.bash}/bin/bash
+    #! ${pkgs.zsh}/bin/zsh
 
     # first import environment variables from the login manager
     export XDG_DATA_DIRS=/run/current-system/sw/share/gsettings-schemas:$XDG_DATA_DIRS
