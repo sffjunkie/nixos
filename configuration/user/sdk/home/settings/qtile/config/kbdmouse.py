@@ -6,10 +6,12 @@ from libqtile.config import Click, Drag, Key  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 
 from window import float_to_front
-from settings.defs import Settings
+from settings.typedefs import Settings
 
 
 def user_menu(settings: Settings):
+    # Super = settings["keys"]["Super"]
+    # Alt = settings["keys"]["Alt"]
     return [
         # Key(
         #     [Super, Alt],
@@ -21,8 +23,8 @@ def user_menu(settings: Settings):
 
 
 def system_menu(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
     return [
         Key(
             [Super, Alt],
@@ -34,8 +36,8 @@ def system_menu(settings: Settings):
 
 
 def application(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
     return [
         # Launcher
         Key(
@@ -76,7 +78,7 @@ def application(settings: Settings):
 
 
 def layout(settings: Settings):
-    Super = settings.keys.Super
+    Super = settings["keys"]["Super"]
     return [
         Key(
             [Super],
@@ -88,10 +90,10 @@ def layout(settings: Settings):
 
 
 def window(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
-    Shift = settings.keys.Shift
-    Ctrl = settings.keys.Ctrl
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
+    Shift = settings["keys"]["Shift"]
+    Ctrl = settings["keys"]["Ctrl"]
     return [
         # region Switch
         Key(
@@ -214,7 +216,7 @@ def window(settings: Settings):
 
 
 def group(settings: Settings):
-    Super = settings.keys.Super
+    Super = settings["keys"]["Super"]
     return [
         Key(
             [Super],
@@ -232,9 +234,9 @@ def group(settings: Settings):
 
 
 def screen(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
-    Ctrl = settings.keys.Ctrl
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
+    Ctrl = settings["keys"]["Ctrl"]
     return [
         Key(
             [Super, Alt, Ctrl],
@@ -252,8 +254,8 @@ def screen(settings: Settings):
 
 
 def clipboard(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
     return [
         Key(
             [Super, Alt],
@@ -275,9 +277,9 @@ def clipboard(settings: Settings):
 
 
 def qtile(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
-    Ctrl = settings.keys.Ctrl
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
+    Ctrl = settings["keys"]["Ctrl"]
     return [
         Key(
             [Super, Alt, Ctrl],
@@ -295,9 +297,9 @@ def qtile(settings: Settings):
 
 
 def music(settings: Settings):
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
-    Ctrl = settings.keys.Ctrl
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
+    Ctrl = settings["keys"]["Ctrl"]
     return [
         # Play / Pause
         Key(
@@ -328,8 +330,8 @@ def music(settings: Settings):
 
 
 def vt(settings: Settings):
-    Alt = settings.keys.Alt
-    Ctrl = settings.keys.Ctrl
+    Alt = settings["keys"]["Alt"]
+    Ctrl = settings["keys"]["Ctrl"]
     return [
         Key(
             [Ctrl, Alt],
@@ -387,7 +389,7 @@ def build_keys(settings: Settings) -> list[Key]:
 
 
 def build_mouse_buttons(settings):
-    Super = settings.keys.Super
+    Super = settings["keys"]["Super"]
     return [
         Drag(
             [Super],

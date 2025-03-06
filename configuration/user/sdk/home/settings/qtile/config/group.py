@@ -3,7 +3,7 @@ from libqtile.config import Match, Rule  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.config import Key, Group  # type: ignore
 
-from settings.defs import Settings
+from settings.typedefs import Settings
 
 
 group_config = {
@@ -61,8 +61,8 @@ def build_groups(settings: Settings) -> list[Group]:
 
 
 def build_group_keys(settings: Settings) -> list[Key]:
-    Super = settings.keys.Super
-    Shift = settings.keys.Shift
+    Super = settings["keys"]["Super"]
+    Shift = settings["keys"]["Shift"]
     keys = []
     for idx, _ in enumerate(group_config.keys(), 1):
         name = str(idx)

@@ -29,6 +29,7 @@ logger.warning(f"libqtile path: {libqtile_path}")
 
 secrets = load_secrets()
 settings = load_settings()
+logger.warn(settings)
 
 theme = load_theme()
 

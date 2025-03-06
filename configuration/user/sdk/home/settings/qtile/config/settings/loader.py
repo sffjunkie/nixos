@@ -5,28 +5,14 @@ import yaml  # type: ignore
 
 from libqtile.log_utils import logger  # type: ignore
 
-DEFAULT_SETTINGS = {
-    "mod": "mod4",
-    "term": "alacritty",
-    "netdevice": "wifi",
-}
-
-
-def volume_control_commands() -> dict:
-    command = ["~/.local/bin/vol"]
-    return {
-        "up": command + ["up"],
-        "down": command + ["down"],
-        "mute": command + ["mute"],
-        "toggle": command + ["toggle"],
-        "app": "pulsemixer",
-    }
+from .typedefs import Settings
+from .default import DEFAULT_SETTINGS
 
 
 def _settings_path(filepath: Path | None = None) -> str:
     if filepath is None or not filepath.is_absolute():
         if filepath is None:
-            filepath = "theme.yaml"
+            filepath = "settings.yaml"
 
         xdg_config = Path(
             os.environ.get(
@@ -53,20 +39,16 @@ def _settings_yaml(filepath: Path | None = None) -> dict | None:
     return settings
 
 
-def load_settings() -> dict:
-    settings = DEFAULT_SETTINGS
-    settings.update(
-        {
-            "volume": volume_control_commands(),
-        }
-    )
+def load_settings(filepath: Path | None = None) -> Settings:
+    settings_path = _settings_path(filepath)
+    logger.info(f"Loading settings from {settings_path}")
+    settings_yaml = _settings_yaml(settings_path) or {}
 
-    settings.update(DEFAULT_SETTINGS)
+    default_settings_path = _settings_path(Path("default_settings.yaml"))
+    default_settings_yaml = _settings_yaml(default_settings_path) or {}
 
-    settings_file = Path(__file__).parent.parent / "settings.yaml"
-    if settings_file.exists():
-        with settings_file.open() as fp:
-            settings_yaml = yaml.load(fp, yaml.SafeLoader)
-        settings.update(settings_yaml)
+    default_settings_yaml.update(settings_yaml)
 
-    return settings
+    logger.info(f"Settings {default_settings_yaml}")
+
+    return default_settings_yaml

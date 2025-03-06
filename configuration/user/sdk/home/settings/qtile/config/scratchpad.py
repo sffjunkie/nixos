@@ -3,7 +3,7 @@ from libqtile.config import Key, ScratchPad, DropDown  # type: ignore
 from terminal import terminal_run_command
 from anchor import anchor_window, WindowLocation
 
-from settings.defs import Settings
+from settings.typedefs import Settings
 
 
 def build_scratchpads(settings: Settings) -> list[ScratchPad]:
@@ -55,8 +55,8 @@ def build_scratchpads(settings: Settings) -> list[ScratchPad]:
 
 
 def build_keys(settings: Settings) -> list[Key]:
-    Super = settings.keys.Super
-    Alt = settings.keys.Alt
+    Super = settings["keys"]["Super"]
+    Alt = settings["keys"]["Alt"]
     return [
         Key(
             [Super, Alt],
