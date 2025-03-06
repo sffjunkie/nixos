@@ -1,12 +1,11 @@
 {
   config,
   lib,
-  osConfig,
   pkgs,
   ...
 }:
 {
-  config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {
+  config = {
     xdg.configFile."desktop/default_settings.yaml".text = lib.generators.toYAML { } {
       keys = {
         Alt = "mod1";
