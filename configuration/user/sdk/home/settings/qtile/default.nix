@@ -8,6 +8,7 @@
 {
   imports = [
     ./group.nix
+    ./theme.nix
   ];
 
   config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {

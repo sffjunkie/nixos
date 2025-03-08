@@ -135,10 +135,10 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         props={
             "background": colors["powerline_bg"][1],
             "volume": {
-                "volume_up_command": settings["volume"]["up"],
-                "volume_down_command": settings["volume"]["down"],
-                "mute_command": settings["volume"]["toggle"],
-                "volume_app": settings["volume"]["app"],
+                "volume_up_command": settings["commands"]["volume"]["up"],
+                "volume_down_command": settings["commands"]["volume"]["down"],
+                "mute_command": settings["commands"]["volume"]["toggle"],
+                "volume_app": settings["apps"]["volume"],
             },
         },
     )
