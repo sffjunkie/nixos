@@ -163,18 +163,22 @@ in
         notify = enabled;
       };
 
+      role = {
+        podcaster = enabled;
+      };
+
       script = {
         linkhandler = enabled;
         paths = enabled;
         sysinfo = enabled;
       };
 
-      settings = {
-        gnome = enabled;
-      };
-
       service = {
         syncthing = enabled;
+      };
+
+      settings = {
+        gnome = enabled;
       };
 
       shell = {
