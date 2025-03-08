@@ -24,10 +24,10 @@
           next = "musicctl next";
         };
         volume = {
-          up = ''pulsemixer --change-volume +"$NUM"'';
-          down = ''pulsemixer --change-volume -"$NUM"'';
-          mute = "pulsemixer --mute";
-          toggle = "pulsemixer --toggle-mute";
+          up = "volumectl up";
+          down = "volumectl down";
+          mute = "volumectl mute";
+          toggle = "volumectl toggle";
         };
       };
     };
