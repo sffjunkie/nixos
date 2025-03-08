@@ -21,7 +21,7 @@
       commands = {
         music = {
           play = "musicctl play";
-          next = "msuicctl next";
+          next = "musicctl next";
         };
         volume = {
           up = ''pulsemixer --change-volume +"$NUM"'';
