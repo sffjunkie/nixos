@@ -15,7 +15,7 @@ from qmodule.current_layout import CurrentLayout
 from qmodule.date_time import DateTime
 from qmodule.group_box import GroupBox
 from qmodule.memory_status import MemoryStatus
-from qmodule.music import MusicStatus
+from qmodule.music_status import MusicStatus
 from qmodule.network_status import NetworkStatus
 from qmodule.separator import Separator
 from qmodule.system_menu import SystemMenu
