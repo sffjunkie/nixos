@@ -1,10 +1,16 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 
   cfg = config.looniversity.music.musicctl;
   notify_send = "${pkgs.libnotify}/bin/notify-send";
