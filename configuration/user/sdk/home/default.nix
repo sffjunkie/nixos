@@ -48,10 +48,7 @@ in
       audio = {
         easyeffects = enabled;
         qpwgraph = enabled;
-      };
-
-      role = {
-        podcaster = enabled;
+        volumectl = enabled;
       };
 
       cli = {
