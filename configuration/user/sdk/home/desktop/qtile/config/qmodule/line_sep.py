@@ -22,7 +22,7 @@ class LineSeparator(WidgetModule):
             "size_percent": 50,
             "linewidth": 1,
             "padding": 12,
-            "foreground": self.context.theme["named_colors"]["panel_fg"],
+            "foreground": self.context.theme["color"]["named"]["panel_fg"],
             "background": background,
         }
 

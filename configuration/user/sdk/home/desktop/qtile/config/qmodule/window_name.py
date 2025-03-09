@@ -23,7 +23,7 @@ class WindowName(WidgetModule):
             "padding": 12,
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
-            "foreground": self.context.theme["named_colors"]["group_active_fg"],
+            "foreground": self.context.theme["color"]["named"]["group_active_fg"],
             "background": f"{background_color}00",
         }
 

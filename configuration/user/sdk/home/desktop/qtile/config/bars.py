@@ -2,13 +2,15 @@
 
 import os
 from itertools import cycle
+from typing import Iterator
 
-# from libqtile.log_utils import logger  # type: ignore
+from libqtile.log_utils import logger  # type: ignore
 from libqtile.bar import Bar as QBar  # type: ignore
 from qtile_extras.widget import Spacer as QSpacer  # type: ignore
 
 from qbar.context import BarContext, BarPosition
 
+from qmodule.base import WidgetModule
 from qmodule.context import ModuleContext
 from qmodule.cpu_temp_status import CPUTempStatus
 from qmodule.cpu_usage_status import CPUUsageStatus
@@ -25,25 +27,43 @@ from qmodule.volume_status import VolumeStatus
 from qmodule.weather import Weather
 from qmodule.window_name import WindowName
 
-from qmodule.base import WidgetModule
+from color import contrast_color
 from settings.typedefs import Settings
 from theme.typedefs.theme import Theme
 
 
-def powerline_iter(theme: Theme):
-    named_colors = theme["named_colors"]
-    powerline_colors = named_colors["powerline_bg"]
+def fg_cycle(iterable, fg_light: str, fg_dark: str) -> Iterator:
+    saved = []
+    for element in iterable:
+        fg = contrast_color(element, fg_light, fg_dark)
+        yield fg
+        saved.append(fg)
 
-    if len(powerline_colors) == 1:
-        return cycle(tuple(powerline_colors[0]))
-    else:
-        return cycle(powerline_colors)
+    while saved:
+        for element in saved:
+            yield element
+
+
+def powerline_fg_iter(theme: Theme) -> Iterator:
+    return fg_cycle(
+        theme["color"]["named"]["powerline_bg"],
+        theme["color"]["named"]["foreground_light"],
+        theme["color"]["named"]["foreground_dark"],
+    )
+
+
+def powerline_bg_iter(theme: Theme) -> Iterator:
+    return cycle(theme["color"]["named"]["powerline_bg"])
 
 
 def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
-    named_colors = theme["named_colors"]
+    logger.warning(f"*** {theme}")
+    named_colors = theme["color"]["named"]
 
-    bg_iter = powerline_iter(theme)
+    bg_iter = powerline_bg_iter(theme)
+    fg_iter = powerline_fg_iter(theme)
+
+    logger.warning(next(fg_iter))
 
     bar_context = BarContext(BarPosition.TOP, settings, theme)
 
@@ -145,7 +165,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{next(bg_iter)}",
+            "background": next(bg_iter),
         },
     )
 
@@ -154,7 +174,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{next(bg_iter)}",
+            "background": next(bg_iter),
         },
     )
 
@@ -181,13 +201,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
 
 
 def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
-    named_colors = theme["named_colors"]
-    powerline_colors = named_colors["powerline_bg"]
-
-    if len(powerline_colors) == 1:
-        powerline_next = cycle(tuple(powerline_colors[0]))
-    else:
-        powerline_next = cycle(powerline_colors)
+    bg_iter = powerline_bg_iter(theme)
 
     bar_context = BarContext(BarPosition.BOTTOM, settings, theme)
 
@@ -210,7 +224,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
             "network": {
                 "interface": settings["device"]["net"],
             },
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
         },
     )
     memory_status_context = ModuleContext(
@@ -221,7 +235,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             },
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
         },
     )
     cpu_usage_context = ModuleContext(
@@ -229,7 +243,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
         },
     )
     cpu_temp_context = ModuleContext(
@@ -237,7 +251,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
         },
     )
 
@@ -277,7 +291,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
                 "status_format": "{play_status} {title} | {artist} | {album}",
                 "idle_format": "Play queue empty",
             },
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
         },
     )
 
@@ -286,7 +300,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{next(powerline_next)}",
+            "background": next(bg_iter),
             "volume": {
                 "volume_up_command": settings["controller"]["volume"]["up"],
                 "volume_down_command": settings["controller"]["volume"]["down"],

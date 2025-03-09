@@ -1,7 +1,6 @@
 import os
 import subprocess
 import sys
-from pathlib import Path
 
 from libqtile import __path__ as libqtile_path  # type: ignore
 from libqtile import hook, layout  # type: ignore
@@ -29,7 +28,6 @@ logger.warning(f"libqtile path: {libqtile_path}")
 
 secrets = load_secrets()
 settings = load_settings()
-logger.warn(settings)
 
 theme = load_theme()
 

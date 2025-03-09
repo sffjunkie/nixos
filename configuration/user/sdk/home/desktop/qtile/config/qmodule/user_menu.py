@@ -6,6 +6,7 @@ from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from qmodule.context import ModuleContext
 from qmodule.base import WidgetModule
+from qwidget.icon import MDIcon
 
 # from libqtile.log_utils import logger  # type: ignore
 
@@ -36,7 +37,7 @@ class UserMenu(WidgetModule):
             ]
 
         icon_props = {
-            "text": self.context.theme["logo"],
+            "name": "user",
             "font": self.context.icon_font_family,
             "fontsize": self.context.icon_font_size,
             # "width": self.context.bar.height,
@@ -53,7 +54,7 @@ class UserMenu(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        icon = TextBox(**props)
+        icon = MDIcon(**props)
 
         username_props = {
             "text": os.environ["USER"],

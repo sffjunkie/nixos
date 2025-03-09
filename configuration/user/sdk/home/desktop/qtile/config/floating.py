@@ -21,7 +21,7 @@ def float_rules() -> list[Rule]:
 
 
 def build_layout(theme: Theme) -> layout.Floating:
-    color_scheme = theme["named_colors"]
+    color_scheme = theme["color"]["named"]
     return layout.Floating(
         float_rules=float_rules(),
         border_normal=color_scheme["window_border"],

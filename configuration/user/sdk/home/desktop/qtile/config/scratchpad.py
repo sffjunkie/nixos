@@ -40,7 +40,7 @@ def build_scratchpads(settings: Settings) -> list[ScratchPad]:
             dropdowns=[
                 DropDown(
                     name="home-automation",
-                    cmd=f"{settings['apps']['terminal']} https://hass.looniversity.net",
+                    cmd=f"{settings['app']['terminal']} https://hass.looniversity.net",
                     height=home_automation_dimension.height,
                     width=home_automation_dimension.width,
                     x=home_automation_dimension.x,
