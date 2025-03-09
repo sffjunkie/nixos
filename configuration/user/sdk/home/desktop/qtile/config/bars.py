@@ -1,6 +1,7 @@
 """Bars for Qtile"""
 
 import os
+from itertools import cycle
 
 # from libqtile.log_utils import logger  # type: ignore
 from libqtile.bar import Bar as QBar  # type: ignore
@@ -28,12 +29,22 @@ from qmodule.base import WidgetModule
 from settings.typedefs import Settings
 from theme.typedefs.theme import Theme
 
-NET_INTERFACE = "wlp3s0"
-TERMINAL = os.environ.get("TERMINAL", "xterm")
+
+def powerline_iter(theme: Theme):
+    named_colors = theme["named_colors"]
+    powerline_colors = named_colors["powerline_bg"]
+
+    if len(powerline_colors) == 1:
+        return cycle(tuple(powerline_colors[0]))
+    else:
+        return cycle(powerline_colors)
 
 
 def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
-    colors = theme["named_colors"]
+    named_colors = theme["named_colors"]
+
+    bg_iter = powerline_iter(theme)
+
     bar_context = BarContext(BarPosition.TOP, settings, theme)
 
     widgets = []
@@ -54,7 +65,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
                 settings,
                 theme,
                 props={
-                    "background": colors["powerline_bg"][-1],
+                    "background": next(bg_iter),
                 },
             )
         ),
@@ -64,7 +75,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
                 settings,
                 theme,
                 props={
-                    "background": colors["panel_bg"],
+                    "background": named_colors["panel_bg"],
                 },
             )
         ),
@@ -74,7 +85,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
                 settings,
                 theme,
                 props={
-                    "background": colors["panel_bg"],
+                    "background": named_colors["panel_bg"],
                 },
             )
         ),
@@ -96,7 +107,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
                 theme,
                 props={
                     "group": 4,
-                    "background": colors["panel_bg"],
+                    "background": named_colors["panel_bg"],
                 },
             )
         ),
@@ -117,7 +128,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": colors["powerline_bg"][0],
+            "background": next(bg_iter),
             "weather": {
                 "app_key": os.environ.get("OWM_API_KEY", ""),
                 "coordinates": {
@@ -134,7 +145,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{colors['powerline_bg'][2]}",
+            "background": f"{next(bg_iter)}",
         },
     )
 
@@ -143,7 +154,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": colors["powerline_bg"][-1],
+            "background": f"{next(bg_iter)}",
         },
     )
 
@@ -170,7 +181,14 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
 
 
 def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
-    colors = theme["named_colors"]
+    named_colors = theme["named_colors"]
+    powerline_colors = named_colors["powerline_bg"]
+
+    if len(powerline_colors) == 1:
+        powerline_next = cycle(tuple(powerline_colors[0]))
+    else:
+        powerline_next = cycle(powerline_colors)
+
     bar_context = BarContext(BarPosition.BOTTOM, settings, theme)
 
     widgets = []
@@ -192,7 +210,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
             "network": {
                 "interface": settings["device"]["net"],
             },
-            "background": f"{colors['powerline_bg'][4]}",
+            "background": f"{next(powerline_next)}",
         },
     )
     memory_status_context = ModuleContext(
@@ -203,7 +221,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
             "memory": {
                 "format": "{MemUsed:6.0f}M/{MemTotal:.0f}M",
             },
-            "background": f"{colors['powerline_bg'][5]}",
+            "background": f"{next(powerline_next)}",
         },
     )
     cpu_usage_context = ModuleContext(
@@ -211,7 +229,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{colors['powerline_bg'][6]}",
+            "background": f"{next(powerline_next)}",
         },
     )
     cpu_temp_context = ModuleContext(
@@ -219,7 +237,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": f"{colors['powerline_bg'][7]}",
+            "background": f"{next(powerline_next)}",
         },
     )
 
@@ -259,7 +277,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
                 "status_format": "{play_status} {title} | {artist} | {album}",
                 "idle_format": "Play queue empty",
             },
-            "background": f"{colors['powerline_bg'][-1]}",
+            "background": f"{next(powerline_next)}",
         },
     )
 
@@ -268,7 +286,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         settings,
         theme,
         props={
-            "background": colors["powerline_bg"][1],
+            "background": f"{next(powerline_next)}",
             "volume": {
                 "volume_up_command": settings["controller"]["volume"]["up"],
                 "volume_down_command": settings["controller"]["volume"]["down"],

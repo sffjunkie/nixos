@@ -12,7 +12,7 @@ in
 {
   imports = [
     ./accounts
-    ./settings
+    ./desktop
 
     ../../common
   ];
