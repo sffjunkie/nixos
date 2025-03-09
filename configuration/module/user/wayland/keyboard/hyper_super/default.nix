@@ -1,13 +1,19 @@
 # key codes - /run/current-system/sw/share/X11/xkb/keycodes/evdev
 # US keyboard symbols - /run/current-system/sw/share/X11/xkb/symbols/us
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.wayland.keyboard.hyper_super;
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.wayland.keyboard.hyper_super = {
