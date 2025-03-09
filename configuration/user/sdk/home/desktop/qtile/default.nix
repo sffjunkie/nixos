@@ -6,12 +6,6 @@
   ...
 }:
 {
-  imports = [
-    ./group.nix
-    ./settings.nix
-    ./theme.nix
-  ];
-
   config = lib.mkIf osConfig.looniversity.desktop.environment.qtile.enable {
     xdg.configFile = {
       "qtile" = {
