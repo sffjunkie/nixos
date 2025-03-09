@@ -1,14 +1,14 @@
 from pathlib import Path
 from typing import TypedDict
 
-from theme.typedefs.bar import BarDefinitions
+from .bar import BarDefinitions
 from theme.typedefs.color import Base16ColorDefinitions, NamedColorDefinitions
 from theme.typedefs.font import FontDefinitions
 
 PropertyDefinitions = dict[str, str | int]
 
 
-class ThemeDefinition(TypedDict):
+class Theme(TypedDict):
     path: Path | None
     bars: BarDefinitions
     base16_colors: Base16ColorDefinitions

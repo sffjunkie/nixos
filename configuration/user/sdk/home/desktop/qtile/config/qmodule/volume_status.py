@@ -34,7 +34,7 @@ class VolumeStatus(WidgetModule):
 
         volume_text_props = {
             "name": "bar_volume",
-            "volume_app": "pavucontrol",
+            "volume_app": "volumectl app",
             "mute_format": "   M",
             "unmute_format": "{volume:>3}%",
             "menu_font": self.context.text_font_family,

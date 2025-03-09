@@ -5,7 +5,7 @@ import yaml  # type: ignore
 from libqtile.log_utils import logger  # type: ignore
 
 from theme.typedefs.color import Base16ColorDefinitions, NamedColorDefinitions
-from theme.typedefs.theme import ThemeDefinition
+from theme.typedefs.theme import Theme
 from theme.default import BASE16_DEFAULT_COLOR_SCHEME
 from .utils import is_base16, is_color
 
@@ -69,7 +69,7 @@ def _theme_yaml(filepath: Path | None = None) -> dict | None:
     return theme
 
 
-def load_theme(filepath: Path | None = None) -> ThemeDefinition:
+def load_theme(filepath: Path | None = None) -> Theme:
     theme_path = _theme_path(filepath)
     logger.info(f"Loading theme from {theme_path}")
     theme_yaml = _theme_yaml(theme_path) or {}
@@ -116,7 +116,7 @@ def load_theme(filepath: Path | None = None) -> ThemeDefinition:
     tc = _deref_colors(layout, base16_scheme, named_colors)
     layout.update(tc)
 
-    theme_def = ThemeDefinition(
+    theme_def = Theme(
         path=filepath,
         bars=bars,
         base16_colors=base16_scheme,

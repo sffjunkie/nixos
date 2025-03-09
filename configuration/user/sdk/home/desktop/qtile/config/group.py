@@ -61,14 +61,14 @@ def build_groups(settings: Settings) -> list[Group]:
 
 
 def build_group_keys(settings: Settings) -> list[Key]:
-    Super = settings["keys"]["Super"]
-    Shift = settings["keys"]["Shift"]
+    cmd = settings["key"]["cmd"]
+    shift = settings["key"]["shift"]
     keys = []
     for idx, _ in enumerate(group_config.keys(), 1):
         name = str(idx)
         keys.append(
             Key(
-                [Super],
+                [cmd],
                 str(idx),
                 lazy.group[name].toscreen(toggle=True),
                 desc=f"Switch to group {name}",
@@ -76,7 +76,7 @@ def build_group_keys(settings: Settings) -> list[Key]:
         )
         keys.append(
             Key(
-                [Super, Shift],
+                [cmd, shift],
                 str(idx),
                 lazy.window.togroup(name),
                 desc=f"Send current window to group {name}",

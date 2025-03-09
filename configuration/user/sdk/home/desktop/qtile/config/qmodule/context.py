@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from theme.typedefs.theme import ThemeDefinition
+from theme.typedefs.theme import Theme
 from qbar.context import BarContext
 from theme.utils import opacity_to_str
 
@@ -26,7 +26,7 @@ class ModuleContext:
         self,
         bar: BarContext,
         settings: dict,
-        theme: ThemeDefinition,
+        theme: Theme,
         props: dict | None = None,
     ):
         self.bar = bar

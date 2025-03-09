@@ -1,4 +1,4 @@
-from .typedefs.theme import PropertyDefinitions, ThemeDefinition
+from .typedefs.theme import PropertyDefinitions, Theme
 from .typedefs.color import Base16ColorDefinitions, NamedColorDefinitions
 
 DEFAULT_FONT = "Hack Nerd Font Mono"
@@ -88,7 +88,7 @@ DEFAULT_BAR_PROPS = {
     },
 }
 
-DEFAULT_THEME: ThemeDefinition = {
+DEFAULT_THEME: Theme = {
     "path": None,
     "base16_colors": BASE16_DEFAULT_COLOR_SCHEME,
     "named_colors": DEFAULT_NAMED_COLORS,

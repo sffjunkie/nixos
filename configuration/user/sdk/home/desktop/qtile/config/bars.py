@@ -25,13 +25,14 @@ from qmodule.weather import Weather
 from qmodule.window_name import WindowName
 
 from qmodule.base import WidgetModule
-from theme.typedefs.theme import ThemeDefinition
+from settings.typedefs import Settings
+from theme.typedefs.theme import Theme
 
 NET_INTERFACE = "wlp3s0"
 TERMINAL = os.environ.get("TERMINAL", "xterm")
 
 
-def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
+def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
     colors = theme["named_colors"]
     bar_context = BarContext(BarPosition.TOP, settings, theme)
 
@@ -128,21 +129,6 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         },
     )
 
-    volume_context = ModuleContext(
-        bar_context,
-        settings,
-        theme,
-        props={
-            "background": colors["powerline_bg"][1],
-            "volume": {
-                "volume_up_command": settings["commands"]["volume"]["up"],
-                "volume_down_command": settings["commands"]["volume"]["down"],
-                "mute_command": settings["commands"]["volume"]["toggle"],
-                "volume_app": settings["apps"]["volume"],
-            },
-        },
-    )
-
     date_time_context = ModuleContext(
         bar_context,
         settings,
@@ -163,7 +149,6 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
 
     end: list[WidgetModule] = [
         Weather(weather_context),
-        VolumeStatus(volume_context),
         DateTime(date_time_context),
         SystemMenu(system_menu_context),
     ]
@@ -184,7 +169,7 @@ def build_top_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     )
 
 
-def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
+def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
     colors = theme["named_colors"]
     bar_context = BarContext(BarPosition.BOTTOM, settings, theme)
 
@@ -205,7 +190,7 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         theme,
         props={
             "network": {
-                "interface": NET_INTERFACE,
+                "interface": settings["device"]["net"],
             },
             "background": f"{colors['powerline_bg'][4]}",
         },
@@ -278,8 +263,24 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
         },
     )
 
+    volume_context = ModuleContext(
+        bar_context,
+        settings,
+        theme,
+        props={
+            "background": colors["powerline_bg"][1],
+            "volume": {
+                "volume_up_command": settings["controller"]["volume"]["up"],
+                "volume_down_command": settings["controller"]["volume"]["down"],
+                "mute_command": settings["controller"]["volume"]["toggle"],
+                "volume_app": settings["app"]["volume"],
+            },
+        },
+    )
+
     end: list[WidgetModule] = [
         MusicStatus(music_status_context),
+        VolumeStatus(volume_context),
     ]
 
     group_id = idx + 1
@@ -297,7 +298,7 @@ def build_bottom_bar(settings: dict, theme: ThemeDefinition) -> QBar | None:
     )
 
 
-def build_bars(settings: dict, theme: ThemeDefinition) -> dict[str, QBar]:
+def build_bars(settings: dict, theme: Theme) -> dict[str, QBar]:
     bars = {}
     bars["top"] = build_top_bar(settings, theme)
     bars["bottom"] = build_bottom_bar(settings, theme)

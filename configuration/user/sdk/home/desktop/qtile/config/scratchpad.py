@@ -23,8 +23,8 @@ def build_scratchpads(settings: Settings) -> list[ScratchPad]:
             "0",
             dropdowns=[
                 DropDown(
-                    name="ncmpcpp",
-                    cmd=terminal_run_command("alacritty", ["ncmpcpp"]),
+                    name="music-player",
+                    cmd=terminal_run_command(settings["app"]["terminal"], ["ncmpcpp"]),
                     height=ncmpcpp_dimension.height,
                     width=ncmpcpp_dimension.width,
                     x=ncmpcpp_dimension.x,
@@ -40,7 +40,7 @@ def build_scratchpads(settings: Settings) -> list[ScratchPad]:
             dropdowns=[
                 DropDown(
                     name="home-automation",
-                    cmd="qutebrowser https://hass.looniversity.net",
+                    cmd=f"{settings['apps']['terminal']} https://hass.looniversity.net",
                     height=home_automation_dimension.height,
                     width=home_automation_dimension.width,
                     x=home_automation_dimension.x,
@@ -55,13 +55,13 @@ def build_scratchpads(settings: Settings) -> list[ScratchPad]:
 
 
 def build_keys(settings: Settings) -> list[Key]:
-    Super = settings["keys"]["Super"]
-    Alt = settings["keys"]["Alt"]
+    Super = settings["key"]["cmd"]
+    Alt = settings["key"]["alt"]
     return [
         Key(
             [Super, Alt],
             "F8",
-            lazy.group["0"].dropdown_toggle("ncmpcpp"),
+            lazy.group["0"].dropdown_toggle("music-player"),
         ),
         Key(
             [Super, Alt],

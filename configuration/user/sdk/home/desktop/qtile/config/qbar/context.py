@@ -1,6 +1,6 @@
 from qtile_extras.widget.decorations import PowerLineDecoration  # type: ignore
 
-from theme.typedefs.theme import ThemeDefinition
+from theme.typedefs.theme import Theme
 from theme.utils import opacity_to_str
 from enum import StrEnum
 
@@ -32,7 +32,7 @@ class BarContext:
         self,
         position: BarPosition,
         settings: dict,
-        theme: ThemeDefinition,
+        theme: Theme,
         props: dict = {},
     ):
         self.position = position
