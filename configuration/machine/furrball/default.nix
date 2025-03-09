@@ -4,7 +4,7 @@
   ...
 }:
 let
-  inherit (lib) enabled;
+  inherit (lib) disabled enabled;
 in
 {
   imports = [
@@ -26,55 +26,55 @@ in
 
     looniversity = {
       admin = {
-        mongodb.enable = true;
-        postgresql.enable = true;
+        mongodb = enabled;
+        postgresql = enabled;
       };
 
       doc = {
-        mystmd.enable = true;
+        mystmd = enabled;
       };
 
       media = {
-        pavucontrol.enable = true;
-        spotify.enable = true;
+        pavucontrol = enabled;
+        spotify = enabled;
       };
 
       mount = {
-        backup.enable = true;
-        movies.enable = true;
-        music.enable = true;
-        private.enable = true;
+        backup = enabled;
+        movies = enabled;
+        music = enabled;
+        private = enabled;
       };
 
       network = {
-        net-tools.enable = true;
+        net-tools = enabled;
       };
 
       role = {
-        container_host.enable = true;
-        games_machine.enable = true;
-        podcaster.enable = true;
-        vm_host.enable = true;
-        workstation.enable = true;
+        container_host = enabled;
+        games_machine = enabled;
+        podcaster = enabled;
+        vm_host = enabled;
+        workstation = enabled;
       };
 
-      script.wake.enable = true;
+      script.wake = enabled;
 
       service = {
-        immich = enabled;
+        immich = disabled;
       };
 
-      shell.zsh.enable = true;
+      shell.zsh = enabled;
 
-      storage.udisks2.enable = true;
+      storage.udisks2 = enabled;
 
       system = {
-        rclone.enable = true;
-        # ssh.enable = true;
+        rclone = enabled;
+        # ssh= enabled;
       };
 
       theme = {
-        stylix.enable = true;
+        stylix = enabled;
       };
     };
 
@@ -83,7 +83,7 @@ in
       pkgs.zoom-us
     ];
 
-    services.input-remapper.enable = true;
+    services.input-remapper = enabled;
 
     systemd.services = {
       "rclone@gdrive" = {
