@@ -1,6 +1,23 @@
+from pathlib import Path
 from typing import TypedDict, NotRequired
 
 
+PropertyDefinitions = dict[str, str | int]
+
+# region bar
+BarLocation = str
+
+
+class BarDefinition(TypedDict):
+    height: int
+    opacity: float
+    margin: tuple[int, int, int, int]
+
+
+BarDefinitions = dict[BarLocation, BarDefinition]
+# endregion
+
+# region color
 Color = str
 
 
@@ -48,3 +65,29 @@ class NamedColors(TypedDict):
 class Colors(TypedDict):
     base16: Base16
     named: NamedColors
+
+
+# endregion
+
+# region font
+FontType = str
+
+
+class FontDefinition(TypedDict):
+    family: str
+    size: int
+
+
+FontDefinitions = dict[FontType, FontDefinition]
+# endregion
+
+
+class Theme(TypedDict):
+    bar: BarDefinitions
+    color: Colors
+    extension: PropertyDefinitions
+    font: FontDefinitions
+    layout: PropertyDefinitions
+    logo: str
+    path: Path | None
+    widget: PropertyDefinitions
