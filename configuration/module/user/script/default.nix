@@ -1,5 +1,6 @@
 {
   imports = [
+    ./displays
     ./linkhandler
     ./paths
     ./rofi-clip
