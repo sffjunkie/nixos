@@ -128,6 +128,7 @@ in
               "**/result"
               "**/.devenv"
               "**/.direnv"
+              "**/.venv"
             ];
 
             "terminal.integrated.scrollback" = 5000;
