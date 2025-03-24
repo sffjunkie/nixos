@@ -1,6 +1,6 @@
 from enum import StrEnum
 
-from theme.typedefs.theme import Theme
+from theme.typedefs import Theme
 from qbar.context import BarContext
 from theme.utils import opacity_to_str
 

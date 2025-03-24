@@ -46,7 +46,7 @@ class Outputs:
 
 
 def wlr_randr() -> Outputs:
-    cp = Popen(
+    cp = Popen(  # type: ignore
         ["wlr-randr", "--json"],
         capture_output=True,
     )

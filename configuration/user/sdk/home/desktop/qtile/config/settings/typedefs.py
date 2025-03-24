@@ -6,6 +6,7 @@ class Apps(TypedDict):
     browser: NotRequired[str]
     code: NotRequired[str]
     terminal: NotRequired[str]
+    system_menu: NotRequired[str]
 
     cliboard_copy: NotRequired[str]
     cliboard_delete: NotRequired[str]

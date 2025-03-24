@@ -1,9 +1,8 @@
 import os
-import subprocess
 import sys
 
 from libqtile import __path__ as libqtile_path  # type: ignore
-from libqtile import hook, layout  # type: ignore
+from libqtile import layout  # type: ignore
 from libqtile.backend.wayland import InputConfig  # type: ignore
 from libqtile.config import Screen  # type: ignore
 from libqtile.log_utils import logger  # type: ignore
@@ -14,9 +13,9 @@ import group
 import kbdmouse
 import scratchpad
 import wallpaper
-from secret import load_secrets
-from settings import load_settings
-from theme import load_theme
+from secret.loader import load_secrets
+from settings.loader import load_settings
+from theme.loader import load_theme
 
 is_nixos = os.path.exists("/etc/NIXOS")
 
@@ -28,15 +27,12 @@ logger.warning(f"libqtile path: {libqtile_path}")
 
 secrets = load_secrets()
 settings = load_settings()
-
 theme = load_theme()
 
 bar_defs = bars.build_bars(settings=settings, theme=theme)
 screens = [
     Screen(
         **bar_defs,
-        #        top=top_bar,
-        #        bottom=bottom_bar,
         wallpaper=wallpaper.get_wallpaper(),
         wallpaper_mode="fill",
     ),
@@ -78,28 +74,3 @@ wl_input_rules = {
 }
 
 wl_xcursor_size = 32
-
-
-def systemd_run(command: list[str]) -> list[str]:
-    return [
-        "systemd-run",
-        "--collect",
-        "--user",
-        f"--unit={command[0]}",
-        "--",
-        *command,
-    ]
-
-
-@hook.subscribe.startup_once
-def start_once():
-    commands = [
-        [
-            "systemctl",
-            "--user",
-            "import-environment",
-            "WAYLAND_DISPLAY",
-        ],
-    ]
-    for command in commands:
-        subprocess.Popen(systemd_run(command))

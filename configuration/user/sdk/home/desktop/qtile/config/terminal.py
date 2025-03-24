@@ -1,7 +1,7 @@
 import os
 
 
-def terminal_from_env():
+def terminal_from_env() -> str:
     terminal = os.environ.get("TERMINAL", "xterm")
     return terminal
 

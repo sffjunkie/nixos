@@ -47,19 +47,21 @@ class Base16(TypedDict):
 
 
 class NamedColors(TypedDict):
-    window_border: NotRequired[Color]
-    panel_fg: NotRequired[Color]
-    panel_bg: NotRequired[Color]
     group_current_fg: NotRequired[Color]
     group_current_bg: NotRequired[Color]
     group_active_fg: NotRequired[Color]
     group_active_bg: NotRequired[Color]
     group_inactive_fg: NotRequired[Color]
     group_inactive_bg: NotRequired[Color]
-    powerline_fg: NotRequired[Color]
-    powerline_bg: NotRequired[list[str]]
-    foreground_dark: NotRequired[Color]
-    foreground_light: NotRequired[Color]
+
+    panel_fg: NotRequired[Color]
+    panel_bg: NotRequired[Color]
+
+    widget_bg: NotRequired[list[str]]
+    widget_fg_dark: NotRequired[Color]
+    widget_fg_light: NotRequired[Color]
+
+    window_border: NotRequired[Color]
 
 
 class Colors(TypedDict):

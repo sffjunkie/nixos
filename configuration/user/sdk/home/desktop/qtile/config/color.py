@@ -1,5 +1,7 @@
 import string
 
+from libqtile.log_utils import logger  # type: ignore
+
 RGBColor = tuple[float, float, float]
 
 
@@ -11,8 +13,8 @@ def rgb_intensity(rgb: RGBColor):
 
 def contrast_color(
     color: str,
-    light: str = "#FFFFFF",
-    dark: str = "#000000",
+    light: str = "FFFFFF",
+    dark: str = "000000",
 ) -> str:
     """Return either the light ior dark color
     whichever provides the most contrast"""
@@ -39,6 +41,8 @@ def rgbhex_to_rgb(value: str, allow_short: bool = True) -> RGBColor | None:
     """
     if value[0] == "#":
         value = value[1:]
+
+    logger.warning(value)
 
     for ch in value:
         if ch not in string.hexdigits:

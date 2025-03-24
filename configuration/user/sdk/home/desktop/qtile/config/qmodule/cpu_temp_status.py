@@ -2,9 +2,9 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import ThermalSensor  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
+from qwidget.icon import MDIcon
 from qmodule.base import WidgetModule
 from qmodule.context import ModuleContext
-from qwidget.icon import MDIcon
 
 
 class CPUTempStatus(WidgetModule):

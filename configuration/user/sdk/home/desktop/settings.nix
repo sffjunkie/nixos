@@ -9,10 +9,13 @@
   config = {
     xdg.configFile."desktop/settings.yaml".text = lib.generators.toYAML { } {
       app = {
+        app_launcher = "rofi-launcher";
         brain = "${pkgs.obsidian}/bin/obsidian";
         browser = "${pkgs.brave}/bin/brave";
+        clipboard_copy = "rofi-clip -c";
+        clipboard_delete = "rofi-clip -d";
         code = "${pkgs.vscode.fhs}/bin/code";
-        system-menu = "rofi-launcher";
+        system_menu = "system-menu";
         terminal = "${pkgs.alacritty}/bin/alacritty";
         volume = "${pkgs.pavucontrol}/bin/pavucontrol";
       };

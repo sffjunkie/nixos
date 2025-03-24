@@ -1,9 +1,9 @@
+from libqtile.config import DropDown, Key, ScratchPad  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
-from libqtile.config import Key, ScratchPad, DropDown  # type: ignore
-from terminal import terminal_run_command
-from anchor import anchor_window, WindowLocation
 
+from anchor import WindowLocation, anchor_window
 from settings.typedefs import Settings
+from terminal import terminal_run_command
 
 
 def build_scratchpads(settings: Settings) -> list[ScratchPad]:

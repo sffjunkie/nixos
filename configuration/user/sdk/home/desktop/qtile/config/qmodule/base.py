@@ -1,5 +1,7 @@
 from typing import Protocol
+
 from libqtile.widget import base  # type: ignore
+
 from qmodule.context import ModuleContext
 
 

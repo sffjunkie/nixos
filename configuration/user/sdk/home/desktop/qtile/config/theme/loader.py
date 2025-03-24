@@ -4,45 +4,22 @@ from pathlib import Path
 import yaml  # type: ignore
 from libqtile.log_utils import logger  # type: ignore
 
-from .typedefs import NamedColors, Base16Colors, Theme
+from theme.typedefs import NamedColors, Base16Colors, Theme
 
-# from theme.default import BASE16_DEFAULT_COLOR_SCHEME
-from .utils import is_base16, is_color
-
-
-# def base16_to_named_colors(base16: Base16Colors) -> NamedColor:
-#     return {
-#         "window_border": base16["base06"],
-#         "panel_fg": base16["base04"],
-#         "panel_bg": base16["base00"],
-#         "group_current_fg": base16["base05"],
-#         "group_current_bg": base16["base03"],
-#         "group_active_fg": base16["base07"],
-#         "group_active_bg": base16["base04"],
-#         "group_inactive_fg": base16["base07"],
-#         "group_inactive_bg": base16["base04"],
-#         "powerline_fg": base16["base01"],
-#         "powerline_bg": [
-#             base16["base08"],
-#             base16["base09"],
-#             base16["base0A"],
-#             base16["base0B"],
-#             base16["base0C"],
-#             base16["base0D"],
-#             base16["base0E"],
-#             base16["base0F"],
-#         ],
-#     }
+from theme.utils import is_base16, is_color
 
 
 def _deref_colors(
     theme_info: dict, base16_colors: Base16Colors, named_colors: NamedColors
 ) -> dict:
     d = {}
+    logger.warning(named_colors)
     for name, value in theme_info.items():
         if not isinstance(value, (int, float, bool)) and not is_color(value):
             if isinstance(value, dict):
                 value = _deref_colors(value, base16_colors, named_colors)
+            elif isinstance(value, list):
+                pass
             elif is_base16(value):
                 value = base16_colors[value]
             elif value in named_colors:
@@ -116,14 +93,17 @@ def load_theme(filepath: Path | None = None) -> Theme:
     default_theme_yaml = _theme_yaml(default_theme_path) or {}
 
     theme_path = _theme_path(filepath)
-    logger.warning(f"Loading theme from {theme_path}")
+    # logger.warning(f"Loading theme from {theme_path}")
     theme_yaml = _theme_yaml(theme_path) or {}
 
     base16_colors = _theme_base16_colors(theme_yaml, default_theme_yaml)
     logger.warning(f"base16_colors: {base16_colors}")
 
     named_colors = _theme_named_colors(theme_yaml, default_theme_yaml)
-    logger.warning(f"named_colors: {named_colors}")
+    # logger.warning(f"named_colors: {named_colors}")
+    tc = _deref_colors(named_colors, base16_colors, named_colors)
+    # named_colors.update(tc)
+    # logger.warning(f"tc: {tc}")
 
     widget = default_theme_yaml["widget"].copy()
     if "widget" in theme_yaml:
@@ -166,7 +146,6 @@ def load_theme(filepath: Path | None = None) -> Theme:
         logo=theme_yaml.get("logo", default_theme_yaml["logo"]),
         widget=widget,
     )
-    logger.warning(f"XXX {theme_def}")
 
     return theme_def
 
@@ -190,7 +169,13 @@ def _load_base16_color_scheme(
     for file_path in search_folder.rglob(os.path.join("**", "*.yaml")):
         if file_path.name.endswith(scheme_path.name):
             with open(file_path, "r") as fp:
-                colors = yaml.load(fp, Loader=yaml.SafeLoader)
-                return colors["palette"]
+                color_yaml = yaml.load(fp, Loader=yaml.SafeLoader)
+                base16_colors = {}
+                for name, value in color_yaml["palette"].items():
+                    if value[0] == "#":
+                        base16_colors[name] = value[1:]
+                    else:
+                        base16_colors[name] = value
+                return base16_colors
 
     return None

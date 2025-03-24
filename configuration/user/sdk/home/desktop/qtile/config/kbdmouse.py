@@ -7,12 +7,26 @@ from window import float_to_front
 from settings.typedefs import Settings
 
 
+GROUP_SWITCH = ["cmd", "alt"]
+
+QTILE_CONTROL = ["cmd", "alt", "ctrl"]
+
+SCREEN_SWITCH = ["cmd", "alt", "ctrl"]
+
+VT_SWITCH = ["ctrl", "alt"]
+
+WINDOW_SWITCH = ["cmd"]
+WINDOW_MOVE = ["cmd", "shift"]
+WINDOW_CONTROL = ["cmd", "ctrl"]
+
+APP_LAUNCH = ["cmd", "alt"]
+
+
 def user_menu(settings: Settings):
-    # cmd = settings["key"]["cmd"]
-    # alt = settings["key"]["alt"]
+    # launch = [settings["key"][name] for name in (LAUNCH_APP)]
     return [
         # Key(
-        #     [cmd, alt],
+        #     modifiers,
         #     "F1",
         #     lazy.spawn("user-menu"),
         #     desc="Show the user menu",
@@ -21,11 +35,10 @@ def user_menu(settings: Settings):
 
 
 def system_menu(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
+    launch = [settings["key"][name] for name in (APP_LAUNCH)]
     return [
         Key(
-            [cmd, alt],
+            launch,
             "F12",
             lazy.spawn("system-menu"),
             desc="Show the system menu",
@@ -34,40 +47,39 @@ def system_menu(settings: Settings):
 
 
 def application(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
+    launch = [settings["key"][name] for name in (APP_LAUNCH)]
     return [
         # Launcher
         Key(
-            [cmd, alt],
+            launch,
             "Return",
-            lazy.spawn(settings["app"]["system-menu"]),
+            lazy.spawn(settings["app"]["app_launcher"]),
             desc="Show the rofi app launcher (drun)",
         ),
         # Browser
         Key(
-            [cmd, alt],
+            launch,
             "w",
             lazy.spawn(settings["app"]["browser"]),
             desc="Start the browser",
         ),
         # Brain
         Key(
-            [cmd, alt],
+            launch,
             "b",
             lazy.spawn(settings["app"]["brain"]),
             desc="Start the Brain",
         ),
         # Code Editor
         Key(
-            [cmd, alt],
+            launch,
             "c",
             lazy.spawn(settings["app"]["code"]),
             desc="Start Coding",
         ),
         # Terminal
         Key(
-            [cmd, alt],
+            launch,
             "t",
             lazy.spawn(settings["app"]["terminal"]),
             desc="Start the terminal",
@@ -88,32 +100,32 @@ def layout(settings: Settings):
 
 
 def window(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
-    shift = settings["key"]["shift"]
-    ctrl = settings["key"]["ctrl"]
+    switch = [settings["key"][name] for name in (WINDOW_SWITCH)]
+    move = [settings["key"][name] for name in (WINDOW_MOVE)]
+    control = [settings["key"][name] for name in (WINDOW_CONTROL)]
+
     return [
         # region Switch
         Key(
-            [cmd, alt],
+            switch,
             "h",
             lazy.layout.up(),
             desc="Previous window",
         ),
         Key(
-            [cmd, alt],
+            switch,
             "l",
             lazy.layout.down(),
             desc="Next window",
         ),
         Key(
-            [cmd, alt],
+            switch,
             "Left",
             lazy.layout.up(),
             desc="Previous window",
         ),
         Key(
-            [cmd, alt],
+            switch,
             "Right",
             lazy.layout.down(),
             desc="Next window",
@@ -121,40 +133,44 @@ def window(settings: Settings):
         # endregion
         # region Move
         Key(
-            [cmd, shift],
+            move,
             "Right",
             lazy.layout.shuffle_down(),
             desc="Move window down in stack",
         ),
         Key(
-            [cmd, shift],
+            move,
             "Left",
             lazy.layout.shuffle_up(),
             desc="Move window up in stack",
         ),
         Key(
-            [cmd, shift],
+            move,
             "l",
             lazy.layout.shuffle_down(),
             desc="Move window down in stack",
         ),
         Key(
-            [cmd, shift],
+            move,
             "h",
             lazy.layout.shuffle_up(),
             desc="Move window up in stack",
         ),
         # endregion
         # region Control
-        Key([cmd, shift], "f", float_to_front),
         Key(
-            [cmd, ctrl],
+            move,
+            "f",
+            float_to_front,
+        ),
+        Key(
+            control,
             "c",
             lazy.window.kill(),
             desc="Close window",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "f",
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
@@ -162,49 +178,49 @@ def window(settings: Settings):
         # endregion
         # region Size
         Key(
-            [cmd, ctrl],
+            control,
             "Right",
             lazy.layout.grow_main(),
             desc="Increase Main Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "l",
             lazy.layout.grow_main(),
             desc="Increase Main Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "Left",
             lazy.layout.shrink_main(),
             desc="Decrease Main Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "h",
             lazy.layout.shrink_main(),
             desc="Decrease Main Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "Up",
             lazy.layout.grow(),
             desc="Increase Sub Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "j",
             lazy.layout.grow(),
             desc="Increase Sub Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "Down",
             lazy.layout.shrink(),
             desc="Decrease Sub Window Size",
         ),
         Key(
-            [cmd, ctrl],
+            control,
             "k",
             lazy.layout.shrink(),
             desc="Decrease Sub Window Size",
@@ -214,16 +230,16 @@ def window(settings: Settings):
 
 
 def group(settings: Settings):
-    cmd = settings["key"]["cmd"]
+    switch = [settings["key"][name] for name in (GROUP_SWITCH)]
     return [
         Key(
-            [cmd],
+            switch,
             "Left",
             lazy.screen.prev_group(),
             desc="Switch to next group",
         ),
         Key(
-            [cmd],
+            switch,
             "Right",
             lazy.screen.next_group(),
             desc="Switch to previous group",
@@ -232,18 +248,16 @@ def group(settings: Settings):
 
 
 def screen(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
-    ctrl = settings["key"]["ctrl"]
+    switch = [settings["key"][name] for name in (SCREEN_SWITCH)]
     return [
         Key(
-            [cmd, alt, ctrl],
+            switch,
             "Right",
             lazy.next_scren(),
             desc="Switch to next screen",
         ),
         Key(
-            [cmd, alt, ctrl],
+            switch,
             "Left",
             lazy.prev_scren(),
             desc="Switch to previous screen",
@@ -252,11 +266,10 @@ def screen(settings: Settings):
 
 
 def clipboard(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
+    launch = [settings["key"][name] for name in (APP_LAUNCH)]
     return [
         Key(
-            [cmd, alt],
+            launch,
             "Insert",
             lazy.spawn(
                 "rofi-clip -c",
@@ -264,7 +277,7 @@ def clipboard(settings: Settings):
             desc="Copy an item from the clipboard history",
         ),
         Key(
-            [cmd, alt],
+            launch,
             "Delete",
             lazy.spawn(
                 "rofi-clip -d",
@@ -275,19 +288,17 @@ def clipboard(settings: Settings):
 
 
 def qtile(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
-    ctrl = settings["key"]["ctrl"]
+    control = [settings["key"][name] for name in (QTILE_CONTROL)]
     return [
         Key(
-            [cmd, alt, ctrl],
-            "Return",
+            control,
+            "Home",
             lazy.reload_config(),
             desc="Reload QTile",
         ),
         Key(
-            [cmd, alt, ctrl],
-            "Backspace",
+            control,
+            "End",
             lazy.shutdown(),
             desc="Quit QTile",
         ),
@@ -295,31 +306,30 @@ def qtile(settings: Settings):
 
 
 def music(settings: Settings):
-    cmd = settings["key"]["cmd"]
-    alt = settings["key"]["alt"]
-    ctrl = settings["key"]["ctrl"]
+    fkey = [settings["key"][name] for name in ("cmd",)]
+    launch = [settings["key"][name] for name in (APP_LAUNCH)]
     return [
         # Play / Pause
         Key(
-            [cmd],
+            fkey,
             "F8",
             lazy.spawn("musicctl toggle"),
             desc="Toggle music play/pause",
         ),
         Key(
-            [cmd],
+            fkey,
             "F7",
             lazy.spawn("musicctl previous"),
             desc="Switch to previous music track",
         ),
         Key(
-            [cmd],
+            fkey,
             "F9",
             lazy.spawn("musicctl next"),
             desc="Switch to next music track",
         ),
         Key(
-            [cmd, alt, ctrl],
+            launch,
             "F8",
             lazy.spawn("pavucontrol"),
             desc="Pavucontrol",
@@ -328,41 +338,40 @@ def music(settings: Settings):
 
 
 def vt(settings: Settings):
-    alt = settings["key"]["alt"]
-    ctrl = settings["key"]["ctrl"]
+    switch = [settings["key"][name] for name in (VT_SWITCH)]
     return [
         Key(
-            [ctrl, alt],
+            switch,
             "F1",
             lazy.core.change_vt(1),
             desc="Switch to VT 1",
         ),
         Key(
-            [ctrl, alt],
+            switch,
             "F2",
             lazy.core.change_vt(2),
             desc="Switch to VT 2",
         ),
         Key(
-            [ctrl, alt],
+            switch,
             "F3",
             lazy.core.change_vt(3),
             desc="Switch to VT 3",
         ),
         Key(
-            [ctrl, alt],
+            switch,
             "F4",
             lazy.core.change_vt(4),
             desc="Switch to VT 4",
         ),
         Key(
-            [ctrl, alt],
+            switch,
             "F5",
             lazy.core.change_vt(5),
             desc="Switch to VT 5",
         ),
         Key(
-            [ctrl, alt],
+            switch,
             "F6",
             lazy.core.change_vt(6),
             desc="Switch to VT 6",

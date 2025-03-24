@@ -5,10 +5,49 @@
   pkgs,
   ...
 }:
+let
+  margin = 8;
+in
 {
   config = {
     xdg.configFile."desktop/theme.yaml".text = lib.generators.toYAML { } {
-      logo = ""; # Nixos logo
+      bar = {
+        top = {
+          height = 38;
+          margin = [
+            margin
+            margin
+            0
+            margin
+          ];
+          opacity = 0.8;
+        };
+        bottom = {
+          height = 38;
+          margin = [
+            0
+            margin
+            margin
+            margin
+          ];
+          opacity = 0.8;
+        };
+      };
+
+      color = {
+        base16 = {
+          scheme_name = "nord";
+          scheme_dir = "${pkgs.base16-schemes}/share/themes";
+        };
+
+        named = {
+          widget_fg_dark = "base00";
+          widget_fg_light = "base04";
+          # widget_bg = [
+          #   "base07"
+          # ];
+        };
+      };
 
       font = {
         text = {
@@ -29,34 +68,11 @@
         };
       };
 
-      bars = {
-        top = {
-          height = 40;
-          margin = [
-            8
-            8
-            4
-            8
-          ];
-          opacity = 0.8;
-        };
-        bottom = {
-          height = 40;
-          margin = [
-            4
-            8
-            8
-            8
-          ];
-          opacity = 0.8;
-        };
+      layout = {
+        margin = margin;
       };
 
-      base16_scheme_name = "catppuccin-macchiato";
-      base16_scheme_dir = "${pkgs.base16-schemes}/share/themes";
-
-      foreground_dark = "base00";
-      foreground_light = "base04";
+      logo = ""; # Nixos logo
     };
   };
 }

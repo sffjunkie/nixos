@@ -1,8 +1,9 @@
+from enum import StrEnum
+
 from qtile_extras.widget.decorations import PowerLineDecoration  # type: ignore
 
-from theme.typedefs.theme import Theme
+from theme.typedefs import Theme
 from theme.utils import opacity_to_str
-from enum import StrEnum
 
 
 class BarPosition(StrEnum):

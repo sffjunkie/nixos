@@ -29,10 +29,11 @@ from qmodule.window_name import WindowName
 
 from color import contrast_color
 from settings.typedefs import Settings
-from theme.typedefs.theme import Theme
+from theme.typedefs import Theme
 
 
 def fg_cycle(iterable, fg_light: str, fg_dark: str) -> Iterator:
+    logger.warning(f"*** {fg_light}")
     saved = []
     for element in iterable:
         fg = contrast_color(element, fg_light, fg_dark)
@@ -44,26 +45,25 @@ def fg_cycle(iterable, fg_light: str, fg_dark: str) -> Iterator:
             yield element
 
 
-def powerline_fg_iter(theme: Theme) -> Iterator:
+def widget_fg_iter(theme: Theme) -> Iterator:
     return fg_cycle(
-        theme["color"]["named"]["powerline_bg"],
-        theme["color"]["named"]["foreground_light"],
-        theme["color"]["named"]["foreground_dark"],
+        theme["color"]["named"]["widget_bg"],
+        theme["color"]["named"]["widget_fg_light"],
+        theme["color"]["named"]["widget_fg_dark"],
     )
 
 
-def powerline_bg_iter(theme: Theme) -> Iterator:
-    return cycle(theme["color"]["named"]["powerline_bg"])
+def widget_bg_iter(theme: Theme) -> Iterator:
+    return cycle(theme["color"]["named"]["widget_bg"])
 
 
 def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
-    logger.warning(f"*** {theme}")
     named_colors = theme["color"]["named"]
 
-    bg_iter = powerline_bg_iter(theme)
-    fg_iter = powerline_fg_iter(theme)
+    bg_iter = widget_bg_iter(theme)
 
-    logger.warning(next(fg_iter))
+    # fg_iter = widget_fg_iter(theme)
+    # logger.warning(next(fg_iter))
 
     bar_context = BarContext(BarPosition.TOP, settings, theme)
 
@@ -77,6 +77,8 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
         )
     )
 
+    logger.warning(f"Background {next(bg_iter)} {next(bg_iter)}")
+    logger.warning(theme["color"]["named"]["widget_bg"])
     # region start
     start: list[WidgetModule] = [
         UserMenu(
@@ -201,7 +203,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
 
 
 def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
-    bg_iter = powerline_bg_iter(theme)
+    bg_iter = widget_bg_iter(theme)
 
     bar_context = BarContext(BarPosition.BOTTOM, settings, theme)
 
