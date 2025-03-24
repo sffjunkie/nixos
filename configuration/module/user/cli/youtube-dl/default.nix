@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.cli.youtubeDl;
@@ -13,8 +14,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [
-      pkgs.yt-dlp
-    ];
+    programs.yt-dlp = {
+      enable = true;
+      settings = {
+        paths = "home:~/videos/youtube/";
+      };
+    };
   };
 }
