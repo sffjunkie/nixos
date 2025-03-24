@@ -30,6 +30,7 @@ in
       cursor = {
         name = "Nordzy-cursors";
         package = pkgs.nordzy-cursor-theme;
+        size = 32;
       };
 
       fonts = {
