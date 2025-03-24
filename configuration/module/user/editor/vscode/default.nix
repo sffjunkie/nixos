@@ -108,9 +108,11 @@ in
             };
             "files.insertFinalNewline" = true;
             "files.exclude" = {
-              "**/.tox" = true;
               ".devenv" = true;
               ".direnv" = true;
+              "**/.mypy_cache" = true;
+              "**/.pytest_cache" = true;
+              "**/.tox" = true;
             };
 
             "git.confirmSync" = false;
