@@ -17,7 +17,7 @@ let
 in
 {
   options.looniversity.wayland.keyboard.hyper_super = {
-    enable = mkEnableOption "separate hyper and super keys";
+    enable = mkEnableOption "separate hyper and cmd keys";
 
     name = mkOption {
       type = types.str;
