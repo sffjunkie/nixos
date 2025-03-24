@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.development.treefmt;
@@ -14,7 +15,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = [
-      pkgs.treefmt2
+      pkgs.treefmt
     ];
   };
 }
