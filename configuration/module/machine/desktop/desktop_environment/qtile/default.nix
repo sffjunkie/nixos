@@ -64,7 +64,7 @@ in
               ps.qtile-extras
 
               # Packages required by widgets
-              ps.dbus-next # Bluetooth
+              ps.dbus-fast # Bluetooth
               ps.psutil # CPU
               ps.pulsectl-asyncio # PulseVolume
 
