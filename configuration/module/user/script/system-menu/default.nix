@@ -7,6 +7,8 @@
 let
   cfg = config.looniversity.script.system-menu;
 
+  rofi = config.programs.rofi.package;
+
   system-menu-script = pkgs.writeScriptBin "system-menu" ''
     #!${lib.getExe pkgs.bash}
     swapon --show | grep "dev" > /dev/null 2>&1
