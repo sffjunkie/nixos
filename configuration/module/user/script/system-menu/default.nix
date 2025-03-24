@@ -16,7 +16,7 @@ let
     fi
 
     choices="suspend/lockscreen''${hibernate_choice}/reboot/shutdown"
-    ${lib.getExe pkgs.rofi} \
+    ${lib.getExe rofi} \
       -theme-str '@import "looniversity"' \
       -show power-menu \
       -modi "power-menu:rofi-power-menu --choices=''${choices}"
