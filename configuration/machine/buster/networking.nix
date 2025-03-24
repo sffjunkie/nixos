@@ -1,6 +1,6 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
-  lanDev = lib.network.netdevice config "buster" "lan";
+  lanDev = lib.network.netdevice config "buster" "wifi";
 in
 {
   config = {
