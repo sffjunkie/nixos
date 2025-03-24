@@ -23,6 +23,7 @@ let
     golang.go
     gruntfuggly.todo-tree
     humao.rest-client
+    mkhl.direnv
     ms-python.python
     ms-python.vscode-pylance
     ms-vscode.makefile-tools
