@@ -145,6 +145,11 @@ in
         vscode = enabled;
       };
 
+      keyboard = {
+        input-remapper = disabled;
+        hyper_super = enabled;
+      };
+
       terminal = {
         alacritty = enabled;
         kitty = disabled;
@@ -212,7 +217,6 @@ in
           wdisplays = enabled;
         };
         screenshot.sshot = enabled;
-        keyboard.hyper_super = disabled;
         lockscreen.swaylock = enabled;
       };
     };
