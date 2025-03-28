@@ -34,6 +34,8 @@ in
         mystmd = enabled;
       };
 
+      keyboard.input-remapper = disabled;
+
       media = {
         pavucontrol = enabled;
         spotify = enabled;
@@ -82,8 +84,6 @@ in
       pkgs.teams-for-linux
       pkgs.zoom-us
     ];
-
-    services.input-remapper = enabled;
 
     systemd.services = {
       "rclone@gdrive" = {
