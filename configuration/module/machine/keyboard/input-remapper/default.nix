@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.keyboard.input-remapperr;
+  cfg = config.looniversity.keyboard.input-remapper;
 
   inherit (lib) mkEnableOption mkIf;
 in
@@ -16,7 +16,7 @@ in
 
   config = mkIf cfg.enable {
     services.input-remapper = {
-      enabled = true;
+      enable = true;
     };
   };
 }
