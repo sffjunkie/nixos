@@ -212,7 +212,7 @@ in
           wdisplays = enabled;
         };
         screenshot.sshot = enabled;
-        keyboard.hyper_super = enabled;
+        keyboard.hyper_super = disabled;
         lockscreen.swaylock = enabled;
       };
     };

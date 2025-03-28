@@ -9,6 +9,7 @@
     ./game
     ./gfx
     ./gui
+    ./keyboard
     ./media
     ./music
     ./script

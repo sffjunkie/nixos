@@ -1,5 +1,5 @@
 {
   imports = [
-    ./evdevremapkeys
+    ./input-remapper
   ];
 }

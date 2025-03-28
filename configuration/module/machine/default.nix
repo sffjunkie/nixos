@@ -7,6 +7,7 @@
     ./fs
     ./game
     ./home-automation
+    ./keyboard
     ./media
     ./network
     ./script

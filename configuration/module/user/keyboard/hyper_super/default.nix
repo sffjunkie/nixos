@@ -7,7 +7,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.wayland.keyboard.hyper_super;
+  cfg = config.looniversity.keyboard.hyper_super;
   inherit (lib)
     mkEnableOption
     mkIf
@@ -16,7 +16,7 @@ let
     ;
 in
 {
-  options.looniversity.wayland.keyboard.hyper_super = {
+  options.looniversity.keyboard.hyper_super = {
     enable = mkEnableOption "separate hyper and cmd keys";
 
     name = mkOption {
@@ -26,7 +26,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".xkb/symbols/${config.looniversity.wayland.keyboard.hyper_super.name}".text = ''
+    home.file.".xkb/symbols/${config.looniversity.keyboard.hyper_super.name}".text = ''
       default partial modifier_keys
 
       xkb_symbols "basic" {

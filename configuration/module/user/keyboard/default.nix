@@ -1,6 +1,6 @@
 {
   imports = [
-    ./evdevremapkeys
+    ./input-remapper
     ./hyper_super
   ];
 }
