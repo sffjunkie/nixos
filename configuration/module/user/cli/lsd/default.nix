@@ -15,7 +15,7 @@ in
   config = mkIf cfg.enable {
     programs.lsd = {
       enable = true;
-      enableAliases = true;
+      enableZshIntegration = true;
     };
   };
 }
