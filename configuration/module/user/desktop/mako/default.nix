@@ -18,9 +18,14 @@ in
       enable = true;
       anchor = "top-right";
       extraConfig = ''
-        width=384
-        max-icon-size=128
-        outer-margin=45,5
+        outer-margin=45,8
+
+        [app-name=music-notify]
+        width=600
+        max-icon-size=256
+        anchor=bottom-right
+        outer-margin=60,8
+        format=%b
       '';
     };
 
