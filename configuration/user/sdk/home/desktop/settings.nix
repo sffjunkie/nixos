@@ -5,9 +5,12 @@
   pkgs,
   ...
 }:
+let
+  settingsFormat = pkgs.formats.yaml { };
+in
 {
   config = {
-    xdg.configFile."desktop/settings.yaml".text = lib.generators.toYAML { } {
+    xdg.configFile."desktop/settings.yaml".source = settingsFormat.generate "desktop-settings.yaml" {
       app = {
         app_launcher = "rofi-launcher";
         brain = "${pkgs.obsidian}/bin/obsidian";

@@ -7,10 +7,11 @@
 }:
 let
   margin = 8;
+  settingsFormat = pkgs.formats.yaml { };
 in
 {
   config = {
-    xdg.configFile."desktop/theme.yaml".text = lib.generators.toYAML { } {
+    xdg.configFile."desktop/theme.yaml".source = settingsFormat.generate "desktop-theme.yaml" {
       bar = {
         top = {
           height = 38;

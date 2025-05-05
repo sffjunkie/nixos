@@ -5,9 +5,12 @@
   pkgs,
   ...
 }:
+let
+  settingsFormat = pkgs.formats.yaml { };
+in
 {
   config = {
-    xdg.configFile."desktop/group.yaml".text = lib.generators.toYAML { } {
+    xdg.configFile."desktop/group.yaml".source = settingsFormat.generate "desktop-group.yaml" {
       groups = [
         {
           name = "WWW";
