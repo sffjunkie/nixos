@@ -16,17 +16,18 @@ in
   config = mkIf cfg.enable {
     services.mako = {
       enable = true;
-      anchor = "top-right";
-      extraConfig = ''
-        outer-margin=45,8
+      settings = {
+        anchor = "top-right";
+        outer-margin = "45,8";
 
-        [app-name=music-notify]
-        width=600
-        max-icon-size=256
-        anchor=bottom-right
-        outer-margin=60,8
-        format=%b
-      '';
+        "app-name=music-notify" = {
+          width = 600;
+          max-icon-size = 256;
+          anchor = "bottom-right";
+          outer-margin = "60,8";
+          format = "%b";
+        };
+      };
     };
 
     systemd.user.services.mako = {
