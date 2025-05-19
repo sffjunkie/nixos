@@ -1,5 +1,6 @@
 {
   imports = [
+    ./stadia
     ./wacom
     ./yubikey
   ];
