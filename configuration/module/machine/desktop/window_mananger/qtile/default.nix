@@ -99,7 +99,7 @@ in
 
         serviceConfig = {
           Type = "simple";
-          ExecStart = "${pyEnv}/bin/qtile start -b wayland";
+          ExecStart = "${pyEnv}/bin/qtile start --backend wayland --config %h/.config/qtile";
           Restart = "on-failure";
           RestartSec = 1;
           TimeoutStopSec = 10;
