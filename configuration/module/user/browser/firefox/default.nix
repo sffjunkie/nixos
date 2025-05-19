@@ -15,6 +15,9 @@ in
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
+      profiles = {
+        default = { };
+      };
     };
   };
 }
