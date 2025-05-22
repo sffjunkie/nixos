@@ -1,7 +1,9 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  osConfig,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.storage.udiskie;

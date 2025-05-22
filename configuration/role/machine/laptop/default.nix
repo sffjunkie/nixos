@@ -1,8 +1,9 @@
-{ config
-, lib
-, nixos-hardware
-, pkgs
-, ...
+{
+  config,
+  lib,
+  nixos-hardware,
+  pkgs,
+  ...
 }:
 let
   inherit (lib) mkEnableOption mkIf;

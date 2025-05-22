@@ -1,11 +1,17 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.system.gpg;
-  inherit (lib) mkDefault mkEnableOption mkIf mkOption;
+  inherit (lib)
+    mkDefault
+    mkEnableOption
+    mkIf
+    mkOption
+    ;
 in
 {
   options.looniversity.system.gpg.enable = mkEnableOption "gpg";
@@ -20,7 +26,7 @@ in
       enable = true;
       enableSshSupport = true;
       defaultCacheTtl = 1800;
-      pinentryPackage = pkgs.pinentry-gtk2;
+      pinentry.package = pkgs.pinentry-gtk2;
     };
   };
 }

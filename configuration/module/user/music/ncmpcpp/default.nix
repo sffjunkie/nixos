@@ -1,12 +1,18 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.music.ncmpcpp;
   mpdcfg = config.looniversity.music.mpd;
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.music.ncmpcpp = {
@@ -17,8 +23,8 @@ in
     programs.ncmpcpp = {
       enable = true;
       settings = {
-        mpd_host = mpdcfg.mpdHost;
-        mpd_port = "${toString mpdcfg.mpdPort}";
+        mpd_host = mpdcfg.host;
+        mpd_port = "${toString mpdcfg.port}";
 
         startup_screen = "playlist";
 
@@ -54,11 +60,6 @@ in
         ignore_leading_the = "yes";
         external_editor = "nano";
         use_console_editor = "yes";
-
-        visualizer_data_source = mpdcfg.mpdFifoAddress;
-        visualizer_output_name = mpdcfg.mpdVisualizerFeedName;
-        visualizer_in_stereo = "yes";
-        visualizer_type = "wave";
 
         playlist_disable_highlight_delay = 0;
       };
