@@ -3,7 +3,7 @@ from libqtile.config import Match, Rule  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.config import Key, Group  # type: ignore
 
-from settings.typedefs import Settings
+from .settings.typedefs import Settings
 
 
 group_config = {

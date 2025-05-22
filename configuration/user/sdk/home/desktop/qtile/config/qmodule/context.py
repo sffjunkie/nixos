@@ -1,8 +1,8 @@
 from enum import StrEnum
 
-from theme.typedefs import Theme
-from qbar.context import BarContext
-from theme.utils import opacity_to_str
+from ..theme.typedefs import Theme
+from ..qbar.context import BarContext
+from ..theme.utils import opacity_to_str
 
 
 class GroupPosition(StrEnum):

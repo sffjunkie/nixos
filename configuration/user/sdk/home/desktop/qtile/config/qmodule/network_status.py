@@ -2,11 +2,11 @@ from libqtile.lazy import lazy  # type: ignore
 from libqtile.widget import base  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.context import ModuleContext
-from qmodule.base import WidgetModule
-from qwidget.icon import MDIcon
-from qwidget.net_min import NetMin
-from terminal import terminal_run_command, terminal_from_env
+from .context import ModuleContext
+from .base import WidgetModule
+from ..qwidget.icon import MDIcon
+from ..qwidget.net_min import NetMin
+from ..terminal import terminal_run_command, terminal_from_env
 
 
 class NetworkStatus(WidgetModule):

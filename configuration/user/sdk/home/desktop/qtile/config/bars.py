@@ -8,28 +8,29 @@ from libqtile.log_utils import logger  # type: ignore
 from libqtile.bar import Bar as QBar  # type: ignore
 from qtile_extras.widget import Spacer as QSpacer  # type: ignore
 
-from qbar.context import BarContext, BarPosition
+from .qbar.context import BarContext, BarPosition
 
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
-from qmodule.cpu_temp_status import CPUTempStatus
-from qmodule.cpu_usage_status import CPUUsageStatus
-from qmodule.current_layout import CurrentLayout
-from qmodule.date_time import DateTime
-from qmodule.group_box import GroupBox
-from qmodule.memory_status import MemoryStatus
-from qmodule.music_status import MusicStatus
-from qmodule.network_status import NetworkStatus
-from qmodule.separator import Separator
-from qmodule.system_menu import SystemMenu
-from qmodule.user_menu import UserMenu
-from qmodule.volume_status import VolumeStatus
-from qmodule.weather import Weather
-from qmodule.window_name import WindowName
+from .qmodule.base import WidgetModule
+from .qmodule.bluetooth import Bluetooth
+from .qmodule.context import ModuleContext
+from .qmodule.cpu_temp_status import CPUTempStatus
+from .qmodule.cpu_usage_status import CPUUsageStatus
+from .qmodule.current_layout import CurrentLayout
+from .qmodule.date_time import DateTime
+from .qmodule.group_box import GroupBox
+from .qmodule.memory_status import MemoryStatus
+from .qmodule.music_status import MusicStatus
+from .qmodule.network_status import NetworkStatus
+from .qmodule.separator import Separator
+from .qmodule.system_menu import SystemMenu
+from .qmodule.user_menu import UserMenu
+from .qmodule.volume_status import VolumeStatus
+from .qmodule.weather import Weather
+from .qmodule.window_name import WindowName
 
-from color import contrast_color
-from settings.typedefs import Settings
-from theme.typedefs import Theme
+from .color import contrast_color
+from .settings.typedefs import Settings
+from .theme.typedefs import Theme
 
 
 def fg_cycle(iterable, fg_light: str, fg_dark: str) -> Iterator:
@@ -157,7 +158,7 @@ def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
                     "latitude": os.environ.get("USER_LOCATION_LATITUDE", "51.5"),
                     "longitude": os.environ.get("USER_LOCATION_LONGITUDE", "-0.15"),
                 },
-                "format": "{main_temp}/{main_feels_like}°{units_temperature} {icon}",
+                "format": "{main_temp:.1f}/{main_feels_like:.1f}°{units_temperature} {icon}",
             },
         },
     )
@@ -256,12 +257,23 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
             "background": next(bg_iter),
         },
     )
+    bluetooth_context = ModuleContext(
+        bar_context,
+        settings,
+        theme,
+        props={
+            "background": next(bg_iter),
+            "menu_font": "JetBrainsMono Nerd Font",
+            "menu_fontsize": 16,
+        },
+    )
 
     start: list[WidgetModule] = [
         NetworkStatus(network_status_context),
         MemoryStatus(memory_status_context),
         CPUUsageStatus(cpu_usage_context),
         CPUTempStatus(cpu_temp_context),
+        Bluetooth(bluetooth_context),
     ]
 
     for idx, group in enumerate(start):

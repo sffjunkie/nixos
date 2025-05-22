@@ -3,10 +3,10 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import CPU  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
-from qwidget.icon import MDIcon
-from terminal import terminal_run_command, terminal_from_env
+from .base import WidgetModule
+from .context import ModuleContext
+from ..qwidget.icon import MDIcon
+from ..terminal import terminal_run_command, terminal_from_env
 
 
 class CPUUsageStatus(WidgetModule):

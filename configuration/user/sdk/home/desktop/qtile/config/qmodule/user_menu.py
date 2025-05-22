@@ -4,9 +4,9 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import TextBox  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.context import ModuleContext
-from qmodule.base import WidgetModule
-from qwidget.icon import MDIcon
+from .context import ModuleContext
+from .base import WidgetModule
+from ..qwidget.icon import MDIcon
 
 # from libqtile.log_utils import logger  # type: ignore
 

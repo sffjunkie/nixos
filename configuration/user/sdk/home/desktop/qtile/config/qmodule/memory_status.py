@@ -3,10 +3,10 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import Memory  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qwidget.icon import MDIcon
-from terminal import terminal_from_env, terminal_run_command
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
+from ..qwidget.icon import MDIcon
+from ..terminal import terminal_from_env, terminal_run_command
+from .base import WidgetModule
+from .context import ModuleContext
 
 
 class MemoryStatus(WidgetModule):

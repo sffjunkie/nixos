@@ -3,8 +3,8 @@
 from libqtile.config import Click, Drag, Key  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 
-from window import float_to_front
-from settings.typedefs import Settings
+from .window import float_to_front
+from .settings.typedefs import Settings
 
 
 GROUP_SWITCH = ["cmd", "alt"]
@@ -299,7 +299,7 @@ def qtile(settings: Settings):
         Key(
             control,
             "End",
-            lazy.shutdown(),
+            lazy.spawn('loginctl terminate-user ""'),
             desc="Quit QTile",
         ),
     ]
@@ -333,6 +333,12 @@ def music(settings: Settings):
             "F8",
             lazy.spawn("pavucontrol"),
             desc="Pavucontrol",
+        ),
+        Key(
+            launch,
+            "F9",
+            lazy.spawn("music-notify"),
+            desc="Music notification",
         ),
     ]
 

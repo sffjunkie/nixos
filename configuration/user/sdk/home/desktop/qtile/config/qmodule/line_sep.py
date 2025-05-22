@@ -1,8 +1,8 @@
 from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import Sep  # type: ignore
 
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
+from .base import WidgetModule
+from .context import ModuleContext
 
 
 class LineSeparator(WidgetModule):

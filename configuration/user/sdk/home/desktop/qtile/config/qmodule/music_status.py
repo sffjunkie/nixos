@@ -2,9 +2,9 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import Mpd2  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.base import WidgetModule
-from qwidget.icon import MDIcon
-from qmodule.context import ModuleContext
+from .base import WidgetModule
+from ..qwidget.icon import MDIcon
+from .context import ModuleContext
 
 
 class MusicStatus(WidgetModule):

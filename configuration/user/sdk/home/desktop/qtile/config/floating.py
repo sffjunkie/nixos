@@ -1,6 +1,6 @@
 from libqtile import layout  # type: ignore
 from libqtile.config import Match, Rule  # type: ignore
-from theme.typedefs import Theme
+from .theme.typedefs import Theme
 
 wmclass_float = [
     "com.github.wwmm.easyeffects",
