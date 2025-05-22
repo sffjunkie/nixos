@@ -7,7 +7,7 @@
 }:
 let
   cfg = config.looniversity.editor.vscode.python;
-  inherit (lib) mkDefault mkEnableOption mkIf;
+  inherit (lib) mkEnableOption mkIf;
 
   vscodeExtensions = with pkgs.vscode-extensions; [
     ms-python.python
