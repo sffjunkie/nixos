@@ -1,11 +1,7 @@
 {
   imports = [
-    ./coredns
-    ./net-tools
-    ./openvpn
-    ./sshd
-    ./traefik
-    ./unbound
-    ./unifi
+    ./app
+    ./controller
+    ./link
   ];
 }
