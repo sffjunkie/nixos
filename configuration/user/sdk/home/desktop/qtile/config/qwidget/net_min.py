@@ -21,7 +21,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 from math import log
-from typing import Tuple
+
+import psutil  # type: ignore
 
 from libqtile.log_utils import logger  # type: ignore
 from libqtile.widget import base  # type: ignore
@@ -42,86 +43,149 @@ class NetMin(widget.Net):
     defaults = [
         (
             "format",
-            "{down} ↓↑ {up}",
-            "Display format of down-/upload speed of given interfaces",
+            "{down:6.2f}{down_suffix:<2}\u2193\u2191{up:6.2f}{up_suffix:<2}",
+            "Display format of down/upload/total speed of given interfaces",
         ),
-        ("minimum", 10 * 1024, "The minimum number of bytes before showing values."),
+        (
+            "minimum",
+            10 * 1024,
+            "The minimum number of bytes before showing values.",
+        ),
     ]
 
     def __init__(self, **config):
-        widget.Net.__init__(self, **config)
+        super().__init__(**config)
         self.add_defaults(NetMin.defaults)
 
-    def convert_b(self, num_bytes: float) -> Tuple[float, str]:
-        """Converts the number of bytes to the correct unit"""
-        factor = 1000.0
+        self.factor = 1000.0
+        self.allowed_prefixes = ["", "k", "M", "G", "T", "P", "E", "Z", "Y"]
 
         if self.use_bits:
-            letters = [" b", "kb", "Mb", "Gb", "Tb", "Pb", "Eb", "Zb", "Yb"]
-            num_bytes *= 8
+            self.base_unit = "b"
+            self.byte_multiplier = 8
         else:
-            letters = [" B", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
+            self.base_unit = "B"
+            self.byte_multiplier = 1
 
-        if num_bytes > 0:
-            power = int(log(num_bytes) / log(factor))
-            power = max(min(power, len(letters) - 1), 0)
+        self.units = list(map(lambda p: p + self.base_unit, self.allowed_prefixes))
+
+        if not isinstance(self.interface, list):
+            if self.interface is None:
+                self.interface = ["all"]
+            elif isinstance(self.interface, str):
+                self.interface = [self.interface]
+            else:
+                raise AttributeError(
+                    f"Invalid Argument passed: {self.interface}\nAllowed Types: list, str, None"
+                )
+        self.stats = self.get_stats()
+
+    def convert_b(
+        self, num_bytes: float, prefix: str | None = None
+    ) -> tuple[float, str]:
+        """Converts the number of bytes to the correct unit"""
+
+        num_bytes *= self.byte_multiplier
+
+        if prefix is None:
+            if num_bytes > 0:
+                power = int(log(num_bytes) / log(self.factor))
+                power = min(power, len(self.units) - 1)
+            else:
+                power = 0
         else:
-            power = 0
+            power = self.allowed_prefixes.index(prefix)
 
-        converted_bytes = num_bytes / factor**power
-        unit = letters[power]
+        converted_bytes = num_bytes / self.factor**power
+        unit = self.units[power]
 
         return converted_bytes, unit
 
-    def _format_down(self, down, down_letter):
-        max_len_down = 7 - len(down_letter)
-        down = "{val:{max_len}f}".format(val=down, max_len=max_len_down)
-        return down[:max_len_down]
-
-    def _format_up(self, up, up_letter):
-        max_len_up = 7 - len(up_letter)
-        up = "{val:{max_len}f}".format(val=up, max_len=max_len_up)
-        return up[:max_len_up]
+    def get_stats(self):
+        interfaces = {}
+        if self.interface == ["all"]:
+            net = psutil.net_io_counters(pernic=False)
+            interfaces["all"] = {
+                "down": net.bytes_recv,
+                "up": net.bytes_sent,
+                "total": net.bytes_recv + net.bytes_sent,
+            }
+            return interfaces
+        else:
+            net = psutil.net_io_counters(pernic=True)
+            for iface in net:
+                down = net[iface].bytes_recv
+                up = net[iface].bytes_sent
+                interfaces[iface] = {
+                    "down": down,
+                    "up": up,
+                    "total": down + up,
+                }
+            return interfaces
 
     def poll(self):
         ret_stat = []
         try:
+            new_stats = self.get_stats()
             for intf in self.interface:
-                new_stats = self.get_stats()
                 down = new_stats[intf]["down"] - self.stats[intf]["down"]
                 up = new_stats[intf]["up"] - self.stats[intf]["up"]
+                total = new_stats[intf]["total"] - self.stats[intf]["total"]
 
                 down = down / self.update_interval
                 up = up / self.update_interval
+                total = total / self.update_interval
                 zero = "   ≅0  "
 
                 if down > self.minimum:
-                    down, down_letter = self.convert_b(down)
-                    down = self._format_down(down, down_letter)
-                    down += down_letter
+                    down, down_suffix = self.convert_b(down, self.prefix)
                 else:
                     down = zero
-                    down_letter = ""
+                    down_suffix = ""
+
+                down_cumulative, down_cumulative_suffix = self.convert_b(
+                    new_stats[intf]["down"], self.cumulative_prefix
+                )
 
                 if up > self.minimum:
-                    up, up_letter = self.convert_b(up)
-                    up = self._format_up(up, up_letter)
-                    up += up_letter
+                    up, up_suffix = self.convert_b(up, self.prefix)
                 else:
                     up = zero
-                    up_letter = ""
+                    up_suffix = ""
+
+                up_cumulative, up_cumulative_suffix = self.convert_b(
+                    new_stats[intf]["up"], self.cumulative_prefix
+                )
+
+                if total > self.minimum:
+                    total, total_suffix = self.convert_b(total, self.prefix)
+                else:
+                    total = zero
+                    total_suffix = ""
+
+                total_cumulative, total_cumulative_suffix = self.convert_b(
+                    new_stats[intf]["total"], self.cumulative_prefix
+                )
 
                 self.stats[intf] = new_stats[intf]
                 ret_stat.append(
                     self.format.format(
-                        **{
-                            "interface": intf,
-                            "down": down,
-                            "up": up,
-                        }
+                        interface=intf,
+                        down=down,
+                        down_suffix=down_suffix,
+                        down_cumulative=down_cumulative,
+                        down_cumulative_suffix=down_cumulative_suffix,
+                        up=up,
+                        up_suffix=up_suffix,
+                        up_cumulative=up_cumulative,
+                        up_cumulative_suffix=up_cumulative_suffix,
+                        total=total,
+                        total_suffix=total_suffix,
+                        total_cumulative=total_cumulative,
+                        total_cumulative_suffix=total_cumulative_suffix,
                     )
                 )
 
             return " ".join(ret_stat)
-        except Exception as excp:
-            logger.error("%s: Caught Exception:\n%s", self.__class__.__name__, excp)
+        except Exception:
+            logger.exception("Net widget errored while polling:")

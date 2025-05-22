@@ -3,9 +3,9 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import PulseVolume  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qwidget.icon import MDIcon
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
+from ..qwidget.icon import MDIcon
+from .base import WidgetModule
+from .context import ModuleContext
 
 
 class VolumeStatus(WidgetModule):
@@ -45,6 +45,10 @@ class VolumeStatus(WidgetModule):
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
             "background": f"{background_color}00",
+            "mouse_callbacks": {
+                "Button4": lazy.widget["bar_volume"].decrease_vol(),
+                "Button5": lazy.widget["bar_volume"].increase_vol(),
+            },
         }
 
         props = self.context.merge_parameters(
@@ -64,9 +68,8 @@ class VolumeStatus(WidgetModule):
             "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
-                "Button1": lazy.widget["bar_volume"].mute(),
-                "Button4": lazy.widget["bar_volume"].increase_vol(),
-                "Button5": lazy.widget["bar_volume"].decrease_vol(),
+                "Button4": lazy.widget["bar_volume"].decrease_vol(),
+                "Button5": lazy.widget["bar_volume"].increase_vol(),
             },
         }
 

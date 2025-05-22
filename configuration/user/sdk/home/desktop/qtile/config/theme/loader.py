@@ -4,9 +4,9 @@ from pathlib import Path
 import yaml  # type: ignore
 from libqtile.log_utils import logger  # type: ignore
 
-from theme.typedefs import NamedColors, Base16Colors, Theme
+from .typedefs import NamedColors, Base16Colors, Theme
 
-from theme.utils import is_base16, is_color
+from .utils import is_base16, is_color
 
 
 def _deref_colors(

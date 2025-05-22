@@ -2,8 +2,8 @@ from libqtile.widget import base  # type: ignore
 from qtile_extras.widget import OpenWeather  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.context import ModuleContext
-from qmodule.base import WidgetModule
+from .context import ModuleContext
+from .base import WidgetModule
 
 
 class Weather(WidgetModule):

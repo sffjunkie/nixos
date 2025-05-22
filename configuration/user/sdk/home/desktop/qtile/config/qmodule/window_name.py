@@ -3,8 +3,8 @@ from qtile_extras.widget import Spacer as QSpacer  # type: ignore
 from qtile_extras.widget import WindowName as QWindowName  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
-from qmodule.base import WidgetModule
-from qmodule.context import ModuleContext
+from .base import WidgetModule
+from .context import ModuleContext
 
 
 class WindowName(WidgetModule):

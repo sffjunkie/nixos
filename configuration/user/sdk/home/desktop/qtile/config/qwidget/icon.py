@@ -2,6 +2,7 @@ from qtile_extras import widget  # type: ignore
 
 
 MDICONS: dict[str, str] = {
+    "bluetooth": chr(0xF00AF),
     "calendar": chr(983277),
     "clock": chr(983376),
     "cpu_temp": chr(984335),

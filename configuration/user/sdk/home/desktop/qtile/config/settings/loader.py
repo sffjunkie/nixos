@@ -5,7 +5,7 @@ import yaml  # type: ignore
 
 from libqtile.log_utils import logger  # type: ignore
 
-from settings.typedefs import Settings
+from .typedefs import Settings
 
 
 def _settings_path(filepath: Path | None = None) -> str:
