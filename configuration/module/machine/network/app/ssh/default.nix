@@ -1,11 +1,18 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  cfg = config.looniversity.system.ssh;
-  inherit (lib) mkEnableOption mkIf mkOption types traceVal;
+  cfg = config.looniversity.network.app.ssh;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    traceVal
+    ;
 in
 {
   options.looniversity.system.ssh = {

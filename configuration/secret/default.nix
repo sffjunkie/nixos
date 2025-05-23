@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   options.sopsFiles = lib.mkOption {
     type = lib.types.attrsOf lib.types.path;
   };

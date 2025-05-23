@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  cfg = config.looniversity.network.coredns;
+  cfg = config.looniversity.network.app.coredns;
   lanDev = lib.traceVal lib.network.netdevice config "pinky" "lan";
   lanIpv4 = lib.network.lanIpv4 config "pinky";
   dynamicZoneDataDir = "/var/lib/coredns/dynamic";
