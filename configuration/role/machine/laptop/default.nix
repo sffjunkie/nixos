@@ -69,8 +69,6 @@ in
     networking.networkmanager.enable = true;
     networking.firewall.enable = false;
 
-    hardware.bluetooth.enable = true;
-
     services.libinput.enable = true;
     services.pcscd.enable = true;
     services.upower.enable = true;
