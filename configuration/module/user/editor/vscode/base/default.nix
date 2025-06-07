@@ -25,7 +25,6 @@ let
     oderwat.indent-rainbow
     pkief.material-icon-theme
     stkb.rewrap
-    timonwong.shellcheck
     twxs.cmake
     zxh404.vscode-proto3
 
@@ -69,6 +68,7 @@ in
             "cSpell.enabled" = false;
 
             "diffEditor.ignoreTrimWhitespace" = false;
+
             "editor.formatOnSave" = true;
             "editor.lineNumbers" = "relative";
             "editor.parameterHints.enabled" = false;

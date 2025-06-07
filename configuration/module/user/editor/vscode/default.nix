@@ -6,6 +6,7 @@
     ./markdown
     ./nix
     ./python
+    ./shellcheck
     ./theme
     ./toml
   ];
