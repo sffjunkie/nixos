@@ -125,6 +125,7 @@ in
       gui = {
         fava = enabled;
         firefox = enabled;
+        google-chrome = enabled;
         brave = enabled;
         darktable = enabled;
         discord = enabled;
