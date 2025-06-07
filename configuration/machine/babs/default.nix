@@ -22,7 +22,7 @@
 
     looniversity = {
       network = {
-        net-tools.enable = true;
+        cli.enable = true;
         sshd.enable = true;
       };
 

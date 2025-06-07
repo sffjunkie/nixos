@@ -5,12 +5,12 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.tool.net-tools;
+  cfg = config.looniversity.network.tool.cli;
 
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.network.tool.net-tools = {
+  options.looniversity.network.tool.cli = {
     enable = mkEnableOption "networking tools";
   };
 
