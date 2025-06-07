@@ -9,10 +9,8 @@
     ./homepage-dashboard
     ./immich
     ./lldap
-    ./mongodb
     ./netbox
     ./nextcloud
-    ./postgresql
     ./step-ca
   ];
 }
