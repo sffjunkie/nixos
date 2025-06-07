@@ -5,5 +5,6 @@
     ./nfs
     ./samba
     ./udisks2
+    ./zfs
   ];
 }
