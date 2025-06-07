@@ -72,7 +72,7 @@
         stylix.nixosModules.stylix
       ];
 
-      hmCommonModules = [
+      homeCommonModules = [
         home-manager.nixosModules.default
         {
           config = {
@@ -112,7 +112,7 @@
               }
             ]
             ++ hostCommonModules
-            ++ hmCommonModules;
+            ++ homeCommonModules;
         };
 
         # Services
@@ -131,7 +131,7 @@
               }
             ]
             ++ hostCommonModules
-            ++ hmCommonModules;
+            ++ homeCommonModules;
         };
 
         # Workstation
@@ -159,7 +159,7 @@
               qde.nixosModules.default
             ]
             ++ hostCommonModules
-            ++ hmCommonModules;
+            ++ homeCommonModules;
         };
 
         # Storage
@@ -181,7 +181,7 @@
               nixos-hardware.nixosModules.common-pc-ssd
             ]
             ++ hostCommonModules
-            ++ hmCommonModules;
+            ++ homeCommonModules;
         };
 
         # Laptop
@@ -207,7 +207,7 @@
               nixos-hardware.nixosModules.microsoft-surface-pro-intel
             ]
             ++ hostCommonModules
-            ++ hmCommonModules;
+            ++ homeCommonModules;
         };
 
         # Installer ISO
@@ -223,7 +223,7 @@
               config.home-manager.users.nixos = import ./configuration/user/nixos/home;
             }
             sops-nix.nixosModules.sops
-          ] ++ hmCommonModules;
+          ] ++ homeCommonModules;
         };
       };
 
