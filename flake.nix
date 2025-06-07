@@ -70,14 +70,18 @@
         home-manager.nixosModules.default
         {
           config = {
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
+            home-manager = {
+              useUserPackages = true;
+
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+
+              sharedModules = [
+                sops-nix.homeManagerModules.sops
+                nixvim.homeManagerModules.nixvim
+              ];
             };
-            home-manager.sharedModules = [
-              sops-nix.homeManagerModules.sops
-              nixvim.homeManagerModules.nixvim
-            ];
           };
         }
       ];
@@ -96,6 +100,7 @@
             [
               ./configuration/machine/pinky
               ./configuration/user/sysadmin/machine
+
               {
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
               }
@@ -114,6 +119,7 @@
             [
               ./configuration/machine/thebrain
               ./configuration/user/sysadmin/machine
+
               {
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
               }
@@ -133,6 +139,7 @@
               ./configuration/machine/furrball
               ./configuration/user/sdk/machine
               ./configuration/user/sysadmin/machine
+
               {
                 config.home-manager.users.sdk = import ./configuration/user/sdk/home;
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
@@ -142,6 +149,8 @@
               nixos-hardware.nixosModules.common-pc-ssd
 
               nix-index-database.nixosModules.nix-index
+
+              qde.nixosModules.default
             ]
             ++ machineCommonModules
             ++ hmCommonModules;
@@ -181,6 +190,7 @@
               ./configuration/machine/buster
               ./configuration/user/sdk/machine
               ./configuration/user/sysadmin/machine
+
               {
                 config.home-manager.users.sdk = import ./configuration/user/sdk/home;
                 # TODO: Fix sdk_buster
