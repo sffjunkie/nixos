@@ -22,7 +22,7 @@ in
       };
 
       device = {
-        wacom.enable = true;
+        wacom.enable = false;
         yubikey.enable = true;
       };
 
