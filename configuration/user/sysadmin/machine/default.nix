@@ -1,7 +1,9 @@
-{ config
-, pkgs
-, ...
-}: {
+{
+  config,
+  pkgs,
+  ...
+}:
+{
   config = {
     # https://github.com/Mic92/sops-nix#setting-a-users-password
     sops.secrets."sysadmin/password_hash" = {
@@ -13,7 +15,12 @@
       isNormalUser = true;
       uid = 1000;
       description = "System Administrator";
-      extraGroups = [ "networkmanager" "wheel" "docker" "podman" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "docker"
+        "podman"
+      ];
       shell = pkgs.zsh;
       openssh = {
         authorizedKeys.keys = [
