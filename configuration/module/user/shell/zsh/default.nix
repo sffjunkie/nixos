@@ -38,6 +38,7 @@ in
     programs.zsh.antidote = {
       enable = true;
       plugins = [
+        "ptavares/zsh-direnv"
         "ohmyzsh/ohmyzsh path:lib"
         "ohmyzsh/ohmyzsh path:plugins/git"
         "ohmyzsh/ohmyzsh path:plugins/sudo"
