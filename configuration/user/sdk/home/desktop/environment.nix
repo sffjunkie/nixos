@@ -13,15 +13,13 @@
       sopsFile = config.sopsFiles.user;
     };
 
-    sops.templates."qde_conf" = {
+    sops.templates."location_conf" = {
       content = ''
         USER_LOCATION_LATITUDE=${config.sops.placeholder."sdk/location/latitude"}
         USER_LOCATION_LONGITUDE=${config.sops.placeholder."sdk/location/longitude"}
         OWM_API_KEY=${config.sops.placeholder."sdk/api_key/owm"}
       '';
-      owner = config.users.users.sdk.name;
+      path = "${config.xdg.configHome}/environment.d/location.conf";
     };
-
-    home.file."environment.d/qde.conf".source = sops.templates."sdk_location".path;
   };
 }
