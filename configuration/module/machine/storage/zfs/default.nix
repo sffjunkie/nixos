@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.looniversity.system.zfs.autoscrub;
+  cfg = config.looniversity.storage.zfs.autoscrub;
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.system.zfs.autoscrub = {
+  options.looniversity.storage.zfs.autoscrub = {
     enable = mkEnableOption "ZFS auto scrubbing";
   };
 

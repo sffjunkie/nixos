@@ -70,7 +70,10 @@ in
 
       shell.zsh = enabled;
 
-      storage.udisks2 = enabled;
+      storage = {
+        udisks2 = enabled;
+        zfs.autoscrub = enabled;
+      };
 
       system = {
         rclone = enabled;
