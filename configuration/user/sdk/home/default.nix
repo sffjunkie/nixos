@@ -17,6 +17,8 @@ in
     ./desktop
 
     ../../common
+
+    # inputs.qde.nixosModules.qtile
   ];
 
   # config = osConfig.home-manager.users.${user}.config
@@ -152,17 +154,16 @@ in
       editor = {
         micro = enabled;
         nixvim = enabled;
-        vscode = {
-          enable = true;
-          git.enable = true;
-          just.enable = true;
-          markdown.enable = true;
-          nix.enable = true;
-          python.enable = true;
-          shellcheck.enable = true;
-          toml.enable = true;
+        vscode = enabled // {
+          git = enabled;
+          just = enabled;
+          markdown = enabled;
+          nix = enabled;
+          python = enabled;
+          shellcheck = enabled;
+          toml = enabled;
 
-          theme.catppuccin.enable = true;
+          theme.catppuccin = enabled;
         };
       };
 
