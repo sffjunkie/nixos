@@ -6,9 +6,14 @@
 }:
 let
   cfg = config.looniversity.music.mpd;
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 
-  mpdFifoAddress = "/run/user/${toString cfg.uid}/mpd.fifo";
+  mpdFifoPath = "/run/user/${toString cfg.uid}/mpd.fifo";
 in
 {
   options.looniversity.music.mpd = {
@@ -17,26 +22,37 @@ in
     uid = mkOption {
       type = types.int;
       default = 1000;
+      description = "User id";
     };
 
-    mpdHost = mkOption {
+    host = mkOption {
       type = types.str;
       default = "localhost";
     };
 
-    mpdPort = mkOption {
+    port = mkOption {
       type = types.port;
       default = 6600;
     };
 
-    mpdFifoAddress = mkOption {
+    visualizerFifoPath = mkOption {
       type = types.str;
-      default = mpdFifoAddress;
+      default = mpdFifoPath;
     };
 
-    mpdVisualizerFeedName = mkOption {
+    visualizerFifoName = mkOption {
       type = types.str;
       default = "MPD visualizer FIFO";
+    };
+
+    outputType = mkOption {
+      type = types.str;
+      default = "pipewire";
+    };
+
+    outputName = mkOption {
+      type = types.str;
+      default = "PipeWire";
     };
   };
 
@@ -49,20 +65,20 @@ in
       enable = true;
       musicDirectory = "/mnt/music";
       network = {
-        listenAddress = config.looniversity.music.mpd.mpdHost;
-        port = config.looniversity.music.mpd.mpdPort;
+        listenAddress = config.looniversity.music.mpd.host;
+        port = config.looniversity.music.mpd.port;
       };
       extraConfig = ''
         audio_output {
-          type            "pipewire"
-          name            "PipeWire Sound Server"
+          type            "${config.looniversity.music.mpd.outputType}"
+          name            "${config.looniversity.music.mpd.outputName}"
         }
 
         audio_output {
           type    "fifo"
-          name    "${config.looniversity.music.mpd.mpdVisualizerFeedName}"
+          name    "${config.looniversity.music.mpd.visualizerFifoName}"
           format  "44100:16:2"
-          path    "${config.looniversity.music.mpd.mpdFifoAddress}"
+          path    "${config.looniversity.music.mpd.visualizerFifoPath}"
         }
       '';
     };
