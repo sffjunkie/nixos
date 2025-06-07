@@ -14,7 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    stylix.targets.qutebrowser.enable = false;
+    stylix.targets.qutebrowser.enable = true;
 
     programs.qutebrowser = {
       enable = true;
