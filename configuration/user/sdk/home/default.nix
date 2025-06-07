@@ -7,6 +7,7 @@
   ...
 }:
 let
+  ageKeyFile = "/home/sdk/.config/sops/age/keys.txt";
   inherit (lib) disabled enabled;
 in
 {
@@ -35,6 +36,10 @@ in
 
         SOPS_AGE_KEY_FILE = "$HOME/secrets/sops/age/keys.txt";
       };
+    };
+
+    sops = {
+      age.keyFile = ageKeyFile;
     };
 
     stylix = {
