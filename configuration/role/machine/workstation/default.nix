@@ -43,7 +43,12 @@ in
       };
 
       network = {
-        sshd.enable = true;
+        service = {
+          sshd.enable = true;
+        };
+        link = {
+          bluetooth.enable = true;
+        };
       };
 
       service = {

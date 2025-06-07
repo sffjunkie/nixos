@@ -33,6 +33,12 @@ in
         pipewire.enable = true;
       };
 
+      network = {
+        link = {
+          bluetooth.enable = true;
+        };
+      };
+
       service = {
         homepage-dashboard.enable = true;
       };

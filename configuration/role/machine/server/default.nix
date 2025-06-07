@@ -19,7 +19,7 @@ in
 
       service.autoUpgrade.enable = true;
       service.fail2ban.enable = true;
-      network.sshd.enable = true;
+      network.service.sshd.enable = true;
     };
 
     networking.firewall = {
