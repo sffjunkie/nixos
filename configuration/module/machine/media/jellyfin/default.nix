@@ -20,7 +20,7 @@ in
         enable = true;
       };
 
-      traefik = mkIf config.looniversity.service.traefik.enable {
+      traefik = mkIf config.looniversity.network.service.traefik.enable {
         dynamicConfigOptions = {
           http = {
             routers = {
