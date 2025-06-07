@@ -4,7 +4,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.app.traefik;
+  cfg = config.looniversity.network.service.traefik;
 
   # certDir = lib.traceVal config.security.acme.certs."*.${config.looniversity.network.domainName}".directory;
   certDir = "/etc/ssl/certs";
@@ -12,7 +12,7 @@ let
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.network.app.traefik = {
+  options.looniversity.network.service.traefik = {
     enable = mkEnableOption "traefik";
   };
 

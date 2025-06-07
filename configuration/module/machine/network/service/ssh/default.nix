@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.app.ssh;
+  cfg = config.looniversity.network.service.ssh;
   inherit (lib)
     mkEnableOption
     mkIf
@@ -15,7 +15,7 @@ let
     ;
 in
 {
-  options.looniversity.network.app.ssh = {
+  options.looniversity.network.service.ssh = {
     enable = mkEnableOption "ssh";
     askPassword = mkOption {
       type = types.str;

@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.app.coredns;
+  cfg = config.looniversity.network.service.coredns;
   lanDev = lib.traceVal lib.network.netdevice config "pinky" "lan";
   lanIpv4 = lib.network.lanIpv4 config "pinky";
   dynamicZoneDataDir = "/var/lib/coredns/dynamic";
@@ -34,7 +34,7 @@ let
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.network.app.coredns = {
+  options.looniversity.network.service.coredns = {
     enable = mkEnableOption "coredns";
   };
 

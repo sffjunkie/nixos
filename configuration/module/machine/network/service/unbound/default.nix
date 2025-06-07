@@ -5,7 +5,7 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.app.unbound;
+  cfg = config.looniversity.network.service.unbound;
   lanIpv4 = lib.network.lanIpv4 config "pinky";
 
   dnsPort = 1053;
@@ -20,7 +20,7 @@ let
     ;
 in
 {
-  options.looniversity.network.app.unbound = {
+  options.looniversity.network.service.unbound = {
     enable = mkEnableOption "unbound";
   };
 
