@@ -1,10 +1,11 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  script = pkgs.writeScriptBin "nog" ''
+  script = pkgs.writeScriptBin "nog.sh" ''
     #!${lib.getExe pkgs.bash}
 
     time_period=(-1)
