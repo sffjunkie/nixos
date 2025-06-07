@@ -104,8 +104,8 @@
 
           modules =
             [
-              ./configuration/machine/pinky
-              ./configuration/user/sysadmin/machine
+              ./configuration/host/pinky
+              ./configuration/user/sysadmin/host
 
               {
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
@@ -123,8 +123,8 @@
 
           modules =
             [
-              ./configuration/machine/thebrain
-              ./configuration/user/sysadmin/machine
+              ./configuration/host/thebrain
+              ./configuration/user/sysadmin/host
 
               {
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
@@ -142,9 +142,9 @@
 
           modules =
             [
-              ./configuration/machine/furrball
-              ./configuration/user/sdk/machine
-              ./configuration/user/sysadmin/machine
+              ./configuration/host/furrball
+              ./configuration/user/sdk/host
+              ./configuration/user/sysadmin/host
 
               {
                 config.home-manager.users.sdk = import ./configuration/user/sdk/home;
@@ -170,8 +170,8 @@
 
           modules =
             [
-              ./configuration/machine/babs
-              ./configuration/user/sysadmin/machine
+              ./configuration/host/babs
+              ./configuration/user/sysadmin/host
 
               {
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
@@ -193,9 +193,9 @@
 
           modules =
             [
-              ./configuration/machine/buster
-              ./configuration/user/sdk/machine
-              ./configuration/user/sysadmin/machine
+              ./configuration/host/buster
+              ./configuration/user/sdk/host
+              ./configuration/user/sysadmin/host
 
               {
                 config.home-manager.users.sdk = import ./configuration/user/sdk/home;
