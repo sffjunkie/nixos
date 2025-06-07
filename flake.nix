@@ -33,6 +33,11 @@
       url = "github:danth/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    qde = {
+      url = "github:sffjunkie/qde/develop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   nixConfig = {
@@ -48,6 +53,7 @@
       nix-index,
       nix-index-database,
       nixvim,
+      qde,
       sops-nix,
       stylix,
       ...
