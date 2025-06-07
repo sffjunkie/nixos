@@ -151,7 +151,18 @@ in
       editor = {
         micro = enabled;
         nixvim = enabled;
-        vscode = enabled;
+        vscode = {
+          enable = true;
+          git.enable = true;
+          just.enable = true;
+          markdown.enable = true;
+          nix.enable = true;
+          python.enable = true;
+          shellcheck.enable = true;
+          toml.enable = true;
+
+          theme.catppuccin.enable = true;
+        };
       };
 
       keyboard = {
