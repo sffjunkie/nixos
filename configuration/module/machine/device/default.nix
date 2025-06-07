@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./stadia
-    ./wacom
-    ./yubikey
-  ];
-}

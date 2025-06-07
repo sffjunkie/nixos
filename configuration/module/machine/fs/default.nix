@@ -1,7 +1,0 @@
-{
-  imports = [
-    ./exports
-    ./mount
-    ./share
-  ];
-}
