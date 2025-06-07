@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.desktop.environment.gnome;
@@ -13,10 +14,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.xserver = {
+    services = {
+      displayManager.defaultSession = "gnome";
       displayManager.gdm.enable = true;
       desktopManager.gnome.enable = true;
-      displayManager.defaultSession = "gnome";
     };
   };
 }
