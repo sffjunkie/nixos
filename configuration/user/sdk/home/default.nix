@@ -19,7 +19,7 @@ in
     ../../common
   ];
 
-  # config = osConfig.home-manager.users.sdk.config
+  # config = osConfig.home-manager.users.${user}.config
   config = {
     programs.home-manager = enabled;
     home = {
