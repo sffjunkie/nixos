@@ -19,6 +19,13 @@ in
     programs.gamemode.enable = true;
     programs.steam = {
       enable = true;
+
+      # package = pkgs.steam.override {
+      #   extraEnv = {
+      #     MANGOHUD = true;
+      #   };
+      # };
+
       extest.enable = true;
       gamescopeSession.enable = true;
 
@@ -28,7 +35,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      mangohud
+      # mangohud
     ];
   };
 }
