@@ -20,6 +20,18 @@ let
   volumectl = pkgs.writeScriptBin "volumectl" ''
     #!${pkgs.runtimeShell}
     case "$1" in
+      up)
+        ${volume_controller} --change-volume +"${toString volume_step}"
+        ;;
+      down)
+        ${volume_controller} --change-volume -"${toString volume_step}"
+        ;;
+      toggle)
+        ${volume_controller} --toggle-mute
+        ;;
+      mute)
+        ${volume_controller} --mute
+        ;;
       *)
         if [ -t 0 ] ; then
             ${pkgs.pulsemixer}/bin/pulsemixer
