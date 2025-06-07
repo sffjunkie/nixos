@@ -5,17 +5,22 @@
   ...
 }:
 let
-  cfg = config.looniversity.network.unbound;
+  cfg = config.looniversity.network.app.unbound;
   lanIpv4 = lib.network.lanIpv4 config "pinky";
 
   dnsPort = 1053;
 
   ttl = 180;
 
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
-  options.looniversity.network.unbound = {
+  options.looniversity.network.app.unbound = {
     enable = mkEnableOption "unbound";
   };
 

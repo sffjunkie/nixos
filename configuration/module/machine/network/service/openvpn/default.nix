@@ -7,10 +7,10 @@
 let
   inherit (lib) mkEnableOption mkIf;
 
-  cfg = config.looniversity.network.openvpn;
+  cfg = config.looniversity.network.app.openvpn;
 in
 {
-  options.looniversity.network.openvpn = {
+  options.looniversity.network.app.openvpn = {
     enable = mkEnableOption "openvpn";
   };
 

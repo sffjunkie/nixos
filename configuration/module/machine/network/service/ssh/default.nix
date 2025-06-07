@@ -15,7 +15,7 @@ let
     ;
 in
 {
-  options.looniversity.system.ssh = {
+  options.looniversity.network.app.ssh = {
     enable = mkEnableOption "ssh";
     askPassword = mkOption {
       type = types.str;

@@ -49,7 +49,9 @@ in
       };
 
       network = {
-        net-tools = enabled;
+        tool = {
+          cli = enabled;
+        };
       };
 
       role = {

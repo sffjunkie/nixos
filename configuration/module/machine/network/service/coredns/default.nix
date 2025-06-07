@@ -34,7 +34,7 @@ let
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.network.coredns = {
+  options.looniversity.network.app.coredns = {
     enable = mkEnableOption "coredns";
   };
 

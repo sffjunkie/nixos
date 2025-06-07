@@ -1,7 +1,8 @@
 {
   imports = [
-    ./app
     ./controller
     ./link
+    ./service
+    ./tool
   ];
 }

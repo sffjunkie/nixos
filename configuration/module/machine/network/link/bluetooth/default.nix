@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.looniversity.system.bluetooth;
+  cfg = config.looniversity.network.link.bluetooth;
   inherit (lib) mkEnableOption mkIf;
 in
 {
-  options.looniversity.system.bluetooth = {
+  options.looniversity.network.link.bluetooth = {
     enable = mkEnableOption "bluetooth";
   };
 
