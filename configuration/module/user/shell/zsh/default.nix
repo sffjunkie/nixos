@@ -18,7 +18,7 @@ in
   options.looniversity.shell.zsh = {
     enable = mkEnableOption "zsh";
 
-    initExtra = mkOption {
+    initContent = mkOption {
       default = "";
       type = types.lines;
       description = "Extra commands that should be added to {file}`.zshrc`.";
@@ -32,7 +32,7 @@ in
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
-      initExtra = config.looniversity.shell.zsh.initExtra;
+      initContent = config.looniversity.shell.zsh.initContent;
     };
 
     programs.zsh.antidote = {

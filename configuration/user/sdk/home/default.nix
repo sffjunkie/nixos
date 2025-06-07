@@ -189,7 +189,7 @@ in
       shell = {
         nushell = enabled;
         zsh = enabled // {
-          initExtra = ''
+          initContent = ''
             bindkey ^f autosuggest-accept
             function edit() { command "''${EDITOR:-${config.home.sessionVariables.EDITOR}}" "$@"; }
             function fjq() { cat "$1" | ${pkgs.jq}/bin/jq .; }

@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.cli.atuin;
@@ -29,7 +30,7 @@ in
         show_preview = false;
       };
     };
-    programs.zsh.initExtra = ''
+    programs.zsh.initContent = ''
       bindkey '^[[1;5A' _atuin_search_widget
     '';
   };
