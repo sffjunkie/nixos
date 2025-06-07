@@ -2,8 +2,9 @@
 {
   imports = [
     ../../module/user
-    ../../role/user
     ../../option
+    ../../role/user
+    ../../secret
     ../../../setting
   ];
 
