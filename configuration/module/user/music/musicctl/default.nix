@@ -20,21 +20,21 @@ let
   musicctl = pkgs.writeScriptBin "musicctl" ''
     #!${pkgs.runtimeShell}
     case "$1" in
-        next)
-            ${playerctl} next
-            ;;
-        previous)
-            ${playerctl} previous
-            ;;
-        toggle)
-            ${playerctl} play-pause
-            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${mpc} current)\\n$(${mpc} | sed -n 2p)"
-            ;;
-        stop)
-            ${playerctl} stop
-            ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
-            ;;
-
+      next)
+        ${playerctl} next
+        ;;
+      previous)
+        ${playerctl} previous
+        ;;
+      toggle)
+        ${playerctl} play-pause
+        ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "$(${mpc} current)\\n$(${mpc} | sed -n 2p)"
+        ;;
+      stop)
+        ${playerctl} stop
+        ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
+        ;;
+      *)
         mixer)
             ${pkgs.pulsemixer}/bin/pulsemixer
             ;;
