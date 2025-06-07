@@ -1,9 +1,13 @@
-{ lib, ... }: {
+{ lib, config, ... }:
+let
+  lanDev = lib.network.netdevice config "buster" "wifi";
+in
+{
   config = {
     networking = {
       hostId = "8ddbb68e";
       hostName = "furrball";
-      domain = "looniversity.net";
+      domain = config.looniversity.network.domainName;
       networkmanager.enable = true;
 
       useDHCP = lib.mkDefault true;
