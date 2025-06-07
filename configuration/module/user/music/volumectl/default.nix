@@ -20,21 +20,13 @@ let
   volumectl = pkgs.writeScriptBin "volumectl" ''
     #!${pkgs.runtimeShell}
     case "$1" in
-        up)
-            ${volume_controller} --change-volume +"${toString volume_step}"
-            ;;
-        down)
-            ${volume_controller} --change-volume -"${toString volume_step}"
-            ;;
-        toggle)
-            ${volume_controller} --toggle-mute
-            ;;
-        mute)
-            ${volume_controller} --mute
-            ;;
-        app)
-            ${pkgs.pavucontrol}/bin/pavucontrol
-            ;;
+      *)
+        if [ -t 0 ] ; then
+            ${pkgs.pulsemixer}/bin/pulsemixer
+        else
+            ${pkgs.pavucontrol}/bin/pavucontrol -t 3
+        fi
+        ;;
     esac
 
     exit 0
