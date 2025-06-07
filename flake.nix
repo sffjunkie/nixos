@@ -221,21 +221,6 @@
         };
       };
 
-      colmena = {
-        meta = {
-          description = "Looniversity";
-          nixpkgs = import nixpkgs { system = "x86_64-linux"; };
-        };
-
-        babs = {
-          deployment = {
-            tags = [ "infra" ];
-            targetHost = "babs.looniversity.net";
-            targetUser = "sysadmin";
-          };
-        };
-      };
-
       # Generic development shells
       # The default 'nix' shell includes scripts to build nixos systems
       # using nix-ouptut-monitor
