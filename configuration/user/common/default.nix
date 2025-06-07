@@ -9,6 +9,10 @@
   ];
 
   config = {
+    sops = {
+      defaultSopsFormat = "yaml";
+    };
+
     nixpkgs.config = {
       allowUnfree = true;
       allowUnfreePredicate = _: true;
