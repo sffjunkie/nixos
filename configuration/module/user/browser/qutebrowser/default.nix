@@ -39,6 +39,7 @@ in
           position = "left";
           show = "multiple";
         };
+        content.tls.certificate_errors = "ask-block-thirdparty";
       };
     };
   };
