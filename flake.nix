@@ -67,7 +67,7 @@
         "x86_64-linux"
       ];
 
-      machineCommonModules = [
+      hostCommonModules = [
         sops-nix.nixosModules.sops
         stylix.nixosModules.stylix
       ];
@@ -111,7 +111,7 @@
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
               }
             ]
-            ++ machineCommonModules
+            ++ hostCommonModules
             ++ hmCommonModules;
         };
 
@@ -130,7 +130,7 @@
                 config.home-manager.users.sysadmin = import ./configuration/user/sysadmin/home;
               }
             ]
-            ++ machineCommonModules
+            ++ hostCommonModules
             ++ hmCommonModules;
         };
 
@@ -158,7 +158,7 @@
 
               qde.nixosModules.default
             ]
-            ++ machineCommonModules
+            ++ hostCommonModules
             ++ hmCommonModules;
         };
 
@@ -180,7 +180,7 @@
               nixos-hardware.nixosModules.common-pc
               nixos-hardware.nixosModules.common-pc-ssd
             ]
-            ++ machineCommonModules
+            ++ hostCommonModules
             ++ hmCommonModules;
         };
 
@@ -206,7 +206,7 @@
 
               nixos-hardware.nixosModules.microsoft-surface-pro-intel
             ]
-            ++ machineCommonModules
+            ++ hostCommonModules
             ++ hmCommonModules;
         };
 
