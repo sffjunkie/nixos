@@ -27,8 +27,6 @@ in
 
     environment.systemPackages = with pkgs; [
       mangohud
-      protonup-ng
-      steam-run-native
     ];
   };
 }
