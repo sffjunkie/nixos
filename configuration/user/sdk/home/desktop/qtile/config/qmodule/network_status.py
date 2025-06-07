@@ -1,3 +1,4 @@
+from libqtile.log_utils import logger  # type: ignore
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.widget import base  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
@@ -45,9 +46,10 @@ class NetworkStatus(WidgetModule):
         )
 
         up_props = {
-            "format": "{up} ",
+            "format": "{up:4.0f}{up_suffix:<2}",
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
+            "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
@@ -87,9 +89,10 @@ class NetworkStatus(WidgetModule):
         up_icon = MDIcon(**props)
 
         down_props = {
-            "format": "{down} ",
+            "format": "{down:4.0f}{down_suffix:<2}",
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
+            "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
@@ -111,6 +114,7 @@ class NetworkStatus(WidgetModule):
             "name": "net_down",
             "font": self.context.icon_font_family,
             "fontsize": self.context.icon_font_size,
+            "padding": 8,
             "background": f"{background_color}00",
             "mouse_callbacks": {
                 "Button1": lazy.spawn(slurm),
@@ -127,5 +131,10 @@ class NetworkStatus(WidgetModule):
 
         down_icon = MDIcon(**props)
 
-        widgets = [up_icon, up, down_icon, down]
+        widgets = [
+            up_icon,
+            up,
+            down_icon,
+            down,
+        ]
         return widgets

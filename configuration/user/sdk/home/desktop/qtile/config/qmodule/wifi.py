@@ -1,6 +1,6 @@
 # from libqtile.lazy import lazy  # type: ignore
 from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import IWD as QEWifi  # type: ignore
+from qtile_extras.widget import WiFiIcon as QEWifi  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from ..qwidget.icon import MDIcon
@@ -8,7 +8,7 @@ from .base import WidgetModule
 from .context import ModuleContext
 
 
-class wifi(WidgetModule):
+class Wifi(WidgetModule):
     def __init__(
         self,
         context: ModuleContext,
@@ -34,6 +34,7 @@ class wifi(WidgetModule):
 
         wifi_props = {
             "name": "wifi",
+            "interface": self.context.settings["device"]["net"],
             "padding": 8,
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
@@ -52,23 +53,26 @@ class wifi(WidgetModule):
 
         wifi_widget = QEWifi(**props)
 
-        wifi_icon_props = {
-            "name": "wifi_icon",
-            "font": self.context.icon_font_family,
-            "fontsize": self.context.icon_font_size,
-            "padding": 8,
-            "background": f"{background_color}00",
-        }
+        # wifi_icon_props = {
+        #     "name": "wifi",
+        #     "font": self.context.icon_font_family,
+        #     "fontsize": self.context.icon_font_size,
+        #     "padding": 8,
+        #     "background": f"{background_color}00",
+        # }
 
-        props = self.context.merge_parameters(
-            wifi_icon_props,
-            self.context.props.pop("icon", {}),
-        )
+        # props = self.context.merge_parameters(
+        #     wifi_icon_props,
+        #     self.context.props.pop("icon", {}),
+        # )
 
-        if decorations is not None:
-            props["decorations"] = decorations
+        # if decorations is not None:
+        #     props["decorations"] = decorations
 
-        wifi_icon = MDIcon(**props)
+        # wifi_icon = MDIcon(**props)
 
-        widgets = [wifi_widget, wifi_icon]
+        widgets = [
+            wifi_widget,
+            # wifi_icon,
+        ]
         return widgets

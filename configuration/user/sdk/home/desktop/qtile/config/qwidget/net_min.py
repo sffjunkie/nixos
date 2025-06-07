@@ -135,12 +135,11 @@ class NetMin(widget.Net):
                 down = down / self.update_interval
                 up = up / self.update_interval
                 total = total / self.update_interval
-                zero = "   ≅0  "
 
                 if down > self.minimum:
                     down, down_suffix = self.convert_b(down, self.prefix)
                 else:
-                    down = zero
+                    down = 0
                     down_suffix = ""
 
                 down_cumulative, down_cumulative_suffix = self.convert_b(
@@ -150,7 +149,7 @@ class NetMin(widget.Net):
                 if up > self.minimum:
                     up, up_suffix = self.convert_b(up, self.prefix)
                 else:
-                    up = zero
+                    up = 0
                     up_suffix = ""
 
                 up_cumulative, up_cumulative_suffix = self.convert_b(
@@ -160,7 +159,7 @@ class NetMin(widget.Net):
                 if total > self.minimum:
                     total, total_suffix = self.convert_b(total, self.prefix)
                 else:
-                    total = zero
+                    total = 0
                     total_suffix = ""
 
                 total_cumulative, total_cumulative_suffix = self.convert_b(
@@ -168,6 +167,7 @@ class NetMin(widget.Net):
                 )
 
                 self.stats[intf] = new_stats[intf]
+
                 ret_stat.append(
                     self.format.format(
                         interface=intf,

@@ -66,5 +66,8 @@ class MusicStatus(WidgetModule):
 
         music_icon = MDIcon(**props)
 
-        widgets = [mpd2, music_icon]
+        widgets = [
+            mpd2,
+            music_icon,
+        ]
         return widgets

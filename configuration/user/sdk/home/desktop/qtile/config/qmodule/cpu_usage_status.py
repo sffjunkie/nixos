@@ -54,7 +54,7 @@ class CPUUsageStatus(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        usage = CPU(**props)
+        cpu_usage = CPU(**props)
 
         usage_icon_props = {
             "name": "cpu_usage",
@@ -75,7 +75,10 @@ class CPUUsageStatus(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        usage_icon = MDIcon(**props)
+        cpu_usage_icon = MDIcon(**props)
 
-        widgets = [usage_icon, usage]
+        widgets = [
+            cpu_usage_icon,
+            cpu_usage,
+        ]
         return widgets

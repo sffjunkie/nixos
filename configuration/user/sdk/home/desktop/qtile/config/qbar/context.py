@@ -2,6 +2,7 @@ from enum import StrEnum
 
 from qtile_extras.widget.decorations import PowerLineDecoration  # type: ignore
 
+from ..settings.typedefs import Settings
 from ..theme.typedefs import Theme
 from ..theme.utils import opacity_to_str
 
@@ -32,7 +33,7 @@ class BarContext:
     def __init__(
         self,
         position: BarPosition,
-        settings: dict,
+        settings: Settings,
         theme: Theme,
         props: dict = {},
     ):
@@ -57,12 +58,16 @@ class BarContext:
         )
         self.logo_font_size = props.get("logo_font_size", theme["font"]["logo"]["size"])
 
-        self.background = props.get(
-            "background",
-            theme["bar"][self.position].get(
-                "background", theme["color"]["named"]["panel_bg"]
-            ),
-        )
+        background = props.get("background", None)
+        if background is None:
+            bar_theme = theme["bar"].get(self.position, None)
+
+            if bar_theme is not None:
+                background = theme["color"]["named"].get("panel_bg", "000000")
+            else:
+                background = "000000"
+        self.background = background
+
         self.opacity = props.get(
             "opacity", theme["bar"][self.position].get("opacity", 1.0)
         )

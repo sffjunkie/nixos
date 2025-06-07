@@ -42,8 +42,8 @@ class Base16Colors(TypedDict):
 
 class Base16(TypedDict):
     colors: NotRequired[Base16Colors]
-    scheme_name: NotRequired[str]
-    scheme_dir: NotRequired[str]
+    scheme_name: str | None
+    scheme_dir: str | None
 
 
 class NamedColors(TypedDict):

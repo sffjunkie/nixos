@@ -1,6 +1,6 @@
 from libqtile.lazy import lazy  # type: ignore
 from libqtile.widget import base  # type: ignore
-from qtile_extras.widget import Bluetooth as QBluetooth  # type: ignore
+from qtile_extras.widget import Bluetooth as QEBluetooth  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from ..qwidget.icon import MDIcon
@@ -33,33 +33,24 @@ class Bluetooth(WidgetModule):
             ]
 
         bluetooth_props = {
-            # "name": "bar_volume",
-            # "volume_app": "volumectl app",
-            # "mute_format": "   M",
-            # "unmute_format": "{volume:>3}%",
-            # "menu_font": self.context.text_font_family,
-            # "menu_fontsize": int(self.context.text_font_size * 0.8),
-            # "menu_width": 500,
-            # "menu_offset_x": -250,
+            "name": "bluetooth",
             "padding": 8,
             "font": self.context.text_font_family,
             "fontsize": self.context.text_font_size,
+            "menu_font": self.context.text_font_family,
+            "menu_fontsize": self.context.text_font_size,
             "background": f"{background_color}00",
-            # "mouse_callbacks": {
-            #     "Button4": lazy.widget["bar_volume"].decrease_vol(),
-            #     "Button5": lazy.widget["bar_volume"].increase_vol(),
-            # },
         }
 
         props = self.context.merge_parameters(
             bluetooth_props,
-            self.context.props.pop("volume", {}),
+            self.context.props.pop("menu", {}),
         )
 
         if decorations is not None:
             props["decorations"] = decorations
 
-        volume_text = QBluetooth(**props)
+        bluetooth_widget = QEBluetooth(**props)
 
         bluetooth_icon_props = {
             "name": "bluetooth",
@@ -81,7 +72,10 @@ class Bluetooth(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        volume_icon = MDIcon(**props)
+        bluetooth_icon = MDIcon(**props)
 
-        widgets = [volume_text, volume_icon]
+        widgets = [
+            bluetooth_icon,
+            bluetooth_widget,
+        ]
         return widgets

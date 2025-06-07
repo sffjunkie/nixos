@@ -46,5 +46,6 @@ class Keys(TypedDict):
 
 class Settings(TypedDict):
     app: Apps
+    controller: Controllers
     device: Devices
     key: Keys

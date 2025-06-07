@@ -3,6 +3,7 @@ from enum import StrEnum
 from ..theme.typedefs import Theme
 from ..qbar.context import BarContext
 from ..theme.utils import opacity_to_str
+from ..settings.typedefs import Settings
 
 
 class GroupPosition(StrEnum):
@@ -25,7 +26,7 @@ class ModuleContext:
     def __init__(
         self,
         bar: BarContext,
-        settings: dict,
+        settings: Settings,
         theme: Theme,
         props: dict | None = None,
     ):

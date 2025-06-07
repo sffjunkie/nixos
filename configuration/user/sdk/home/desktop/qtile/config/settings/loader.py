@@ -8,7 +8,7 @@ from libqtile.log_utils import logger  # type: ignore
 from .typedefs import Settings
 
 
-def _settings_path(filepath: Path | None = None) -> str:
+def _settings_path(filepath: Path | None = None) -> Path | None:
     if filepath is not None and filepath.is_absolute():
         settings_path = filepath
     else:
@@ -44,8 +44,11 @@ def _settings_yaml(filepath: Path | None = None) -> dict | None:
 
 def load_settings(filepath: Path | None = None) -> Settings:
     settings_path = _settings_path(filepath)
-    # logger.warning(f"Loading settings from {settings_path}")
-    settings_yaml = _settings_yaml(settings_path) or {}
+    if settings_path is None:
+        settings_yaml = {}
+    else:
+        # logger.warning(f"Loading settings from {settings_path}")
+        settings_yaml = _settings_yaml(settings_path) or {}
 
     default_settings_path = _settings_path(Path("default_settings.yaml"))
     # logger.warning(f"Default Settings Path {default_settings_path}")

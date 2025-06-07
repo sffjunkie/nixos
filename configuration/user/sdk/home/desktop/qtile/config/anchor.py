@@ -11,12 +11,10 @@ class FloatRange:
 
 ScreenFraction = Annotated[float, FloatRange(min=0.0, max=1.0)]
 
+Margin2 = tuple[ScreenFraction, ScreenFraction]
+Margin4 = tuple[ScreenFraction, ScreenFraction, ScreenFraction, ScreenFraction]
 
-Margin = (
-    ScreenFraction
-    | tuple[ScreenFraction, ScreenFraction]
-    | tuple[ScreenFraction, ScreenFraction, ScreenFraction, ScreenFraction]
-)
+Margin = ScreenFraction | Margin2 | Margin4
 
 
 @dataclass
@@ -56,6 +54,7 @@ def anchor_window(
     height: ScreenFraction,
     margin: Margin = 0.0,
 ) -> WindowPosition:
+    # if isinstance(margin, tuple):
     if width + (2.0 * margin) > 1.0:
         width = 1.0 - (2.0 * margin)
 

@@ -42,8 +42,6 @@ def rgbhex_to_rgb(value: str, allow_short: bool = True) -> RGBColor | None:
     if value[0] == "#":
         value = value[1:]
 
-    logger.warning(value)
-
     for ch in value:
         if ch not in string.hexdigits:
             return None

@@ -14,6 +14,7 @@ MDICONS: dict[str, str] = {
     "net_up": chr(986631),
     "user": chr(0xF0004),
     "volume": chr(0xF057E),
+    "wifi": chr(0xF05A9),
 }
 
 

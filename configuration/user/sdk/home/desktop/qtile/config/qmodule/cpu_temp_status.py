@@ -46,7 +46,7 @@ class CPUTempStatus(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        temp = ThermalSensor(**props)
+        cpu_temp = ThermalSensor(**props)
 
         temp_icon_props = {
             "name": "cpu_temp",
@@ -64,7 +64,10 @@ class CPUTempStatus(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        temp_icon = MDIcon(**props)
+        cpu_temp_icon = MDIcon(**props)
 
-        widgets = [temp_icon, temp]
+        widgets = [
+            cpu_temp_icon,
+            cpu_temp,
+        ]
         return widgets

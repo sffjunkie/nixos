@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  osConfig,
   pkgs,
   ...
 }:
@@ -11,6 +10,8 @@ in
 {
   config = {
     xdg.configFile."desktop/group.yaml".source = settingsFormat.generate "desktop-group.yaml" {
+      layout = "monadtall";
+      decoration = true;
       groups = [
         {
           name = "WWW";

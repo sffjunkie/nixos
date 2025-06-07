@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  osConfig,
   pkgs,
   ...
 }:
@@ -44,27 +43,35 @@ in
         named = {
           widget_fg_dark = "base00";
           widget_fg_light = "base04";
-          # widget_bg = [
-          #   "base07"
-          # ];
+          widget_bg = [
+            "#D08770"
+          ];
         };
       };
 
       font = {
         text = {
           family = "JetBrainsMono Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          size = 16;
+        };
+        ui = {
+          family = "JetBrainsMono Nerd Font";
           size = 16;
         };
         icon = {
           family = "Material Design Icons";
+          package = pkgs.material-design-icons;
           size = 22;
         };
         weather = {
           family = "Hack Nerd Font";
+          package = pkgs.nerd-fonts.hack;
           size = 22;
         };
         logo = {
           family = "Hack Nerd Font";
+          package = pkgs.nerd-fonts.hack;
           size = 22;
         };
       };

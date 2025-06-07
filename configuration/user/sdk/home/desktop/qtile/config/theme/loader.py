@@ -51,7 +51,7 @@ def _theme_path(filepath: Path | None = None) -> Path | None:
     return theme_path
 
 
-def _theme_yaml(filepath: Path | None = None) -> Theme | None:
+def _theme_yaml(filepath: Path | None = None) -> dict | None:
     theme = None
     if filepath is not None:
         try:

@@ -26,6 +26,7 @@ from .qmodule.system_menu import SystemMenu
 from .qmodule.user_menu import UserMenu
 from .qmodule.volume_status import VolumeStatus
 from .qmodule.weather import Weather
+from .qmodule.wifi import Wifi
 from .qmodule.window_name import WindowName
 
 from .color import contrast_color
@@ -55,7 +56,7 @@ def widget_fg_iter(theme: Theme) -> Iterator:
 
 
 def widget_bg_iter(theme: Theme) -> Iterator:
-    return cycle(theme["color"]["named"]["widget_bg"])
+    return cycle(theme["color"]["named"].get("widget_bg", "000000"))
 
 
 def build_top_bar(settings: Settings, theme: Theme) -> QBar | None:
@@ -225,7 +226,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         theme,
         props={
             "network": {
-                "interface": settings["device"]["net"],
+                "interface": settings["device"].get("net", "eth0"),
             },
             "background": next(bg_iter),
         },
@@ -263,8 +264,24 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         theme,
         props={
             "background": next(bg_iter),
-            "menu_font": "JetBrainsMono Nerd Font",
-            "menu_fontsize": 16,
+            "menu": {
+                "menu_font": "JetBrainsMono Nerd Font",
+                "menu_fontsize": 16,
+                "menu_width": 400,
+            },
+        },
+    )
+    wifi_context = ModuleContext(
+        bar_context,
+        settings,
+        theme,
+        props={
+            "background": next(bg_iter),
+            "menu": {
+                "menu_font": "JetBrainsMono Nerd Font",
+                "menu_fontsize": 16,
+                "menu_width": 400,
+            },
         },
     )
 
@@ -274,6 +291,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         CPUUsageStatus(cpu_usage_context),
         CPUTempStatus(cpu_temp_context),
         Bluetooth(bluetooth_context),
+        Wifi(wifi_context),
     ]
 
     for idx, group in enumerate(start):
@@ -309,6 +327,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         },
     )
 
+    volume_control = settings["controller"].get("volume", None)
     volume_context = ModuleContext(
         bar_context,
         settings,
@@ -344,7 +363,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
     )
 
 
-def build_bars(settings: dict, theme: Theme) -> dict[str, QBar]:
+def build_bars(settings: Settings, theme: Theme) -> dict[str, QBar]:
     bars = {}
     bars["top"] = build_top_bar(settings, theme)
     bars["bottom"] = build_bottom_bar(settings, theme)

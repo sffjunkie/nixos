@@ -18,6 +18,7 @@ VT_SWITCH = ["ctrl", "alt"]
 WINDOW_SWITCH = ["cmd"]
 WINDOW_MOVE = ["cmd", "shift"]
 WINDOW_CONTROL = ["cmd", "ctrl"]
+WINDOW_ALT_CONTROL = ["cmd", "ctrl", "alt"]
 
 APP_LAUNCH = ["cmd", "alt"]
 
@@ -103,6 +104,7 @@ def window(settings: Settings):
     switch = [settings["key"][name] for name in (WINDOW_SWITCH)]
     move = [settings["key"][name] for name in (WINDOW_MOVE)]
     control = [settings["key"][name] for name in (WINDOW_CONTROL)]
+    alt_control = [settings["key"][name] for name in (WINDOW_ALT_CONTROL)]
 
     return [
         # region Switch
@@ -174,6 +176,12 @@ def window(settings: Settings):
             "f",
             lazy.window.toggle_floating(),
             desc="Toggle floating window",
+        ),
+        Key(
+            alt_control,
+            "f",
+            lazy.window.toggle_maximize(),
+            desc="Toggle maximized window",
         ),
         # endregion
         # region Size
@@ -329,7 +337,7 @@ def music(settings: Settings):
             desc="Switch to next music track",
         ),
         Key(
-            launch,
+            launch + ["control"],
             "F8",
             lazy.spawn("pavucontrol"),
             desc="Pavucontrol",

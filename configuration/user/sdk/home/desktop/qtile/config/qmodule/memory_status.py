@@ -75,6 +75,9 @@ class MemoryStatus(WidgetModule):
         if decorations is not None:
             props["decorations"] = decorations
 
-        icon = MDIcon(**props)
+        memory_icon = MDIcon(**props)
 
-        return [icon, memory]
+        return [
+            memory_icon,
+            memory,
+        ]
