@@ -45,7 +45,10 @@ in
 
     stylix = {
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
-      targets.vscode.enable = false;
+      targets = {
+        firefox.profileNames = [ "default" ];
+        vscode.enable = false;
+      };
     };
 
     xdg.mime = enabled;
