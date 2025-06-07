@@ -50,7 +50,7 @@ in
             services = {
               jellyfin = {
                 loadBalancer = {
-                  servers = [{ url = "http://127.0.0.1:8096"; }];
+                  servers = [ { url = "http://127.0.0.1:8096"; } ];
                 };
               };
             };
