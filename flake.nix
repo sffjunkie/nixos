@@ -87,7 +87,7 @@
       ];
     in
     {
-      overlays.default = import ./configuration/overlay;
+      # overlays.default = import ./configuration/overlay;
 
       nixosConfigurations = {
         # Security
