@@ -8,6 +8,7 @@
 }:
 let
   ageKeyFile = "/home/sdk/.config/sops/age/keys.txt";
+  mpdConfig = config.looniversity.music.mpd;
   inherit (lib) disabled enabled;
 in
 {
@@ -64,8 +65,8 @@ in
         cava = enabled // {
           settings = {
             input = {
-              method = "pipewire";
-              source = "auto";
+              method = "${mpdConfig.outputType}";
+              source = "mpd.${mpdConfig.outputName}";
             };
           };
         };
