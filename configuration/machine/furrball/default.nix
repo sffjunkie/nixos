@@ -77,7 +77,6 @@ in
 
       system = {
         rclone = enabled;
-        # ssh= enabled;
       };
 
       theme = {
