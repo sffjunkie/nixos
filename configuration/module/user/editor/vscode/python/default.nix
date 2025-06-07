@@ -41,6 +41,7 @@ in
               "**/result"
               "**/.devenv"
               "**/.direnv"
+              "**/.tox"
               "**/.venv"
             ];
             "python.analysis.typeCheckingMode" = "standard";
