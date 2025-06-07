@@ -19,6 +19,7 @@ in
     programs.gamemode.enable = true;
     programs.steam = {
       enable = true;
+      extest.enable = true;
       gamescopeSession.enable = true;
 
       extraCompatPackages = [
