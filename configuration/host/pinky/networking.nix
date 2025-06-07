@@ -1,6 +1,7 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 let
   wanDev = lib.network.netdevice config "pinky" "wan";
@@ -9,43 +10,33 @@ let
 
   vlanDefs = config.looniversity.network.vlans;
 
-  vlanNetDevs =
-    lib.mapAttrs'
-      (
-        name: value:
-          lib.nameValuePair
-            name
-            {
-              netdevConfig = {
-                Name = "${lanDev}.${toString value.id}";
-                Kind = "vlan";
-              };
-              vlanConfig = {
-                Id = value.id;
-              };
-            }
-      )
-      config.looniversity.network.vlans;
+  vlanNetDevs = lib.mapAttrs' (
+    name: value:
+    lib.nameValuePair name {
+      netdevConfig = {
+        Name = "${lanDev}.${toString value.id}";
+        Kind = "vlan";
+      };
+      vlanConfig = {
+        Id = value.id;
+      };
+    }
+  ) config.looniversity.network.vlans;
 
-  vlanNetworks =
-    lib.mapAttrs'
-      (
-        name: value:
-          lib.nameValuePair
-            name
-            {
-              matchConfig = {
-                Name = "${lanDev}.${toString value.id}";
-              };
-              networkConfig = {
-                DHCP = "no";
-              };
-              address = [
-                "${value.networkAddress}/${toString value.prefixLength}"
-              ];
-            }
-      )
-      config.looniversity.network.vlans;
+  vlanNetworks = lib.mapAttrs' (
+    name: value:
+    lib.nameValuePair name {
+      matchConfig = {
+        Name = "${lanDev}.${toString value.id}";
+      };
+      networkConfig = {
+        DHCP = "no";
+      };
+      address = [
+        "${value.networkAddress}/${toString value.prefixLength}"
+      ];
+    }
+  ) config.looniversity.network.vlans;
 in
 {
   config = {
@@ -62,24 +53,22 @@ in
 
       netdevs = vlanNetDevs;
 
-      networks =
-        {
-          wan = {
-            matchConfig.Name = wanDev;
-            networkConfig = {
-              DHCP = false;
-            };
+      networks = {
+        wan = {
+          matchConfig.Name = wanDev;
+          networkConfig = {
+            DHCP = false;
           };
-          lan = {
-            matchConfig.Name = lanDev;
-            networkConfig = {
-              DHCP = false;
-              VLAN = lib.attrNames vlanDefs;
-            };
-            address = [ "${lanIp}/${toString config.looniversity.network.prefixLength}" ];
+        };
+        lan = {
+          matchConfig.Name = lanDev;
+          networkConfig = {
+            DHCP = false;
+            VLAN = lib.attrNames vlanDefs;
           };
-        }
-        // vlanNetworks;
+          address = [ "${lanIp}/${toString config.looniversity.network.prefixLength}" ];
+        };
+      } // vlanNetworks;
     };
   };
 }

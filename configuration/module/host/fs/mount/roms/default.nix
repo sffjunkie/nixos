@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.mount.roms;
@@ -16,7 +17,11 @@ in
     fileSystems."/mnt/roms" = {
       device = "10.44.0.3:/tank1/roms";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "x-systemd.requires=network-online.target" "noauto" ];
+      options = [
+        "x-systemd.automount"
+        "x-systemd.requires=network-online.target"
+        "noauto"
+      ];
     };
   };
 }

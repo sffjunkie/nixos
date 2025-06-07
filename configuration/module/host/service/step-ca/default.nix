@@ -1,8 +1,9 @@
-{ config
-, lib
-, pkgs
-, sops
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.service.step-ca;

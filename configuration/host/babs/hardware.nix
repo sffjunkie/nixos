@@ -1,7 +1,9 @@
-{ config
-, lib
-, ...
-}: {
+{
+  config,
+  lib,
+  ...
+}:
+{
   config = {
     powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
     hardware.enableRedistributableFirmware = true;

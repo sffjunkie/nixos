@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.mount.private;
@@ -19,7 +20,11 @@ in
     fileSystems."/mnt/private" = {
       device = "${lanIpv4}:/tank1/private";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "x-systemd.requires=network-online.target" "noauto" ];
+      options = [
+        "x-systemd.automount"
+        "x-systemd.requires=network-online.target"
+        "noauto"
+      ];
     };
   };
 }

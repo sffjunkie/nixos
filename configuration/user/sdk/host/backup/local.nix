@@ -1,10 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  mkHome = p: "/home/sdk/${p}";
+  username = "sdk";
+  mkHome = p: "/home/${username}/${p}";
 in
 {
   config = {
@@ -14,7 +16,7 @@ in
     };
 
     services.restic.backups.sdk_local = {
-      user = "sdk";
+      user = username;
       initialize = true;
       paths = map mkHome [
         "development"
@@ -32,12 +34,12 @@ in
         ".venv"
         "**/obj/"
       ];
-      repository = "/home/sdk/backup/";
-      passwordFile = config.sops.secrets."restic/repositories/sdk/local/password".path;
+      repository = "/home/${username}/backup/";
+      passwordFile = config.sops.secrets."restic/repositories/${username}/local/password".path;
     };
 
     system.activationScripts."restic_sdk_local" = ''
-      mkdir /home/sdk/backup 2>/dev/null && chown sdk:users /home/sdk/backup
+      mkdir /home/${username}/backup 2>/dev/null && chown sdk:users /home/${username}/backup
     '';
   };
 }

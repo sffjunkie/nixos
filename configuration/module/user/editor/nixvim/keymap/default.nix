@@ -163,7 +163,10 @@
         {
           action = ":CommentToggle<CR>";
           key = "<leader>/";
-          mode = [ "n" "v" ];
+          mode = [
+            "n"
+            "v"
+          ];
           options = {
             desc = "Toggle comments";
           };

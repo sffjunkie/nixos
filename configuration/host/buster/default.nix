@@ -1,9 +1,11 @@
-{ inputs
-, lib
-, config
-, pkgs
-, ...
-}: {
+{
+  inputs,
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./boot.nix
     ./fs.nix

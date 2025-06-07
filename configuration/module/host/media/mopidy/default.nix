@@ -1,12 +1,13 @@
-{ config
-, lib
-, pkgs
-, mopidy-iris
-, mopidy-jellyfin
-, mopidy-local
-, mopidy-mpd
-, mopidy-spotify
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  mopidy-iris,
+  mopidy-jellyfin,
+  mopidy-local,
+  mopidy-mpd,
+  mopidy-spotify,
+  ...
 }:
 let
   cfg = config.looniversity.media.mopidy;

@@ -3,6 +3,9 @@
   pkgs,
   ...
 }:
+let
+  username = "sdk";
+in
 {
   imports = [
     ./backup/local.nix
@@ -12,12 +15,12 @@
 
   config = {
     # https://github.com/Mic92/sops-nix#setting-a-users-password
-    sops.secrets."sdk/password_hash" = {
+    sops.secrets."${username}/password_hash" = {
       neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
-    users.users.sdk = {
+    users.users.${username} = {
       isNormalUser = true;
       uid = 1001;
       description = "me";
@@ -31,12 +34,12 @@
       shell = pkgs.zsh;
       openssh = {
         authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFugnsOEmySWbh2hIrAjroWAO+PB4RznGnt+oDuERsU ed25519-key-20200312"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGFugnsOEmySWbh2hIrAjroWAO+PB4RznGnt+oDuERsU ${username}"
         ];
       };
-      hashedPasswordFile = config.sops.secrets."sdk/password_hash".path;
+      hashedPasswordFile = config.sops.secrets."${username}/password_hash".path;
     };
 
-    services.openssh.settings.AllowUsers = [ "sdk" ];
+    services.openssh.settings.AllowUsers = [ username ];
   };
 }

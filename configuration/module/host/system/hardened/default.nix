@@ -1,11 +1,17 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.system.hardened;
-  inherit (lib) mkDefault mkEnableOption mkIf mkOverride;
+  inherit (lib)
+    mkDefault
+    mkEnableOption
+    mkIf
+    mkOverride
+    ;
 in
 {
   options.looniversity.system.hardened = {

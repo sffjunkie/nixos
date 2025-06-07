@@ -9,7 +9,13 @@
         efi.canTouchEfiVariables = true;
       };
 
-      initrd.availableKernelModules = [ "xhci_pci" "ahci" "uas" "usbhid" "sd_mod" ];
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "uas"
+        "usbhid"
+        "sd_mod"
+      ];
       initrd.kernelModules = [ ];
       kernelModules = [ "kvm-intel" ];
       extraModulePackages = [ ];

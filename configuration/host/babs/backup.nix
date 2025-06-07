@@ -1,8 +1,10 @@
-{ config
-, lib
-, pkgs
-, ...
-}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   config = {
     sops.secrets."restic/s3_access_key" = {
       sopsFile = config.sopsFiles.tool;

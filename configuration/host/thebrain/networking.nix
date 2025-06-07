@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   config = {
     networking = {
       hostId = "cadbfefe";

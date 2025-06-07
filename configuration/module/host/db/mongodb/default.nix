@@ -1,9 +1,10 @@
 # ports: 27017 - 27020
-{ config
-, lib
-, pkgs
-, sops
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.service.mongodb;

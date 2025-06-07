@@ -1,5 +1,6 @@
 # https://github.com/terrortylor/nvim-comment/
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   config = {
     programs.nixvim = {
       extraPlugins = [

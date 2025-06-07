@@ -1,8 +1,9 @@
-{ config
-, lib
-, pkgs
-, tmpDir ? "/var/tmp/nixos-rebuild"
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  tmpDir ? "/var/tmp/nixos-rebuild",
+  ...
 }:
 let
   script = pkgs.writeScriptBin "nos" ''

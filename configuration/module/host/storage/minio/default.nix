@@ -1,7 +1,8 @@
-{ config
-, lib
-, sops
-, ...
+{
+  config,
+  lib,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.storage.minio;
@@ -9,7 +10,12 @@ let
   listenPort = lib.network.serviceHandlerNamedPort config "minio" "listen";
   consolePort = lib.network.serviceHandlerNamedPort config "minio" "console";
 
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.storage.minio = {
@@ -48,6 +54,9 @@ in
       dataDir = config.looniversity.storage.minio.dataDir;
     };
 
-    networking.firewall.allowedTCPPorts = [ listenPort consolePort ];
+    networking.firewall.allowedTCPPorts = [
+      listenPort
+      consolePort
+    ];
   };
 }

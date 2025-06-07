@@ -1,22 +1,22 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.script.wake;
 
-  hostToMac =
-    map
-      (host: {
-        name = host.name;
-        mac = lib.attrByPath [ "netdevice" "lan" "mac" ] "" host.value;
-      })
-      (lib.attrsToList config.looniversity.network.hosts);
+  hostToMac = map (host: {
+    name = host.name;
+    mac = lib.attrByPath [ "netdevice" "lan" "mac" ] "" host.value;
+  }) (lib.attrsToList config.looniversity.network.hosts);
 
   hostWithMac = builtins.filter (item: builtins.elem ":" (lib.stringToCharacters item.mac)) hostToMac;
 
-  hostArrayDef = lib.concatStringsSep "\n" (map (macAttrs: "hostToMac[${macAttrs.name}]=\"${macAttrs.mac}\"") hostWithMac);
+  hostArrayDef = lib.concatStringsSep "\n" (
+    map (macAttrs: "hostToMac[${macAttrs.name}]=\"${macAttrs.mac}\"") hostWithMac
+  );
 
   hostsArray = ''
     declare -A hostToMac

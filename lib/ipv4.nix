@@ -1,4 +1,5 @@
-{ lib, ... }: rec {
+{ lib, ... }:
+rec {
   # ipv4Octets = str -> list[int]
   # Convert an IPv4 address into a list of octets.
   # Only returns the first four octets
@@ -10,7 +11,8 @@
 
   # ipv4IsValid = str -> bool
   # Retuirn tru if the address is a valid IPv4 address
-  ipv4IsValid = ipv4:
+  ipv4IsValid =
+    ipv4:
     let
       octets = ipv4Octets ipv4;
     in
@@ -19,7 +21,8 @@
   # ipv4IsPrivate24BitBlock = str -> bool
   # Returns true if the IPv4 address is part of
   # the 24 bit '10' private address block.
-  ipv4IsPrivate24BitBlock = ipv4:
+  ipv4IsPrivate24BitBlock =
+    ipv4:
     let
       octets = ipv4Octets ipv4;
     in
@@ -28,7 +31,8 @@
   # ipv4IsPrivate20BitBlock = str -> bool
   # Returns true if the IPv4 address is part of
   # the 20 bit '172.16' to '172.31' private address block.
-  ipv4IsPrivate20BitBlock = ipv4:
+  ipv4IsPrivate20BitBlock =
+    ipv4:
     let
       octets = ipv4Octets ipv4;
       part1 = lib.elemAt octets 1;
@@ -38,7 +42,8 @@
   # ipv4IsPrivate16BitBlock = str -> bool
   # Returns true if the IPv4 address is part of
   # the 16 bit '192.168' private address block.
-  ipv4IsPrivate16BitBlock = ipv4:
+  ipv4IsPrivate16BitBlock =
+    ipv4:
     let
       octets = ipv4Octets ipv4;
     in
@@ -50,7 +55,8 @@
   # `host` is a mltui-octet host part
   #
   # e.g. constructIpv4Address "192.168.0.0" "12.13" returns "192.168.12.13"
-  constructIpv4Address = network: host:
+  constructIpv4Address =
+    network: host:
     let
       hostOctets = ipv4Octets host;
       networkOctets = ipv4Octets network;

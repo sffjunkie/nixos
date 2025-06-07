@@ -1,7 +1,8 @@
 # nixos/modules/services/networking/nat.nix
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 let
   wanDev = lib.network.netdevice config "pinky" "wan";

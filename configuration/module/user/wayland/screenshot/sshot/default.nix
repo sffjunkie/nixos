@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.wayland.screenshot.sshot;
@@ -81,7 +82,12 @@ let
     fi
   '';
 
-  inherit (lib) mkDefault mkEnableOption mkIf mkOption;
+  inherit (lib)
+    mkDefault
+    mkEnableOption
+    mkIf
+    mkOption
+    ;
 in
 {
   options.looniversity.wayland.screenshot.sshot.enable = mkEnableOption "screenshot script";

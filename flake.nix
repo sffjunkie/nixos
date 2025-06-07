@@ -93,7 +93,11 @@
       ];
     in
     {
-      # overlays.default = import ./configuration/overlay;
+      overlays.default = final: prev: {
+        ncmpcpp = prev.ncmpcpp.overrideAttrs {
+          visualizerSupport = true;
+        };
+      };
 
       nixosConfigurations = {
         # Security
@@ -243,6 +247,8 @@
           net = import ./devshell/net { inherit pkgs; };
         }
       );
+
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       # The nix devShell above adds a nix-test function which runs the tests
       # under the `tests` attribute

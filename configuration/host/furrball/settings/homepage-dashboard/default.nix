@@ -20,7 +20,7 @@
       services = [
         {
           "Home Automation" = [
-            { "Home Assistant" = [{ href = "https://hass.looniversity.net"; }]; }
+            { "Home Assistant" = [ { href = "https://hass.looniversity.net"; } ]; }
           ];
         }
       ];
@@ -28,27 +28,27 @@
       bookmarks = [
         {
           Google = [
-            { GMail = [{ href = "https://mail.google.com"; }]; }
-            { Calendar = [{ href = "https://calendar.google.com"; }]; }
-            { Keep = [{ href = "https://keep.google.com"; }]; }
-            { Account = [{ href = "https://myaccount.google.com/"; }]; }
+            { GMail = [ { href = "https://mail.google.com"; } ]; }
+            { Calendar = [ { href = "https://calendar.google.com"; } ]; }
+            { Keep = [ { href = "https://keep.google.com"; } ]; }
+            { Account = [ { href = "https://myaccount.google.com/"; } ]; }
           ];
         }
 
         {
           News = [
-            { BBC = [{ href = "https://news.bbc.co.uk/"; }]; }
-            { Semafor = [{ href = "https://semafor.com"; }]; }
-            { Feedly = [{ href = "https://feedly.com"; }]; }
-            { RSS = [{ href = "http://rss.looniversity.net"; }]; }
+            { BBC = [ { href = "https://news.bbc.co.uk/"; } ]; }
+            { Semafor = [ { href = "https://semafor.com"; } ]; }
+            { Feedly = [ { href = "https://feedly.com"; } ]; }
+            { RSS = [ { href = "http://rss.looniversity.net"; } ]; }
           ];
         }
 
         {
           Microsoft = [
-            { Office = [{ href = "https://www.office.com/"; }]; }
-            { OneDrive = [{ href = "https://onedrive.live.com/"; }]; }
-            { Account = [{ href = "https://account.microsoft.com/"; }]; }
+            { Office = [ { href = "https://www.office.com/"; } ]; }
+            { OneDrive = [ { href = "https://onedrive.live.com/"; } ]; }
+            { Account = [ { href = "https://account.microsoft.com/"; } ]; }
           ];
         }
 
@@ -62,7 +62,7 @@
                 }
               ];
             }
-            { "Hacker News" = [{ href = "http://news.ycombinator.com"; }]; }
+            { "Hacker News" = [ { href = "http://news.ycombinator.com"; } ]; }
           ];
         }
 
@@ -89,13 +89,13 @@
                 }
               ];
             }
-            { PyPI = [{ href = "https://pypi.org/manage/projects/"; }]; }
+            { PyPI = [ { href = "https://pypi.org/manage/projects/"; } ]; }
           ];
         }
 
         {
           Domains = [
-            { "Google Domains" = [{ href = "https://domains.google.com/registrar/"; }]; }
+            { "Google Domains" = [ { href = "https://domains.google.com/registrar/"; } ]; }
           ];
         }
       ];

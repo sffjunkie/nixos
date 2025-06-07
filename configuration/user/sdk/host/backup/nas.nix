@@ -1,10 +1,12 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
-  mkHome = p: "/home/sdk/${p}";
+  username = "sdk";
+  mkHome = p: "/home/${username}/${p}";
 in
 {
   config = {
@@ -26,13 +28,13 @@ in
       '';
     };
 
-    sops.secrets."restic/repositories/sdk/s3/password" = {
+    sops.secrets."restic/repositories/${username}/s3/password" = {
       owner = config.users.users.${config.services.restic.backups.sdk_nas.user}.name;
       sopsFile = config.sopsFiles.tool;
     };
 
     services.restic.backups.sdk_nas = {
-      user = "sdk";
+      user = username;
       initialize = true;
       paths = map mkHome [
         "development"
@@ -50,8 +52,8 @@ in
         ".venv"
         "**/obj/"
       ];
-      repository = "s3:https://s3.service.looniversity.net/restic-sdk";
-      passwordFile = config.sops.secrets."restic/repositories/sdk/s3/password".path;
+      repository = "s3:https://s3.service.looniversity.net/restic-${username}";
+      passwordFile = config.sops.secrets."restic/repositories/${username}/s3/password".path;
 
       environmentFile = config.sops.templates."sdk_nas_env_file".path;
     };

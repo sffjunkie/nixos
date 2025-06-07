@@ -1,13 +1,19 @@
-{ config
-, lib
-, pkgs
-, sops
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.service.nextcloud;
 
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.service.nextcloud = {

@@ -1,12 +1,19 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.service.postgresql;
 
-  inherit (lib) mkEnableOption mkIf mkOption mkOverride types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    mkOverride
+    types
+    ;
 in
 {
   options.looniversity.service.postgresql = {
@@ -32,12 +39,10 @@ in
 
       ensureDatabases = cfg.databases;
       ensureUsers =
-        (map
-          (elem: {
-            name = toString elem;
-            ensureDBOwnership = true;
-          })
-          cfg.databases)
+        (map (elem: {
+          name = toString elem;
+          ensureDBOwnership = true;
+        }) cfg.databases)
         ++ [
           { name = "sysadmin"; }
           { name = "dbadmin"; }

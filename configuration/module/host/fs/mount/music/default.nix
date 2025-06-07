@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.mount.music;
@@ -20,7 +21,11 @@ in
     fileSystems."/mnt/music" = {
       device = "${lanIpv4}:/tank0/music";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "x-systemd.requires=network-online.target" "noauto" ];
+      options = [
+        "x-systemd.automount"
+        "x-systemd.requires=network-online.target"
+        "noauto"
+      ];
     };
   };
 }

@@ -1,24 +1,28 @@
-{ config
-, lib
-, ...
+{
+  config,
+  lib,
+  ...
 }:
 let
-  tool = types.submodule ({ name, ... }: {
-    options = {
-      name = mkOption {
-        type = types.str;
-        default = name;
+  tool = types.submodule (
+    { name, ... }:
+    {
+      options = {
+        name = mkOption {
+          type = types.str;
+          default = name;
+        };
+        module = mkOption {
+          type = types.str;
+          default = "";
+        };
+        port = mkOption {
+          type = types.int;
+          default = -1;
+        };
       };
-      module = mkOption {
-        type = types.str;
-        default = "";
-      };
-      port = mkOption {
-        type = types.int;
-        default = -1;
-      };
-    };
-  });
+    }
+  );
 
   inherit (lib) mkOption types;
 in

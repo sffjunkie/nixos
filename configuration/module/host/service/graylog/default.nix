@@ -1,9 +1,10 @@
 # Copies from nixpkgs but uses environment variable to set config
-{ config
-, lib
-, pkgs
-, sops
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  sops,
+  ...
 }:
 let
   cfg = config.looniversity.service.graylog;
@@ -27,7 +28,12 @@ let
     paths = cfg.plugins;
   };
 
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.service.graylog = {
@@ -48,13 +54,12 @@ in
     package = mkOption {
       type = types.package;
       default =
-        if lib.versionOlder config.system.stateVersion "23.05"
-        then pkgs.graylog-3_3
-        else pkgs.graylog-5_1;
+        if lib.versionOlder config.system.stateVersion "23.05" then pkgs.graylog-3_3 else pkgs.graylog-5_1;
       defaultText = lib.literalExpression (
-        if lib.versionOlder config.system.stateVersion "23.05"
-        then "pkgs.graylog-3_3"
-        else "pkgs.graylog-5_1"
+        if lib.versionOlder config.system.stateVersion "23.05" then
+          "pkgs.graylog-3_3"
+        else
+          "pkgs.graylog-5_1"
       );
       description = lib.mdDoc "Graylog package to use.";
     };
@@ -138,7 +143,10 @@ in
       environment = {
         GRAYLOG_CONF = "${confFile}";
       };
-      path = [ pkgs.which pkgs.procps ];
+      path = [
+        pkgs.which
+        pkgs.procps
+      ];
       preStart = ''
         rm -rf /var/lib/graylog/plugins || true
         mkdir -p /var/lib/graylog/plugins -m 755

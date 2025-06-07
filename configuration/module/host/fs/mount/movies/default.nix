@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.mount.movies;
@@ -19,7 +20,11 @@ in
     fileSystems."/mnt/movies" = {
       device = "${lanIpv4}:/tank1/movies";
       fsType = "nfs";
-      options = [ "x-systemd.automount" "x-systemd.requires=network-online.target" "noauto" ];
+      options = [
+        "x-systemd.automount"
+        "x-systemd.requires=network-online.target"
+        "noauto"
+      ];
     };
   };
 }

@@ -4,22 +4,21 @@ let
   nixosScripts = pkgs.callPackage ./scripts { inherit tmpDir; };
 in
 pkgs.mkShell {
-  buildInputs =
-    [
-      pkgs.alejandra
-      pkgs.jq
-      pkgs.nh
-      pkgs.nix-info
-      pkgs.nix-output-monitor
-      pkgs.nix-template
-      pkgs.nix-tree
-      pkgs.nix-update
-      pkgs.nixfmt-rfc-style
-      pkgs.nixpkgs-review
-      pkgs.node2nix
-      pkgs.nvd
-    ]
-    ++ nixosScripts;
+  buildInputs = [
+    pkgs.alejandra
+    pkgs.jq
+    pkgs.nh
+    pkgs.nix-info
+    pkgs.nix-output-monitor
+    pkgs.nix-template
+    pkgs.nix-tree
+    pkgs.nix-update
+    pkgs.nixfmt-rfc-style
+    pkgs.nixpkgs-review
+    pkgs.node2nix
+    pkgs.nvd
+    pkgs.treefmt
+  ] ++ nixosScripts;
 
   # To get this to work with direnv you need to add `eval "$shellHook"` to `.envrc`
   shellHook = ''

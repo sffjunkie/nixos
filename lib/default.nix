@@ -1,9 +1,15 @@
-{ lib
-, inputs
-, ...
-}: final: prev: {
-  enabled = { enable = true; };
-  disabled = { enable = false; };
+{
+  lib,
+  inputs,
+  ...
+}:
+final: prev: {
+  enabled = {
+    enable = true;
+  };
+  disabled = {
+    enable = false;
+  };
 
   deploy = import ./deploy.nix { inherit lib inputs; };
   ipv4 = import ./ipv4.nix { inherit lib; };

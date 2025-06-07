@@ -10,7 +10,12 @@
       };
       supportedFilesystems = [ "zfs" ];
 
-      initrd.availableKernelModules = [ "xhci_pci" "nvme" "uas" "sd_mod" ];
+      initrd.availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+        "uas"
+        "sd_mod"
+      ];
       initrd.kernelModules = [ ];
       kernelModules = [ "kvm-intel" ];
       extraModulePackages = [ ];

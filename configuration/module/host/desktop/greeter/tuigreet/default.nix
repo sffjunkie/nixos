@@ -1,12 +1,18 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.desktop.greeter.tuigreet;
 
-  inherit (lib) mkEnableOption mkIf mkOption types;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 in
 {
   options.looniversity.desktop.greeter.tuigreet = {
@@ -34,6 +40,7 @@ in
       pkgs.greetd.tuigreet
     ];
 
-    services.greetd.settings.default_session.command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.desktop.greeter.tuigreet.script}";
+    services.greetd.settings.default_session.command =
+      "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --cmd ${config.looniversity.desktop.greeter.tuigreet.script}";
   };
 }

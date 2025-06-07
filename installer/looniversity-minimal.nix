@@ -1,11 +1,13 @@
-{ config
-, lib
-, options
-, pkgs
-, isoTarget ? "/run/media/sdk/Ventoy/"
-, ...
+{
+  config,
+  lib,
+  options,
+  pkgs,
+  isoTarget ? "/run/media/sdk/Ventoy/",
+  ...
 }:
-with lib; {
+with lib;
+{
   config = {
     sops = {
       defaultSopsFile = ../configuration/secret/secrets.yaml;
@@ -26,7 +28,10 @@ with lib; {
     };
 
     nix.settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
     };
 
     isoImage.isoName = lib.mkForce "looniversity-minimal-${pkgs.stdenv.hostPlatform.system}.iso";

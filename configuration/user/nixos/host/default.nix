@@ -1,27 +1,35 @@
-{ config
-, pkgs
-, sops
-, ...
-}: {
+{
+  config,
+  pkgs,
+  sops,
+  ...
+}:
+let
+  username = "nixos";
+in
+{
   config = {
     # https://github.com/Mic92/sops-nix#setting-a-users-password
-    sops.secrets."nixos/password_hash" = {
+    sops.secrets."${username}/password_hash" = {
       neededForUsers = true;
       sopsFile = config.sopsFiles.user;
     };
 
-    users.users.nixos = {
+    users.users.${username} = {
       isNormalUser = true;
       uid = 1100;
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
       openssh = {
         authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8Ayl5f2l+BFrUTzbyzmiLbhmYzTaLptCwe80Vk84NJ nixos"
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA8Ayl5f2l+BFrUTzbyzmiLbhmYzTaLptCwe80Vk84NJ ${username}"
         ];
       };
-      hashedPasswordFile = config.sops.secrets."nixos/password_hash".path;
+      hashedPasswordFile = config.sops.secrets."${username}/password_hash".path;
     };
 
-    services.openssh.settings.AllowUsers = [ "nixos" ];
+    services.openssh.settings.AllowUsers = [ username ];
   };
 }

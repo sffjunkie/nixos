@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 let
   cfg = config.looniversity.cli.bat;
@@ -15,7 +16,11 @@ in
   config = mkIf cfg.enable {
     programs.bat = {
       enable = true;
-      extraPackages = with pkgs.bat-extras; [ batdiff batman batgrep ];
+      extraPackages = with pkgs.bat-extras; [
+        batdiff
+        batman
+        batgrep
+      ];
     };
 
     programs.zsh.shellAliases = {
