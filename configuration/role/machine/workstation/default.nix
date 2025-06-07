@@ -22,6 +22,7 @@ in
       };
 
       device = {
+        stadia.enable = true;
         wacom.enable = false;
         yubikey.enable = true;
       };
