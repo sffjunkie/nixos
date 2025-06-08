@@ -19,14 +19,16 @@ in
       settings = {
         anchor = "top-right";
         outer-margin = "45,8";
+        border-radius = 5;
 
         "app-name=music-notify" = {
           width = config.looniversity.music.notify.iconSize * 2.25;
           height = config.looniversity.music.notify.iconSize;
           max-icon-size = config.looniversity.music.notify.iconSize;
           anchor = "bottom-right";
-          outer-margin = "60,8";
+          outer-margin = "64,8";
           format = "%b";
+          icon-border-radius = 5;
         };
       };
     };
