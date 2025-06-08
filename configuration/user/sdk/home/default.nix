@@ -188,6 +188,7 @@ in
         musicctl = enabled;
         ncmpcpp = enabled;
         notify = enabled;
+        rmpc = enabled;
       };
 
       role = {
