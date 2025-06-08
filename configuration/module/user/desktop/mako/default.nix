@@ -19,6 +19,7 @@ in
       settings = {
         anchor = "top-right";
         outer-margin = "45,8";
+        font = lib.mkForce "${config.stylix.fonts.monospace.name} ${toString config.stylix.fonts.sizes.popups}";
         border-radius = 5;
 
         "app-name=music-notify" = {
