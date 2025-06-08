@@ -34,13 +34,12 @@ let
         ${playerctl} stop
         ${notify_send} --hint=int:transient:1 -t 2000 "MPD" "stopped"
         ;;
+      mixer)
+          ${pkgs.pulsemixer}/bin/pulsemixer
+          ;;
       *)
-        mixer)
-            ${pkgs.pulsemixer}/bin/pulsemixer
-            ;;
-
-        *)
-            ${playerctl} metadata
+          ${playerctl} metadata
+          ;;
     esac
 
     exit 0
