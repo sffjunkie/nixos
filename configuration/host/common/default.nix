@@ -10,8 +10,7 @@
 
     ../../module/host
     ../../role/host
-    ../../option
-    ../../../setting
+    ../../var
   ];
 
   config = {

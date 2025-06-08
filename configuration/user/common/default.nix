@@ -2,10 +2,9 @@
 {
   imports = [
     ../../module/user
-    ../../option
     ../../role/user
     ../../secret
-    ../../../setting
+    ../../var
   ];
 
   config = {
