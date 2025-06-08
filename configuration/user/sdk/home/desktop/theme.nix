@@ -36,7 +36,7 @@ in
 
       color = {
         base16 = {
-          scheme_name = "nord";
+          scheme_name = "catppuccin-macchiato";
           scheme_dir = "${pkgs.base16-schemes}/share/themes";
         };
 
