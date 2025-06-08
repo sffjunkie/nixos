@@ -10,7 +10,7 @@ let
 in
 {
   options.looniversity.desktop.mako = {
-    enable = mkEnableOption "mako user service";
+    enable = mkEnableOption "mako notifications";
   };
 
   config = mkIf cfg.enable {
