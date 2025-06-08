@@ -6,12 +6,20 @@ def terminal_from_env() -> str:
     return terminal
 
 
+def terminal_run_command(
+    terminal: str,
+    command: list[str],
+    options: list[str] | None = None,
+) -> str:
+    options = options or []
+
     if terminal in ("kitty", "foot"):
+        cl = [terminal] + options + command
 
     elif terminal in ("tilda",):
-        cl = [terminal, "-c"] + command
+        cl = [terminal] + options + ["-c"] + command
 
     else:
-        cl = [terminal, "-e"] + command
+        cl = [terminal] + options + ["-e"] + command
 
     return " ".join(cl)
