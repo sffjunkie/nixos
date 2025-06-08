@@ -27,7 +27,7 @@ in
         #![enable(unwrap_newtypes)]
         #![enable(unwrap_variant_newtypes)]
         (
-          address: "${mpdcfg.host}:${mpdcfg.port}"
+          address: "${mpdcfg.host}:${toString mpdcfg.port}",
         )
       '';
     };
