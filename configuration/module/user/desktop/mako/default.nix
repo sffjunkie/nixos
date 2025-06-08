@@ -21,8 +21,9 @@ in
         outer-margin = "45,8";
 
         "app-name=music-notify" = {
-          width = 600;
-          max-icon-size = 256;
+          width = config.looniversity.music.notify.iconSize * 2.25;
+          height = config.looniversity.music.notify.iconSize;
+          max-icon-size = config.looniversity.music.notify.iconSize;
           anchor = "bottom-right";
           outer-margin = "60,8";
           format = "%b";
