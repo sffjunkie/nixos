@@ -3,7 +3,6 @@ from qtile_extras.widget import Mpd2  # type: ignore
 from qtile_extras.widget.decorations import RectDecoration  # type: ignore
 
 from .base import WidgetModule
-from ..qwidget.icon import MDIcon
 from .context import ModuleContext
 
 
@@ -48,26 +47,7 @@ class MusicStatus(WidgetModule):
 
         mpd2 = Mpd2(**props)
 
-        music_icon_props = {
-            "name": "music",
-            "font": self.context.icon_font_family,
-            "fontsize": self.context.icon_font_size,
-            "padding": 8,
-            "background": f"{background_color}00",
-        }
-
-        props = self.context.merge_parameters(
-            music_icon_props,
-            self.context.props.pop("icon", {}),
-        )
-
-        if decorations is not None:
-            props["decorations"] = decorations
-
-        music_icon = MDIcon(**props)
-
         widgets = [
             mpd2,
-            music_icon,
         ]
         return widgets
