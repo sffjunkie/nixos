@@ -6,9 +6,7 @@ def terminal_from_env() -> str:
     return terminal
 
 
-def terminal_run_command(terminal: str, command: list[str]) -> str:
-    if terminal in ("kitty",):
-        cl = [terminal] + command
+    if terminal in ("kitty", "foot"):
 
     elif terminal in ("tilda",):
         cl = [terminal, "-c"] + command
