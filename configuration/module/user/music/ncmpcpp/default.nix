@@ -47,11 +47,10 @@ in
         main_window_color = "white";
         progressbar_color = "black:b";
         progressbar_elapsed_color = "blue:b";
+        progressbar_look = "->";
         statusbar_color = "red";
         statusbar_time_color = "cyan:b";
-        playlist_display_mode = "columns";
         browser_display_mode = "columns";
-        progressbar_look = "->";
 
         media_library_primary_tag = "album_artist";
         media_library_albums_split_by_date = "no";
@@ -61,6 +60,7 @@ in
         external_editor = "nano";
         use_console_editor = "yes";
 
+        playlist_display_mode = "columns";
         playlist_disable_highlight_delay = 0;
       };
     };
