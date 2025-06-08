@@ -6,7 +6,12 @@
 }:
 let
   cfg = config.looniversity.music.notify;
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib)
+    mkEnableOption
+    mkIf
+    mkOption
+    types
+    ;
 
   ffmpeg = "${pkgs.ffmpeg}/bin/ffmpeg";
   mpc = "${pkgs.mpc-cli}/bin/mpc";
@@ -19,7 +24,7 @@ let
     previewdir="/tmp/ncmpcpp_previews"
     mkdir -p $previewdir
     previewname="$previewdir/$(${mpc} --format %album% current | base64).png"
-    [ -e "$previewname" ] || ${ffmpeg} -y -i "$filename" -an -vf scale=256:256 "$previewname" > /dev/null 2>&1
+    [ -e "$previewname" ] || ${ffmpeg} -y -i "$filename" -an -vf scale=${toString cfg.iconSize}:${toString cfg.iconSize} "$previewname" > /dev/null 2>&1
 
     ${notify-send} --app-name=music-notify \
       --replace-id=27072 \
@@ -30,7 +35,11 @@ let
 in
 {
   options.looniversity.music.notify = {
-    enable = mkEnableOption "music_notify";
+    enable = mkEnableOption "music notifications";
+    iconSize = mkOption {
+      type = types.int;
+      default = 256;
+    };
   };
 
   config = mkIf cfg.enable {
