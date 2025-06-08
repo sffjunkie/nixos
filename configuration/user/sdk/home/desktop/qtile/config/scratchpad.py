@@ -8,9 +8,9 @@ from .terminal import terminal_run_command
 
 def build_scratchpads(settings: Settings) -> list[ScratchPad]:
     ncmpcpp_dimension = anchor_window(
-        location=WindowLocation.TopCenter,
+        location=WindowLocation.BottomCenter,
         width=0.5,
-        height=0.4,
+        height=0.5,
     )
     home_automation_dimension = anchor_window(
         location=WindowLocation.BottomCenter,
