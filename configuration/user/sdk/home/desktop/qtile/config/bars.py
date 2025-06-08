@@ -320,7 +320,7 @@ def build_bottom_bar(settings: Settings, theme: Theme) -> QBar | None:
         theme,
         props={
             "music": {
-                "status_format": "{play_status} {title} | {artist} | {album}",
+                "status_format": "󰝚 {title} | 󰠃 {artist} | 󰀥 {album} {play_status}",
                 "idle_format": "Play queue empty",
             },
             "background": next(bg_iter),
