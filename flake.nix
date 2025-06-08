@@ -93,12 +93,6 @@
       ];
     in
     {
-      overlays.default = final: prev: {
-        ncmpcpp = prev.ncmpcpp.overrideAttrs {
-          visualizerSupport = true;
-        };
-      };
-
       nixosConfigurations = {
         # Security
         pinky = nixpkgs.lib.nixosSystem {
