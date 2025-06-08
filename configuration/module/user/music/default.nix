@@ -4,6 +4,7 @@
     ./music-notify
     ./musicctl
     ./ncmpcpp
+    ./rmpc
     ./volumectl
   ];
 }
